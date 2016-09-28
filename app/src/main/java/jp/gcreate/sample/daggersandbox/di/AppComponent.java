@@ -1,7 +1,6 @@
 package jp.gcreate.sample.daggersandbox.di;
 
 import dagger.Component;
-import jp.gcreate.sample.daggersandbox.MainActivity;
 import jp.gcreate.sample.daggersandbox.MyApplication;
 import jp.gcreate.sample.daggersandbox.di.Scope.AppScope;
 
@@ -14,5 +13,6 @@ import jp.gcreate.sample.daggersandbox.di.Scope.AppScope;
 public interface AppComponent {
 
     void inject(MyApplication application);
-    void inject(MainActivity activity);
+
+    ActivityComponent plus(ActivityModule module);
 }

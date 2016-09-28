@@ -3,6 +3,8 @@ package jp.gcreate.sample.daggersandbox;
 import android.app.Activity;
 import android.app.Application;
 
+import jp.gcreate.sample.daggersandbox.di.ActivityComponent;
+import jp.gcreate.sample.daggersandbox.di.ActivityModule;
 import jp.gcreate.sample.daggersandbox.di.AppComponent;
 import jp.gcreate.sample.daggersandbox.di.AppModule;
 import jp.gcreate.sample.daggersandbox.di.DaggerAppComponent;
@@ -17,6 +19,11 @@ public class MyApplication extends Application {
     public static AppComponent getAppComponent(Activity activity) {
         MyApplication application = (MyApplication) activity.getApplication();
         return application.appComponent;
+    }
+
+    public static ActivityComponent getActivityComponent(Activity activity) {
+        AppComponent component = getAppComponent(activity);
+        return component.plus(new ActivityModule());
     }
 
     @Override

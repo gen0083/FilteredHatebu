@@ -34,11 +34,6 @@ public class AppModule {
     }
 
     @Provides
-    public String provideString() {
-        return "from AppModule";
-    }
-
-    @Provides
     @AppScope
     public DummyPojo provideDummyPojo(Context context) {
         return new DummyPojo(System.currentTimeMillis(), context.getPackageName() + System.currentTimeMillis());
