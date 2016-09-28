@@ -1,16 +1,15 @@
 package jp.gcreate.sample.daggersandbox.di;
 
-import javax.inject.Singleton;
-
 import dagger.Component;
 import jp.gcreate.sample.daggersandbox.MainActivity;
 import jp.gcreate.sample.daggersandbox.MyApplication;
+import jp.gcreate.sample.daggersandbox.di.Scope.AppScope;
 
 /**
  * Copyright 2016 G-CREATE
  */
 
-@Singleton
+@AppScope
 @Component(modules = AppModule.class)
 public interface AppComponent {
 

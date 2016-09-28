@@ -3,11 +3,10 @@ package jp.gcreate.sample.daggersandbox.di;
 import android.content.Context;
 import android.hardware.SensorManager;
 
-import javax.inject.Singleton;
-
 import dagger.Module;
 import dagger.Provides;
 import jp.gcreate.sample.daggersandbox.DummyPojo;
+import jp.gcreate.sample.daggersandbox.di.Scope.AppScope;
 
 /**
  * Copyright 2016 G-CREATE
@@ -22,13 +21,13 @@ public class AppModule {
     }
 
     @Provides
-    @Singleton
+    @AppScope
     public Context provicdeContext() {
         return context;
     }
 
     @Provides
-    @Singleton
+    @AppScope
     public SensorManager provideSensorManager() {
         SensorManager manager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
         return manager;
@@ -40,7 +39,7 @@ public class AppModule {
     }
 
     @Provides
-    @Singleton
+    @AppScope
     public DummyPojo provideDummyPojo(Context context) {
         return new DummyPojo(System.currentTimeMillis(), context.getPackageName() + System.currentTimeMillis());
     }
