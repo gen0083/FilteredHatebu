@@ -7,11 +7,10 @@ import android.widget.TextView;
 import javax.inject.Inject;
 
 import jp.gcreate.sample.daggersandbox.di.AppComponent;
-import jp.gcreate.sample.daggersandbox.di.AppModule;
-import jp.gcreate.sample.daggersandbox.di.DaggerAppComponent;
 
 public class MainActivity extends AppCompatActivity {
 
+    AppComponent component;
     @Inject
     String injectedString;
     @Inject
@@ -22,9 +21,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        AppComponent component = DaggerAppComponent.builder()
-                                                   .appModule(new AppModule(getApplicationContext()))
-                                                   .build();
+        component = MyApplication.getAppComponent(this);
         component.inject(this);
     }
 
