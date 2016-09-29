@@ -2,6 +2,11 @@ package jp.gcreate.sample.daggersandbox;
 
 import android.app.Activity;
 import android.app.Application;
+import android.content.Context;
+import android.util.Log;
+
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import jp.gcreate.sample.daggersandbox.di.ActivityComponent;
 import jp.gcreate.sample.daggersandbox.di.ActivityModule;
@@ -15,6 +20,8 @@ import jp.gcreate.sample.daggersandbox.di.DaggerAppComponent;
 
 public class MyApplication extends Application {
     private AppComponent appComponent;
+    @Inject @Named("application")
+    Context      context;
 
     public static AppComponent getAppComponent(Activity activity) {
         MyApplication application = (MyApplication) activity.getApplication();
@@ -23,7 +30,7 @@ public class MyApplication extends Application {
 
     public static ActivityComponent getActivityComponent(Activity activity) {
         AppComponent component = getAppComponent(activity);
-        return component.plus(new ActivityModule());
+        return component.plus(new ActivityModule(activity));
     }
 
     @Override
@@ -33,5 +40,8 @@ public class MyApplication extends Application {
         appComponent = DaggerAppComponent.builder()
                                          .appModule(new AppModule(this))
                                          .build();
+        appComponent.inject(this);
+
+        Log.d("test", "application:" + context.toString());
     }
 }

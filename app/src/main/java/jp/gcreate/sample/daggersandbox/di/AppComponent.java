@@ -14,5 +14,6 @@ public interface AppComponent {
 
     void inject(MyApplication application);
 
+    @AppScope
     ActivityComponent plus(ActivityModule module);
 }

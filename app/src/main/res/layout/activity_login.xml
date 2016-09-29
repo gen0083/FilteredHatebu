@@ -16,10 +16,10 @@
             android:layout_height="wrap_content"
             android:hint="User Name"
             >
-            <EditText
-                android:id="@+id/username"
+            <android.support.design.widget.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="text"
                 />
         </android.support.design.widget.TextInputLayout>
 
