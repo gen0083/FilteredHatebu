@@ -4,6 +4,7 @@ import jp.gcreate.sample.daggersandbox.model.HatebuEntry;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Query;
+import rx.Observable;
 
 /**
  * Copyright 2016 G-CREATE
@@ -11,7 +12,7 @@ import retrofit2.http.Query;
 
 public interface HatebuService {
     @GET("entry/json/")
-    Call<HatebuEntry> getEntry(@Query("url") String url);
+    Observable<HatebuEntry> getEntry(@Query("url") String url);
 
     @GET("entry/jsonlite/")
     Call<HatebuEntry> getEntryLite(@Query("url") String url);

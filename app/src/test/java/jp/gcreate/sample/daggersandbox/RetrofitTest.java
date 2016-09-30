@@ -5,16 +5,17 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 import jp.gcreate.sample.daggersandbox.api.HatebuService;
 import jp.gcreate.sample.daggersandbox.model.HatebuEntry;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import rx.Observable;
+import rx.functions.Action1;
 
 /**
  * Copyright 2016 G-CREATE
@@ -43,6 +44,7 @@ public class RetrofitTest {
                 .baseUrl(BASE_URL)
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
         service = retrofit.create(HatebuService.class);
     }
@@ -50,21 +52,22 @@ public class RetrofitTest {
     @Test
     public void test_call() throws IOException, InterruptedException {
         final CountDownLatch latch     = new CountDownLatch(1);
-        Call<HatebuEntry>    entryCall = service
+        Observable<HatebuEntry> entryCall = service
                 .getEntry("http://developer.hatena.ne.jp/ja/documents/bookmark/apis/getinfo");
-        Callback<HatebuEntry> callback = new Callback<HatebuEntry>() {
+        entryCall.subscribe(new Action1<HatebuEntry>() {
             @Override
-            public void onResponse(Call<HatebuEntry> call, Response<HatebuEntry> response) {
-                System.out.println(response.body());
+            public void call(HatebuEntry hatebuEntry) {
+                System.out.println("gotten entry:" + hatebuEntry);
+                System.out.println("bookmarks:" + hatebuEntry.getBookmarks().size());
                 latch.countDown();
             }
-
+        }, new Action1<Throwable>() {
             @Override
-            public void onFailure(Call<HatebuEntry> call, Throwable t) {
+            public void call(Throwable throwable) {
+                System.out.println("error");
                 latch.countDown();
             }
-        };
-        HatebuEntry response = entryCall.execute().body();
-        System.out.println(response);
+        });
+        latch.await(30, TimeUnit.SECONDS);
     }
 }
