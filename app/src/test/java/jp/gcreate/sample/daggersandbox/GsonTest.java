@@ -22,7 +22,10 @@ public class GsonTest {
 
     @Before
     public void setUp() {
-        gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
+        gson = new GsonBuilder()
+                .setDateFormat("yyyy-MM-dd HH:mm:ss")
+                .serializeNulls()
+                .create();
         Calendar cal = Calendar.getInstance();
         cal.set(2017, Calendar.JANUARY, 3, 10, 20, 30);
         TEST_DATE = cal.getTime();
@@ -63,7 +66,7 @@ public class GsonTest {
         GsonTestObject obj = new GsonTestObject("hoge", "fuga@fuga.com", null, 2);
         String json = gson.toJson(obj);
         System.out.println(json);
-        assertThat(json, is("{\"name\":\"hoge\",\"email\":\"fuga@fuga.com\",\"num\":2}"));
+        assertThat(json, is("{\"name\":\"hoge\",\"email\":\"fuga@fuga.com\",\"date\":null,\"num\":2}"));
     }
 
     public static class GsonTestObject {
