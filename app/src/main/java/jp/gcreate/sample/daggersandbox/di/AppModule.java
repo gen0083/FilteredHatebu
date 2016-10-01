@@ -25,7 +25,7 @@ public class AppModule {
     @Provides
     @AppScope
     @Named("application")
-    public Context provicdeContext() {
+    public Context provideContext() {
         return context;
     }
 
