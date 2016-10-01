@@ -5,6 +5,7 @@
     >
 
     <data>
+        <import type="jp.gcreate.sample.daggersandbox.util.StringUtil" />
         <variable
             name="bookmark"
             type="jp.gcreate.sample.daggersandbox.model.HatebuBookmark"
@@ -43,7 +44,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@{bookmark.tags}"
+                android:text="@{StringUtil.concatenateStringArray(bookmark.tags)}"
                 tools:text="tags"
                 />
 
