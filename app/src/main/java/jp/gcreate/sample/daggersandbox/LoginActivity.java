@@ -1,6 +1,5 @@
 package jp.gcreate.sample.daggersandbox;
 
-import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -8,11 +7,9 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import jp.gcreate.sample.daggersandbox.databinding.ActivityLoginBinding;
 import jp.gcreate.sample.daggersandbox.di.ActivityComponent;
@@ -24,8 +21,12 @@ import jp.gcreate.sample.daggersandbox.di.ActivityComponent;
 public class LoginActivity extends AppCompatActivity {
     ActivityLoginBinding binding;
     private ActivityComponent component;
-    @Inject @Named("activity")
-    Context context;
+    @Inject
+    DummyPojo pojo;
+    @Inject
+    String timeString;
+    @Inject
+    long time;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,7 +36,8 @@ public class LoginActivity extends AppCompatActivity {
         component = MyApplication.getActivityComponent(this);
         component.inject(this);
 
-        Log.d("test", "activity: " + context.toString());
+        binding.fromAppComponent.setText("from app:" + pojo);
+        binding.fromActivityComponent.setText("from activity:" + timeString + ", long:" + time);
 
         binding.loginButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -10,6 +10,18 @@
         android:orientation="vertical"
         >
 
+        <TextView
+            android:id="@+id/from_app_component"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+        <TextView
+            android:id="@+id/from_activity_component"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
         <android.support.design.widget.TextInputLayout
             android:id="@+id/username_wrapper"
             android:layout_width="match_parent"
