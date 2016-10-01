@@ -23,6 +23,7 @@ import jp.gcreate.sample.daggersandbox.di.DaggerAppComponent;
 public class MyApplication extends Application {
     private AppComponent appComponent;
     private HashMap<String, ActivityComponent> activityComponentSet = new HashMap<>();
+    private HashMap<String, ActivityModule> activityModuleMap = new HashMap<>();
     @Inject @Named("application")
     Context      context;
 
@@ -36,11 +37,14 @@ public class MyApplication extends Application {
         Log.d("test", "getActivityComponent: activity name:" + key);
         MyApplication application = (MyApplication) activity.getApplication();
         if (application.hasComponent(key)) {
+            application.getActivityModule(key).updateContext(activity);
             return application.getActivityComponent(key);
         } else {
             AppComponent appComponent = getAppComponent(activity);
-            ActivityComponent activityComponent = appComponent.plus(new ActivityModule());
+            ActivityModule module = new ActivityModule(activity);
+            ActivityComponent activityComponent = appComponent.plus(module);
             application.setActivityComponent(key, activityComponent);
+            application.setActivityModule(key, module);
             return activityComponent;
         }
     }
@@ -67,5 +71,17 @@ public class MyApplication extends Application {
 
     public void setActivityComponent(String key, ActivityComponent component) {
         activityComponentSet.put(key, component);
+    }
+
+    public void setActivityModule(String key, ActivityModule module) {
+        activityModuleMap.put(key, module);
+    }
+
+    public ActivityModule getActivityModule(String key) {
+        return activityModuleMap.get(key);
+    }
+
+    public boolean hasModule(String key) {
+        return activityModuleMap.containsKey(key);
     }
 }

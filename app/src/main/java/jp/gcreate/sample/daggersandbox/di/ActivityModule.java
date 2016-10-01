@@ -1,5 +1,9 @@
 package jp.gcreate.sample.daggersandbox.di;
 
+import android.content.Context;
+
+import javax.inject.Named;
+
 import dagger.Module;
 import dagger.Provides;
 import jp.gcreate.sample.daggersandbox.di.Scope.ActivityScope;
@@ -10,6 +14,21 @@ import jp.gcreate.sample.daggersandbox.di.Scope.ActivityScope;
 
 @Module
 public class ActivityModule {
+    private Context activityContext;
+
+    public ActivityModule(Context activityContext) {
+        this.activityContext = activityContext;
+    }
+
+    public void updateContext(Context activityContext) {
+        this.activityContext = activityContext;
+    }
+
+    @Provides
+    @Named("activity")
+    public Context provideActivityContext() {
+        return activityContext;
+    }
 
     @Provides
     @ActivityScope
