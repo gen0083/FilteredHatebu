@@ -50,6 +50,11 @@ dependencies {
     compile "com.squareup.retrofit2:converter-moshi:$retrofit_ver"
     compile "com.squareup.retrofit2:converter-gson:$retrofit_ver"
     compile "com.squareup.retrofit2:adapter-rxjava:$retrofit_ver"
+    compile("com.squareup.retrofit2:converter-simplexml:$retrofit_ver") {
+        exclude module: 'stax'
+        exclude module: 'stax-api'
+        exclude module: 'xpp3'
+    }
 
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
