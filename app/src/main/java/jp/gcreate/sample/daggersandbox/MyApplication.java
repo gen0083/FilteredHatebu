@@ -8,13 +8,13 @@ import android.util.Log;
 import java.util.HashMap;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import jp.gcreate.sample.daggersandbox.di.ActivityComponent;
 import jp.gcreate.sample.daggersandbox.di.ActivityModule;
 import jp.gcreate.sample.daggersandbox.di.AppComponent;
 import jp.gcreate.sample.daggersandbox.di.AppModule;
 import jp.gcreate.sample.daggersandbox.di.DaggerAppComponent;
+import jp.gcreate.sample.daggersandbox.di.qualifier.ApplicationContext;
 
 /**
  * Copyright 2016 G-CREATE
@@ -24,7 +24,7 @@ public class MyApplication extends Application {
     private AppComponent appComponent;
     private HashMap<String, ActivityComponent> activityComponentSet = new HashMap<>();
     private HashMap<String, ActivityModule> activityModuleMap = new HashMap<>();
-    @Inject @Named("application")
+    @Inject @ApplicationContext
     Context      context;
 
     public static AppComponent getAppComponent(Context context) {

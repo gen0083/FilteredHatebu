@@ -3,12 +3,11 @@ package jp.gcreate.sample.daggersandbox.di;
 import android.content.Context;
 import android.hardware.SensorManager;
 
-import javax.inject.Named;
-
 import dagger.Module;
 import dagger.Provides;
 import jp.gcreate.sample.daggersandbox.DummyPojo;
 import jp.gcreate.sample.daggersandbox.di.Scope.AppScope;
+import jp.gcreate.sample.daggersandbox.di.qualifier.ApplicationContext;
 
 /**
  * Copyright 2016 G-CREATE
@@ -24,7 +23,7 @@ public class AppModule {
 
     @Provides
     @AppScope
-    @Named("application")
+    @ApplicationContext
     public Context provideContext() {
         return context;
     }
@@ -38,7 +37,7 @@ public class AppModule {
 
     @Provides
     @AppScope
-    public DummyPojo provideDummyPojo(@Named("application") Context context) {
+    public DummyPojo provideDummyPojo(@ApplicationContext Context context) {
         return new DummyPojo(System.currentTimeMillis(), context.getPackageName() + System.currentTimeMillis());
     }
 }

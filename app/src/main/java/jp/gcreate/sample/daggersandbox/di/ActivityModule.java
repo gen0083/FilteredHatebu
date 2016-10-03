@@ -2,11 +2,10 @@ package jp.gcreate.sample.daggersandbox.di;
 
 import android.content.Context;
 
-import javax.inject.Named;
-
 import dagger.Module;
 import dagger.Provides;
 import jp.gcreate.sample.daggersandbox.di.Scope.ActivityScope;
+import jp.gcreate.sample.daggersandbox.di.qualifier.ActivityContext;
 
 /**
  * Copyright 2016 G-CREATE
@@ -25,7 +24,7 @@ public class ActivityModule {
     }
 
     @Provides
-    @Named("activity")
+    @ActivityContext
     public Context provideActivityContext() {
         return activityContext;
     }

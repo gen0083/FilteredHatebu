@@ -11,10 +11,10 @@ import android.text.TextUtils;
 import android.view.View;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import jp.gcreate.sample.daggersandbox.databinding.ActivityLoginBinding;
 import jp.gcreate.sample.daggersandbox.di.ActivityComponent;
+import jp.gcreate.sample.daggersandbox.di.qualifier.ActivityContext;
 
 /**
  * Copyright 2016 G-CREATE
@@ -24,7 +24,7 @@ public class LoginActivity extends AppCompatActivity {
     ActivityLoginBinding binding;
     private ActivityComponent component;
     @Inject
-    @Named("activity")
+    @ActivityContext
     Context   activityContext;
     @Inject
     DummyPojo pojo;
