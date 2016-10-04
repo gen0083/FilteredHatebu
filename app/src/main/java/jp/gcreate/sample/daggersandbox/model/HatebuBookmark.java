@@ -1,7 +1,5 @@
 package jp.gcreate.sample.daggersandbox.model;
 
-import java.util.Date;
-
 /**
  * Copyright 2016 G-CREATE
  */
@@ -9,10 +7,10 @@ import java.util.Date;
 public class HatebuBookmark {
     String   user;
     String[] tags;
-    Date     timestamp;
+    String   timestamp;
     String   comment;
 
-    public HatebuBookmark(String user, String[] tags, Date timestamp, String comment) {
+    public HatebuBookmark(String user, String[] tags, String timestamp, String comment) {
         this.user = user;
         this.tags = tags;
         this.timestamp = timestamp;
@@ -35,11 +33,11 @@ public class HatebuBookmark {
         this.tags = tags;
     }
 
-    public Date getTimestamp() {
+    public String getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(Date timestamp) {
+    public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
     }
 

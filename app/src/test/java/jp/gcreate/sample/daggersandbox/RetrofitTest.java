@@ -8,6 +8,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 import jp.gcreate.sample.daggersandbox.api.HatebuService;
+import jp.gcreate.sample.daggersandbox.model.HatebuBookmark;
 import jp.gcreate.sample.daggersandbox.model.HatebuEntry;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -59,6 +60,9 @@ public class RetrofitTest {
             public void call(HatebuEntry hatebuEntry) {
                 System.out.println("gotten entry:" + hatebuEntry);
                 System.out.println("bookmarks:" + hatebuEntry.getBookmarks().size());
+                for (HatebuBookmark bookmark : hatebuEntry.getBookmarks()) {
+                    System.out.println(bookmark);
+                }
                 latch.countDown();
             }
         }, new Action1<Throwable>() {
