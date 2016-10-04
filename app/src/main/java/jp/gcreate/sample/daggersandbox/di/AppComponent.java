@@ -9,7 +9,7 @@ import jp.gcreate.sample.daggersandbox.di.Scope.AppScope;
  */
 
 @AppScope
-@Component(modules = AppModule.class)
+@Component(modules = {AppModule.class, AppNetworkModule.class})
 public interface AppComponent {
 
     void inject(MyApplication application);
