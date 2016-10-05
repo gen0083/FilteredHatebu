@@ -10,6 +10,8 @@ public class StringUtil {
     }
 
     public static String concatenateStringArray(String[] array, String divider) {
+        if (array == null) return "";
+        if (array.length == 0) return "";
         StringBuilder builder = new StringBuilder();
         for (String str : array) {
             builder.append(str);

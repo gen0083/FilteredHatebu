@@ -32,4 +32,24 @@ public class StringUtilTest {
         String actual = StringUtil.concatenateStringArray(target, "##");
         assertThat(actual, is("abc##def"));
     }
+
+    @Test
+    public void リストに要素がない場合() {
+        String[] target = {""};
+        String actual = StringUtil.concatenateStringArray(target);
+        assertThat(actual, is(""));
+    }
+
+    @Test
+    public void リストがnullの場合() {
+        String actual = StringUtil.concatenateStringArray(null);
+        assertThat(actual, is(""));
+    }
+
+    @Test
+    public void リストサイズが0の場合() {
+        String[] target = new String[0];
+        String actual = StringUtil.concatenateStringArray(target);
+        assertThat(actual, is(""));
+    }
 }
