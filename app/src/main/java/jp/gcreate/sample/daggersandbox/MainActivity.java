@@ -3,6 +3,7 @@ package jp.gcreate.sample.daggersandbox;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 
 import javax.inject.Inject;
@@ -11,6 +12,7 @@ import jp.gcreate.sample.daggersandbox.api.HatebuService;
 import jp.gcreate.sample.daggersandbox.databinding.ActivityMainBinding;
 import jp.gcreate.sample.daggersandbox.di.ActivityComponent;
 import jp.gcreate.sample.daggersandbox.model.HatebuEntry;
+import jp.gcreate.sample.daggersandbox.recycler.BookmarksAdapter;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -20,6 +22,7 @@ import rx.subscriptions.CompositeSubscription;
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
+    private BookmarksAdapter adapter;
     ActivityComponent component;
     @Inject
     String        injectedString;
@@ -38,6 +41,10 @@ public class MainActivity extends AppCompatActivity {
         component.inject(this);
 
         subscription = new CompositeSubscription();
+
+        adapter = new BookmarksAdapter(this);
+        binding.recyclerView.setAdapter(adapter);
+        binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     @Override
@@ -51,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void call(HatebuEntry hatebuEntry) {
                         binding.setEntry(hatebuEntry);
+                        adapter.setList(hatebuEntry.getBookmarks());
                     }
                 }, new Action1<Throwable>() {
                     @Override
