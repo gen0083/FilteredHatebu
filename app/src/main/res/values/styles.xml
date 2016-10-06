@@ -8,4 +8,8 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="RecyclerViewItem">
+        <item name="android:padding">@dimen/item_padding</item>
+    </style>
+
 </resources>

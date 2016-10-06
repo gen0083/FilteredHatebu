@@ -27,6 +27,9 @@ public class HatebuFeedItem {
     @Element
     private String link;
 
+    @Element(required = false)
+    private String description;
+
     @Element(data = true)
     private String encoded;
 
@@ -61,6 +64,14 @@ public class HatebuFeedItem {
 
     public void setLink(String link) {
         this.link = link;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getEncoded() {

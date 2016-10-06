@@ -5,10 +5,9 @@
     >
 
     <data>
-        <import type="jp.gcreate.sample.daggersandbox.util.StringUtil" />
         <variable
-            name="bookmark"
-            type="jp.gcreate.sample.daggersandbox.model.HatebuBookmark"
+            name="item"
+            type="jp.gcreate.sample.daggersandbox.model.HatebuFeedItem"
             />
     </data>
 
@@ -20,43 +19,42 @@
         >
 
         <TextView
-            android:id="@+id/user"
+            android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{bookmark.user}"
-            tools:text="username"
+            android:text="@{item.title}"
+            tools:text="Title"
             />
 
         <TextView
-            android:id="@+id/comment"
+            android:id="@+id/description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@{bookmark.comment}"
-            tools:text="hatebu comments"
+            android:text="@{item.description}"
+            tools:text="here is description."
             />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             >
 
             <TextView
+                android:id="@+id/count"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@{StringUtil.concatenateStringArray(bookmark.tags)}"
-                tools:text="tags"
+                android:text="@{String.valueOf(item.count)}"
+                tools:text="253"
                 />
 
             <TextView
-                android:id="@+id/timestamp"
+                android:id="@+id/date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{bookmark.timestamp.toString()}"
-                tools:text="2017/5/1 1:2:3"
+                android:text="@{item.date}"
+                tools:text="2011/1/1"
                 />
-
         </LinearLayout>
 
     </LinearLayout>
