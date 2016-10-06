@@ -3,7 +3,6 @@ package jp.gcreate.sample.daggersandbox;
 import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
-import android.util.Log;
 
 import java.util.HashMap;
 
@@ -15,6 +14,7 @@ import jp.gcreate.sample.daggersandbox.di.AppComponent;
 import jp.gcreate.sample.daggersandbox.di.AppModule;
 import jp.gcreate.sample.daggersandbox.di.DaggerAppComponent;
 import jp.gcreate.sample.daggersandbox.di.qualifier.ApplicationContext;
+import timber.log.Timber;
 
 /**
  * Copyright 2016 G-CREATE
@@ -34,7 +34,7 @@ public class MyApplication extends Application {
 
     public static ActivityComponent getActivityComponent(Activity activity) {
         String key = activity.getClass().getSimpleName();
-        Log.d("test", "getActivityComponent: activity name:" + key);
+        Timber.d("getActivityComponent: activity name:%s", key);
         MyApplication application = (MyApplication) activity.getApplication();
         if (application.hasComponent(key)) {
             application.getActivityModule(key).updateContext(activity);
@@ -58,7 +58,9 @@ public class MyApplication extends Application {
                                          .build();
         appComponent.inject(this);
 
-        Log.d("test", "application:" + context.toString());
+        Timber.plant(new Timber.DebugTree());
+
+        Timber.d("application:%s", context.toString());
     }
 
     public boolean hasComponent(String key) {
