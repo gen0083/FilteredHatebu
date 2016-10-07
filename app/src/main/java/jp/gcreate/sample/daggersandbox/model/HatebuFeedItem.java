@@ -1,5 +1,8 @@
 package jp.gcreate.sample.daggersandbox.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Namespace;
@@ -17,7 +20,7 @@ import org.simpleframework.xml.Root;
         @Namespace(reference = "http://purl.org/dc/elements/1.1/", prefix = "dc"),
         @Namespace(reference = "http://www.hatena.ne.jp/info/xmlns#", prefix = "hatena")
 })
-public class HatebuFeedItem {
+public class HatebuFeedItem implements Parcelable {
     @Attribute
     private String about;
 
@@ -117,4 +120,48 @@ public class HatebuFeedItem {
                + "subject:" + subject + ", "
                + "count:" + count + "}";
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.about);
+        dest.writeString(this.title);
+        dest.writeString(this.link);
+        dest.writeString(this.description);
+        dest.writeString(this.encoded);
+        dest.writeString(this.date);
+        dest.writeString(this.subject);
+        dest.writeInt(this.count);
+    }
+
+    public HatebuFeedItem() {
+    }
+
+    protected HatebuFeedItem(Parcel in) {
+        this.about = in.readString();
+        this.title = in.readString();
+        this.link = in.readString();
+        this.description = in.readString();
+        this.encoded = in.readString();
+        this.date = in.readString();
+        this.subject = in.readString();
+        this.count = in.readInt();
+    }
+
+    public static final Parcelable.Creator<HatebuFeedItem> CREATOR
+            = new Parcelable.Creator<HatebuFeedItem>() {
+        @Override
+        public HatebuFeedItem createFromParcel(Parcel source) {
+            return new HatebuFeedItem(source);
+        }
+
+        @Override
+        public HatebuFeedItem[] newArray(int size) {
+            return new HatebuFeedItem[size];
+        }
+    };
 }

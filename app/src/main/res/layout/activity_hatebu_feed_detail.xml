@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <data>
+        <variable
+            name="item"
+            type="jp.gcreate.sample.daggersandbox.model.HatebuFeedItem"
+            />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{item.title}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            tools:text="Here is the title sometimes very very long characters in this line."
+            />
+
+        <TextView
+            android:id="@+id/url"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{item.link}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+            tools:text="http://hoge.test.com/hoge/fuga_fuga.html"
+            />
+
+        <TextView
+            android:id="@+id/summary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@{item.description}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            tools:text="Content summary, hogehoge."
+            />
+
+    </LinearLayout>
+</layout>

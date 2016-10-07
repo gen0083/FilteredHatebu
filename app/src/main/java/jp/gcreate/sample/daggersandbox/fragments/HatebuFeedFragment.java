@@ -2,6 +2,7 @@ package jp.gcreate.sample.daggersandbox.fragments;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -15,9 +16,11 @@ import javax.inject.Inject;
 
 import jp.gcreate.sample.daggersandbox.MyApplication;
 import jp.gcreate.sample.daggersandbox.R;
+import jp.gcreate.sample.daggersandbox.activities.HatebuFeedDetailActivity;
 import jp.gcreate.sample.daggersandbox.api.HatebuFeedService;
 import jp.gcreate.sample.daggersandbox.databinding.FragmentHatebuFeedBinding;
 import jp.gcreate.sample.daggersandbox.model.HatebuFeed;
+import jp.gcreate.sample.daggersandbox.model.HatebuFeedItem;
 import jp.gcreate.sample.daggersandbox.recycler.FeedAdapter;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
@@ -29,7 +32,7 @@ import timber.log.Timber;
  * Copyright 2016 G-CREATE
  */
 
-public class HatebuFeedFragment extends Fragment {
+public class HatebuFeedFragment extends Fragment implements FeedAdapter.OnRecycelerItemClickListener {
     private static final String EXTRA_CATEGORY_KEY = "category_key";
     private FragmentHatebuFeedBinding binding;
     private String                    categoryKey;
@@ -94,6 +97,7 @@ public class HatebuFeedFragment extends Fragment {
     private void setupRecyclerView() {
         Context context = getContext();
         adapter = new FeedAdapter(context);
+        adapter.setOnRecyclerItemClickListener(this);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(context));
         binding.recyclerView.setAdapter(adapter);
     }
@@ -127,5 +131,11 @@ public class HatebuFeedFragment extends Fragment {
         if (serviceSubscription != null && !serviceSubscription.isUnsubscribed()) {
             serviceSubscription.unsubscribe();
         }
+    }
+
+    @Override
+    public void onClick(FeedAdapter adapter, int position, HatebuFeedItem item) {
+        Intent i = HatebuFeedDetailActivity.createIntent(getActivity(), item);
+        getActivity().startActivity(i);
     }
 }
