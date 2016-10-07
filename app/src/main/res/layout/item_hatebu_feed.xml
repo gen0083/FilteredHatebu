@@ -5,6 +5,7 @@
     >
 
     <data>
+
         <variable
             name="item"
             type="jp.gcreate.sample.daggersandbox.model.HatebuFeedItem"
@@ -12,50 +13,52 @@
     </data>
 
     <LinearLayout
+        style="@style/RecyclerViewContainer.Clickable"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/RecyclerViewItem"
         android:orientation="vertical"
         >
-
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@{item.title}"
-            tools:text="Title"
-            />
-
-        <TextView
-            android:id="@+id/description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@{item.description}"
-            tools:text="here is description."
-            />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/item_padding_with_item"
             >
 
             <TextView
                 android:id="@+id/count"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:paddingRight="@dimen/item_padding_with_item"
                 android:text="@{String.valueOf(item.count)}"
+                android:textAppearance="@style/TextAppearance.AppCompat.Title"
+                android:textColor="@color/red_600"
                 tools:text="253"
                 />
 
             <TextView
-                android:id="@+id/date"
-                android:layout_width="wrap_content"
+                android:id="@+id/title"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@{item.date}"
-                tools:text="2011/1/1"
+                android:layout_weight="1"
+                android:text="@{item.title}"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                android:layout_gravity="fill_horizontal"
+                tools:text="Title"
                 />
+
+
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{item.date}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+            tools:text="2011/1/1"
+            />
 
     </LinearLayout>
 </layout>
