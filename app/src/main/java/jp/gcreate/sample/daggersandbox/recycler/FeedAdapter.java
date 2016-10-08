@@ -48,6 +48,7 @@ public class FeedAdapter extends RecyclerView.Adapter<DataBindingViewHolder<Item
         ItemHatebuFeedBinding binding = holder.getBinding();
         final HatebuFeedItem  item    = items.get(position);
         binding.setItem(item);
+        binding.executePendingBindings();
     }
 
     @Override
