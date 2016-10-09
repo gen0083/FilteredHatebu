@@ -52,4 +52,9 @@ public class BookmarksAdapter extends RecyclerView.Adapter<DataBindingViewHolder
         this.list = list;
         notifyDataSetChanged();
     }
+
+    public void addItem(HatebuBookmark item) {
+        list.add(item);
+        notifyItemChanged(list.size());
+    }
 }

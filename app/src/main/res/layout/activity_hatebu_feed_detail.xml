@@ -22,10 +22,7 @@
             android:id="@+id/card_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            app:cardCornerRadius="2dp"
-            app:cardUseCompatPadding="true"
-            app:cardElevation="2dp"
+            style="@style/FeedDetailCardContainer"
             >
 
             <LinearLayout
@@ -88,6 +85,15 @@
 
         </android.support.v7.widget.CardView>
 
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            tools:listitem="@layout/item_entry_bookmarks"
+            />
 
     </LinearLayout>
 </layout>
