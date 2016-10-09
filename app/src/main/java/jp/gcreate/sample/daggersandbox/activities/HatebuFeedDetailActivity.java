@@ -3,12 +3,16 @@ package jp.gcreate.sample.daggersandbox.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.customtabs.CustomTabsIntent;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.view.View;
 
 import javax.inject.Inject;
 
@@ -63,6 +67,13 @@ public class HatebuFeedDetailActivity extends AppCompatActivity {
         }
 
         setupRecyclerView();
+
+        binding.readMoreButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openCustomTab(item.getLink());
+            }
+        });
     }
 
     private void setupRecyclerView() {
@@ -104,5 +115,13 @@ public class HatebuFeedDetailActivity extends AppCompatActivity {
         if (bookmarkSubscription != null && !bookmarkSubscription.isUnsubscribed()) {
             bookmarkSubscription.unsubscribe();
         }
+    }
+
+    private void openCustomTab(String url) {
+        CustomTabsIntent i = new CustomTabsIntent.Builder()
+                         .setToolbarColor(ContextCompat.getColor(this, R.color.colorPrimary))
+                .setShowTitle(true)
+                .build();
+        i.launchUrl(this, Uri.parse(url));
     }
 }
