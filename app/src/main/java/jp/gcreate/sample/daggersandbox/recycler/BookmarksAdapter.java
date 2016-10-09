@@ -41,6 +41,7 @@ public class BookmarksAdapter extends RecyclerView.Adapter<DataBindingViewHolder
         ItemEntryBookmarksBinding binding = holder.getBinding();
         HatebuBookmark bookmark = list.get(position);
         binding.setBookmark(bookmark);
+        binding.executePendingBindings();
     }
 
     @Override
