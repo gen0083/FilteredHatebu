@@ -38,6 +38,8 @@ public class HatebuFeedFragment extends Fragment implements FeedAdapter.OnRecyce
     private String                    categoryKey;
     private Subscription              serviceSubscription;
     private FeedAdapter               adapter;
+    private LinearLayoutManager layoutManager;
+    private int scrolledPosition;
     @Inject
     HatebuFeedService service;
 
@@ -98,7 +100,8 @@ public class HatebuFeedFragment extends Fragment implements FeedAdapter.OnRecyce
         Context context = getContext();
         adapter = new FeedAdapter(context);
         adapter.setOnRecyclerItemClickListener(this);
-        binding.recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        layoutManager = new LinearLayoutManager(context);
+        binding.recyclerView.setLayoutManager(layoutManager);
         binding.recyclerView.setAdapter(adapter);
     }
 
@@ -131,6 +134,18 @@ public class HatebuFeedFragment extends Fragment implements FeedAdapter.OnRecyce
         if (serviceSubscription != null && !serviceSubscription.isUnsubscribed()) {
             serviceSubscription.unsubscribe();
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        layoutManager.scrollToPosition(scrolledPosition);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        scrolledPosition = layoutManager.findFirstVisibleItemPosition();
     }
 
     @Override
