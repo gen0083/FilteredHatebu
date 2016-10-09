@@ -44,6 +44,11 @@ public class HatebuFeedFragmentsAdapter extends FragmentStatePagerAdapter {
         return keys.size();
     }
 
+    @Override
+    public CharSequence getPageTitle(int position) {
+        return keys.get(position);
+    }
+
     public void setKeys(List<String> keys) {
         this.keys = keys;
     }

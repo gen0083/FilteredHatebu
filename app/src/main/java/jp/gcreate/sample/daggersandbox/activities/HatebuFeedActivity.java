@@ -31,7 +31,10 @@ public class HatebuFeedActivity extends AppCompatActivity {
 
         List<String> categoryKeys = new ArrayList<>();
         categoryKeys.add("it");
+        categoryKeys.add("life");
+        categoryKeys.add("game");
         HatebuFeedFragmentsAdapter adapter = new HatebuFeedFragmentsAdapter(getSupportFragmentManager(), categoryKeys);
         binding.viewPager.setAdapter(adapter);
+        binding.viewPagerTitle.setupWithViewPager(binding.viewPager);
     }
 }
