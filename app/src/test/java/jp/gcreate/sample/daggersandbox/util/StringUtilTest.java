@@ -1,8 +1,6 @@
-package jp.gcreate.sample.daggersandbox;
+package jp.gcreate.sample.daggersandbox.util;
 
 import org.junit.Test;
-
-import jp.gcreate.sample.daggersandbox.util.StringUtil;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
