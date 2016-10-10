@@ -14,6 +14,7 @@ import jp.gcreate.sample.daggersandbox.di.AppComponent;
 import jp.gcreate.sample.daggersandbox.di.AppModule;
 import jp.gcreate.sample.daggersandbox.di.DaggerAppComponent;
 import jp.gcreate.sample.daggersandbox.di.qualifier.ApplicationContext;
+import jp.gcreate.sample.daggersandbox.util.StethoWrapper;
 import timber.log.Timber;
 
 /**
@@ -26,6 +27,10 @@ public class MyApplication extends Application {
     private HashMap<String, ActivityModule> activityModuleMap = new HashMap<>();
     @Inject @ApplicationContext
     Context      context;
+    @Inject
+    StethoWrapper stetho;
+    @Inject
+    Timber.Tree tree;
 
     public static AppComponent getAppComponent(Context context) {
         MyApplication application = (MyApplication) context.getApplicationContext();
@@ -58,7 +63,8 @@ public class MyApplication extends Application {
                                          .build();
         appComponent.inject(this);
 
-        Timber.plant(new Timber.DebugTree());
+        Timber.plant(tree);
+        stetho.install();
 
         Timber.d("application:%s", context.toString());
     }

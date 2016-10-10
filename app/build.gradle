@@ -49,6 +49,8 @@ dependencies {
     compile "com.squareup.okhttp3:okhttp:$okhttp_ver"
     compile "com.squareup.okhttp3:logging-interceptor:$okhttp_ver"
 
+    debugCompile 'com.facebook.stetho:stetho:1.4.1'
+
     def retrofit_ver = "2.1.0"
     compile "com.squareup.retrofit2:retrofit:$retrofit_ver"
     compile "com.squareup.retrofit2:converter-moshi:$retrofit_ver"
