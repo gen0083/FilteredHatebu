@@ -5,6 +5,7 @@ import java.util.regex.Pattern;
 
 import io.realm.RealmObject;
 import io.realm.annotations.Ignore;
+import io.realm.annotations.PrimaryKey;
 
 /**
  * Copyright 2016 G-CREATE
@@ -12,6 +13,7 @@ import io.realm.annotations.Ignore;
 
 public class UriFilter extends RealmObject {
     private static final String HTTP = "http(s)?://[^/]*";
+    @PrimaryKey
     private String  filter;
     @Ignore
     private Pattern pattern;
@@ -20,11 +22,11 @@ public class UriFilter extends RealmObject {
 
     public UriFilter(String filter) {
         this.filter = filter;
-        pattern = Pattern.compile(HTTP + filter);
     }
 
     public void setFilter(String filter) {
         this.filter = filter;
+        pattern = null;
     }
 
     public String getFilter() {
@@ -32,6 +34,9 @@ public class UriFilter extends RealmObject {
     }
 
     public boolean isFilteredUrl(String uri) {
+        if (pattern == null) {
+            pattern = Pattern.compile(HTTP + filter);
+        }
         Matcher m = pattern.matcher(uri);
         return m.find();
     }

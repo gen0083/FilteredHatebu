@@ -8,6 +8,7 @@ import java.util.HashMap;
 
 import javax.inject.Inject;
 
+import io.realm.Realm;
 import jp.gcreate.sample.daggersandbox.di.ActivityComponent;
 import jp.gcreate.sample.daggersandbox.di.ActivityModule;
 import jp.gcreate.sample.daggersandbox.di.AppComponent;
@@ -65,6 +66,7 @@ public class MyApplication extends Application {
 
         Timber.plant(tree);
         stetho.install();
+        Realm.init(this);
 
         Timber.d("application:%s", context.toString());
     }
