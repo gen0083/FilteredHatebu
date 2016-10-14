@@ -8,7 +8,7 @@
 
         <variable
             name="item"
-            type="jp.gcreate.sample.daggersandbox.model.HatebuFeedItem"
+            type="jp.gcreate.product.filteredhatebu.model.HatebuFeedItem"
             />
     </data>
 

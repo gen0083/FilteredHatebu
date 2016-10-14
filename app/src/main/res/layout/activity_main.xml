@@ -9,7 +9,7 @@
 
         <variable
             name="entry"
-            type="jp.gcreate.sample.daggersandbox.model.HatebuEntry"
+            type="jp.gcreate.product.filteredhatebu.model.HatebuEntry"
             />
     </data>
 
@@ -22,7 +22,7 @@
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
-        tools:context="jp.gcreate.sample.daggersandbox.MainActivity"
+        tools:context="jp.gcreate.product.filteredhatebu.MainActivity"
         >
 
         <TextView
