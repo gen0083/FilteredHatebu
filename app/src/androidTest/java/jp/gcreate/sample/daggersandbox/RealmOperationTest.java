@@ -10,7 +10,7 @@ import org.junit.runner.RunWith;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import io.realm.RealmResults;
-import jp.gcreate.sample.daggersandbox.model.UriFilter;
+import io.realm.exceptions.RealmPrimaryKeyConstraintException;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
@@ -33,54 +33,143 @@ public class RealmOperationTest {
 
     @Test
     public void insert() {
-        Realm                   realm  = Realm.getDefaultInstance();
-        RealmResults<UriFilter> actual = realm.where(UriFilter.class).findAll();
-        assertThat(actual.size(), is(0));
+        Realm realm = Realm.getDefaultInstance();
+        try {
+            RealmResults<RealmOperationTestModel> actual = realm
+                    .where(RealmOperationTestModel.class)
+                    .findAll();
+            assertThat(actual.size(), is(0));
 
-        realm.beginTransaction();
-        UriFilter model = new UriFilter("test.com/");
-        realm.copyToRealm(model);
-        realm.commitTransaction();
+            realm.executeTransaction(new Realm.Transaction() {
+                @Override
+                public void execute(Realm realm) {
+                    RealmOperationTestModel model = new RealmOperationTestModel(1, "test.com/");
+                    realm.copyToRealm(model);
+                }
+            });
 
-        actual = realm.where(UriFilter.class).findAll();
-        assertThat(actual.size(), is(1));
-        realm.close();
+            actual = realm.where(RealmOperationTestModel.class).findAll();
+            assertThat(actual.size(), is(1));
+        } finally {
+            realm.close();
+        }
     }
 
     @Test
     public void update() {
         Realm realm = Realm.getDefaultInstance();
-        realm.beginTransaction();
-        UriFilter model = new UriFilter("test.com/");
-        realm.copyToRealm(model);
-        realm.commitTransaction();
+        try {
 
-        realm.beginTransaction();
-        model = new UriFilter("abc.jp/");
-        realm.copyToRealm(model);
-        realm.commitTransaction();
+            realm.executeTransaction(new Realm.Transaction() {
+                @Override
+                public void execute(Realm realm) {
+                    RealmOperationTestModel model = new RealmOperationTestModel(1, "test.com/");
+                    realm.copyToRealm(model);
+                }
+            });
 
-        RealmResults<UriFilter> result = realm.where(UriFilter.class).findAll();
-        assertThat(result.size(), is(2));
-        assertThat(result.get(0).getFilter(), is("test.com/"));
-        assertThat(result.get(1).getFilter(), is("abc.jp/"));
+            realm.executeTransaction(new Realm.Transaction() {
+                @Override
+                public void execute(Realm realm) {
+                    RealmOperationTestModel model = new RealmOperationTestModel(2, "abc.jp/");
+                    realm.copyToRealm(model);
+                }
+            });
 
-        model = new UriFilter("hoge.jp/");
-        realm.beginTransaction();
-        realm.copyToRealmOrUpdate(model);
-        realm.commitTransaction();
+            RealmResults<RealmOperationTestModel> result = realm
+                    .where(RealmOperationTestModel.class)
+                    .findAll();
+            assertThat(result.size(), is(2));
+            assertThat(result.get(0).value, is("test.com/"));
+            assertThat(result.get(1).value, is("abc.jp/"));
 
-        result = realm.where(UriFilter.class)
-                      .equalTo("filter", "abc.jp/")
-                      .findAll();
-        result.get(0).deleteFromRealm();
+            realm.executeTransaction(new Realm.Transaction() {
+                @Override
+                public void execute(Realm realm) {
+                    RealmResults<RealmOperationTestModel> result = realm
+                            .where(RealmOperationTestModel.class)
+                            .equalTo("value", "abc.jp/")
+                            .findAll();
+                    RealmOperationTestModel target = result.get(0);
+                    target.value = "hoge.jp/";
+                    realm.copyToRealmOrUpdate(target);
+                }
+            });
 
-        result = realm.where(UriFilter.class).findAll();
-        assertThat(result.size(), is(2));
-        assertThat(result.get(0).getFilter(), is("test.com/"));
-        assertThat(result.get(1).getFilter(), is("hoge.jp/"));
+            result = realm.where(RealmOperationTestModel.class).findAll();
+            assertThat(result.size(), is(2));
+            assertThat(result.get(0).value, is("test.com/"));
+            assertThat(result.get(1).value, is("hoge.jp/"));
+        } finally {
+            realm.close();
+        }
+    }
 
-        realm.close();
+    @Test(expected = RealmPrimaryKeyConstraintException.class)
+    public void insert_duplicated_primary_key() {
+        Realm realm = Realm.getDefaultInstance();
+        try {
+            realm.executeTransaction(new Realm.Transaction() {
+                @Override
+                public void execute(Realm realm) {
+                    RealmOperationTestModel model = new RealmOperationTestModel(1, "one.com/");
+                    realm.insert(model);
+                    model = new RealmOperationTestModel(1, "two.com/");
+                    realm.insert(model);
+                }
+            });
+
+            RealmResults<RealmOperationTestModel> result = realm
+                    .where(RealmOperationTestModel.class)
+                    .findAll();
+            assertThat(result.size(), is(1));
+
+        } finally {
+            realm.close();
+        }
+    }
+
+    @Test
+    public void delete() {
+        Realm realm = Realm.getDefaultInstance();
+        try {
+            realm.executeTransaction(new Realm.Transaction() {
+                @Override
+                public void execute(Realm realm) {
+                    RealmOperationTestModel model = new RealmOperationTestModel(1, "one.com/");
+                    realm.insert(model);
+                    model = new RealmOperationTestModel(2, "two.com/");
+                    realm.insert(model);
+                    model = new RealmOperationTestModel(3, "three.com/");
+                    realm.insert(model);
+                }
+            });
+
+            RealmResults<RealmOperationTestModel> result = realm
+                    .where(RealmOperationTestModel.class)
+                    .findAll();
+            assertThat(result.size(), is(3));
+
+            realm.executeTransaction(new Realm.Transaction() {
+                @Override
+                public void execute(Realm realm) {
+                    RealmResults<RealmOperationTestModel> target = realm
+                            .where(RealmOperationTestModel.class)
+                            .equalTo("id", 2)
+                            .findAll();
+                    assertThat(target.size(), is(1));
+                    assertThat(target.get(0).value, is("two.com/"));
+                    target.get(0).deleteFromRealm();
+                }
+            });
+
+            result = realm.where(RealmOperationTestModel.class)
+                          .findAll();
+            assertThat(result.size(), is(2));
+
+        } finally {
+            realm.close();
+        }
     }
 
     private void deleteDefaultRealm() {
