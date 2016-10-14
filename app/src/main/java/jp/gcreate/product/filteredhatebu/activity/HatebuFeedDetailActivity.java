@@ -21,6 +21,7 @@ import jp.gcreate.product.filteredhatebu.R;
 import jp.gcreate.product.filteredhatebu.api.HatebuService;
 import jp.gcreate.product.filteredhatebu.databinding.ActivityHatebuFeedDetailBinding;
 import jp.gcreate.product.filteredhatebu.di.ActivityComponent;
+import jp.gcreate.product.filteredhatebu.fragment.SelectFilterDialogFragment;
 import jp.gcreate.product.filteredhatebu.model.HatebuBookmark;
 import jp.gcreate.product.filteredhatebu.model.HatebuEntry;
 import jp.gcreate.product.filteredhatebu.model.HatebuFeedItem;
@@ -30,18 +31,20 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
+import timber.log.Timber;
 
 /**
  * Copyright 2016 G-CREATE
  */
 
-public class HatebuFeedDetailActivity extends AppCompatActivity {
+public class HatebuFeedDetailActivity extends AppCompatActivity
+        implements SelectFilterDialogFragment.Callback {
     private static final String EXTRA_ITEM_KEY = "feed_item_key";
     private ActivityHatebuFeedDetailBinding binding;
     private HatebuFeedItem                  item;
     private ActivityComponent               component;
     private Subscription                    bookmarkSubscription;
-    private BookmarksAdapter adapter;
+    private BookmarksAdapter                adapter;
     @Inject
     HatebuService service;
 
@@ -72,6 +75,12 @@ public class HatebuFeedDetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 openCustomTab(item.getLink());
+            }
+        });
+        binding.addFilterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openFilterDialog();
             }
         });
     }
@@ -119,9 +128,24 @@ public class HatebuFeedDetailActivity extends AppCompatActivity {
 
     private void openCustomTab(String url) {
         CustomTabsIntent i = new CustomTabsIntent.Builder()
-                         .setToolbarColor(ContextCompat.getColor(this, R.color.colorPrimary))
+                .setToolbarColor(ContextCompat.getColor(this, R.color.colorPrimary))
                 .setShowTitle(true)
                 .build();
         i.launchUrl(this, Uri.parse(url));
+    }
+
+    private void openFilterDialog() {
+        SelectFilterDialogFragment f = SelectFilterDialogFragment.newInstance(item.getLink());
+        f.show(getSupportFragmentManager(), "dialog");
+    }
+
+    @Override
+    public void onCanceled() {
+        Timber.d("%s onCanceled from AlertDialog.", this);
+    }
+
+    @Override
+    public void onSelected(String selected) {
+        Timber.d("%s onSelected from AlertDialog selected:%s", this, selected);
     }
 }

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">DaggerSandBox</string>
+    <string name="cancel">キャンセル</string>
+    <string name="filter_candidate">フィルタを選択してください</string>
 </resources>

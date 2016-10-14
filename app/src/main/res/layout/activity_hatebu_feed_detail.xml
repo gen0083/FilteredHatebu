@@ -65,18 +65,38 @@
                 tools:text="Content summary, hogehoge."
                 />
 
-            <Button
-                android:id="@+id/read_more_button"
-                style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="8dp"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:paddingTop="8dp"
-                android:text="サイトへ移動"
-                />
+                android:orientation="horizontal"
+                android:gravity="right"
+                >
 
+                <Button
+                    android:id="@+id/read_more_button"
+                    style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="8dp"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:paddingTop="8dp"
+                    android:text="サイトへ移動"
+                    />
+
+                <Button
+                    android:id="@+id/add_filter_button"
+                    style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="8dp"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:paddingTop="8dp"
+                    android:text="フィルタを追加"
+                    />
+
+            </LinearLayout>
         </LinearLayout>
 
         <android.support.v7.widget.RecyclerView
