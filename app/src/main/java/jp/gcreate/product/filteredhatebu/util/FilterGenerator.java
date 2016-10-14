@@ -10,15 +10,25 @@ import java.util.regex.Pattern;
  */
 
 public class FilterGenerator {
-    private static Pattern DOMAIN = Pattern.compile("http://(.+?/)");
-    private static Pattern SUBDIRECTORY = Pattern.compile("http://(.+?/.+?/)");
+    private static Pattern DOMAIN = Pattern.compile("http[s]?://(.+?/)");
+    private static Pattern SUBDIRECTORY = Pattern.compile("http[s]?://(.+?/.+?/)");
 
     public static List<String> generateFilterCandidate(String uri) {
         List<String> candidate = new ArrayList<>();
         String host = getHost(uri);
         candidate.add(host);
-        candidate.add(getHostWithoutSubDomain(host));
-        candidate.add(getHostAndSubDirectory(uri));
+        String subdomain = getHostWithoutSubDomain(uri);
+        boolean isSameDomain = host.equals(subdomain);
+        if (!isSameDomain) {
+            candidate.add(subdomain);
+        }
+        String subdirectory = getHostAndSubDirectory(uri);
+        if (!subdirectory.equals("")) {
+            candidate.add(subdirectory);
+            if (!isSameDomain) {
+                candidate.add(removeSubDomain(subdirectory));
+            }
+        }
         return candidate;
     }
 
@@ -32,13 +42,7 @@ public class FilterGenerator {
 
     public static String getHostWithoutSubDomain(String uri) {
         String domain = getHost(uri);
-        String[] splited = domain.split("\\.");
-        if (splited.length <= 2) return domain;
-        String ret = splited[splited.length - 2] + "." + splited[splited.length - 1];
-        for (int i = splited.length - 3; i > 0; i--) {
-            ret = splited[i] + "." + ret;
-        }
-        return ret;
+        return removeSubDomain(domain);
     }
 
     public static String getHostAndSubDirectory(String uri) {
@@ -49,7 +53,23 @@ public class FilterGenerator {
         return "";
     }
 
-    public static String removeSubDomain(String domain) {
-        return "";
+    public static String getHostAndSubDirectoryWithoutSubDomain(String uri) {
+        return removeSubDomain(getHostAndSubDirectory(uri));
+    }
+
+    static String removeSubDomain(String uri) {
+        String[] split = uri.split("/");
+        if (split.length >= 1) {
+            String host = split[0];
+            String[] segment = host.split("\\.");
+            if (segment.length > 2) {
+                int position = host.indexOf(".") + 1;
+                return uri.substring(position, uri.length());
+            } else {
+                return uri;
+            }
+        } else {
+            throw new RuntimeException("FilterGenerator in removeSubDomain failed. Uri format invalid. Expected xxx.com/");
+        }
     }
 }
