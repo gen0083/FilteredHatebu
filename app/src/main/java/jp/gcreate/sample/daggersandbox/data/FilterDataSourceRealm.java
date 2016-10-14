@@ -23,12 +23,18 @@ public class FilterDataSourceRealm implements FilterDataSource {
     }
 
     @Override
-    public void insertFilter(String insert) {
+    public void insertFilter(final String insert) {
         Realm realm = Realm.getInstance(config);
-        realm.beginTransaction();
-        realm.copyToRealmOrUpdate(new UriFilter(insert));
-        realm.commitTransaction();
-        realm.close();
+        try {
+            realm.executeTransaction(new Realm.Transaction() {
+                @Override
+                public void execute(Realm realm) {
+                    realm.copyToRealmOrUpdate(new UriFilter(insert));
+                }
+            });
+        } finally {
+            realm.close();
+        }
     }
 
     @Override
@@ -37,12 +43,17 @@ public class FilterDataSourceRealm implements FilterDataSource {
             @Override
             public void call(SingleSubscriber<? super List<UriFilter>> singleSubscriber) {
                 final Realm realm = Realm.getInstance(config);
-                RealmResults<UriFilter> results = realm.where(UriFilter.class).findAll();
-                if (results.size() == 0) {
-                    singleSubscriber.onError(new NoSuchElementException("Filter has no data."));
+                try {
+                    RealmResults<UriFilter> results = realm.where(UriFilter.class).findAll();
+                    if (results.size() == 0) {
+                        singleSubscriber.onError(new NoSuchElementException("Filter has no data."));
+                    }
+                    singleSubscriber.onSuccess(results.subList(0, results.size()));
+                } catch (Exception e) {
+                    singleSubscriber.onError(e);
+                } finally {
+                    realm.close();
                 }
-                singleSubscriber.onSuccess(results.subList(0, results.size()));
-                realm.close();
             }
         });
     }
@@ -53,13 +64,19 @@ public class FilterDataSourceRealm implements FilterDataSource {
             @Override
             public void call(final SingleSubscriber<? super UriFilter> singleSubscriber) {
                 final Realm realm = Realm.getInstance(config);
-                RealmResults<UriFilter> results = realm.where(UriFilter.class)
-                                                       .equalTo("filter", filter)
-                                                       .findAll();
-                if (results.size() == 1) {
-                    singleSubscriber.onSuccess(results.get(0));
-                } else {
-                    singleSubscriber.onError(new NoSuchElementException("Filter '" + filter + "' is not exist."));
+                try {
+                    RealmResults<UriFilter> results = realm.where(UriFilter.class)
+                                                           .equalTo("filter", filter)
+                                                           .findAll();
+                    if (results.size() == 1) {
+                        singleSubscriber.onSuccess(results.get(0));
+                    } else {
+                        singleSubscriber.onError(new NoSuchElementException("Filter '" + filter + "' is not exist."));
+                    }
+                } catch (Exception e) {
+                    singleSubscriber.onError(e);
+                } finally {
+                    realm.close();
                 }
                 realm.close();
             }
@@ -73,18 +90,27 @@ public class FilterDataSourceRealm implements FilterDataSource {
     }
 
     @Override
-    public void deleteFilter(String delete) {
+    public void deleteFilter(final String delete) {
         Realm realm = Realm.getInstance(config);
-        realm.beginTransaction();
-        RealmResults<UriFilter> result = realm.where(UriFilter.class).equalTo("filter", delete).findAll();
-        if (result.size() == 1) {
-            result.get(0).deleteFromRealm();
-        } else {
-            for (int i = 0; i < result.size(); i++) {
-                result.get(i).deleteFromRealm();
-            }
+        try {
+            realm.executeTransaction(new Realm.Transaction() {
+                @Override
+                public void execute(Realm realm) {
+                    RealmResults<UriFilter> result = realm.where(UriFilter.class)
+                                                          .equalTo("filter", delete)
+                                                          .findAll();
+                    if (result.size() == 1) {
+                        result.get(0).deleteFromRealm();
+                    } else {
+                        for (int i = 0; i < result.size(); i++) {
+                            result.get(i).deleteFromRealm();
+                        }
+                    }
+                }
+            });
+        } finally {
+            realm.close();
         }
-        realm.commitTransaction();
         realm.close();
     }
 }
