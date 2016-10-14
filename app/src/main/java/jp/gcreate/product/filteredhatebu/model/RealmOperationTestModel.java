@@ -1,16 +1,17 @@
-package jp.gcreate.product.filteredhatebu;
+package jp.gcreate.product.filteredhatebu.model;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
 /**
  * Copyright 2016 G-CREATE
+ * TODO: primaryKeyと値を持つデータが出来たらこれは消す
  */
 
 public class RealmOperationTestModel extends RealmObject {
     @PrimaryKey
-    long id;
-    String value;
+    public long id;
+    public String value;
 
     public RealmOperationTestModel() {
         // A default public constructor with no argument must be declared
@@ -21,5 +22,21 @@ public class RealmOperationTestModel extends RealmObject {
     public RealmOperationTestModel(long id, String value) {
         this.id = id;
         this.value = value;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    public String getValue() {
+        return value;
     }
 }

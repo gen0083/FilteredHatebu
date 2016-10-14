@@ -11,12 +11,16 @@ import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import io.realm.RealmResults;
 import io.realm.exceptions.RealmPrimaryKeyConstraintException;
+import jp.gcreate.product.filteredhatebu.model.RealmOperationTestModel;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 /**
  * Copyright 2016 G-CREATE
+ * TODO: RealmOperationTestModelはprimeryKeyと値を持ったデータで置き換える
+ * 現状はそのようなデータがないためテスト用に作ったものを使っているが、テストコードにおいてあると動かない
+ * （UriFilterをRelamが認識できなくなるらしい）
  */
 
 @RunWith(AndroidJUnit4.class)
@@ -80,8 +84,8 @@ public class RealmOperationTest {
                     .where(RealmOperationTestModel.class)
                     .findAll();
             assertThat(result.size(), is(2));
-            assertThat(result.get(0).value, is("test.com/"));
-            assertThat(result.get(1).value, is("abc.jp/"));
+            assertThat(result.get(0).getValue(), is("test.com/"));
+            assertThat(result.get(1).getValue(), is("abc.jp/"));
 
             realm.executeTransaction(new Realm.Transaction() {
                 @Override
@@ -91,15 +95,15 @@ public class RealmOperationTest {
                             .equalTo("value", "abc.jp/")
                             .findAll();
                     RealmOperationTestModel target = result.get(0);
-                    target.value = "hoge.jp/";
+                    target.setValue("hoge.jp/");
                     realm.copyToRealmOrUpdate(target);
                 }
             });
 
             result = realm.where(RealmOperationTestModel.class).findAll();
             assertThat(result.size(), is(2));
-            assertThat(result.get(0).value, is("test.com/"));
-            assertThat(result.get(1).value, is("hoge.jp/"));
+            assertThat(result.get(0).getValue(), is("test.com/"));
+            assertThat(result.get(1).getValue(), is("hoge.jp/"));
         } finally {
             realm.close();
         }
@@ -158,7 +162,7 @@ public class RealmOperationTest {
                             .equalTo("id", 2)
                             .findAll();
                     assertThat(target.size(), is(1));
-                    assertThat(target.get(0).value, is("two.com/"));
+                    assertThat(target.get(0).getValue(), is("two.com/"));
                     target.get(0).deleteFromRealm();
                 }
             });
