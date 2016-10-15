@@ -30,7 +30,7 @@ public class FilterRepository implements FilterDataSource {
     @Override
     public void insertFilter(String insert) {
         localDataSource.insertFilter(insert);
-        cachedList.add(new UriFilter(insert));
+        isDirty = true;
     }
 
     @Override
@@ -71,22 +71,12 @@ public class FilterRepository implements FilterDataSource {
     @Override
     public void updateFilter(String old, String update) {
         localDataSource.updateFilter(old, update);
-        for (int i = 0; i < cachedList.size(); i++) {
-            if (cachedList.get(i).getFilter().equals(old)) {
-                cachedList.get(i).setFilter(update);
-                return;
-            }
-        }
+        isDirty = true;
     }
 
     @Override
     public void deleteFilter(String delete) {
         localDataSource.deleteFilter(delete);
-        for (int i = 0; i < cachedList.size(); i++) {
-            if (cachedList.get(i).getFilter().equals(delete)) {
-                cachedList.remove(i);
-                return;
-            }
-        }
+        isDirty = true;
     }
 }

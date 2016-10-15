@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.customtabs.CustomTabsIntent;
+import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -47,7 +48,7 @@ public class HatebuFeedDetailActivity extends AppCompatActivity
     private Subscription                    bookmarkSubscription;
     private BookmarksAdapter                adapter;
     @Inject
-    HatebuService service;
+    HatebuService    service;
     @Inject
     FilterRepository filterRepository;
 
@@ -148,8 +149,17 @@ public class HatebuFeedDetailActivity extends AppCompatActivity
     }
 
     @Override
-    public void onSelected(String selected) {
+    public void onSelected(final String selected) {
         Timber.d("%s onSelected from AlertDialog selected:%s", this, selected);
         filterRepository.insertFilter(selected);
+        Snackbar.make(binding.title, getString(R.string.add_filter_done, selected),
+                      Snackbar.LENGTH_SHORT)
+                .setAction(R.string.cancel, new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        filterRepository.deleteFilter(selected);
+                    }
+                })
+                .show();
     }
 }
