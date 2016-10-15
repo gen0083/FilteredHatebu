@@ -18,6 +18,7 @@ import jp.gcreate.product.filteredhatebu.MyApplication;
 import jp.gcreate.product.filteredhatebu.R;
 import jp.gcreate.product.filteredhatebu.activity.HatebuFeedDetailActivity;
 import jp.gcreate.product.filteredhatebu.api.HatebuFeedService;
+import jp.gcreate.product.filteredhatebu.data.FilterRepository;
 import jp.gcreate.product.filteredhatebu.databinding.FragmentHatebuFeedBinding;
 import jp.gcreate.product.filteredhatebu.model.HatebuFeed;
 import jp.gcreate.product.filteredhatebu.model.HatebuFeedItem;
@@ -42,6 +43,8 @@ public class HatebuFeedFragment extends Fragment implements FeedAdapter.OnRecyce
     private int scrolledPosition;
     @Inject
     HatebuFeedService service;
+    @Inject
+    FilterRepository filterRepository;
 
     public static HatebuFeedFragment createInstance(String category) {
         HatebuFeedFragment f    = new HatebuFeedFragment();
@@ -98,7 +101,7 @@ public class HatebuFeedFragment extends Fragment implements FeedAdapter.OnRecyce
 
     private void setupRecyclerView() {
         Context context = getContext();
-        adapter = new FeedAdapter(context);
+        adapter = new FeedAdapter(context, filterRepository);
         adapter.setOnRecyclerItemClickListener(this);
         layoutManager = new LinearLayoutManager(context);
         binding.recyclerView.setLayoutManager(layoutManager);

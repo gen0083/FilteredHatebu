@@ -10,8 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import jp.gcreate.product.filteredhatebu.R;
+import jp.gcreate.product.filteredhatebu.data.FilterRepository;
 import jp.gcreate.product.filteredhatebu.databinding.ItemHatebuFeedBinding;
 import jp.gcreate.product.filteredhatebu.model.HatebuFeedItem;
+import jp.gcreate.product.filteredhatebu.model.UriFilter;
+import rx.functions.Action1;
 import timber.log.Timber;
 
 /**
@@ -24,13 +27,15 @@ public class FeedAdapter extends RecyclerView.Adapter<DataBindingViewHolder<Item
     private List<HatebuFeedItem>         items;
     private RecyclerView                 recyclerView;
     private OnRecycelerItemClickListener listener;
+    private FilterRepository filterRepository;
 
-    public FeedAdapter(Context context) {
-        this(context, new ArrayList<HatebuFeedItem>());
+    public FeedAdapter(Context context, FilterRepository filterRepository) {
+        this(context, filterRepository, new ArrayList<HatebuFeedItem>());
     }
 
-    public FeedAdapter(Context context, List<HatebuFeedItem> items) {
+    public FeedAdapter(Context context, FilterRepository filterRepository, List<HatebuFeedItem> items) {
         this.context = context;
+        this.filterRepository = filterRepository;
         this.items = items;
         Timber.i("%s constructor called.", this);
     }
@@ -48,8 +53,20 @@ public class FeedAdapter extends RecyclerView.Adapter<DataBindingViewHolder<Item
     public void onBindViewHolder(DataBindingViewHolder<ItemHatebuFeedBinding> holder,
                                  int position) {
         Timber.i("%s onBindViewHolder", this);
-        ItemHatebuFeedBinding binding = holder.getBinding();
-        final HatebuFeedItem  item    = items.get(position);
+        final ItemHatebuFeedBinding binding    = holder.getBinding();
+        final HatebuFeedItem        item       = items.get(position);
+        filterRepository.getFilterAll()
+                .subscribe(new Action1<List<UriFilter>>() {
+                    @Override
+                    public void call(List<UriFilter> uriFilters) {
+                        boolean b = false;
+                        for (UriFilter f : uriFilters) {
+                             b = f.isFilteredUrl(item.getLink());
+                            if (b) break;
+                        }
+                        binding.setIsFiltered(b);
+                    }
+                });
         binding.setItem(item);
         binding.executePendingBindings();
     }

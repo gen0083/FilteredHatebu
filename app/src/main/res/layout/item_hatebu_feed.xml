@@ -10,6 +10,10 @@
             name="item"
             type="jp.gcreate.product.filteredhatebu.model.HatebuFeedItem"
             />
+        <variable
+            name="isFiltered"
+            type="Boolean"
+            />
     </data>
 
     <LinearLayout
@@ -17,6 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:alpha="@{isFiltered ? 0.4f : 1f}"
         >
 
         <LinearLayout
