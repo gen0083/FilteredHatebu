@@ -61,10 +61,15 @@ public class FeedAdapter extends RecyclerView.Adapter<DataBindingViewHolder<Item
                     public void call(List<UriFilter> uriFilters) {
                         boolean b = false;
                         for (UriFilter f : uriFilters) {
-                             b = f.isFilteredUrl(item.getLink());
+                            b = f.isFilteredUrl(item.getLink());
                             if (b) break;
                         }
                         binding.setIsFiltered(b);
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        binding.setIsFiltered(false);
                     }
                 });
         binding.setItem(item);

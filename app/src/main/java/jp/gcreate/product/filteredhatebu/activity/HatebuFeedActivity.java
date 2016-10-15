@@ -61,6 +61,11 @@ public class HatebuFeedActivity extends AppCompatActivity {
                                 }
                                 Timber.d("<< Filter in local file ");
                             }
+                        }, new Action1<Throwable>() {
+                            @Override
+                            public void call(Throwable throwable) {
+                                Timber.d("No data in FilterRepository");
+                            }
                         });
     }
 }

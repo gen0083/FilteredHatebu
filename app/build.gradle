@@ -38,7 +38,7 @@ dependencies {
     apt 'com.google.dagger:dagger-compiler:2.7'
 
     compile 'com.jakewharton.timber:timber:4.3.1'
-    compile 'io.reactivex:rxjava:1.2.0'
+    compile 'io.reactivex:rxjava:1.2.1'
     compile 'io.reactivex:rxandroid:1.2.1'
 
     def orma_version = '3.0.0'
