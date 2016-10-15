@@ -176,6 +176,30 @@ public class RealmOperationTest {
         }
     }
 
+    @Test(expected = IllegalStateException.class)
+    public void access_object_after_close() {
+        Realm                         realm = Realm.getDefaultInstance();
+        RealmOperationTestModel model;
+        try {
+            realm.executeTransaction(new Realm.Transaction() {
+                @Override
+                public void execute(Realm realm) {
+                    realm.copyToRealm(new RealmOperationTestModel(1, "first"));
+                    realm.copyToRealm(new RealmOperationTestModel(2, "second"));
+                }
+            });
+            RealmResults<RealmOperationTestModel> result = realm
+                    .where(RealmOperationTestModel.class)
+                    .findAll();
+            model = result.get(0);
+        } finally {
+            realm.close();
+        }
+        // closeした後はRealmObjectにアクセスできない
+        // -> java.lang.IllegalStateException: This Realm instance has already been closed, making it unusable.
+        assertThat(model.getValue(), is("first"));
+    }
+
     private void deleteDefaultRealm() {
         Realm              realm  = Realm.getDefaultInstance();
         RealmConfiguration config = realm.getConfiguration();
