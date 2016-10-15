@@ -1,4 +1,4 @@
-package jp.gcreate.product.filteredhatebu.model;
+package jp.gcreate.product.filteredhatebu;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;

@@ -1,21 +1,23 @@
 package jp.gcreate.product.filteredhatebu.model;
 
+import com.github.gfx.android.orma.annotation.Column;
+import com.github.gfx.android.orma.annotation.Getter;
+import com.github.gfx.android.orma.annotation.OnConflict;
+import com.github.gfx.android.orma.annotation.Setter;
+import com.github.gfx.android.orma.annotation.Table;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import io.realm.RealmObject;
-import io.realm.annotations.Ignore;
-import io.realm.annotations.PrimaryKey;
 
 /**
  * Copyright 2016 G-CREATE
  */
 
-public class UriFilter extends RealmObject {
+@Table
+public class UriFilter {
     private static final String HTTP = "http(s)?://[^/]*";
-    @PrimaryKey
+    @Column(value = "filter", unique = true, uniqueOnConflict = OnConflict.IGNORE, indexed = true)
     private String  filter;
-    @Ignore
     private Pattern pattern;
 
     public UriFilter() {}
@@ -24,11 +26,13 @@ public class UriFilter extends RealmObject {
         this.filter = filter;
     }
 
+    @Setter("filter")
     public void setFilter(String filter) {
         this.filter = filter;
         pattern = null;
     }
 
+    @Getter("filter")
     public String getFilter() {
         return filter;
     }

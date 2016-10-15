@@ -77,7 +77,7 @@ public class RxSingleTest {
                 });
         assertThat(s.isUnsubscribed(), is(false));
         latch.await();
-        TimeUnit.SECONDS.sleep(1);
+        TimeUnit.SECONDS.sleep(2);
         assertThat(s.isUnsubscribed(), is(true));
     }
 }
