@@ -1,8 +1,8 @@
 package jp.gcreate.product.filteredhatebu.di;
 
 import dagger.Subcomponent;
-import jp.gcreate.product.filteredhatebu.LoginActivity;
-import jp.gcreate.product.filteredhatebu.MainActivity;
+import jp.gcreate.product.filteredhatebu.activity.LoginActivity;
+import jp.gcreate.product.filteredhatebu.activity.MainActivity;
 import jp.gcreate.product.filteredhatebu.activity.HatebuFeedActivity;
 import jp.gcreate.product.filteredhatebu.activity.HatebuFeedDetailActivity;
 import jp.gcreate.product.filteredhatebu.di.Scope.ActivityScope;

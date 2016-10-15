@@ -14,9 +14,9 @@
         android:theme="@style/AppTheme"
         android:name="jp.gcreate.product.filteredhatebu.MyApplication"
         >
-        <activity android:name="jp.gcreate.product.filteredhatebu.LoginActivity">
+        <activity android:name="jp.gcreate.product.filteredhatebu.activity.LoginActivity">
         </activity>
-        <activity android:name="jp.gcreate.product.filteredhatebu.MainActivity">
+        <activity android:name="jp.gcreate.product.filteredhatebu.activity.MainActivity">
         </activity>
         <activity android:name="jp.gcreate.product.filteredhatebu.activity.HatebuFeedActivity">
             <intent-filter>

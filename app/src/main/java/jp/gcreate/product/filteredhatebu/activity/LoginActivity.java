@@ -1,4 +1,4 @@
-package jp.gcreate.product.filteredhatebu;
+package jp.gcreate.product.filteredhatebu.activity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,6 +12,9 @@ import android.view.View;
 
 import javax.inject.Inject;
 
+import jp.gcreate.product.filteredhatebu.DummyPojo;
+import jp.gcreate.product.filteredhatebu.MyApplication;
+import jp.gcreate.product.filteredhatebu.R;
 import jp.gcreate.product.filteredhatebu.databinding.ActivityLoginBinding;
 import jp.gcreate.product.filteredhatebu.di.ActivityComponent;
 import jp.gcreate.product.filteredhatebu.di.qualifier.ActivityContext;

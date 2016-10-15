@@ -1,4 +1,4 @@
-package jp.gcreate.product.filteredhatebu;
+package jp.gcreate.product.filteredhatebu.activity;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -8,6 +8,9 @@ import android.util.Log;
 
 import javax.inject.Inject;
 
+import jp.gcreate.product.filteredhatebu.DummyPojo;
+import jp.gcreate.product.filteredhatebu.MyApplication;
+import jp.gcreate.product.filteredhatebu.R;
 import jp.gcreate.product.filteredhatebu.api.HatebuService;
 import jp.gcreate.product.filteredhatebu.databinding.ActivityMainBinding;
 import jp.gcreate.product.filteredhatebu.di.ActivityComponent;
