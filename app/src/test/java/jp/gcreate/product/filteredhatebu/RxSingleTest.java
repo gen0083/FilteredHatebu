@@ -2,13 +2,13 @@ package jp.gcreate.product.filteredhatebu;
 
 import org.junit.Test;
 
-import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 import rx.Single;
 import rx.SingleSubscriber;
 import rx.Subscription;
 import rx.functions.Action1;
+import rx.observers.TestSubscriber;
 import rx.schedulers.Schedulers;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -22,6 +22,12 @@ public class RxSingleTest {
     private Single<String> source = Single.create(new Single.OnSubscribe<String>() {
         @Override
         public void call(SingleSubscriber<? super String> singleSubscriber) {
+            try {
+                // emulate weighted work
+                TimeUnit.SECONDS.sleep(2);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             singleSubscriber.onSuccess("test");
         }
     });
@@ -60,24 +66,14 @@ public class RxSingleTest {
 
     @Test
     public void onSuccess後はunsubscribeされる() throws InterruptedException {
-        final CountDownLatch latch = new CountDownLatch(1);
+        TestSubscriber<String> test = new TestSubscriber<>();
         Subscription s = source
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Action1<String>() {
-                    @Override
-                    public void call(String s) {
-                        try {
-                            TimeUnit.SECONDS.sleep(2);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        assertThat(s, is("test"));
-                        latch.countDown();
-                    }
-                });
+                .subscribe(test);
         assertThat(s.isUnsubscribed(), is(false));
-        latch.await();
-        TimeUnit.SECONDS.sleep(2);
+        test.awaitTerminalEvent(3, TimeUnit.SECONDS);
+        test.assertValue("test");
+        test.onCompleted();
         assertThat(s.isUnsubscribed(), is(true));
     }
 }
