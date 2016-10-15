@@ -9,7 +9,8 @@ import jp.gcreate.product.filteredhatebu.di.Scope.AppScope;
  */
 
 @AppScope
-@Component(modules = {AppModule.class, AppNetworkModule.class, AppDebugModule.class})
+@Component(modules = {AppModule.class, AppNetworkModule.class, AppDebugModule.class,
+                      AppDataModule.class})
 public interface AppComponent {
 
     void inject(MyApplication application);

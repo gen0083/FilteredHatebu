@@ -19,6 +19,7 @@ import javax.inject.Inject;
 import jp.gcreate.product.filteredhatebu.MyApplication;
 import jp.gcreate.product.filteredhatebu.R;
 import jp.gcreate.product.filteredhatebu.api.HatebuService;
+import jp.gcreate.product.filteredhatebu.data.FilterRepository;
 import jp.gcreate.product.filteredhatebu.databinding.ActivityHatebuFeedDetailBinding;
 import jp.gcreate.product.filteredhatebu.di.ActivityComponent;
 import jp.gcreate.product.filteredhatebu.fragment.SelectFilterDialogFragment;
@@ -47,6 +48,8 @@ public class HatebuFeedDetailActivity extends AppCompatActivity
     private BookmarksAdapter                adapter;
     @Inject
     HatebuService service;
+    @Inject
+    FilterRepository filterRepository;
 
     public static Intent createIntent(Context context, HatebuFeedItem item) {
         Intent i = new Intent(context, HatebuFeedDetailActivity.class);
@@ -147,5 +150,6 @@ public class HatebuFeedDetailActivity extends AppCompatActivity
     @Override
     public void onSelected(String selected) {
         Timber.d("%s onSelected from AlertDialog selected:%s", this, selected);
+        filterRepository.insertFilter(selected);
     }
 }

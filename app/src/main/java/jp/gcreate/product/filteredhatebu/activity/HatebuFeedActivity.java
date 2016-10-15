@@ -8,11 +8,17 @@ import android.support.v7.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 import jp.gcreate.product.filteredhatebu.MyApplication;
 import jp.gcreate.product.filteredhatebu.R;
+import jp.gcreate.product.filteredhatebu.data.FilterRepository;
 import jp.gcreate.product.filteredhatebu.databinding.ActivityFeedBinding;
 import jp.gcreate.product.filteredhatebu.di.ActivityComponent;
 import jp.gcreate.product.filteredhatebu.fragment.HatebuFeedFragmentsAdapter;
+import jp.gcreate.product.filteredhatebu.model.UriFilter;
+import rx.functions.Action1;
+import timber.log.Timber;
 
 /**
  * Copyright 2016 G-CREATE
@@ -21,6 +27,8 @@ import jp.gcreate.product.filteredhatebu.fragment.HatebuFeedFragmentsAdapter;
 public class HatebuFeedActivity extends AppCompatActivity {
     private ActivityFeedBinding binding;
     private ActivityComponent component;
+    @Inject
+    FilterRepository filterRepository;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -28,6 +36,7 @@ public class HatebuFeedActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_feed);
 
         component = MyApplication.getActivityComponent(this);
+        component.inject(this);
 
         List<String> categoryKeys = new ArrayList<>();
         categoryKeys.add("it");
@@ -36,5 +45,22 @@ public class HatebuFeedActivity extends AppCompatActivity {
         HatebuFeedFragmentsAdapter adapter = new HatebuFeedFragmentsAdapter(getSupportFragmentManager(), categoryKeys);
         binding.viewPager.setAdapter(adapter);
         binding.viewPagerTitle.setupWithViewPager(binding.viewPager);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // TODO: remove this (for debugging)
+        filterRepository.getFilterAll()
+                        .subscribe(new Action1<List<UriFilter>>() {
+                            @Override
+                            public void call(List<UriFilter> uriFilters) {
+                                Timber.d(">> Filter in local file");
+                                for (UriFilter f : uriFilters) {
+                                    Timber.d(" %s", f.getFilter());
+                                }
+                                Timber.d("<< Filter in local file ");
+                            }
+                        });
     }
 }
