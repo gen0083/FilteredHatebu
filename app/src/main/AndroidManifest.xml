@@ -12,13 +12,13 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        android:name="jp.gcreate.product.filteredhatebu.MyApplication"
+        android:name=".MyApplication"
         >
-        <activity android:name="jp.gcreate.product.filteredhatebu.activity.LoginActivity">
+        <activity android:name=".activity.LoginActivity">
         </activity>
-        <activity android:name="jp.gcreate.product.filteredhatebu.activity.MainActivity">
+        <activity android:name=".activity.MainActivity">
         </activity>
-        <activity android:name="jp.gcreate.product.filteredhatebu.activity.HatebuFeedActivity">
+        <activity android:name=".activity.HatebuFeedActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,7 +26,9 @@
             </intent-filter>
 
         </activity>
-        <activity android:name="jp.gcreate.product.filteredhatebu.activity.HatebuFeedDetailActivity">
+        <activity android:name=".activity.HatebuFeedDetailActivity">
+        </activity>
+        <activity android:name=".activity.FilterEditActivity">
         </activity>
     </application>
 

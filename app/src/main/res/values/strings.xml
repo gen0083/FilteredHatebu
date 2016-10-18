@@ -1,6 +1,7 @@
 <resources>
-    <string name="app_name">DaggerSandBox</string>
+    <string name="app_name">Filtered Hatebu</string>
     <string name="cancel">キャンセル</string>
     <string name="filter_candidate">フィルタを選択してください</string>
     <string name="add_filter_done">%sを追加しました</string>
+    <string name="edit_filter">フィルタを編集</string>
 </resources>
