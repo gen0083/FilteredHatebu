@@ -41,10 +41,12 @@ public class HatebuFeedActivity extends AppCompatActivity {
         component = CustomApplication.getActivityComponent(this);
         component.inject(this);
 
-        List<String> categoryKeys = new ArrayList<>();
-        categoryKeys.add("it");
-        categoryKeys.add("life");
-        categoryKeys.add("game");
+        List<HatebuFeedFragmentsAdapter.HatebuCategory> categoryKeys = new ArrayList<>();
+        categoryKeys.add(new HatebuFeedFragmentsAdapter.HatebuCategory("", "総合"));
+        categoryKeys.add(new HatebuFeedFragmentsAdapter.HatebuCategory("general", "一般"));
+        categoryKeys.add(new HatebuFeedFragmentsAdapter.HatebuCategory("it", "テクノロジー"));
+        categoryKeys.add(new HatebuFeedFragmentsAdapter.HatebuCategory("life", "暮らし"));
+        categoryKeys.add(new HatebuFeedFragmentsAdapter.HatebuCategory("game", "アニメとゲーム"));
         HatebuFeedFragmentsAdapter adapter = new HatebuFeedFragmentsAdapter(getSupportFragmentManager(), categoryKeys);
         binding.viewPager.setAdapter(adapter);
         binding.viewPagerTitle.setupWithViewPager(binding.viewPager);

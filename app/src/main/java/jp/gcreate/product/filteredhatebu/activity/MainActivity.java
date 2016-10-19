@@ -11,7 +11,7 @@ import javax.inject.Inject;
 import jp.gcreate.product.filteredhatebu.CustomApplication;
 import jp.gcreate.product.filteredhatebu.DummyPojo;
 import jp.gcreate.product.filteredhatebu.R;
-import jp.gcreate.product.filteredhatebu.api.HatebuService;
+import jp.gcreate.product.filteredhatebu.api.HatebuEntryService;
 import jp.gcreate.product.filteredhatebu.databinding.ActivityMainBinding;
 import jp.gcreate.product.filteredhatebu.di.ActivityComponent;
 import jp.gcreate.product.filteredhatebu.model.HatebuEntry;
@@ -28,11 +28,11 @@ public class MainActivity extends AppCompatActivity {
     private BookmarksAdapter adapter;
     ActivityComponent component;
     @Inject
-    String        injectedString;
+    String             injectedString;
     @Inject
-    DummyPojo     pojo;
+    DummyPojo          pojo;
     @Inject
-    HatebuService service;
+    HatebuEntryService service;
     Subscription subscription;
 
     @Override

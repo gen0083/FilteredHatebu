@@ -1,6 +1,5 @@
 package jp.gcreate.product.filteredhatebu.model;
 
-import org.simpleframework.xml.Element;
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Namespace;
 import org.simpleframework.xml.NamespaceList;
@@ -24,20 +23,8 @@ import java.util.List;
         @Namespace(reference = "http://search.yahoo.com/mrss", prefix = "media")
 })
 public class HatebuFeed {
-    @Element(name = "channel")
-    private HatebuFeedChannel channel;
-
     @ElementList(entry = "item", inline = true)
     private List<HatebuFeedItem> itemList;
-
-    public HatebuFeedChannel getChannel() {
-        return channel;
-    }
-
-    public void setChannel(
-            HatebuFeedChannel channel) {
-        this.channel = channel;
-    }
 
     public List<HatebuFeedItem> getItemList() {
         return itemList;

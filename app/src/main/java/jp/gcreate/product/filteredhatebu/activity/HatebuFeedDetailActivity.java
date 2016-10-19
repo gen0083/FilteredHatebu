@@ -19,7 +19,7 @@ import javax.inject.Inject;
 
 import jp.gcreate.product.filteredhatebu.CustomApplication;
 import jp.gcreate.product.filteredhatebu.R;
-import jp.gcreate.product.filteredhatebu.api.HatebuService;
+import jp.gcreate.product.filteredhatebu.api.HatebuEntryService;
 import jp.gcreate.product.filteredhatebu.data.FilterRepository;
 import jp.gcreate.product.filteredhatebu.databinding.ActivityHatebuFeedDetailBinding;
 import jp.gcreate.product.filteredhatebu.di.ActivityComponent;
@@ -48,9 +48,9 @@ public class HatebuFeedDetailActivity extends AppCompatActivity
     private Subscription                    bookmarkSubscription;
     private BookmarksAdapter                adapter;
     @Inject
-    HatebuService    service;
+    HatebuEntryService service;
     @Inject
-    FilterRepository filterRepository;
+    FilterRepository   filterRepository;
 
     public static Intent createIntent(Context context, HatebuFeedItem item) {
         Intent i = new Intent(context, HatebuFeedDetailActivity.class);

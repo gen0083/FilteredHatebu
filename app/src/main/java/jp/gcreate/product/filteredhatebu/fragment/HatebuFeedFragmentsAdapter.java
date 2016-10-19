@@ -14,14 +14,14 @@ import java.util.List;
 
 public class HatebuFeedFragmentsAdapter extends FragmentStatePagerAdapter {
     // TODO: use string now but replace HatebuFeedChannel for the future.
-    private List<String> keys;
+    private List<HatebuCategory> keys;
     private HashMap<String, HatebuFeedFragment> fragments;
 
     public HatebuFeedFragmentsAdapter(FragmentManager fm) {
-        this(fm, new ArrayList<String>());
+        this(fm, new ArrayList<HatebuCategory>());
     }
 
-    public HatebuFeedFragmentsAdapter(FragmentManager fm, List<String> keys) {
+    public HatebuFeedFragmentsAdapter(FragmentManager fm, List<HatebuCategory> keys) {
         super(fm);
         this.keys = keys;
         fragments = new HashMap<>();
@@ -29,7 +29,7 @@ public class HatebuFeedFragmentsAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public Fragment getItem(int position) {
-        final String key = keys.get(position);
+        final String key = keys.get(position).key;
         if (fragments.containsKey(key)) {
             return fragments.get(key);
         } else {
@@ -46,14 +46,24 @@ public class HatebuFeedFragmentsAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        return keys.get(position);
+        return keys.get(position).title;
     }
 
-    public void setKeys(List<String> keys) {
-        this.keys = keys;
+    public void setKeys(List<HatebuCategory> categories) {
+        this.keys = categories;
     }
 
-    public void addKey(String key) {
-        keys.add(key);
+    public void addKey(HatebuCategory category) {
+        keys.add(category);
+    }
+
+    public static class HatebuCategory {
+        public String key;
+        public String title;
+
+        public HatebuCategory(String key, String title) {
+            this.key = key;
+            this.title = title;
+        }
     }
 }

@@ -17,12 +17,14 @@ import javax.inject.Inject;
 import jp.gcreate.product.filteredhatebu.CustomApplication;
 import jp.gcreate.product.filteredhatebu.R;
 import jp.gcreate.product.filteredhatebu.activity.HatebuFeedDetailActivity;
-import jp.gcreate.product.filteredhatebu.api.HatebuFeedService;
+import jp.gcreate.product.filteredhatebu.api.HatebuHotentryCategoryService;
+import jp.gcreate.product.filteredhatebu.api.HatebuHotentryService;
 import jp.gcreate.product.filteredhatebu.data.FilterRepository;
 import jp.gcreate.product.filteredhatebu.databinding.FragmentHatebuFeedBinding;
 import jp.gcreate.product.filteredhatebu.model.HatebuFeed;
 import jp.gcreate.product.filteredhatebu.model.HatebuFeedItem;
 import jp.gcreate.product.filteredhatebu.recycler.FeedAdapter;
+import rx.Observable;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -39,12 +41,14 @@ public class HatebuFeedFragment extends Fragment implements FeedAdapter.OnRecyce
     private String                    categoryKey;
     private Subscription              serviceSubscription;
     private FeedAdapter               adapter;
-    private LinearLayoutManager layoutManager;
-    private int scrolledPosition;
+    private LinearLayoutManager       layoutManager;
+    private int                       scrolledPosition;
     @Inject
-    HatebuFeedService service;
+    HatebuHotentryService         hotentryService;
     @Inject
-    FilterRepository filterRepository;
+    HatebuHotentryCategoryService categoryService;
+    @Inject
+    FilterRepository              filterRepository;
 
     public static HatebuFeedFragment createInstance(String category) {
         HatebuFeedFragment f    = new HatebuFeedFragment();
@@ -112,22 +116,28 @@ public class HatebuFeedFragment extends Fragment implements FeedAdapter.OnRecyce
     public void onStart() {
         super.onStart();
         Timber.d("%s onStart", this.toString());
-        serviceSubscription = service.getCategoryFeed(categoryKey)
-                                     .subscribeOn(Schedulers.io())
-                                     .observeOn(AndroidSchedulers.mainThread())
-                                     .subscribe(new Action1<HatebuFeed>() {
-                                         @Override
-                                         public void call(HatebuFeed hatebuFeed) {
-                                             // set feed
-                                             adapter.setItemList(hatebuFeed.getItemList());
-                                         }
-                                     }, new Action1<Throwable>() {
-                                         @Override
-                                         public void call(Throwable throwable) {
-                                             Timber.e("error %s", throwable.getMessage());
-                                             throwable.printStackTrace();
-                                         }
-                                     });
+        Observable<HatebuFeed> feed;
+        if (categoryKey.equals("")) {
+            feed = hotentryService.getHotentryFeed();
+        } else {
+            feed = categoryService.getCategoryFeed(categoryKey);
+        }
+        serviceSubscription = feed
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<HatebuFeed>() {
+                    @Override
+                    public void call(HatebuFeed hatebuFeed) {
+                        // set feed
+                        adapter.setItemList(hatebuFeed.getItemList());
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        Timber.e("error %s", throwable.getMessage());
+                        throwable.printStackTrace();
+                    }
+                });
     }
 
     @Override

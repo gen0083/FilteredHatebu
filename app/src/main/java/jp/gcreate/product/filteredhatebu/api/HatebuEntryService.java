@@ -10,10 +10,10 @@ import rx.Observable;
  * Copyright 2016 G-CREATE
  */
 
-public interface HatebuService {
+public interface HatebuEntryService {
     @GET("entry/json/")
     Observable<HatebuEntry> getEntry(@Query("url") String url);
 
     @GET("entry/jsonlite/")
-    Call<HatebuEntry> getEntryLite(@Query("url") String url);
+    Call<HatebuEntry> getEntryNoRelated(@Query("url") String url);
 }

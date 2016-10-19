@@ -6,8 +6,9 @@ import java.io.File;
 
 import dagger.Module;
 import dagger.Provides;
-import jp.gcreate.product.filteredhatebu.api.HatebuFeedService;
-import jp.gcreate.product.filteredhatebu.api.HatebuService;
+import jp.gcreate.product.filteredhatebu.api.HatebuHotentryCategoryService;
+import jp.gcreate.product.filteredhatebu.api.HatebuEntryService;
+import jp.gcreate.product.filteredhatebu.api.HatebuHotentryService;
 import jp.gcreate.product.filteredhatebu.di.Scope.AppScope;
 import jp.gcreate.product.filteredhatebu.di.qualifier.ApplicationContext;
 import okhttp3.Cache;
@@ -23,9 +24,10 @@ import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 
 @Module
 public class AppNetworkModule {
-    private static final String HATEBU_BASE_URL = "https://b.hatena.ne.jp/";
-    private static final String OKHTTP_CACHE_DIR = "okhttp";
-    private static final int OKHTTP_CACHE_SIZE = 4 * 1024 * 1024;
+    private static final String HATEBU_BASE_URL    = "https://b.hatena.ne.jp/";
+    private static final String FEEDBUNER_BASE_URL = "http://feeds.feedburner.com/";
+    private static final String OKHTTP_CACHE_DIR   = "okhttp";
+    private static final int    OKHTTP_CACHE_SIZE  = 4 * 1024 * 1024;
 
     @Provides
     @AppScope
@@ -39,25 +41,37 @@ public class AppNetworkModule {
 
     @Provides
     @AppScope
-    public HatebuFeedService provideHatebuFeedService(OkHttpClient client) {
+    public HatebuHotentryService provideHatebuHotentryService(OkHttpClient client) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(FEEDBUNER_BASE_URL)
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addConverterFactory(SimpleXmlConverterFactory.create())
+                .client(client)
+                .build();
+        return retrofit.create(HatebuHotentryService.class);
+    }
+
+    @Provides
+    @AppScope
+    public HatebuHotentryCategoryService provideHatebuFeedService(OkHttpClient client) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(HATEBU_BASE_URL)
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .addConverterFactory(SimpleXmlConverterFactory.create())
                 .client(client)
                 .build();
-        return retrofit.create(HatebuFeedService.class);
+        return retrofit.create(HatebuHotentryCategoryService.class);
     }
 
     @Provides
     @AppScope
-    public HatebuService provideHatebuService(OkHttpClient client) {
+    public HatebuEntryService provideHatebuService(OkHttpClient client) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(HATEBU_BASE_URL)
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build();
-        return retrofit.create(HatebuService.class);
+        return retrofit.create(HatebuEntryService.class);
     }
 }
