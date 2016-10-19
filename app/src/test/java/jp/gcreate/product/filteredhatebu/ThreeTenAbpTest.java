@@ -6,6 +6,7 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 import org.threeten.bp.LocalDateTime;
 import org.threeten.bp.format.DateTimeFormatter;
+import org.threeten.bp.format.DateTimeParseException;
 import org.threeten.bp.temporal.ChronoUnit;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -25,6 +26,13 @@ public class ThreeTenAbpTest {
         LocalDateTime time = LocalDateTime.parse(TIME_STRINGS, DateTimeFormatter.ISO_OFFSET_DATE_TIME);
         System.out.println(time);
         assertThat(time.toString(), is("2016-10-19T09:19:23"));
+    }
+
+    @Test(expected = DateTimeParseException.class)
+    public void convert_no_offset_time() {
+        LocalDateTime time = LocalDateTime.parse("2016-10-19T09:10:12", DateTimeFormatter.ISO_OFFSET_DATE_TIME);
+        System.out.println(time);
+        assertThat(time.toString(), is("2016-10-19T09:10:12"));
     }
 
     @Test

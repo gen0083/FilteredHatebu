@@ -83,7 +83,7 @@
                 android:id="@+id/date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@{item.date}"
+                android:text="@{StringUtil.whenPublished(item.date, context)}"
                 android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                 tools:text="2011/1/1"
                 />

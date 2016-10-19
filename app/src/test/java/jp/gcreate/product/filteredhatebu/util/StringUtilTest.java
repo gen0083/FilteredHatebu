@@ -12,6 +12,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
  */
 @RunWith(Enclosed.class)
 public class StringUtilTest {
+
     public static class 文字列連結 {
         @Test
         public void 文字列の結合() {
@@ -93,4 +94,5 @@ public class StringUtilTest {
             assertThat(actual, is("hoge.com/http://abc"));
         }
     }
+
 }

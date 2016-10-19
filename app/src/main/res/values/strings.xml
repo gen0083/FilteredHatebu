@@ -4,4 +4,5 @@
     <string name="filter_candidate">フィルタを選択してください</string>
     <string name="add_filter_done">%sを追加しました</string>
     <string name="edit_filter">フィルタを編集</string>
+    <string name="before_hours">%d時間前</string>
 </resources>
