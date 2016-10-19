@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,17 +25,19 @@ import timber.log.Timber;
 
 public class FeedAdapter extends RecyclerView.Adapter<DataBindingViewHolder<ItemHatebuFeedBinding>>
         implements View.OnClickListener {
+    private static final String FAVION_URL = "https://favicon.hatena.ne.jp/?url=";
     private Context                      context;
     private List<HatebuFeedItem>         items;
     private RecyclerView                 recyclerView;
     private OnRecycelerItemClickListener listener;
-    private FilterRepository filterRepository;
+    private FilterRepository             filterRepository;
 
     public FeedAdapter(Context context, FilterRepository filterRepository) {
         this(context, filterRepository, new ArrayList<HatebuFeedItem>());
     }
 
-    public FeedAdapter(Context context, FilterRepository filterRepository, List<HatebuFeedItem> items) {
+    public FeedAdapter(Context context, FilterRepository filterRepository,
+                       List<HatebuFeedItem> items) {
         this.context = context;
         this.filterRepository = filterRepository;
         this.items = items;
@@ -53,26 +57,32 @@ public class FeedAdapter extends RecyclerView.Adapter<DataBindingViewHolder<Item
     public void onBindViewHolder(DataBindingViewHolder<ItemHatebuFeedBinding> holder,
                                  int position) {
         Timber.i("%s onBindViewHolder", this);
-        final ItemHatebuFeedBinding binding    = holder.getBinding();
-        final HatebuFeedItem        item       = items.get(position);
+        final ItemHatebuFeedBinding binding = holder.getBinding();
+        final HatebuFeedItem        item    = items.get(position);
         filterRepository.getFilterAll()
-                .subscribe(new Action1<List<UriFilter>>() {
-                    @Override
-                    public void call(List<UriFilter> uriFilters) {
-                        boolean b = false;
-                        for (UriFilter f : uriFilters) {
-                            b = f.isFilteredUrl(item.getLink());
-                            if (b) break;
-                        }
-                        binding.setIsFiltered(b);
-                    }
-                }, new Action1<Throwable>() {
-                    @Override
-                    public void call(Throwable throwable) {
-                        binding.setIsFiltered(false);
-                    }
-                });
+                        .subscribe(new Action1<List<UriFilter>>() {
+                            @Override
+                            public void call(List<UriFilter> uriFilters) {
+                                boolean b = false;
+                                for (UriFilter f : uriFilters) {
+                                    b = f.isFilteredUrl(item.getLink());
+                                    if (b) break;
+                                }
+                                binding.setIsFiltered(b);
+                            }
+                        }, new Action1<Throwable>() {
+                            @Override
+                            public void call(Throwable throwable) {
+                                binding.setIsFiltered(false);
+                            }
+                        });
         binding.setItem(item);
+        Picasso.with(context)
+               .load(FAVION_URL + item.getLink())
+               .placeholder(R.drawable.favicon_placeholder)
+               .error(R.drawable.favicon_placeholder)
+               .fit()
+               .into(binding.favicon);
         binding.executePendingBindings();
     }
 

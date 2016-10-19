@@ -40,6 +40,7 @@ dependencies {
     compile 'com.jakewharton.timber:timber:4.3.1'
     compile 'io.reactivex:rxjava:1.2.1'
     compile 'io.reactivex:rxandroid:1.2.1'
+    compile 'com.squareup.picasso:picasso:2.5.2'
 
     def orma_version = '3.0.0'
     apt "com.github.gfx.android.orma:orma-processor:$orma_version"
