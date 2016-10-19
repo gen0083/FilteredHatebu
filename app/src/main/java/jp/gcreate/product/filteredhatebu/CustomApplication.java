@@ -10,7 +10,6 @@ import java.util.HashMap;
 
 import javax.inject.Inject;
 
-import io.realm.Realm;
 import jp.gcreate.product.filteredhatebu.di.ActivityComponent;
 import jp.gcreate.product.filteredhatebu.di.ActivityModule;
 import jp.gcreate.product.filteredhatebu.di.AppComponent;
@@ -68,7 +67,6 @@ public class CustomApplication extends Application {
 
         Timber.plant(tree);
         stetho.install();
-        Realm.init(this);
         AndroidThreeTen.init(this);
 
         Timber.d("application:%s", context.toString());
