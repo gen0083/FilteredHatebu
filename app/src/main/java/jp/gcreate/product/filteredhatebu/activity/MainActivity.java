@@ -8,8 +8,8 @@ import android.util.Log;
 
 import javax.inject.Inject;
 
+import jp.gcreate.product.filteredhatebu.CustomApplication;
 import jp.gcreate.product.filteredhatebu.DummyPojo;
-import jp.gcreate.product.filteredhatebu.MyApplication;
 import jp.gcreate.product.filteredhatebu.R;
 import jp.gcreate.product.filteredhatebu.api.HatebuService;
 import jp.gcreate.product.filteredhatebu.databinding.ActivityMainBinding;
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
-        component = MyApplication.getActivityComponent(this);
+        component = CustomApplication.getActivityComponent(this);
         component.inject(this);
 
         subscription = new CompositeSubscription();

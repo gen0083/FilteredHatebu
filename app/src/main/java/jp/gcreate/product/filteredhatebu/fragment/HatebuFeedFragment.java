@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 
 import javax.inject.Inject;
 
-import jp.gcreate.product.filteredhatebu.MyApplication;
+import jp.gcreate.product.filteredhatebu.CustomApplication;
 import jp.gcreate.product.filteredhatebu.R;
 import jp.gcreate.product.filteredhatebu.activity.HatebuFeedDetailActivity;
 import jp.gcreate.product.filteredhatebu.api.HatebuFeedService;
@@ -59,7 +59,7 @@ public class HatebuFeedFragment extends Fragment implements FeedAdapter.OnRecyce
         super.onAttach(context);
         Timber.d("%s onAttach to %s", this.toString(), context.toString());
         if (context instanceof Activity) {
-            MyApplication.getActivityComponent((Activity) context).inject(this);
+            CustomApplication.getActivityComponent((Activity) context).inject(this);
         }
     }
 

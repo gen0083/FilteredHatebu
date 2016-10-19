@@ -13,7 +13,7 @@ import android.view.View;
 import javax.inject.Inject;
 
 import jp.gcreate.product.filteredhatebu.DummyPojo;
-import jp.gcreate.product.filteredhatebu.MyApplication;
+import jp.gcreate.product.filteredhatebu.CustomApplication;
 import jp.gcreate.product.filteredhatebu.R;
 import jp.gcreate.product.filteredhatebu.databinding.ActivityLoginBinding;
 import jp.gcreate.product.filteredhatebu.di.ActivityComponent;
@@ -41,7 +41,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
 
-        component = MyApplication.getActivityComponent(this);
+        component = CustomApplication.getActivityComponent(this);
         component.inject(this);
 
         binding.fromAppComponent.setText("from app:" + pojo + ", activity context:" + activityContext);

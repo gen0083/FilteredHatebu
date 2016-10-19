@@ -17,7 +17,7 @@ import android.view.View;
 
 import javax.inject.Inject;
 
-import jp.gcreate.product.filteredhatebu.MyApplication;
+import jp.gcreate.product.filteredhatebu.CustomApplication;
 import jp.gcreate.product.filteredhatebu.R;
 import jp.gcreate.product.filteredhatebu.api.HatebuService;
 import jp.gcreate.product.filteredhatebu.data.FilterRepository;
@@ -63,7 +63,7 @@ public class HatebuFeedDetailActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_hatebu_feed_detail);
 
-        component = MyApplication.getActivityComponent(this);
+        component = CustomApplication.getActivityComponent(this);
         component.inject(this);
 
         Intent intent = getIntent();

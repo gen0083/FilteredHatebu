@@ -22,7 +22,7 @@ import timber.log.Timber;
  * Copyright 2016 G-CREATE
  */
 
-public class MyApplication extends Application {
+public class CustomApplication extends Application {
     private AppComponent appComponent;
     private HashMap<String, ActivityComponent> activityComponentSet = new HashMap<>();
     private HashMap<String, ActivityModule> activityModuleMap = new HashMap<>();
@@ -34,14 +34,14 @@ public class MyApplication extends Application {
     Timber.Tree tree;
 
     public static AppComponent getAppComponent(Context context) {
-        MyApplication application = (MyApplication) context.getApplicationContext();
+        CustomApplication application = (CustomApplication) context.getApplicationContext();
         return application.appComponent;
     }
 
     public static ActivityComponent getActivityComponent(Activity activity) {
         String key = activity.getClass().getSimpleName();
         Timber.d("getActivityComponent: activity name:%s", key);
-        MyApplication application = (MyApplication) activity.getApplication();
+        CustomApplication application = (CustomApplication) activity.getApplication();
         if (application.hasComponent(key)) {
             application.getActivityModule(key).updateContext(activity);
             return application.getActivityComponent(key);

@@ -1,7 +1,7 @@
 package jp.gcreate.product.filteredhatebu.di;
 
 import dagger.Component;
-import jp.gcreate.product.filteredhatebu.MyApplication;
+import jp.gcreate.product.filteredhatebu.CustomApplication;
 import jp.gcreate.product.filteredhatebu.di.Scope.AppScope;
 
 /**
@@ -13,7 +13,7 @@ import jp.gcreate.product.filteredhatebu.di.Scope.AppScope;
                       AppDataModule.class})
 public interface AppComponent {
 
-    void inject(MyApplication application);
+    void inject(CustomApplication application);
 
     @AppScope
     ActivityComponent plus(ActivityModule module);

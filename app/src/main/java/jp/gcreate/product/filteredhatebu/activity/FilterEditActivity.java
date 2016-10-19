@@ -10,7 +10,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import jp.gcreate.product.filteredhatebu.MyApplication;
+import jp.gcreate.product.filteredhatebu.CustomApplication;
 import jp.gcreate.product.filteredhatebu.R;
 import jp.gcreate.product.filteredhatebu.data.FilterRepository;
 import jp.gcreate.product.filteredhatebu.databinding.ActivityFilterEditBinding;
@@ -37,7 +37,7 @@ public class FilterEditActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_filter_edit);
 
-        component = MyApplication.getActivityComponent(this);
+        component = CustomApplication.getActivityComponent(this);
         component.inject(this);
 
         setupRecyclerView();
