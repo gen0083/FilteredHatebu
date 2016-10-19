@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 
+import com.jakewharton.threetenabp.AndroidThreeTen;
+
 import java.util.HashMap;
 
 import javax.inject.Inject;
@@ -67,6 +69,7 @@ public class CustomApplication extends Application {
         Timber.plant(tree);
         stetho.install();
         Realm.init(this);
+        AndroidThreeTen.init(this);
 
         Timber.d("application:%s", context.toString());
     }
