@@ -1,8 +1,11 @@
 package jp.gcreate.product.filteredhatebu.activity;
 
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -44,6 +47,7 @@ public class HatebuFeedDetailActivity extends AppCompatActivity
         implements SelectFilterDialogFragment.Callback {
     private static final String TAG            = "FeedDetailActivity";
     private static final String EXTRA_ITEM_KEY = "feed_item_key";
+    private static final int INTENT_SHARE_CODE = 1;
     private ActivityHatebuFeedDetailBinding   binding;
     private HatebuFeedItem                    item;
     private ActivityComponent                 component;
@@ -87,7 +91,7 @@ public class HatebuFeedDetailActivity extends AppCompatActivity
         binding.shareButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                shareUrl(item);
+                shareUrl(item.getLink());
             }
         });
         binding.addFilterButton.setOnClickListener(new View.OnClickListener() {
@@ -150,18 +154,29 @@ public class HatebuFeedDetailActivity extends AppCompatActivity
     }
 
     private void openCustomTab(String url) {
+        final Bitmap shareIcon = BitmapFactory.decodeResource(getResources(), R.drawable.ic_share);
+        final Bitmap closeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.ic_arrow_back);
+        final PendingIntent shareIntent = PendingIntent
+                .getActivity(this, INTENT_SHARE_CODE, createShareUrlIntent(url), PendingIntent.FLAG_UPDATE_CURRENT);
         CustomTabsIntent i = new CustomTabsIntent.Builder()
                 .setToolbarColor(ContextCompat.getColor(this, R.color.colorPrimary))
                 .setShowTitle(true)
+                .setCloseButtonIcon(closeIcon)
+                .setActionButton(shareIcon, getString(R.string.share_url), shareIntent)
+                .addMenuItem(getString(R.string.share_url), shareIntent)
                 .build();
         i.launchUrl(this, Uri.parse(url));
     }
 
-    private void shareUrl(HatebuFeedItem item) {
+    private void shareUrl(String url) {
+        startActivity(createShareUrlIntent(url));
+    }
+
+    private Intent createShareUrlIntent(String url) {
         Intent intent = new Intent(Intent.ACTION_SEND);
         intent.setType("text/plain");
-        intent.putExtra(Intent.EXTRA_TEXT, item.getLink());
-        startActivity(intent);
+        intent.putExtra(Intent.EXTRA_TEXT, url);
+        return intent;
     }
 
     private void openFilterDialog() {
