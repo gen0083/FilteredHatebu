@@ -16,7 +16,7 @@
         android:orientation="vertical"
         android:gravity="center_vertical"
         android:padding="@dimen/item_padding"
-        android:background="?attr/selectableItemBackground"
+        android:background="@color/grey_50"
         >
 
         <TextView
