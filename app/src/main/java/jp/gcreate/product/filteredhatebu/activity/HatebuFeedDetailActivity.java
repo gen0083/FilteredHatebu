@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -32,6 +31,7 @@ import jp.gcreate.product.filteredhatebu.model.HatebuBookmark;
 import jp.gcreate.product.filteredhatebu.model.HatebuEntry;
 import jp.gcreate.product.filteredhatebu.model.HatebuFeedItem;
 import jp.gcreate.product.filteredhatebu.recycler.BookmarksAdapter;
+import jp.gcreate.product.filteredhatebu.util.BitmapUtil;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -154,8 +154,8 @@ public class HatebuFeedDetailActivity extends AppCompatActivity
     }
 
     private void openCustomTab(String url) {
-        final Bitmap shareIcon = BitmapFactory.decodeResource(getResources(), R.drawable.ic_share);
-        final Bitmap closeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.ic_arrow_back);
+        final Bitmap shareIcon = BitmapUtil.getBitmap(this, R.drawable.ic_share);
+        final Bitmap closeIcon = BitmapUtil.getBitmap(this, R.drawable.ic_arrow_back);
         final PendingIntent shareIntent = PendingIntent
                 .getActivity(this, INTENT_SHARE_CODE, createShareUrlIntent(url), PendingIntent.FLAG_UPDATE_CURRENT);
         CustomTabsIntent i = new CustomTabsIntent.Builder()
