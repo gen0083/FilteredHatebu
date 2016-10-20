@@ -106,6 +106,7 @@ public class FilterAdapter extends RecyclerView.Adapter<DataBindingViewHolder<It
                 public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
                     int position = viewHolder.getAdapterPosition();
                     list.remove(position);
+                    notifyItemRemoved(position);
                 }
 
                 @Override
