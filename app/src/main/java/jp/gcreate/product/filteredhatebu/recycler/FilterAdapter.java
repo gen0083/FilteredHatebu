@@ -37,7 +37,7 @@ public class FilterAdapter extends RecyclerView.Adapter<DataBindingViewHolder<It
     public void onBindViewHolder(DataBindingViewHolder<ItemFilterBinding> holder, int position) {
         ItemFilterBinding binding = holder.getBinding();
         UriFilter item = list.get(position);
-        binding.setFilter(item);
+        binding.setItem(item);
     }
 
     @Override
