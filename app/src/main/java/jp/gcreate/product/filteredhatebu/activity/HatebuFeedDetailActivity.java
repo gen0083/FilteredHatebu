@@ -7,6 +7,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.customtabs.CustomTabsIntent;
+import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -41,12 +42,14 @@ import timber.log.Timber;
 
 public class HatebuFeedDetailActivity extends AppCompatActivity
         implements SelectFilterDialogFragment.Callback {
+    private static final String TAG            = "FeedDetailActivity";
     private static final String EXTRA_ITEM_KEY = "feed_item_key";
-    private ActivityHatebuFeedDetailBinding binding;
-    private HatebuFeedItem                  item;
-    private ActivityComponent               component;
-    private Subscription                    bookmarkSubscription;
-    private BookmarksAdapter                adapter;
+    private ActivityHatebuFeedDetailBinding   binding;
+    private HatebuFeedItem                    item;
+    private ActivityComponent                 component;
+    private Subscription                      bookmarkSubscription;
+    private BookmarksAdapter                  adapter;
+    private BottomSheetBehavior<RecyclerView> bottomSheetBehavior;
     @Inject
     HatebuEntryService service;
     @Inject
@@ -94,6 +97,7 @@ public class HatebuFeedDetailActivity extends AppCompatActivity
         RecyclerView r = binding.recyclerView;
         r.setLayoutManager(new LinearLayoutManager(this));
         r.setAdapter(adapter);
+        bottomSheetBehavior = BottomSheetBehavior.from(r);
     }
 
     @Override
@@ -127,6 +131,15 @@ public class HatebuFeedDetailActivity extends AppCompatActivity
         super.onStop();
         if (bookmarkSubscription != null && !bookmarkSubscription.isUnsubscribed()) {
             bookmarkSubscription.unsubscribe();
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_EXPANDED) {
+            bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+        } else {
+            super.onBackPressed();
         }
     }
 
