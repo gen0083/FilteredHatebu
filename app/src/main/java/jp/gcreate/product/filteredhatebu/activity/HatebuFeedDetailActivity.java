@@ -84,6 +84,12 @@ public class HatebuFeedDetailActivity extends AppCompatActivity
                 openCustomTab(item.getLink());
             }
         });
+        binding.shareButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                shareUrl(item);
+            }
+        });
         binding.addFilterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -149,6 +155,13 @@ public class HatebuFeedDetailActivity extends AppCompatActivity
                 .setShowTitle(true)
                 .build();
         i.launchUrl(this, Uri.parse(url));
+    }
+
+    private void shareUrl(HatebuFeedItem item) {
+        Intent intent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        intent.putExtra(Intent.EXTRA_TEXT, item.getLink());
+        startActivity(intent);
     }
 
     private void openFilterDialog() {
