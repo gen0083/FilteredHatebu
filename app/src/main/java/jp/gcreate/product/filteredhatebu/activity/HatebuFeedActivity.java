@@ -41,6 +41,8 @@ public class HatebuFeedActivity extends AppCompatActivity {
         component = CustomApplication.getActivityComponent(this);
         component.inject(this);
 
+        setSupportActionBar(binding.toolbar);
+
         List<HatebuFeedFragmentsAdapter.HatebuCategory> categoryKeys = new ArrayList<>();
         categoryKeys.add(new HatebuFeedFragmentsAdapter.HatebuCategory("", "総合"));
         categoryKeys.add(new HatebuFeedFragmentsAdapter.HatebuCategory("general", "一般"));
