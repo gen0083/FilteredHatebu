@@ -11,6 +11,8 @@ import rx.Observable;
 import rx.Single;
 import rx.functions.Action1;
 import rx.functions.Func1;
+import rx.subjects.BehaviorSubject;
+import rx.subjects.SerializedSubject;
 import timber.log.Timber;
 
 /**
@@ -21,6 +23,8 @@ public class FilterRepository implements FilterDataSource {
     private List<UriFilter> cachedList = new ArrayList<>();
     private boolean         isDirty    = true;
     private FilterDataSource localDataSource;
+    private SerializedSubject<Long, Long> onModifiedObserver = new SerializedSubject<>(
+            BehaviorSubject.<Long>create());
 
     @Inject
     public FilterRepository(FilterDataSource localDataSource) {
@@ -72,11 +76,17 @@ public class FilterRepository implements FilterDataSource {
     public void updateFilter(String old, String update) {
         localDataSource.updateFilter(old, update);
         isDirty = true;
+        onModifiedObserver.onNext(System.currentTimeMillis());
     }
 
     @Override
     public void deleteFilter(String delete) {
         localDataSource.deleteFilter(delete);
         isDirty = true;
+        onModifiedObserver.onNext(System.currentTimeMillis());
+    }
+
+    public Observable<Long> listenModified() {
+        return onModifiedObserver;
     }
 }

@@ -16,7 +16,10 @@ import jp.gcreate.product.filteredhatebu.data.FilterRepository;
 import jp.gcreate.product.filteredhatebu.databinding.ItemHatebuFeedBinding;
 import jp.gcreate.product.filteredhatebu.model.HatebuFeedItem;
 import jp.gcreate.product.filteredhatebu.model.UriFilter;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
+import rx.subscriptions.CompositeSubscription;
 import timber.log.Timber;
 
 /**
@@ -27,10 +30,13 @@ public class FeedAdapter extends RecyclerView.Adapter<DataBindingViewHolder<Item
         implements View.OnClickListener {
     private static final String FAVICON_URL = "https://favicon.hatena.ne.jp/?url=";
     private Context                      context;
-    private List<HatebuFeedItem>         items;
+    private List<HatebuFeedItem>         originList;
+    private List<HatebuFeedItem>         shownList;
     private RecyclerView                 recyclerView;
     private OnRecycelerItemClickListener listener;
     private FilterRepository             filterRepository;
+    private CompositeSubscription        compositeSubscription;
+    private long                         previousModifiedTime;
 
     public FeedAdapter(Context context, FilterRepository filterRepository) {
         this(context, filterRepository, new ArrayList<HatebuFeedItem>());
@@ -40,7 +46,35 @@ public class FeedAdapter extends RecyclerView.Adapter<DataBindingViewHolder<Item
                        List<HatebuFeedItem> items) {
         this.context = context;
         this.filterRepository = filterRepository;
-        this.items = items;
+        this.originList = items;
+        updateShownList();
+    }
+
+    private void updateShownList() {
+        shownList = new ArrayList<>();
+        for (final HatebuFeedItem item : originList) {
+            filterRepository.getFilterAll()
+                            .subscribe(new Action1<List<UriFilter>>() {
+                                @Override
+                                public void call(List<UriFilter> uriFilters) {
+                                    boolean isFiltered = false;
+                                    for (UriFilter f : uriFilters) {
+                                        isFiltered = f.isFilteredUrl(item.getLink());
+                                        if (isFiltered) break;
+                                    }
+                                    if (!isFiltered) {
+                                        shownList.add(item);
+                                    }
+                                }
+                            }, new Action1<Throwable>() {
+                                @Override
+                                public void call(Throwable throwable) {
+                                    shownList.add(item);
+                                }
+                            });
+
+        }
+        notifyDataSetChanged();
     }
 
     @Override
@@ -55,25 +89,8 @@ public class FeedAdapter extends RecyclerView.Adapter<DataBindingViewHolder<Item
     public void onBindViewHolder(DataBindingViewHolder<ItemHatebuFeedBinding> holder,
                                  final int position) {
         final ItemHatebuFeedBinding binding = holder.getBinding();
-        final HatebuFeedItem        item    = items.get(position);
+        final HatebuFeedItem        item    = shownList.get(position);
         Timber.i("%s onBindViewHolder position:%d item:%s", this, position, item);
-        filterRepository.getFilterAll()
-                        .subscribe(new Action1<List<UriFilter>>() {
-                            @Override
-                            public void call(List<UriFilter> uriFilters) {
-                                boolean b = false;
-                                for (UriFilter f : uriFilters) {
-                                    b = f.isFilteredUrl(item.getLink());
-                                    if (b) break;
-                                }
-                                binding.setIsFiltered(b);
-                            }
-                        }, new Action1<Throwable>() {
-                            @Override
-                            public void call(Throwable throwable) {
-                                binding.setIsFiltered(false);
-                            }
-                        });
         binding.setItem(item);
         Picasso.with(context)
                .load(FAVICON_URL + item.getLink())
@@ -86,13 +103,12 @@ public class FeedAdapter extends RecyclerView.Adapter<DataBindingViewHolder<Item
 
     @Override
     public int getItemCount() {
-        int count = items.size();
-        return count;
+        return shownList.size();
     }
 
     public void setItemList(List<HatebuFeedItem> items) {
-        this.items = items;
-        notifyDataSetChanged();
+        this.originList = items;
+        updateShownList();
     }
 
     @Override
@@ -101,6 +117,20 @@ public class FeedAdapter extends RecyclerView.Adapter<DataBindingViewHolder<Item
         Timber.i("%s onAttachedRecyclerView:%s", this, recyclerView);
         this.recyclerView = recyclerView;
         this.context = recyclerView.getContext();
+        compositeSubscription = new CompositeSubscription();
+        Subscription s = filterRepository.listenModified()
+                                         .observeOn(AndroidSchedulers.mainThread())
+                                         .subscribe(new Action1<Long>() {
+                                             @Override
+                                             public void call(Long time) {
+                                                 if (time > previousModifiedTime) {
+                                                     // list updated
+                                                     updateShownList();
+                                                 }
+                                                 previousModifiedTime = time;
+                                             }
+                                         });
+        compositeSubscription.add(s);
     }
 
     @Override
@@ -109,13 +139,14 @@ public class FeedAdapter extends RecyclerView.Adapter<DataBindingViewHolder<Item
         Timber.i("%s onDetachedFromRecyclerView:%s", this, recyclerView);
         this.recyclerView = null;
         this.context = null;
+        compositeSubscription.unsubscribe();
     }
 
     @Override
     public void onClick(View v) {
         Timber.i("%s onClick view:%s", this, v);
         int                  position = recyclerView.getChildAdapterPosition(v);
-        final HatebuFeedItem item     = items.get(position);
+        final HatebuFeedItem item     = shownList.get(position);
         Timber.i("%s onClick position:%d", this, position);
         if (listener != null) {
             Timber.i("%s onClick: callback to %s", this, listener);
