@@ -25,7 +25,7 @@ import timber.log.Timber;
 
 public class FeedAdapter extends RecyclerView.Adapter<DataBindingViewHolder<ItemHatebuFeedBinding>>
         implements View.OnClickListener {
-    private static final String FAVION_URL = "https://favicon.hatena.ne.jp/?url=";
+    private static final String FAVICON_URL = "https://favicon.hatena.ne.jp/?url=";
     private Context                      context;
     private List<HatebuFeedItem>         items;
     private RecyclerView                 recyclerView;
@@ -41,13 +41,11 @@ public class FeedAdapter extends RecyclerView.Adapter<DataBindingViewHolder<Item
         this.context = context;
         this.filterRepository = filterRepository;
         this.items = items;
-        Timber.i("%s constructor called.", this);
     }
 
     @Override
     public DataBindingViewHolder<ItemHatebuFeedBinding> onCreateViewHolder(ViewGroup parent,
                                                                            int viewType) {
-        Timber.i("%s onCreateViewHolder", this);
         View view = LayoutInflater.from(context).inflate(R.layout.item_hatebu_feed, parent, false);
         view.setOnClickListener(this);
         return new DataBindingViewHolder<>(view);
@@ -55,10 +53,10 @@ public class FeedAdapter extends RecyclerView.Adapter<DataBindingViewHolder<Item
 
     @Override
     public void onBindViewHolder(DataBindingViewHolder<ItemHatebuFeedBinding> holder,
-                                 int position) {
-        Timber.i("%s onBindViewHolder", this);
+                                 final int position) {
         final ItemHatebuFeedBinding binding = holder.getBinding();
         final HatebuFeedItem        item    = items.get(position);
+        Timber.i("%s onBindViewHolder position:%d item:%s", this, position, item);
         filterRepository.getFilterAll()
                         .subscribe(new Action1<List<UriFilter>>() {
                             @Override
@@ -78,7 +76,7 @@ public class FeedAdapter extends RecyclerView.Adapter<DataBindingViewHolder<Item
                         });
         binding.setItem(item);
         Picasso.with(context)
-               .load(FAVION_URL + item.getLink())
+               .load(FAVICON_URL + item.getLink())
                .placeholder(R.drawable.favicon_placeholder)
                .error(R.drawable.favicon_placeholder)
                .fit()
@@ -89,7 +87,6 @@ public class FeedAdapter extends RecyclerView.Adapter<DataBindingViewHolder<Item
     @Override
     public int getItemCount() {
         int count = items.size();
-        Timber.i("%s getItemCount:%d", this, count);
         return count;
     }
 

@@ -39,7 +39,7 @@ public class HatebuFeedItem implements Parcelable {
     @Element
     private String date;
 
-    @Element
+    @Element(required = false)
     private String subject;
 
     @Element(name = "bookmarkcount")

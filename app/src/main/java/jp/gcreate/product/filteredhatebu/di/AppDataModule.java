@@ -23,8 +23,6 @@ public class AppDataModule {
     @Provides
     @AppScope
     public OrmaDatabase provideOrmaDatabase(@ApplicationContext Context context) {
-        // TODO: this is for debugging, delete this on release
-        context.deleteDatabase(ORMA_FILE);
         OrmaDatabase orma = OrmaDatabase.builder(context)
                                         .writeOnMainThread(AccessThreadConstraint.WARNING)
                                         .readOnMainThread(AccessThreadConstraint.WARNING)

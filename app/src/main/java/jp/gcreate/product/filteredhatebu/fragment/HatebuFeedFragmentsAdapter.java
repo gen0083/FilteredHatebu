@@ -13,7 +13,6 @@ import java.util.List;
  */
 
 public class HatebuFeedFragmentsAdapter extends FragmentStatePagerAdapter {
-    // TODO: use string now but replace HatebuFeedChannel for the future.
     private List<HatebuCategory> keys;
     private HashMap<String, HatebuFeedFragment> fragments;
 

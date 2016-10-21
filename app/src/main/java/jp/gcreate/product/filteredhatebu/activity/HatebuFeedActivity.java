@@ -19,9 +19,6 @@ import jp.gcreate.product.filteredhatebu.data.FilterRepository;
 import jp.gcreate.product.filteredhatebu.databinding.ActivityFeedBinding;
 import jp.gcreate.product.filteredhatebu.di.ActivityComponent;
 import jp.gcreate.product.filteredhatebu.fragment.HatebuFeedFragmentsAdapter;
-import jp.gcreate.product.filteredhatebu.model.UriFilter;
-import rx.functions.Action1;
-import timber.log.Timber;
 
 /**
  * Copyright 2016 G-CREATE
@@ -57,23 +54,6 @@ public class HatebuFeedActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        // TODO: remove this (for debugging)
-        filterRepository.getFilterAll()
-                        .subscribe(new Action1<List<UriFilter>>() {
-                            @Override
-                            public void call(List<UriFilter> uriFilters) {
-                                Timber.d(">> Filter in local file");
-                                for (UriFilter f : uriFilters) {
-                                    Timber.d(" %s", f.getFilter());
-                                }
-                                Timber.d("<< Filter in local file ");
-                            }
-                        }, new Action1<Throwable>() {
-                            @Override
-                            public void call(Throwable throwable) {
-                                Timber.d("No data in FilterRepository");
-                            }
-                        });
     }
 
     @Override

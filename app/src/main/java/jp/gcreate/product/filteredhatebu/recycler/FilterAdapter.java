@@ -74,7 +74,7 @@ public class FilterAdapter extends RecyclerView.Adapter<DataBindingViewHolder<It
     }
 
     private class SwipeDismissTouchHelper extends ItemTouchHelper {
-        public SwipeDismissTouchHelper() {
+        private SwipeDismissTouchHelper() {
             this(new ItemTouchHelper.SimpleCallback(0, LEFT | RIGHT) {
                 private Drawable deleteIcon;
                 private Drawable background;
@@ -116,6 +116,7 @@ public class FilterAdapter extends RecyclerView.Adapter<DataBindingViewHolder<It
                                         boolean isCurrentlyActive) {
                     super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState,
                                       isCurrentlyActive);
+                    // draw background of itemView to notify that this action means delete item to user
                     if (dX == 0) return;
                     if (!isInitialized) {
                         init();
@@ -139,7 +140,7 @@ public class FilterAdapter extends RecyclerView.Adapter<DataBindingViewHolder<It
             });
         }
 
-        public SwipeDismissTouchHelper(Callback callback) {
+        private SwipeDismissTouchHelper(Callback callback) {
             super(callback);
         }
     }
