@@ -57,6 +57,12 @@ dependencies {
 
     debugCompile 'com.facebook.stetho:stetho:1.4.1'
 
+    def leak_ver = '1.5'
+    debugCompile "com.squareup.leakcanary:leakcanary-android:$leak_ver"
+    releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leak_ver"
+    testCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leak_ver"
+    androidTestCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leak_ver"
+
     def retrofit_ver = "2.1.0"
     compile "com.squareup.retrofit2:retrofit:$retrofit_ver"
     compile "com.squareup.retrofit2:converter-moshi:$retrofit_ver"
