@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'com.github.gfx.ribbonizer'
 
 android {
     apply from: "${System.getenv('HOME')}/.android-mykey/FilteredHatebu.sign.gradle", to: android
@@ -15,6 +16,10 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        debug {
+            minifyEnabled false
+            applicationIdSuffix ".debug"
+        }
         release {
             minifyEnabled true
             useProguard false
