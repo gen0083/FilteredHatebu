@@ -3,9 +3,6 @@ package jp.gcreate.product.filteredhatebu.data;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
-
-import jp.gcreate.product.filteredhatebu.di.Scope.AppScope;
 import jp.gcreate.product.filteredhatebu.model.UriFilter;
 import rx.Observable;
 import rx.Single;
@@ -18,7 +15,6 @@ import timber.log.Timber;
 /**
  * Copyright 2016 G-CREATE
  */
-@AppScope
 public class FilterRepository implements FilterDataSource {
     private List<UriFilter> cachedList = new ArrayList<>();
     private boolean         isDirty    = true;
@@ -26,7 +22,6 @@ public class FilterRepository implements FilterDataSource {
     private SerializedSubject<Long, Long> onModifiedObserver = new SerializedSubject<>(
             BehaviorSubject.<Long>create());
 
-    @Inject
     public FilterRepository(FilterDataSource localDataSource) {
         this.localDataSource = localDataSource;
     }

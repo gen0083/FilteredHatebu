@@ -8,6 +8,7 @@ import dagger.Module;
 import dagger.Provides;
 import jp.gcreate.product.filteredhatebu.data.FilterDataSource;
 import jp.gcreate.product.filteredhatebu.data.FilterDataSourceOrma;
+import jp.gcreate.product.filteredhatebu.data.FilterRepository;
 import jp.gcreate.product.filteredhatebu.di.Scope.AppScope;
 import jp.gcreate.product.filteredhatebu.di.qualifier.ApplicationContext;
 import jp.gcreate.product.filteredhatebu.model.OrmaDatabase;
@@ -19,6 +20,12 @@ import jp.gcreate.product.filteredhatebu.model.OrmaDatabase;
 @Module
 public class AppDataModule {
     private static final String ORMA_FILE = "hatebu.orma";
+
+    @Provides
+    @AppScope
+    public FilterRepository provideFilterRepository(FilterDataSource dataSource) {
+        return new FilterRepository(dataSource);
+    }
 
     @Provides
     @AppScope
