@@ -3,6 +3,7 @@ package jp.gcreate.product.filteredhatebu.di;
 import dagger.Module;
 import dagger.Provides;
 import jp.gcreate.product.filteredhatebu.di.Scope.AppScope;
+import jp.gcreate.product.filteredhatebu.util.ReleaseLogTree;
 import jp.gcreate.product.filteredhatebu.util.StethoWrapper;
 import timber.log.Timber;
 
@@ -21,6 +22,6 @@ public class AppDebugModule {
     @Provides
     @AppScope
     public Timber.Tree providesTimberTree() {
-        return new Timber.DebugTree();
+        return new ReleaseLogTree();
     }
 }
