@@ -6,7 +6,7 @@
         android:id="@+id/edit_filter"
         android:title="@string/edit_filter"
         android:icon="@drawable/ic_settings_black"
-        app:showAsAction="ifRoom"
+        app:showAsAction="never"
         />
     <item
         android:id="@+id/licenses"
