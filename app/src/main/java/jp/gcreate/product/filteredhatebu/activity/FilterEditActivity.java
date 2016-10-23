@@ -26,7 +26,7 @@ import rx.schedulers.Schedulers;
  * Copyright 2016 G-CREATE
  */
 
-public class FilterEditActivity extends AppCompatActivity {
+public class FilterEditActivity extends AppCompatActivity implements FilterAdapter.DeleteCallback {
     private ActivityFilterEditBinding binding;
     private ActivityComponent component;
     @Inject
@@ -59,5 +59,10 @@ public class FilterEditActivity extends AppCompatActivity {
                             }
                         });
 
+    }
+
+    @Override
+    public void onDelete(String delete) {
+        filterRepository.deleteFilter(delete);
     }
 }

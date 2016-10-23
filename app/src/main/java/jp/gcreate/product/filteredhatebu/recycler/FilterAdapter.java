@@ -28,11 +28,17 @@ public class FilterAdapter extends RecyclerView.Adapter<DataBindingViewHolder<It
     private List<UriFilter> list;
     private RecyclerView    recyclerView;
     private ItemTouchHelper touchHelper;
+    private DeleteCallback callback;
 
     public FilterAdapter(Context context) {
         this.context = context;
         touchHelper = new SwipeDismissTouchHelper();
         list = new ArrayList<>();
+        if (context instanceof DeleteCallback) {
+            callback = (DeleteCallback) context;
+        } else {
+            throw new RuntimeException(context + " must implement DeleteCallback.");
+        }
     }
 
     @Override
@@ -73,6 +79,10 @@ public class FilterAdapter extends RecyclerView.Adapter<DataBindingViewHolder<It
         this.recyclerView = null;
     }
 
+    public interface DeleteCallback {
+        void onDelete(String delete);
+    }
+
     private class SwipeDismissTouchHelper extends ItemTouchHelper {
         private SwipeDismissTouchHelper() {
             this(new ItemTouchHelper.SimpleCallback(0, LEFT | RIGHT) {
@@ -105,7 +115,11 @@ public class FilterAdapter extends RecyclerView.Adapter<DataBindingViewHolder<It
                 @Override
                 public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
                     int position = viewHolder.getAdapterPosition();
+                    String key = list.get(position).getFilter();
                     list.remove(position);
+                    if (callback != null) {
+                        callback.onDelete(key);
+                    }
                     notifyItemRemoved(position);
                 }
 
