@@ -52,11 +52,11 @@ public class FeedAdapter extends RecyclerView.Adapter<DataBindingViewHolder<Item
 
     private void updateShownList() {
         shownList = new ArrayList<>();
-        for (final HatebuFeedItem item : originList) {
-            filterRepository.getFilterAll()
-                            .subscribe(new Action1<List<UriFilter>>() {
-                                @Override
-                                public void call(List<UriFilter> uriFilters) {
+        filterRepository.getFilterAll()
+                        .subscribe(new Action1<List<UriFilter>>() {
+                            @Override
+                            public void call(List<UriFilter> uriFilters) {
+                                for (final HatebuFeedItem item : originList) {
                                     boolean isFiltered = false;
                                     for (UriFilter f : uriFilters) {
                                         isFiltered = f.isFilteredUrl(item.getLink());
@@ -66,15 +66,15 @@ public class FeedAdapter extends RecyclerView.Adapter<DataBindingViewHolder<Item
                                         shownList.add(item);
                                     }
                                 }
-                            }, new Action1<Throwable>() {
-                                @Override
-                                public void call(Throwable throwable) {
-                                    shownList.add(item);
-                                }
-                            });
-
-        }
-        notifyDataSetChanged();
+                                notifyDataSetChanged();
+                            }
+                        }, new Action1<Throwable>() {
+                            @Override
+                            public void call(Throwable throwable) {
+                                shownList = originList;
+                                notifyDataSetChanged();
+                            }
+                        });
     }
 
     @Override
@@ -90,7 +90,7 @@ public class FeedAdapter extends RecyclerView.Adapter<DataBindingViewHolder<Item
                                  final int position) {
         final ItemHatebuFeedBinding binding = holder.getBinding();
         final HatebuFeedItem        item    = shownList.get(position);
-        Timber.i("%s onBindViewHolder position:%d item:%s", this, position, item);
+        Timber.v("%s onBindViewHolder position:%d item:%s", this, position, item);
         binding.setItem(item);
         Picasso.with(context)
                .load(FAVICON_URL + item.getLink())
@@ -114,7 +114,7 @@ public class FeedAdapter extends RecyclerView.Adapter<DataBindingViewHolder<Item
     @Override
     public void onAttachedToRecyclerView(RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
-        Timber.i("%s onAttachedRecyclerView:%s", this, recyclerView);
+        Timber.v("%s onAttachedRecyclerView:%s", this, recyclerView);
         this.recyclerView = recyclerView;
         this.context = recyclerView.getContext();
         compositeSubscription = new CompositeSubscription();
@@ -136,7 +136,7 @@ public class FeedAdapter extends RecyclerView.Adapter<DataBindingViewHolder<Item
     @Override
     public void onDetachedFromRecyclerView(RecyclerView recyclerView) {
         super.onDetachedFromRecyclerView(recyclerView);
-        Timber.i("%s onDetachedFromRecyclerView:%s", this, recyclerView);
+        Timber.v("%s onDetachedFromRecyclerView:%s", this, recyclerView);
         this.recyclerView = null;
         this.context = null;
         compositeSubscription.unsubscribe();
@@ -144,12 +144,12 @@ public class FeedAdapter extends RecyclerView.Adapter<DataBindingViewHolder<Item
 
     @Override
     public void onClick(View v) {
-        Timber.i("%s onClick view:%s", this, v);
+        Timber.v("%s onClick view:%s", this, v);
         int                  position = recyclerView.getChildAdapterPosition(v);
         final HatebuFeedItem item     = shownList.get(position);
-        Timber.i("%s onClick position:%d", this, position);
+        Timber.v("%s onClick position:%d", this, position);
         if (listener != null) {
-            Timber.i("%s onClick: callback to %s", this, listener);
+            Timber.v("%s onClick: callback to %s", this, listener);
             listener.onClick(this, position, item);
         }
     }

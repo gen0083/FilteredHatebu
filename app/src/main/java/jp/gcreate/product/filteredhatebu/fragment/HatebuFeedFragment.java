@@ -130,7 +130,8 @@ public class HatebuFeedFragment extends Fragment implements FeedAdapter.OnRecyce
                 .subscribe(new Action1<HatebuFeed>() {
                     @Override
                     public void call(HatebuFeed hatebuFeed) {
-                        // set feed
+                        // HatebuFeedはレスポンス本体で、実際に必要な各記事のリストはgetItemListで取得する
+                        Timber.d("feed got: %d", hatebuFeed.getItemList().size());
                         adapter.setItemList(hatebuFeed.getItemList());
                     }
                 }, new Action1<Throwable>() {
