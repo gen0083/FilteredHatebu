@@ -1,0 +1,101 @@
+- artifact: com.android.support:+:+
+  name: Android Support Library
+  copyrightHolder: The Android Open Source Project
+  license: The Apache Software License, Version 2.0
+- artifact: com.android.databinding:+:+
+  name: Data Binding
+  copyrightHolder: The Android Open Source Project
+  license: The Apache Software License, Version 2.0
+  licenseUrl: http://www.apache.org/licenses/LICENSE-2.0.txt
+- artifact: com.google.dagger:dagger:+
+  name: Dagger2
+  copyrightHolder: The Dagger Authors
+  license: The Apache License, Version 2.0
+  url: https://github.com/google/dagger
+- artifact: com.google.code.gson:gson:+
+  name: Gson
+  copyrightHolder: Google Inc.
+  license: The Apache License, Version 2.0
+  url: https://github.com/google/gson
+- artifact: javax.inject:javax.inject:+
+  name: javax.inject
+  copyrightHolder: The JSR-330 Expert Group
+  license: The Apache Software License, Version 2.0
+  licenseUrl: http://www.apache.org/licenses/LICENSE-2.0.txt
+  url: http://code.google.com/p/atinject/
+- artifact: com.squareup.okhttp3:+:+
+  name: OkHttp
+  copyrightHolder: Square, Inc.
+  license: The Apache License, Version 2.0
+  url: https://github.com/square/okhttp
+- artifact: com.squareup.okio:okio:+
+  name: Okio
+  copyrightHolder: Square, Inc.
+  license: The Apache License, Version 2.0
+  url: https://github.com/square/okio
+- artifact: com.squareup.picasso:picasso:+
+  name: Picasso
+  copyrightHolder: Square, Inc.
+  license: The Apache License, Version 2.0
+  url: https://github.com/square/picasso
+- artifact: com.squareup.retrofit2:+:+
+  name: Retrofit
+  copyrightHolder: Square, Inc.
+  license: The Apache License, Version 2.0
+  url: https://github.com/square/retrofit
+- artifact: com.squareup.moshi:moshi:+
+  name: Moshi
+  copyrightHolder: Square, Inc.
+  license: The Apache Software License, Version 2.0
+  url: https://github.com/square/moshi
+- artifact: com.squareup.leakcanary:+:+
+  name: LeakCanary
+  copyrightHolder: Square, Inc.
+  license: The Apache Software License, Version 2.0
+  licenseUrl: http://www.apache.org/licenses/LICENSE-2.0.txt
+  url: http://github.com/square/leakcanary
+- artifact: org.simpleframework:simple-xml:+
+  name: Simple XML
+  copyrightHolder: Niall Gallagher <niallg@users.sf.net>
+  license: The Apache Software License, Version 2.0
+  licenseUrl: http://www.apache.org/licenses/LICENSE-2.0.txt
+  url: http://simple.sourceforge.net
+- artifact: com.github.gfx.android.orma:+:+
+  name: Android Orma
+  copyrightHolder: FUJI Goro (gfx).
+  license: The Apache License, Version 2.0
+  url: https://github.com/gfx/Android-Orma
+- artifact: org.antlr:antlr4-runtime:+
+  name: ANTLR 4 Runtime
+  copyrightHolder: Terence Parr and Sam Harwell
+  license: The BSD License
+- artifact: io.reactivex:rxjava:+
+  name: RxJava
+  copyrightHolder: Netflix, Inc.
+  license: The Apache Software License, Version 2.0
+  licenseUrl: http://www.apache.org/licenses/LICENSE-2.0.txt
+  url: https://github.com/ReactiveX/RxJava
+- artifact: io.reactivex:rxandroid:+
+  name: RxAndroid
+  copyrightHolder: The RxAndroid authors
+  license: The Apache Software License, Version 2.0
+  licenseUrl: http://www.apache.org/licenses/LICENSE-2.0.txt
+  url: https://github.com/ReactiveX/RxAndroid
+- artifact: com.jakewharton.threetenabp:threetenabp:+
+  name: ThreeTenAbp
+  copyrightHolder: Jake Wharton
+  license: The Apache Software License, Version 2.0
+  licenseUrl: http://www.apache.org/licenses/LICENSE-2.0.txt
+  url: https://github.com/JakeWharton/ThreeTenABP/
+- artifact: org.threeten:threetenbp:+
+  name: ThreeTen backport
+  copyrightHolder: Stephen Colebourne & Michael Nascimento Santos
+  license: BSD 3-clause
+  licenseUrl: https://raw.githubusercontent.com/ThreeTen/threetenbp/master/LICENSE.txt
+  url: https://www.threeten.org/threetenbp
+- artifact: com.jakewharton.timber:timber:+
+  name: Timber
+  copyrightHolder: Jake Wharton
+  license: The Apache Software License, Version 2.0
+  licenseUrl: http://www.apache.org/licenses/LICENSE-2.0.txt
+  url: https://github.com/JakeWharton/timber

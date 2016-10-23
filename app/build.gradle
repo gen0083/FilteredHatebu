@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'com.github.gfx.ribbonizer'
+apply plugin: 'com.cookpad.android.licensetools'
 
 android {
     apply from: "${System.getenv('HOME')}/.android-mykey/FilteredHatebu.sign.gradle", to: android

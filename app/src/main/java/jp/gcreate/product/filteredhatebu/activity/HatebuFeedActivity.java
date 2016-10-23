@@ -19,12 +19,14 @@ import jp.gcreate.product.filteredhatebu.data.FilterRepository;
 import jp.gcreate.product.filteredhatebu.databinding.ActivityFeedBinding;
 import jp.gcreate.product.filteredhatebu.di.ActivityComponent;
 import jp.gcreate.product.filteredhatebu.fragment.HatebuFeedFragmentsAdapter;
+import jp.gcreate.product.filteredhatebu.fragment.LicensesDialogFragment;
 
 /**
  * Copyright 2016 G-CREATE
  */
 
 public class HatebuFeedActivity extends AppCompatActivity {
+    private static final String TAG_LICENSE = "license";
     private ActivityFeedBinding binding;
     private ActivityComponent component;
     @Inject
@@ -69,6 +71,9 @@ public class HatebuFeedActivity extends AppCompatActivity {
             case R.id.edit_filter:
                 Intent intent = new Intent(this, FilterEditActivity.class);
                 startActivity(intent);
+                return true;
+            case R.id.licenses:
+                new LicensesDialogFragment().show(getSupportFragmentManager(), TAG_LICENSE);
                 return true;
             default:
                 break;
