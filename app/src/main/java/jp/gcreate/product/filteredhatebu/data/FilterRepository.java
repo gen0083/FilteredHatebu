@@ -30,6 +30,7 @@ public class FilterRepository implements FilterDataSource {
     public void insertFilter(String insert) {
         localDataSource.insertFilter(insert);
         isDirty = true;
+        onModifiedObserver.onNext(System.currentTimeMillis());
     }
 
     @Override

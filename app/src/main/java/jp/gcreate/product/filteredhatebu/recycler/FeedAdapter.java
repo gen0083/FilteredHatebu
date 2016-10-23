@@ -53,6 +53,7 @@ public class FeedAdapter extends RecyclerView.Adapter<DataBindingViewHolder<Item
     private void updateShownList() {
         shownList = new ArrayList<>();
         filterRepository.getFilterAll()
+                        .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new Action1<List<UriFilter>>() {
                             @Override
                             public void call(List<UriFilter> uriFilters) {
