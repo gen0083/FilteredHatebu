@@ -1,5 +1,7 @@
 package jp.gcreate.product.filteredhatebu.di;
 
+import com.crashlytics.android.core.CrashlyticsCore;
+
 import dagger.Module;
 import dagger.Provides;
 import jp.gcreate.product.filteredhatebu.di.Scope.AppScope;
@@ -23,5 +25,11 @@ public class AppDebugModule {
     @AppScope
     public Timber.Tree providesTimberTree() {
         return new ReleaseLogTree();
+    }
+
+    @Provides
+    @AppScope
+    public CrashlyticsCore providesCrashlyticsCore() {
+        return new CrashlyticsCore.Builder().build();
     }
 }

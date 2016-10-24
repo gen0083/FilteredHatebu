@@ -99,3 +99,25 @@
   license: The Apache Software License, Version 2.0
   licenseUrl: http://www.apache.org/licenses/LICENSE-2.0.txt
   url: https://github.com/JakeWharton/timber
+- artifact: com.crashlytics.sdk.android:answers:+
+  name: Android SDK Answers
+  copyrightHolder: Crashlytics, Inc.
+  license: Answers Terms of Service
+  licenseUrl: https://answers.io/img/terms.pdf
+  skip: true
+- artifact: com.crashlytics.sdk.android:crashlytics:+
+  name: Android SDK Crashlytics
+  copyrightHolder: Crashlytics, Inc.
+  license: Crashlytics Terms of Service
+  licenseUrl: http://try.crashlytics.com/terms/terms-of-service.pdf
+  skip: true
+- artifact: com.crashlytics.sdk.android:crashlytics-core:+
+  skip: true
+- artifact: com.crashlytics.sdk.android:beta:+
+  skip: true
+- artifact: io.fabric.sdk.android:fabric:+
+  name: Android SDK Fabric
+  copyrightHolder: Twitter, Inc.
+  license: Fabric Software and Services Agreement
+  licenseUrl: https://fabric.io/terms
+  skip: true

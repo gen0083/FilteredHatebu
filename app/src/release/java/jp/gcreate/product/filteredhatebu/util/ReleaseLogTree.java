@@ -2,6 +2,8 @@ package jp.gcreate.product.filteredhatebu.util;
 
 import android.util.Log;
 
+import com.crashlytics.android.Crashlytics;
+
 import timber.log.Timber;
 
 /**
@@ -15,6 +17,6 @@ public class ReleaseLogTree extends Timber.Tree {
             return;
         }
 
-        //TODO: post log to crash reporting tool
+        Crashlytics.log(priority, tag, message);
     }
 }

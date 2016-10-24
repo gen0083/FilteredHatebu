@@ -64,3 +64,7 @@
 }
 -keep class jp.gcreate.product.filteredhatebu.model.HatebuFeedItem { *; }
 -keep class jp.gcreate.product.filteredhatebu.model.HatebuFeed { *; }
+
+# Crashlytics
+-keepattributes SourceFile,LineNumberTable
+-keep public class * extends java.lang.Exception

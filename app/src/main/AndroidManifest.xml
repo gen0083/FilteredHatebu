@@ -14,6 +14,10 @@
         android:theme="@style/AppTheme"
         android:name=".CustomApplication"
         >
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="76ab1dc0e514cde7dcadf75f1060be889e25ee39"
+            />
         <activity
             android:name=".activity.HatebuFeedActivity"
             android:theme="@style/AppTheme.NoActionBar"
