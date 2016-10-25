@@ -8,4 +8,6 @@
     <string name="share_url">URLを共有</string>
     <string name="licenses">オープンソースライセンス</string>
     <string name="close">閉じる</string>
+    <string name="move_to_the_site">サイトへ移動</string>
+    <string name="add_filter">フィルタを追加</string>
 </resources>
