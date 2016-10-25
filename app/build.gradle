@@ -16,6 +16,13 @@ android {
         versionName "16.10.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+    productFlavors {
+        mock {
+            applicationIdSuffix ".mock"
+        }
+        prod {
+        }
+    }
     buildTypes {
         debug {
             minifyEnabled false
@@ -32,6 +39,18 @@ android {
     dataBinding {
         enabled = true
     }
+}
+
+ribbonizer {
+    builder { variant, iconFile ->
+        if (variant.flavorName == "mock") {
+            return yellowRibbonFilter(variant, iconFile)
+        } else {
+            return greenRibbonFilter(variant, iconFile)
+        }
+    }
+
+    forcedVariantsNames "mockRelease"
 }
 
 dependencies {

@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://purl.org/rss/1.0/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:taxo="http://purl.org/rss/1.0/modules/taxonomy/" xmlns:opensearch="http://a9.com/-/spec/opensearchrss/1.0/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:hatena="http://www.hatena.ne.jp/info/xmlns#" xmlns:media="http://search.yahoo.com/mrss">
+    <channel rdf:about="http://b.hatena.ne.jp/hotentry">
+        <title>はてなブックマーク - 人気エントリー</title>
+        <link>http://b.hatena.ne.jp/hotentry</link>
+        <description>最近の人気エントリー</description>
+
+        <items>
+            <rdf:Seq>
+                <rdf:li rdf:resource="http://getlife.hateblo.jp/entry/2016/10/24/045343" />
+                <rdf:li rdf:resource="http://whity-akumagai.com/special/" />
+                <rdf:li rdf:resource="http://anond.hatelabo.jp/20161024040352" />
+                <rdf:li rdf:resource="http://headlines.yahoo.co.jp/hl?a=20161024-00000323-oric-ent" />
+                <rdf:li rdf:resource="http://toyokeizai.net/articles/-/141117" />
+                <rdf:li rdf:resource="http://www.slideshare.net/takaumada/zero-to-product-manager" />
+                <rdf:li rdf:resource="http://www.4gamer.net/games/360/G036098/20161024011/" />
+                <rdf:li rdf:resource="http://gendai.ismedia.jp/articles/-/50023" />
+                <rdf:li rdf:resource="http://www.asahi.com/articles/ASJBS1S6BJBSUHBI005.html" />
+                <rdf:li rdf:resource="http://omocoro.jp/kiji/93581/" />
+                <rdf:li rdf:resource="http://anond.hatelabo.jp/20161024003339" />
+                <rdf:li rdf:resource="http://coliss.com/articles/build-websites/operation/css/gradient-background-hue-css.html" />
+                <rdf:li rdf:resource="http://www.ipa.go.jp/siensi/index.html" />
+                <rdf:li rdf:resource="http://anond.hatelabo.jp/20161024024824" />
+                <rdf:li rdf:resource="http://anond.hatelabo.jp/20161023223604" />
+                <rdf:li rdf:resource="http://jbpress.ismedia.jp/articles/-/48185" />
+                <rdf:li rdf:resource="http://www.hageatama.org/wp/2840" />
+                <rdf:li rdf:resource="http://mainichi.jp/articles/20161024/k00/00e/040/123000c" />
+                <rdf:li rdf:resource="http://delete-all.hatenablog.com/entry/2016/10/24/123000" />
+                <rdf:li rdf:resource="http://www.slideshare.net/Piro_Shiki/steam-67547741" />
+                <rdf:li rdf:resource="http://anond.hatelabo.jp/20161024005709" />
+                <rdf:li rdf:resource="http://headlines.yahoo.co.jp/hl?a=20161024-00000001-maiall-soci" />
+                <rdf:li rdf:resource="http://togetter.com/li/1040159" />
+                <rdf:li rdf:resource="http://qiita.com/joker1007/items/9f54e763ae640f757cfb" />
+                <rdf:li rdf:resource="http://www.oricon.co.jp/news/2080417/full/" />
+                <rdf:li rdf:resource="http://twitter.com/i/moments/782773534850371584" />
+                <rdf:li rdf:resource="http://togetter.com/li/1039919" />
+                <rdf:li rdf:resource="http://hirokimochizuki.hatenablog.com/entry/serge.paugam" />
+                <rdf:li rdf:resource="http://cardloan-girls.jp/medicalinsurance/" />
+                <rdf:li rdf:resource="http://media.hama1-cl.jp/mote-technic/sagami-original/" />
+            </rdf:Seq>
+        </items>
+        <atom10:link xmlns:atom10="http://www.w3.org/2005/Atom" rel="self" type="application/rdf+xml" href="http://feeds.feedburner.com/hatena/b/hotentry" /><feedburner:info xmlns:feedburner="http://rssnamespace.org/feedburner/ext/1.0" uri="hatena/b/hotentry" /><atom10:link xmlns:atom10="http://www.w3.org/2005/Atom" rel="hub" href="http://pubsubhubbub.appspot.com/" /></channel>
+    <item rdf:about="http://test.com/hoge">
+        <title>test1</title>
+        <link>http://test.com/hoge</link>
+        <description>test1's description</description>
+        <content:encoded><![CDATA[test1's description]]></content:encoded>
+        <dc:date>2016-10-24T04:55:05+09:00</dc:date>
+        <dc:subject>テクノロジー</dc:subject>
+        <hatena:bookmarkcount>759</hatena:bookmarkcount>
+    </item>
+    <item rdf:about="http://test2.com/abc/def">
+        <title>test2</title>
+        <link>http://test1.com/abc/def</link>
+        <description>あいうえおかきくけこ</description>
+        <content:encoded><![CDATA[あいうえおかきくけこ]]></content:encoded>
+        <dc:date>2016-10-24T12:03:54+09:00</dc:date>
+        <dc:subject>おもしろ</dc:subject>
+        <hatena:bookmarkcount>302</hatena:bookmarkcount>
+    </item>
+    <item rdf:about="http://test.com/test/is/difficult">
+        <title>test3</title>
+        <link>http://test.com/test/is/difficult</link>
+        <description>Test is difficult. This is the same domain with first article.</description>
+        <content:encoded><![CDATA[Test is difficult. This is the same domain with first article.]]></content:encoded>
+        <dc:date>2016-10-24T04:06:05+09:00</dc:date>
+        <dc:subject>学び</dc:subject>
+        <hatena:bookmarkcount>355</hatena:bookmarkcount>
+    </item>
+    <item rdf:about="http://www.test4.jp/hl?a=20161024-00000323-oric-ent">
+        <title>test4</title>
+        <link>http://www.test4.jp/hl?a=20161024-00000323-oric-ent</link>
+        <description>4th description</description>
+        <content:encoded><![CDATA[4th description]]></content:encoded>
+        <dc:date>2016-10-24T12:44:14+09:00</dc:date>
+        <dc:subject>アニメとゲーム</dc:subject>
+        <hatena:bookmarkcount>232</hatena:bookmarkcount>
+    </item>
+    <item rdf:about="http://test5.net/articles/-/141117">
+        <title>test5</title>
+        <link>http://test5.net/articles/-/141117</link>
+        <description>test5</description>
+        <content:encoded><![CDATA[test5]]></content:encoded>
+        <dc:date>2016-10-24T08:20:47+09:00</dc:date>
+        <dc:subject>政治と経済</dc:subject>
+        <hatena:bookmarkcount>342</hatena:bookmarkcount>
+    </item>
+    <item rdf:about="http://www.test.com/test/manager">
+        <title>test6</title>
+        <link>http://www.test.com/test/manager</link>
+        <description>Manager</description>
+        <content:encoded><![CDATA[Manager]]></content:encoded>
+        <dc:date>2016-10-24T10:57:27+09:00</dc:date>
+        <dc:subject>テクノロジー</dc:subject>
+        <hatena:bookmarkcount>307</hatena:bookmarkcount>
+    </item>
+    <item rdf:about="http://abc.com/360/G036098/20161024011/">
+        <title>test7</title>
+        <link>http://abc.com/360/G036098/20161024011/</link>
+        <description>7th test.</description>
+        <content:encoded><![CDATA[7th test.]]></content:encoded>
+        <dc:date>2016-10-24T12:25:37+09:00</dc:date>
+        <dc:subject>アニメとゲーム</dc:subject>
+        <hatena:bookmarkcount>187</hatena:bookmarkcount>
+    </item>
+    <item rdf:about="http://test8.jp/articles/-/50023">
+        <title>test8</title>
+        <link>http://test8.jp/articles/-/50023</link>
+        <description>ABCDEFG</description>
+        <content:encoded><![CDATA[ABCDEFG]]></content:encoded>
+        <dc:date>2016-10-24T07:34:53+09:00</dc:date>
+        <dc:subject>世の中</dc:subject>
+        <hatena:bookmarkcount>307</hatena:bookmarkcount>
+    </item>
+    <item rdf:about="http://test9.net/articles/ASJBS1S6BJBSUHBI005.html">
+        <title>test9</title>
+        <link>http://test9.net/articles/ASJBS1S6BJBSUHBI005.html</link>
+        <description>one two three</description>
+        <content:encoded><![CDATA[one two three]]></content:encoded>
+        <dc:date>2016-10-24T11:26:20+09:00</dc:date>
+        <dc:subject>世の中</dc:subject>
+        <hatena:bookmarkcount>193</hatena:bookmarkcount>
+    </item>
+    <item rdf:about="http://test.10.jp/kiji/93581/">
+        <title>test10</title>
+        <link>http://test.10.jp/kiji/93581/</link>
+        <description>test dot</description>
+        <content:encoded><![CDATA[test dot]]></content:encoded>
+        <dc:date>2016-10-24T12:29:12+09:00</dc:date>
+        <dc:subject>おもしろ</dc:subject>
+        <hatena:bookmarkcount>125</hatena:bookmarkcount>
+    </item>
+    <item rdf:about="http://test11.uk/20161024003339">
+        <title>test11</title>
+        <link>http://test11.uk/20161024003339</link>
+        <description>test11</description>
+        <content:encoded><![CDATA[test11]]></content:encoded>
+        <dc:date>2016-10-24T01:00:07+09:00</dc:date>
+        <dc:subject>おもしろ</dc:subject>
+        <hatena:bookmarkcount>393</hatena:bookmarkcount>
+    </item>
+    <item rdf:about="http://test12.tv/">
+        <title>test12</title>
+        <link>http://test12.tv/</link>
+        <description>test12</description>
+        <content:encoded><![CDATA[test12]]></content:encoded>
+        <dc:date>2016-10-24T09:33:20+09:00</dc:date>
+        <dc:subject>テクノロジー</dc:subject>
+        <hatena:bookmarkcount>266</hatena:bookmarkcount>
+    </item>
+    <item rdf:about="http://test13.go.jp/index.html">
+        <title>test13</title>
+        <link>http://test13.go.jp/index.html</link>
+        <description>test13</description>
+        <content:encoded><![CDATA[test13]]></content:encoded>
+        <dc:date>2016-10-24T15:16:05+09:00</dc:date>
+        <dc:subject>政治と経済</dc:subject>
+        <hatena:bookmarkcount>99</hatena:bookmarkcount>
+    </item>
+    <item rdf:about="http://test14.com/20161024024824">
+        <title>test14</title>
+        <link>http://test14.com/20161024024824</link>
+        <description>test14</description>
+        <content:encoded><![CDATA[test14]]></content:encoded>
+        <dc:date>2016-10-24T03:06:24+09:00</dc:date>
+        <dc:subject>政治と経済</dc:subject>
+        <hatena:bookmarkcount>72</hatena:bookmarkcount>
+    </item>
+    <item rdf:about="http://test15.com/20161023223604">
+        <title>test15</title>
+        <link>http://test15.com/20161023223604</link>
+        <description>test15</description>
+        <content:encoded><![CDATA[test15]]></content:encoded>
+        <dc:date>2016-10-24T06:32:28+09:00</dc:date>
+        <dc:subject>暮らし</dc:subject>
+        <hatena:bookmarkcount>172</hatena:bookmarkcount>
+    </item>
+    <item rdf:about="http://test16.jp/articles/-/48185">
+        <title>test16</title>
+        <link>http://test16.jp/articles/-/48185</link>
+        <description>test16</description>
+        <content:encoded><![CDATA[test16]]></content:encoded>
+        <dc:date>2016-10-24T07:56:04+09:00</dc:date>
+        <dc:subject>政治と経済</dc:subject>
+        <hatena:bookmarkcount>225</hatena:bookmarkcount>
+    </item>
+    <item rdf:about="http://test17.org/wp/2840">
+        <title>test17</title>
+        <link>http://test17.org/wp/2840</link>
+        <description>test17</description>
+        <content:encoded><![CDATA[test17]]></content:encoded>
+        <dc:date>2016-10-23T23:01:13+09:00</dc:date>
+        <dc:subject>テクノロジー</dc:subject>
+        <hatena:bookmarkcount>553</hatena:bookmarkcount>
+    </item>
+    <item rdf:about="http://test18.jp/articles/20161024/k00/00e/040/123000c">
+        <title>test18</title>
+        <link>http://test18.jp/articles/20161024/k00/00e/040/123000c</link>
+        <description>test18</description>
+        <content:encoded><![CDATA[test18]]></content:encoded>
+        <dc:date>2016-10-24T08:42:55+09:00</dc:date>
+        <dc:subject>アニメとゲーム</dc:subject>
+        <hatena:bookmarkcount>121</hatena:bookmarkcount>
+    </item>
+    <item rdf:about="http://test19.com/entry/2016/10/24/123000">
+        <title>test19</title>
+        <link>http://test19.com/entry/2016/10/24/123000</link>
+        <description>test19</description>
+        <content:encoded><![CDATA[test19]]></content:encoded>
+        <dc:date>2016-10-24T12:48:52+09:00</dc:date>
+        <dc:subject>暮らし</dc:subject>
+        <hatena:bookmarkcount>70</hatena:bookmarkcount>
+    </item>
+    <item rdf:about="http://test20.jp/">
+        <title>test20</title>
+        <link>http://test20.jp/</link>
+        <description>test20</description>
+        <content:encoded><![CDATA[test20]]></content:encoded>
+        <dc:date>2016-10-23T22:53:36+09:00</dc:date>
+        <dc:subject>テクノロジー</dc:subject>
+        <hatena:bookmarkcount>150</hatena:bookmarkcount>
+    </item>
+    <item rdf:about="http://test21.jp/20161024005709">
+        <title>test21</title>
+        <link>http://test21.jp/20161024005709</link>
+        <description>test21</description>
+        <content:encoded><![CDATA[test21]]></content:encoded>
+        <dc:date>2016-10-24T00:58:44+09:00</dc:date>
+        <dc:subject>暮らし</dc:subject>
+        <hatena:bookmarkcount>284</hatena:bookmarkcount>
+    </item>
+    <item rdf:about="http://test22.co.jp/hl?a=20161024-00000001-maiall-soci">
+        <title>test22</title>
+        <link>http://test22.co.jp/hl?a=20161024-00000001-maiall-soci</link>
+        <description>test22</description>
+        <content:encoded><![CDATA[test22]]></content:encoded>
+        <dc:date>2016-10-24T11:10:55+09:00</dc:date>
+        <dc:subject>エンタメ</dc:subject>
+        <hatena:bookmarkcount>105</hatena:bookmarkcount>
+    </item>
+    <item rdf:about="http://test23.com/li/1040159">
+        <title>test23</title>
+        <link>http://test23.com/li/1040159</link>
+        <description>test23</description>
+        <content:encoded><![CDATA[test23]]></content:encoded>
+        <dc:date>2016-10-24T01:10:04+09:00</dc:date>
+        <dc:subject>おもしろ</dc:subject>
+        <hatena:bookmarkcount>149</hatena:bookmarkcount>
+    </item>
+    <item rdf:about="http://test24.com/items/9f54e763ae640f757cfb">
+        <title>test24</title>
+        <link>http://test24.com/items/9f54e763ae640f757cfb</link>
+        <description>test24</description>
+        <content:encoded><![CDATA[test24]]></content:encoded>
+        <dc:date>2016-10-24T15:18:25+09:00</dc:date>
+        <dc:subject>テクノロジー</dc:subject>
+        <hatena:bookmarkcount>66</hatena:bookmarkcount>
+    </item>
+    <item rdf:about="http://test25.co.jp/news/2080417/full/">
+        <title>test25</title>
+        <link>http://test25.co.jp/news/2080417/full/</link>
+        <description>test25</description>
+        <content:encoded><![CDATA[test25]]></content:encoded>
+        <dc:date>2016-10-24T12:49:31+09:00</dc:date>
+        <dc:subject>アニメとゲーム</dc:subject>
+        <hatena:bookmarkcount>75</hatena:bookmarkcount>
+    </item>
+    <item rdf:about="http://test26.com/i/moments/782773534850371584">
+        <title>test26</title>
+        <link>http://test26.com/i/moments/782773534850371584</link>
+        <description>test26</description>
+        <content:encoded><![CDATA[test26]]></content:encoded>
+        <dc:date>2016-10-24T07:07:59+09:00</dc:date>
+        <dc:subject>テクノロジー</dc:subject>
+        <hatena:bookmarkcount>137</hatena:bookmarkcount>
+    </item>
+    <item rdf:about="http://test27.com/li/1039919">
+        <title>test27</title>
+        <link>http://test27.com/li/1039919</link>
+        <description>test27</description>
+        <content:encoded><![CDATA[test27]]></content:encoded>
+        <dc:date>2016-10-23T19:13:00+09:00</dc:date>
+        <dc:subject>学び</dc:subject>
+        <hatena:bookmarkcount>692</hatena:bookmarkcount>
+    </item>
+    <item rdf:about="http://test28.hatenablog.com/entry/serge.paugam">
+        <title>test28</title>
+        <link>http://test28.hatenablog.com/entry/serge.paugam</link>
+        <description>test28</description>
+        <content:encoded><![CDATA[test28]]></content:encoded>
+        <dc:date>2016-10-23T21:52:16+09:00</dc:date>
+        <dc:subject>政治と経済</dc:subject>
+        <hatena:bookmarkcount>910</hatena:bookmarkcount>
+    </item>
+    <item rdf:about="http://test29.jp/medicalinsurance/">
+        <title>test29</title>
+        <link>http://test29.jp/medicalinsurance/</link>
+        <description>test29</description>
+        <content:encoded><![CDATA[test29]]></content:encoded>
+        <dc:date>2016-10-24T10:31:12+09:00</dc:date>
+        <dc:subject>政治と経済</dc:subject>
+        <hatena:bookmarkcount>96</hatena:bookmarkcount>
+    </item>
+    <item rdf:about="http://test30.jp/">
+        <title>test30</title>
+        <link>http://test30.jp/</link>
+        <description>test30</description>
+        <content:encoded><![CDATA[test30]]></content:encoded>
+        <dc:date>2016-10-24T11:36:43+09:00</dc:date>
+        <dc:subject>おもしろ</dc:subject>
+        <hatena:bookmarkcount>91</hatena:bookmarkcount>
+    </item>
+</rdf:RDF>
