@@ -2,14 +2,15 @@ package jp.gcreate.product.filteredhatebu.api;
 
 import jp.gcreate.product.filteredhatebu.model.HatebuFeed;
 import retrofit2.http.GET;
-import retrofit2.http.Path;
 import rx.Observable;
 
 /**
  * Copyright 2016 G-CREATE
  */
 
-public interface HatebuHotentryCategoryService {
-    @GET("hotentry/{category}.rss")
-    Observable<HatebuFeed> getCategoryFeed(@Path("category") String category);
+public interface FeedsBurnerClienet {
+    public static final String BASE_URL = "http://feeds.feedburner.com/";
+
+    @GET("hatena/b/hotentry")
+    Observable<HatebuFeed> getHotentryFeed();
 }

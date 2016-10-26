@@ -6,7 +6,7 @@ import org.junit.Test;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-import jp.gcreate.product.filteredhatebu.api.HatebuHotentryCategoryService;
+import jp.gcreate.product.filteredhatebu.api.HatenaClient;
 import jp.gcreate.product.filteredhatebu.model.HatebuFeed;
 import jp.gcreate.product.filteredhatebu.model.HatebuFeedItem;
 import okhttp3.OkHttpClient;
@@ -22,7 +22,7 @@ import rx.functions.Action1;
 
 public class HatebuFeedTest {
     private static final String BASE_URL = "http://b.hatena.ne.jp/";
-    private HatebuHotentryCategoryService service;
+    private HatenaClient service;
 
     @Before
     public void setUp() {
@@ -44,7 +44,7 @@ public class HatebuFeedTest {
                 .addConverterFactory(SimpleXmlConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
-        service = retrofit.create(HatebuHotentryCategoryService.class);
+        service = retrofit.create(HatenaClient.class);
     }
 
     @Test

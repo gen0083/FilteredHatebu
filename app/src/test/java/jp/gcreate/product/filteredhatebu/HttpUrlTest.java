@@ -25,7 +25,7 @@ public class HttpUrlTest {
         HttpUrl url = HttpUrl.parse("http://hoge.com/test/index.html");
         assertThat(url.scheme(), is("http"));
         assertThat(url.host(), is("hoge.com"));
-        assertThat(url.encodedPath(), is("test/index.html"));
+        assertThat(url.encodedPath(), is("/test/index.html"));
     }
 
     @Test

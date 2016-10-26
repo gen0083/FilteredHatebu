@@ -11,7 +11,6 @@ import java.util.regex.Pattern;
 
 import javax.inject.Inject;
 
-import jp.gcreate.product.filteredhatebu.di.AppNetworkModule;
 import jp.gcreate.product.filteredhatebu.di.qualifier.ApplicationContext;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
@@ -40,10 +39,10 @@ public class MockInterceptor implements Interceptor {
     public Response intercept(Chain chain) throws IOException {
         HttpUrl url = chain.request().url();
         Timber.d("url:%s path:%s", url, url.encodedPath());
-        if (AppNetworkModule.FEEDBURNER_BASE_URL.contains(url.host())) {
+        if (FeedsBurnerClienet.BASE_URL.contains(url.host())) {
             return mockedFeedsBurnerResponse(chain.request());
         }
-        if (AppNetworkModule.HATEBU_BASE_URL.contains(url.host())) {
+        if (HatenaClient.BASE_URL.contains(url.host())) {
             if (url.encodedPath().equals("/entry/json/") || url.encodedPath().equals("/entry/jsonlite/")) {
                 if (url.query().contains("test.com/")) {
                     return mockedHatebuEntry(chain.request());

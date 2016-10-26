@@ -18,8 +18,8 @@ import javax.inject.Inject;
 import jp.gcreate.product.filteredhatebu.CustomApplication;
 import jp.gcreate.product.filteredhatebu.R;
 import jp.gcreate.product.filteredhatebu.activity.HatebuFeedDetailActivity;
-import jp.gcreate.product.filteredhatebu.api.HatebuHotentryCategoryService;
-import jp.gcreate.product.filteredhatebu.api.HatebuHotentryService;
+import jp.gcreate.product.filteredhatebu.api.FeedsBurnerClienet;
+import jp.gcreate.product.filteredhatebu.api.HatenaClient;
 import jp.gcreate.product.filteredhatebu.data.FilterRepository;
 import jp.gcreate.product.filteredhatebu.databinding.FragmentHatebuFeedBinding;
 import jp.gcreate.product.filteredhatebu.model.HatebuFeed;
@@ -45,11 +45,11 @@ public class HatebuFeedFragment extends Fragment implements FeedAdapter.OnRecyce
     private LinearLayoutManager       layoutManager;
     private int                       scrolledPosition;
     @Inject
-    HatebuHotentryService         hotentryService;
+    FeedsBurnerClienet hotentryService;
     @Inject
-    HatebuHotentryCategoryService categoryService;
+    HatenaClient       categoryService;
     @Inject
-    FilterRepository              filterRepository;
+    FilterRepository   filterRepository;
 
     public static HatebuFeedFragment createInstance(String category) {
         HatebuFeedFragment f    = new HatebuFeedFragment();
