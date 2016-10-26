@@ -19,7 +19,7 @@ import jp.gcreate.product.filteredhatebu.model.OrmaDatabase;
 
 @Module
 public class AppDataModule {
-    private static final String ORMA_FILE = "hatebu.orma";
+    public static final String ORMA_FILE = "hatebu.orma";
 
     @Provides
     @AppScope

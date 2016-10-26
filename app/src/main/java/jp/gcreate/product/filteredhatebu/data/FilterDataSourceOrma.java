@@ -70,4 +70,9 @@ public class FilterDataSourceOrma implements FilterDataSource {
             .filterEq(delete)
             .execute();
     }
+
+    @Override
+    public void deleteAll() {
+        orma.deleteFromUriFilter().execute();
+    }
 }

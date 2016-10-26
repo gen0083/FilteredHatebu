@@ -19,4 +19,6 @@ public interface FilterDataSource {
     void updateFilter(String old, String update);
 
     void deleteFilter(String delete);
+
+    void deleteAll();
 }
