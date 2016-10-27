@@ -1,4 +1,4 @@
-package jp.gcreate.product.filteredhatebu.recycler;
+package jp.gcreate.product.filteredhatebu.ui.editfilter;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -18,6 +18,7 @@ import java.util.List;
 import jp.gcreate.product.filteredhatebu.R;
 import jp.gcreate.product.filteredhatebu.databinding.ItemFilterBinding;
 import jp.gcreate.product.filteredhatebu.model.UriFilter;
+import jp.gcreate.product.filteredhatebu.ui.common.DataBindingViewHolder;
 
 /**
  * Copyright 2016 G-CREATE

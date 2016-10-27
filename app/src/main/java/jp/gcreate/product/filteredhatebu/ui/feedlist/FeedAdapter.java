@@ -1,4 +1,4 @@
-package jp.gcreate.product.filteredhatebu.recycler;
+package jp.gcreate.product.filteredhatebu.ui.feedlist;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -16,6 +16,7 @@ import jp.gcreate.product.filteredhatebu.data.FilterRepository;
 import jp.gcreate.product.filteredhatebu.databinding.ItemHatebuFeedBinding;
 import jp.gcreate.product.filteredhatebu.model.HatebuFeedItem;
 import jp.gcreate.product.filteredhatebu.model.UriFilter;
+import jp.gcreate.product.filteredhatebu.ui.common.DataBindingViewHolder;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;

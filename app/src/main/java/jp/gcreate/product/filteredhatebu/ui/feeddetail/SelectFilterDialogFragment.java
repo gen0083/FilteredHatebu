@@ -1,4 +1,4 @@
-package jp.gcreate.product.filteredhatebu.fragment;
+package jp.gcreate.product.filteredhatebu.ui.feeddetail;
 
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -10,7 +10,7 @@ import android.support.v4.app.DialogFragment;
 import android.widget.ArrayAdapter;
 
 import jp.gcreate.product.filteredhatebu.R;
-import jp.gcreate.product.filteredhatebu.util.FilterGenerator;
+import jp.gcreate.product.filteredhatebu.ui.common.FilterGenerator;
 import timber.log.Timber;
 
 /**

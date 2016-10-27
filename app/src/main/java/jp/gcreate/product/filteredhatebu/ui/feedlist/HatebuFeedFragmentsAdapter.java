@@ -1,4 +1,4 @@
-package jp.gcreate.product.filteredhatebu.fragment;
+package jp.gcreate.product.filteredhatebu.ui.feedlist;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

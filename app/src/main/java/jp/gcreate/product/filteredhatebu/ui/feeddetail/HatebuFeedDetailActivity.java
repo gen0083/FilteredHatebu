@@ -1,4 +1,4 @@
-package jp.gcreate.product.filteredhatebu.activity;
+package jp.gcreate.product.filteredhatebu.ui.feeddetail;
 
 import android.app.PendingIntent;
 import android.content.Context;
@@ -26,12 +26,10 @@ import jp.gcreate.product.filteredhatebu.api.HatenaClient;
 import jp.gcreate.product.filteredhatebu.data.FilterRepository;
 import jp.gcreate.product.filteredhatebu.databinding.ActivityHatebuFeedDetailBinding;
 import jp.gcreate.product.filteredhatebu.di.ActivityComponent;
-import jp.gcreate.product.filteredhatebu.fragment.SelectFilterDialogFragment;
 import jp.gcreate.product.filteredhatebu.model.HatebuBookmark;
 import jp.gcreate.product.filteredhatebu.model.HatebuEntry;
 import jp.gcreate.product.filteredhatebu.model.HatebuFeedItem;
-import jp.gcreate.product.filteredhatebu.recycler.BookmarksAdapter;
-import jp.gcreate.product.filteredhatebu.util.BitmapUtil;
+import jp.gcreate.product.filteredhatebu.ui.common.BitmapUtil;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -52,7 +50,7 @@ public class HatebuFeedDetailActivity extends AppCompatActivity
     private HatebuFeedItem                    item;
     private ActivityComponent                 component;
     private Subscription                      bookmarkSubscription;
-    private BookmarksAdapter                  adapter;
+    private BookmarkCommentsAdapter           adapter;
     private BottomSheetBehavior<RecyclerView> bottomSheetBehavior;
     @Inject
     HatenaClient     service;
@@ -103,7 +101,7 @@ public class HatebuFeedDetailActivity extends AppCompatActivity
     }
 
     private void setupRecyclerView() {
-        adapter = new BookmarksAdapter(this);
+        adapter = new BookmarkCommentsAdapter(this);
         RecyclerView r = binding.recyclerView;
         r.setLayoutManager(new LinearLayoutManager(this));
         r.setAdapter(adapter);

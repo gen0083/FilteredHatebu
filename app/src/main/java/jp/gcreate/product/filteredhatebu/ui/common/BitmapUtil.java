@@ -1,4 +1,4 @@
-package jp.gcreate.product.filteredhatebu.util;
+package jp.gcreate.product.filteredhatebu.ui.common;
 
 import android.annotation.TargetApi;
 import android.content.Context;

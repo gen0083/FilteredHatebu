@@ -1,4 +1,4 @@
-package jp.gcreate.product.filteredhatebu.recycler;
+package jp.gcreate.product.filteredhatebu.ui.feeddetail;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -12,20 +12,21 @@ import java.util.List;
 import jp.gcreate.product.filteredhatebu.R;
 import jp.gcreate.product.filteredhatebu.databinding.ItemEntryBookmarksBinding;
 import jp.gcreate.product.filteredhatebu.model.HatebuBookmark;
+import jp.gcreate.product.filteredhatebu.ui.common.DataBindingViewHolder;
 
 /**
  * Copyright 2016 G-CREATE
  */
 
-public class BookmarksAdapter extends RecyclerView.Adapter<DataBindingViewHolder<ItemEntryBookmarksBinding>> {
+public class BookmarkCommentsAdapter extends RecyclerView.Adapter<DataBindingViewHolder<ItemEntryBookmarksBinding>> {
     private final Context             context;
     private List<HatebuBookmark> list;
 
-    public BookmarksAdapter(Context context) {
+    public BookmarkCommentsAdapter(Context context) {
         this(context, new ArrayList<HatebuBookmark>());
     }
 
-    public BookmarksAdapter(Context context, List<HatebuBookmark> list) {
+    public BookmarkCommentsAdapter(Context context, List<HatebuBookmark> list) {
         this.context = context;
         this.list = list;
     }

@@ -1,4 +1,4 @@
-package jp.gcreate.product.filteredhatebu.util;
+package jp.gcreate.product.filteredhatebu.ui.common;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -10,6 +10,8 @@ import org.junit.runner.RunWith;
 import org.threeten.bp.Clock;
 import org.threeten.bp.Instant;
 import org.threeten.bp.ZoneId;
+
+import jp.gcreate.product.filteredhatebu.ui.common.StringUtil;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;

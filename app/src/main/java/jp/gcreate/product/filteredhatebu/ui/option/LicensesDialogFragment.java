@@ -1,4 +1,4 @@
-package jp.gcreate.product.filteredhatebu.fragment;
+package jp.gcreate.product.filteredhatebu.ui.option;
 
 import android.app.Dialog;
 import android.content.Context;

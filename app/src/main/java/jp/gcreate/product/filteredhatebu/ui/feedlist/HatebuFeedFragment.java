@@ -1,4 +1,4 @@
-package jp.gcreate.product.filteredhatebu.fragment;
+package jp.gcreate.product.filteredhatebu.ui.feedlist;
 
 import android.app.Activity;
 import android.content.Context;
@@ -17,14 +17,13 @@ import javax.inject.Inject;
 
 import jp.gcreate.product.filteredhatebu.CustomApplication;
 import jp.gcreate.product.filteredhatebu.R;
-import jp.gcreate.product.filteredhatebu.activity.HatebuFeedDetailActivity;
+import jp.gcreate.product.filteredhatebu.ui.feeddetail.HatebuFeedDetailActivity;
 import jp.gcreate.product.filteredhatebu.api.FeedsBurnerClienet;
 import jp.gcreate.product.filteredhatebu.api.HatenaClient;
 import jp.gcreate.product.filteredhatebu.data.FilterRepository;
 import jp.gcreate.product.filteredhatebu.databinding.FragmentHatebuFeedBinding;
 import jp.gcreate.product.filteredhatebu.model.HatebuFeed;
 import jp.gcreate.product.filteredhatebu.model.HatebuFeedItem;
-import jp.gcreate.product.filteredhatebu.recycler.FeedAdapter;
 import rx.Observable;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;

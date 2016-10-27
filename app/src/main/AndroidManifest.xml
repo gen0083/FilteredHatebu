@@ -19,7 +19,7 @@
             android:value="76ab1dc0e514cde7dcadf75f1060be889e25ee39"
             />
         <activity
-            android:name=".activity.HatebuFeedActivity"
+            android:name=".ui.feedlist.HatebuFeedActivity"
             android:theme="@style/AppTheme.NoActionBar"
             >
             <intent-filter>
@@ -29,9 +29,9 @@
             </intent-filter>
 
         </activity>
-        <activity android:name=".activity.HatebuFeedDetailActivity">
+        <activity android:name=".ui.feeddetail.HatebuFeedDetailActivity">
         </activity>
-        <activity android:name=".activity.FilterEditActivity">
+        <activity android:name=".ui.editfilter.FilterEditActivity">
         </activity>
     </application>
 

@@ -1,4 +1,4 @@
-package jp.gcreate.product.filteredhatebu.activity;
+package jp.gcreate.product.filteredhatebu.ui.editfilter;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
@@ -17,7 +17,6 @@ import jp.gcreate.product.filteredhatebu.data.FilterRepository;
 import jp.gcreate.product.filteredhatebu.databinding.ActivityFilterEditBinding;
 import jp.gcreate.product.filteredhatebu.di.ActivityComponent;
 import jp.gcreate.product.filteredhatebu.model.UriFilter;
-import jp.gcreate.product.filteredhatebu.recycler.FilterAdapter;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;

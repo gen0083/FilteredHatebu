@@ -1,4 +1,4 @@
-package jp.gcreate.product.filteredhatebu.activity;
+package jp.gcreate.product.filteredhatebu.ui.feedlist;
 
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
@@ -18,8 +18,8 @@ import jp.gcreate.product.filteredhatebu.R;
 import jp.gcreate.product.filteredhatebu.data.FilterRepository;
 import jp.gcreate.product.filteredhatebu.databinding.ActivityFeedBinding;
 import jp.gcreate.product.filteredhatebu.di.ActivityComponent;
-import jp.gcreate.product.filteredhatebu.fragment.HatebuFeedFragmentsAdapter;
-import jp.gcreate.product.filteredhatebu.fragment.LicensesDialogFragment;
+import jp.gcreate.product.filteredhatebu.ui.option.LicensesDialogFragment;
+import jp.gcreate.product.filteredhatebu.ui.editfilter.FilterEditActivity;
 
 /**
  * Copyright 2016 G-CREATE

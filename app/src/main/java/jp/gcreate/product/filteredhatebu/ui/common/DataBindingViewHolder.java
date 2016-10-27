@@ -1,4 +1,4 @@
-package jp.gcreate.product.filteredhatebu.recycler;
+package jp.gcreate.product.filteredhatebu.ui.common;
 
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;

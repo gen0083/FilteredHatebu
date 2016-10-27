@@ -1,4 +1,4 @@
-package jp.gcreate.product.filteredhatebu.activity;
+package jp.gcreate.product.filteredhatebu.ui.feedlist;
 
 
 import android.content.Context;
@@ -24,6 +24,7 @@ import org.junit.runner.RunWith;
 
 import jp.gcreate.product.filteredhatebu.R;
 import jp.gcreate.product.filteredhatebu.di.AppDataModule;
+import jp.gcreate.product.filteredhatebu.ui.feedlist.HatebuFeedActivity;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.Espresso.pressBack;

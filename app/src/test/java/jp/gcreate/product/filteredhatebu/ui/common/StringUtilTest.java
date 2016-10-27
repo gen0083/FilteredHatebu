@@ -1,8 +1,10 @@
-package jp.gcreate.product.filteredhatebu.util;
+package jp.gcreate.product.filteredhatebu.ui.common;
 
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
+
+import jp.gcreate.product.filteredhatebu.ui.common.StringUtil;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;

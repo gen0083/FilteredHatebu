@@ -6,7 +6,7 @@
     >
 
     <data>
-        <import type="jp.gcreate.product.filteredhatebu.util.StringUtil" />
+        <import type="jp.gcreate.product.filteredhatebu.ui.common.StringUtil" />
         <variable
             name="bookmark"
             type="jp.gcreate.product.filteredhatebu.model.HatebuBookmark"

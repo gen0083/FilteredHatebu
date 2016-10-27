@@ -1,10 +1,12 @@
-package jp.gcreate.product.filteredhatebu.util;
+package jp.gcreate.product.filteredhatebu.ui.common;
 
 import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 import java.util.List;
+
+import jp.gcreate.product.filteredhatebu.ui.common.FilterGenerator;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -17,7 +19,8 @@ public class FilterGeneratorTest {
     public static class フィルタ候補生成 {
         @Test
         public void ホスト部2つサブディレクトリあり() {
-            List<String> actual = FilterGenerator.generateFilterCandidate("http://test.com/user/category/test");
+            List<String> actual = FilterGenerator
+                    .generateFilterCandidate("http://test.com/user/category/test");
             assertThat(actual.size(), is(2));
             assertThat(actual.get(0), is("test.com/"));
             assertThat(actual.get(1), is("test.com/user/"));

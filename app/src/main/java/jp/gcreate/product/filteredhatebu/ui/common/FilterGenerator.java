@@ -1,4 +1,4 @@
-package jp.gcreate.product.filteredhatebu.util;
+package jp.gcreate.product.filteredhatebu.ui.common;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package jp.gcreate.product.filteredhatebu.util;
+package jp.gcreate.product.filteredhatebu.ui.common;
 
 import android.content.Context;
 import android.support.annotation.VisibleForTesting;
