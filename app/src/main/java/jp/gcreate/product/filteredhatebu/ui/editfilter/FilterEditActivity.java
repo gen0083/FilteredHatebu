@@ -7,29 +7,22 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 
-import java.util.List;
-
 import javax.inject.Inject;
 
 import jp.gcreate.product.filteredhatebu.CustomApplication;
 import jp.gcreate.product.filteredhatebu.R;
-import jp.gcreate.product.filteredhatebu.data.FilterRepository;
 import jp.gcreate.product.filteredhatebu.databinding.ActivityFilterEditBinding;
 import jp.gcreate.product.filteredhatebu.di.ActivityComponent;
-import jp.gcreate.product.filteredhatebu.model.UriFilter;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-import rx.schedulers.Schedulers;
 
 /**
  * Copyright 2016 G-CREATE
  */
 
-public class FilterEditActivity extends AppCompatActivity implements FilterAdapter.DeleteCallback {
+public class FilterEditActivity extends AppCompatActivity implements FilterEditContract.View {
     private ActivityFilterEditBinding binding;
     private ActivityComponent component;
     @Inject
-    FilterRepository filterRepository;
+    FilterEditPresenter presenter;
     private FilterAdapter filterAdapter;
 
     @Override
@@ -44,24 +37,41 @@ public class FilterEditActivity extends AppCompatActivity implements FilterAdapt
     }
 
     private void setupRecyclerView() {
-        filterAdapter = new FilterAdapter(this);
+        filterAdapter = new FilterAdapter(this, presenter);
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerView.setAdapter(filterAdapter);
         binding.recyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-        filterRepository.getFilterAll()
-                        .subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new Action1<List<UriFilter>>() {
-                            @Override
-                            public void call(List<UriFilter> uriFilters) {
-                                filterAdapter.setList(uriFilters);
-                            }
-                        });
-
     }
 
     @Override
-    public void onDelete(String delete) {
-        filterRepository.deleteFilter(delete);
+    protected void onResume() {
+        super.onResume();
+        presenter.onAttach(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        presenter.onDetach();
+    }
+
+    @Override
+    public void notifyDatasetChanged() {
+        filterAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void notifyItemChanged(int position) {
+        filterAdapter.notifyItemChanged(position);
+    }
+
+    @Override
+    public void notifyItemRemoved(int position) {
+        filterAdapter.notifyItemRemoved(position);
+    }
+
+    @Override
+    public void notifyItemInserted(int position) {
+        filterAdapter.notifyItemInserted(position);
     }
 }

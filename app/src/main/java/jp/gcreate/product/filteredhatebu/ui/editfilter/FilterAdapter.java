@@ -12,12 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import jp.gcreate.product.filteredhatebu.R;
 import jp.gcreate.product.filteredhatebu.databinding.ItemFilterBinding;
-import jp.gcreate.product.filteredhatebu.model.UriFilter;
 import jp.gcreate.product.filteredhatebu.ui.common.DataBindingViewHolder;
 
 /**
@@ -26,20 +22,14 @@ import jp.gcreate.product.filteredhatebu.ui.common.DataBindingViewHolder;
 
 public class FilterAdapter extends RecyclerView.Adapter<DataBindingViewHolder<ItemFilterBinding>> {
     private Context         context;
-    private List<UriFilter> list;
     private RecyclerView    recyclerView;
     private ItemTouchHelper touchHelper;
-    private DeleteCallback callback;
+    private FilterEditPresenter presenter;
 
-    public FilterAdapter(Context context) {
+    public FilterAdapter(Context context, FilterEditPresenter presenter) {
         this.context = context;
         touchHelper = new SwipeDismissTouchHelper();
-        list = new ArrayList<>();
-        if (context instanceof DeleteCallback) {
-            callback = (DeleteCallback) context;
-        } else {
-            throw new RuntimeException(context + " must implement DeleteCallback.");
-        }
+        this.presenter = presenter;
     }
 
     @Override
@@ -51,19 +41,12 @@ public class FilterAdapter extends RecyclerView.Adapter<DataBindingViewHolder<It
 
     @Override
     public void onBindViewHolder(DataBindingViewHolder<ItemFilterBinding> holder, int position) {
-        ItemFilterBinding binding = holder.getBinding();
-        UriFilter         item    = list.get(position);
-        binding.setItem(item);
+        presenter.onBindViewHolder(holder, position);
     }
 
     @Override
     public int getItemCount() {
-        return list.size();
-    }
-
-    public void setList(List<UriFilter> list) {
-        this.list = list;
-        notifyDataSetChanged();
+        return presenter.getItemCount();
     }
 
     @Override
@@ -78,10 +61,6 @@ public class FilterAdapter extends RecyclerView.Adapter<DataBindingViewHolder<It
         super.onDetachedFromRecyclerView(recyclerView);
         touchHelper.attachToRecyclerView(null);
         this.recyclerView = null;
-    }
-
-    public interface DeleteCallback {
-        void onDelete(String delete);
     }
 
     private class SwipeDismissTouchHelper extends ItemTouchHelper {
@@ -116,12 +95,7 @@ public class FilterAdapter extends RecyclerView.Adapter<DataBindingViewHolder<It
                 @Override
                 public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
                     int position = viewHolder.getAdapterPosition();
-                    String key = list.get(position).getFilter();
-                    list.remove(position);
-                    if (callback != null) {
-                        callback.onDelete(key);
-                    }
-                    notifyItemRemoved(position);
+                    presenter.delete(position);
                 }
 
                 @Override
