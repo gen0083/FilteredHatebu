@@ -17,38 +17,27 @@ import javax.inject.Inject;
 
 import jp.gcreate.product.filteredhatebu.CustomApplication;
 import jp.gcreate.product.filteredhatebu.R;
-import jp.gcreate.product.filteredhatebu.ui.feeddetail.HatebuFeedDetailActivity;
-import jp.gcreate.product.filteredhatebu.api.FeedsBurnerClienet;
-import jp.gcreate.product.filteredhatebu.api.HatenaClient;
-import jp.gcreate.product.filteredhatebu.data.FilterRepository;
 import jp.gcreate.product.filteredhatebu.databinding.FragmentHatebuFeedBinding;
-import jp.gcreate.product.filteredhatebu.model.HatebuFeed;
 import jp.gcreate.product.filteredhatebu.model.HatebuFeedItem;
-import rx.Observable;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-import rx.schedulers.Schedulers;
+import jp.gcreate.product.filteredhatebu.ui.feeddetail.HatebuFeedDetailActivity;
 import timber.log.Timber;
 
 /**
  * Copyright 2016 G-CREATE
  */
 
-public class HatebuFeedFragment extends Fragment implements FeedAdapter.OnRecycelerItemClickListener {
+public class HatebuFeedFragment extends Fragment implements HatebuFeedContract.Fragment.View {
     private static final String EXTRA_CATEGORY_KEY = "category_key";
-    private FragmentHatebuFeedBinding binding;
-    private String                    categoryKey;
-    private Subscription              serviceSubscription;
-    private FeedAdapter               adapter;
-    private LinearLayoutManager       layoutManager;
-    private int                       scrolledPosition;
+    private static final String EXTRA_SCROLLED_POSITION_KEY = "scrolled_position";
+    private FragmentHatebuFeedBinding                     binding;
+    private String                                        categoryKey;
+    private FeedAdapter                                   adapter;
+    private LinearLayoutManager                           layoutManager;
+    private int                                           scrolledPosition;
     @Inject
-    FeedsBurnerClienet hotentryService;
-    @Inject
-    HatenaClient.XmlService       categoryService;
-    @Inject
-    FilterRepository   filterRepository;
+            HatebuFeedActivityPresenter activityPresenter;
+    private HatebuFeedContract.Fragment.FragmentPresenter presenter;
+
 
     public static HatebuFeedFragment createInstance(String category) {
         HatebuFeedFragment f    = new HatebuFeedFragment();
@@ -64,6 +53,13 @@ public class HatebuFeedFragment extends Fragment implements FeedAdapter.OnRecyce
         Timber.d("%s onAttach to %s", this.toString(), context.toString());
         if (context instanceof Activity) {
             CustomApplication.getActivityComponent((Activity) context).inject(this);
+            Bundle args = getArguments();
+            if (args.containsKey(EXTRA_CATEGORY_KEY)) {
+                categoryKey = args.getString(EXTRA_CATEGORY_KEY);
+            } else {
+                throw new RuntimeException("This fragment must set category key.");
+            }
+            presenter = activityPresenter.getOrCreateFragmentPresenter(categoryKey);
         }
     }
 
@@ -94,66 +90,26 @@ public class HatebuFeedFragment extends Fragment implements FeedAdapter.OnRecyce
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         Timber.d("%s onActivityCreated", this);
-        Bundle args = getArguments();
-        if (args.containsKey(EXTRA_CATEGORY_KEY)) {
-            categoryKey = args.getString(EXTRA_CATEGORY_KEY);
-        } else {
-            throw new RuntimeException("This fragment must set category key.");
-        }
         setupRecyclerView();
+        if (savedInstanceState != null) {
+            scrolledPosition = savedInstanceState.getInt(EXTRA_SCROLLED_POSITION_KEY, 0);
+        }
     }
 
     private void setupRecyclerView() {
         Context context = getContext();
-        adapter = new FeedAdapter(context, filterRepository);
-        adapter.setOnRecyclerItemClickListener(this);
+        adapter = new FeedAdapter(context, presenter);
         layoutManager = new LinearLayoutManager(context);
         binding.recyclerView.setLayoutManager(layoutManager);
         binding.recyclerView.setAdapter(adapter);
-        binding.recyclerView.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.VERTICAL));
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        Timber.d("%s onStart", this.toString());
-        Observable<HatebuFeed> feed;
-        if (categoryKey.equals("")) {
-            feed = hotentryService.getHotentryFeed();
-        } else {
-            feed = categoryService.getCategoryFeed(categoryKey);
-        }
-        serviceSubscription = feed
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<HatebuFeed>() {
-                    @Override
-                    public void call(HatebuFeed hatebuFeed) {
-                        // HatebuFeedはレスポンス本体で、実際に必要な各記事のリストはgetItemListで取得する
-                        Timber.d("feed got: %d", hatebuFeed.getItemList().size());
-                        adapter.setItemList(hatebuFeed.getItemList());
-                    }
-                }, new Action1<Throwable>() {
-                    @Override
-                    public void call(Throwable throwable) {
-                        Timber.e("error %s", throwable.getMessage());
-                        throwable.printStackTrace();
-                    }
-                });
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        Timber.d("%s onStop", this.toString());
-        if (serviceSubscription != null && !serviceSubscription.isUnsubscribed()) {
-            serviceSubscription.unsubscribe();
-        }
+        binding.recyclerView.addItemDecoration(
+                new DividerItemDecoration(context, DividerItemDecoration.VERTICAL));
     }
 
     @Override
     public void onResume() {
         super.onResume();
+        presenter.onAttach(this);
         layoutManager.scrollToPosition(scrolledPosition);
     }
 
@@ -161,11 +117,48 @@ public class HatebuFeedFragment extends Fragment implements FeedAdapter.OnRecyce
     public void onPause() {
         super.onPause();
         scrolledPosition = layoutManager.findFirstVisibleItemPosition();
+        presenter.onDetach();
     }
 
     @Override
-    public void onClick(FeedAdapter adapter, int position, HatebuFeedItem item) {
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(EXTRA_SCROLLED_POSITION_KEY, scrolledPosition);
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
+
+    @Override
+    public void showNetworkError() {
+        Timber.e("Network error");
+    }
+
+    @Override
+    public void showNewContentsDoseNotExist() {
+        Timber.d("New contents dose not exist.");
+    }
+
+    @Override
+    public void launchFeedDetailActivity(HatebuFeedItem item) {
         Intent i = HatebuFeedDetailActivity.createIntent(getActivity(), item);
         getActivity().startActivity(i);
+    }
+
+    @Override
+    public void notifyDataSetChanged() {
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void notifyItemChanged(int position) {
+        adapter.notifyItemChanged(position);
     }
 }

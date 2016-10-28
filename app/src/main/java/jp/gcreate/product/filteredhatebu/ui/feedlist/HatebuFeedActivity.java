@@ -8,29 +8,26 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.inject.Inject;
 
 import jp.gcreate.product.filteredhatebu.CustomApplication;
 import jp.gcreate.product.filteredhatebu.R;
-import jp.gcreate.product.filteredhatebu.data.FilterRepository;
 import jp.gcreate.product.filteredhatebu.databinding.ActivityFeedBinding;
 import jp.gcreate.product.filteredhatebu.di.ActivityComponent;
-import jp.gcreate.product.filteredhatebu.ui.option.LicensesDialogFragment;
 import jp.gcreate.product.filteredhatebu.ui.editfilter.FilterEditActivity;
+import jp.gcreate.product.filteredhatebu.ui.option.LicensesDialogFragment;
 
 /**
  * Copyright 2016 G-CREATE
  */
 
-public class HatebuFeedActivity extends AppCompatActivity {
+public class HatebuFeedActivity extends AppCompatActivity implements HatebuFeedContract.Activity.View {
     private static final String TAG_LICENSE = "license";
     private ActivityFeedBinding binding;
     private ActivityComponent component;
+    private HatebuFeedFragmentsAdapter adapter;
     @Inject
-    FilterRepository filterRepository;
+    HatebuFeedActivityPresenter presenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -42,13 +39,7 @@ public class HatebuFeedActivity extends AppCompatActivity {
 
         setSupportActionBar(binding.toolbar);
 
-        List<HatebuFeedFragmentsAdapter.HatebuCategory> categoryKeys = new ArrayList<>();
-        categoryKeys.add(new HatebuFeedFragmentsAdapter.HatebuCategory("", "総合"));
-        categoryKeys.add(new HatebuFeedFragmentsAdapter.HatebuCategory("general", "一般"));
-        categoryKeys.add(new HatebuFeedFragmentsAdapter.HatebuCategory("it", "テクノロジー"));
-        categoryKeys.add(new HatebuFeedFragmentsAdapter.HatebuCategory("life", "暮らし"));
-        categoryKeys.add(new HatebuFeedFragmentsAdapter.HatebuCategory("game", "アニメとゲーム"));
-        HatebuFeedFragmentsAdapter adapter = new HatebuFeedFragmentsAdapter(getSupportFragmentManager(), categoryKeys);
+        adapter = new HatebuFeedFragmentsAdapter(getSupportFragmentManager(), presenter);
         binding.viewPager.setAdapter(adapter);
         binding.viewPagerTitle.setupWithViewPager(binding.viewPager);
     }
@@ -56,6 +47,13 @@ public class HatebuFeedActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+        presenter.onAttach(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        presenter.onDetach();
     }
 
     @Override
@@ -79,5 +77,20 @@ public class HatebuFeedActivity extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
+
+    @Override
+    public void notifyDataSetChanged() {
+        adapter.notifyDataSetChanged();
     }
 }

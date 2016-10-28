@@ -1,7 +1,5 @@
 package jp.gcreate.product.filteredhatebu.ui.feedlist;
 
-import android.support.v7.widget.RecyclerView;
-
 import jp.gcreate.product.filteredhatebu.model.HatebuFeedItem;
 
 /**
@@ -13,14 +11,16 @@ public interface HatebuFeedContract {
         interface View {
             void showLoading();
             void hideLoading();
-            void showCategories();
+            void notifyDataSetChanged();
         }
 
         interface ActivityPresenter {
-            void loadCategories(View view);
-            Fragment.Presenter getOrCreateFragmentPresenter(String key);
+            void onAttach(View view);
+            void onDetach();
+            // For fragments in ViewPager
+            Fragment.FragmentPresenter getOrCreateFragmentPresenter(String key);
             // PagerAdapter
-            Fragment getItem(int position);
+            android.support.v4.app.Fragment getItem(int position);
             String getPageTitle(int position);
             int getCount();
         }
@@ -28,16 +28,22 @@ public interface HatebuFeedContract {
 
     interface Fragment {
         interface View {
-            void showList();
             void showLoading();
             void hideLoading();
+            void showNetworkError();
+            void showNewContentsDoseNotExist();
+            void launchFeedDetailActivity(HatebuFeedItem item);
+            // RecyclerView
+            void notifyDataSetChanged();
+            void notifyItemChanged(int position);
         }
 
-        interface Presenter {
-            void onDisplay(View view);
+        interface FragmentPresenter {
+            void onAttach(View view);
+            void onDetach();
+            void reloadList();
             // RecyclerAdapter
             HatebuFeedItem getItem(int position);
-            <T extends RecyclerView.ViewHolder> void onBindViewHolder(T holder, int position);
             int getItemCount();
             void onClick(int position);
         }
