@@ -1,7 +1,13 @@
 Filtered Hatebu
 ===============
 
+個人的な勉強・練習用に作ったはてブリーダーアプリです。アプリはGoogle Playで公開しています。
+
+<a href='https://play.google.com/store/apps/details?id=jp.gcreate.product.filteredhatebu&utm_source=global_co&utm_medium=prtnr&utm_content=Mar2515&utm_campaign=PartBadge&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img width="200" alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'/></a>
+
 ## Libraries
+
+使用しているライブラリ（詳しくはapp/build.gradleを確認してください）
 
 - [Dagger2](https://github.com/google/dagger)
 - [Gson](https://github.com/google/gson)
