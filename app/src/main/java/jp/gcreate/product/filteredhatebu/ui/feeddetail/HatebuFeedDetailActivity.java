@@ -53,7 +53,7 @@ public class HatebuFeedDetailActivity extends AppCompatActivity
     private BookmarkCommentsAdapter           adapter;
     private BottomSheetBehavior<RecyclerView> bottomSheetBehavior;
     @Inject
-    HatenaClient     service;
+    HatenaClient.JsonService     service;
     @Inject
     FilterRepository filterRepository;
 

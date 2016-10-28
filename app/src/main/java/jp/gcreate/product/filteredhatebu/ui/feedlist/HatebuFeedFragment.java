@@ -46,7 +46,7 @@ public class HatebuFeedFragment extends Fragment implements FeedAdapter.OnRecyce
     @Inject
     FeedsBurnerClienet hotentryService;
     @Inject
-    HatenaClient       categoryService;
+    HatenaClient.XmlService       categoryService;
     @Inject
     FilterRepository   filterRepository;
 

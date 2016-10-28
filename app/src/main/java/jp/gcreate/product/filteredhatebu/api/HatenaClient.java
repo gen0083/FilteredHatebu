@@ -15,12 +15,16 @@ import rx.Observable;
 public interface HatenaClient {
     public static final String BASE_URL     = "https://b.hatena.ne.jp/";
 
-    @GET("entry/json/")
-    Observable<HatebuEntry> getEntry(@Query("url") String url);
+    interface JsonService {
+        @GET("entry/json/")
+        Observable<HatebuEntry> getEntry(@Query("url") String url);
 
-    @GET("entry/jsonlite/")
-    Call<HatebuEntry> getEntryNoRelated(@Query("url") String url);
+        @GET("entry/jsonlite/")
+        Call<HatebuEntry> getEntryNoRelated(@Query("url") String url);
+    }
 
-    @GET("hotentry/{category}.rss")
-    Observable<HatebuFeed> getCategoryFeed(@Path("category") String category);
+    interface XmlService {
+        @GET("hotentry/{category}.rss")
+        Observable<HatebuFeed> getCategoryFeed(@Path("category") String category);
+    }
 }

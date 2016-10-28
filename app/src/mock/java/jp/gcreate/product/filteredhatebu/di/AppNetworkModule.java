@@ -44,13 +44,25 @@ public class AppNetworkModule {
 
     @Provides
     @AppScope
-    public HatenaClient provideHatebuService(OkHttpClient client) {
+    public HatenaClient.JsonService provideHatebuJsonService(OkHttpClient client) {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(HatenaClient.BASE_URL)
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .client(client)
                 .build();
-        return retrofit.create(HatenaClient.class);
+        return retrofit.create(HatenaClient.JsonService.class);
+    }
+
+    @Provides
+    @AppScope
+    public HatenaClient.XmlService provideHatebuXmlService(OkHttpClient client) {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(HatenaClient.BASE_URL)
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addConverterFactory(SimpleXmlConverterFactory.create())
+                .client(client)
+                .build();
+        return retrofit.create(HatenaClient.XmlService.class);
     }
 }
