@@ -10,6 +10,7 @@ import jp.gcreate.product.filteredhatebu.api.MockInterceptor;
 import jp.gcreate.product.filteredhatebu.di.Scope.AppScope;
 import jp.gcreate.product.filteredhatebu.di.qualifier.ApplicationContext;
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -24,9 +25,11 @@ public class AppNetworkModule {
 
     @Provides
     @AppScope
-    public OkHttpClient provideOkHttpClient(@ApplicationContext Context context) {
+    public OkHttpClient provideOkHttpClient(@ApplicationContext Context context,
+                                            HttpLoggingInterceptor interceptor) {
         OkHttpClient.Builder builder = new OkHttpClient.Builder()
-                             .addInterceptor(new MockInterceptor(context));
+                .addInterceptor(interceptor)
+                .addInterceptor(new MockInterceptor(context));
         return builder.build();
     }
 

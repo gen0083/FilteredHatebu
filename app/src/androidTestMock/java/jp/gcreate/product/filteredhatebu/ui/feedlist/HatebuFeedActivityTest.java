@@ -24,7 +24,6 @@ import org.junit.runner.RunWith;
 
 import jp.gcreate.product.filteredhatebu.R;
 import jp.gcreate.product.filteredhatebu.di.AppDataModule;
-import jp.gcreate.product.filteredhatebu.ui.feedlist.HatebuFeedActivity;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.Espresso.pressBack;
@@ -139,6 +138,70 @@ public class HatebuFeedActivityTest {
                               1),
                       isDisplayed()));
         textView2.check(doesNotExist());
+    }
+
+    @Test
+    public void カテゴリフィードが表示できる() {
+        onView(allOf(withText("テクノロジー"), isDisplayed())).perform(click());
+
+        ViewInteraction textView = onView(
+                allOf(withId(R.id.title),
+                      withText("category test"),
+                      childAtPosition(
+                              childAtPosition(
+                                      IsInstanceOf.<View>instanceOf(
+                                              android.widget.LinearLayout.class),
+                                      0),
+                              1),
+                      isDisplayed()));
+        textView.check(
+                matches(withText("category test")));
+    }
+
+    @Test
+    public void フィルタ追加後カテゴリの記事も非表示になる() {
+        onView(allOf(withId(R.id.recycler_view), isDisplayed()))
+                .perform(actionOnItemAtPosition(0, click()));
+
+        onView(
+                allOf(withId(R.id.add_filter_button), withText("フィルタを追加"),
+                      isDisplayed()))
+                .perform(click());
+
+        ViewInteraction appCompatTextView = onView(
+                allOf(withId(android.R.id.text1), withText("test.com/"),
+                      childAtPosition(
+                              allOf(withClassName(
+                                      is("com.android.internal.app.AlertController$RecycleListView")),
+                                    withParent(withClassName(is("android.widget.FrameLayout")))),
+                              0),
+                      isDisplayed()));
+        appCompatTextView.perform(click());
+
+        pressBack();
+
+        onView(allOf(withId(R.id.title), withText("test1"),
+                      childAtPosition(
+                              childAtPosition(
+                                      IsInstanceOf.<View>instanceOf(
+                                              android.widget.LinearLayout.class),
+                                      0),
+                              1),
+                      isDisplayed()))
+                .check(doesNotExist());
+
+        onView(allOf(withText("テクノロジー"), isDisplayed())).perform(click());
+
+        onView(allOf(withId(R.id.title),
+                     withText("category test"),
+                     childAtPosition(
+                             childAtPosition(
+                                     IsInstanceOf.<View>instanceOf(
+                                             android.widget.LinearLayout.class),
+                                     0),
+                             1),
+                     isDisplayed()))
+                .check(doesNotExist());
     }
 
     private static Matcher<View> childAtPosition(
