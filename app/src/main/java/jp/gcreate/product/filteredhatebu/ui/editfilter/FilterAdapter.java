@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 
 import jp.gcreate.product.filteredhatebu.R;
 import jp.gcreate.product.filteredhatebu.databinding.ItemFilterBinding;
+import jp.gcreate.product.filteredhatebu.model.UriFilter;
 import jp.gcreate.product.filteredhatebu.ui.common.DataBindingViewHolder;
 
 /**
@@ -41,7 +42,17 @@ public class FilterAdapter extends RecyclerView.Adapter<DataBindingViewHolder<It
 
     @Override
     public void onBindViewHolder(DataBindingViewHolder<ItemFilterBinding> holder, int position) {
-        presenter.onBindViewHolder(holder, position);
+        ItemFilterBinding binding   = holder.getBinding();
+        UriFilter         filter    = presenter.getItem(position);
+        boolean           isDeleted = presenter.isDeleted(position);
+        binding.setItem(filter);
+        binding.setIsDeleted(isDeleted);
+        binding.cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                presenter.undoDelete();
+            }
+        });
     }
 
     @Override

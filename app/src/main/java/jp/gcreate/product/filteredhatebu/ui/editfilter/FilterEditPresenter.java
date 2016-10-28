@@ -1,17 +1,13 @@
 package jp.gcreate.product.filteredhatebu.ui.editfilter;
 
-import android.view.View;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import jp.gcreate.product.filteredhatebu.data.FilterRepository;
-import jp.gcreate.product.filteredhatebu.databinding.ItemFilterBinding;
 import jp.gcreate.product.filteredhatebu.di.Scope.ActivityScope;
 import jp.gcreate.product.filteredhatebu.model.UriFilter;
-import jp.gcreate.product.filteredhatebu.ui.common.DataBindingViewHolder;
 import jp.gcreate.product.filteredhatebu.ui.common.DeletedITem;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -48,7 +44,9 @@ public class FilterEditPresenter implements FilterEditContract.Presenter {
         this.view = view;
         if (!isInitialize) {
             updateList();
+            isInitialize = true;
         }
+        view.notifyDatasetChanged();
     }
 
     private void updateList() {
@@ -107,17 +105,12 @@ public class FilterEditPresenter implements FilterEditContract.Presenter {
     }
 
     @Override
-    public void onBindViewHolder(DataBindingViewHolder<ItemFilterBinding> holder, int position) {
-        ItemFilterBinding binding = holder.getBinding();
-        UriFilter filter = list.get(position);
-        boolean isDeleted = (deletedItem != null && deletedItem.getPosition() == position);
-        binding.setItem(filter);
-        binding.setIsDeleted(isDeleted);
-        binding.cancelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                undoDelete();
-            }
-        });
+    public UriFilter getItem(int position) {
+        return list.get(position);
+    }
+
+    @Override
+    public boolean isDeleted(int position) {
+        return (deletedItem != null && deletedItem.getPosition() == position);
     }
 }

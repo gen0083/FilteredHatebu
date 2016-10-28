@@ -1,7 +1,6 @@
 package jp.gcreate.product.filteredhatebu.ui.editfilter;
 
-import jp.gcreate.product.filteredhatebu.databinding.ItemFilterBinding;
-import jp.gcreate.product.filteredhatebu.ui.common.DataBindingViewHolder;
+import jp.gcreate.product.filteredhatebu.model.UriFilter;
 
 /**
  * Copyright 2016 G-CREATE
@@ -24,6 +23,7 @@ public interface FilterEditContract {
 
         // RecyclerView
         int getItemCount();
-        void onBindViewHolder(DataBindingViewHolder<ItemFilterBinding> holder, int position);
+        UriFilter getItem(int position);
+        boolean isDeleted(int position);
     }
 }
