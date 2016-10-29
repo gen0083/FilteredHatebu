@@ -109,6 +109,7 @@ public class HatebuFeedFragment extends Fragment implements HatebuFeedContract.F
     @Override
     public void onResume() {
         super.onResume();
+        Timber.d("%s[category:%s] onResume presenter:%s", this, categoryKey, presenter);
         presenter.onAttach(this);
         layoutManager.scrollToPosition(scrolledPosition);
     }
@@ -116,6 +117,7 @@ public class HatebuFeedFragment extends Fragment implements HatebuFeedContract.F
     @Override
     public void onPause() {
         super.onPause();
+        Timber.d("%s onPause", this);
         scrolledPosition = layoutManager.findFirstVisibleItemPosition();
         presenter.onDetach();
     }
