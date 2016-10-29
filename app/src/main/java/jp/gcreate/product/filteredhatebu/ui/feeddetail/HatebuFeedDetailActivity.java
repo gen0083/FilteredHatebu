@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.VisibleForTesting;
 import android.support.customtabs.CustomTabsIntent;
 import android.support.design.widget.BottomSheetBehavior;
 import android.support.design.widget.Snackbar;
@@ -166,6 +167,11 @@ public class HatebuFeedDetailActivity extends AppCompatActivity
     private void openFilterDialog() {
         SelectFilterDialogFragment f = SelectFilterDialogFragment.newInstance(item.getLink());
         f.show(getSupportFragmentManager(), "dialog");
+    }
+
+    @VisibleForTesting
+    BookmarkCommentsAdapter getAdapter() {
+        return adapter;
     }
 
     @Override
