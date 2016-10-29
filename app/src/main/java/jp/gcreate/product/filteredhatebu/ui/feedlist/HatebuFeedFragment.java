@@ -50,15 +50,15 @@ public class HatebuFeedFragment extends Fragment implements HatebuFeedContract.F
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        Timber.d("%s onAttach to %s", this.toString(), context.toString());
+        Bundle args = getArguments();
+        if (args.containsKey(EXTRA_CATEGORY_KEY)) {
+            categoryKey = args.getString(EXTRA_CATEGORY_KEY);
+        } else {
+            throw new RuntimeException("This fragment must set category key.");
+        }
+        Timber.d("%s[category:%s] onAttach to %s", this, categoryKey, context.toString());
         if (context instanceof Activity) {
             CustomApplication.getActivityComponent((Activity) context).inject(this);
-            Bundle args = getArguments();
-            if (args.containsKey(EXTRA_CATEGORY_KEY)) {
-                categoryKey = args.getString(EXTRA_CATEGORY_KEY);
-            } else {
-                throw new RuntimeException("This fragment must set category key.");
-            }
             presenter = activityPresenter.getOrCreateFragmentPresenter(categoryKey);
         }
     }
@@ -66,14 +66,14 @@ public class HatebuFeedFragment extends Fragment implements HatebuFeedContract.F
     @Override
     public void onDetach() {
         super.onDetach();
-        Timber.d("%s onDetach", this.toString());
+        Timber.d("%s[category:%s] onDetach", this, categoryKey);
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        Timber.d("%s onCreateView", this);
+        Timber.d("%s[category:%s] onCreateView", this, categoryKey);
         binding = DataBindingUtil
                 .inflate(inflater, R.layout.fragment_hatebu_feed, container, false);
         return binding.getRoot();
@@ -82,14 +82,14 @@ public class HatebuFeedFragment extends Fragment implements HatebuFeedContract.F
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        Timber.d("%s onDestroyView", this);
+        Timber.d("%s[category:%s] onDestroyView", this, categoryKey);
         binding.unbind();
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        Timber.d("%s onActivityCreated", this);
+        Timber.d("%s[category:%s] onActivityCreated", this, categoryKey);
         setupRecyclerView();
         if (savedInstanceState != null) {
             scrolledPosition = savedInstanceState.getInt(EXTRA_SCROLLED_POSITION_KEY, 0);
@@ -109,7 +109,7 @@ public class HatebuFeedFragment extends Fragment implements HatebuFeedContract.F
     @Override
     public void onResume() {
         super.onResume();
-        Timber.d("%s[category:%s] onResume presenter:%s", this, categoryKey, presenter);
+        Timber.d("%s[category:%s] onResume presenter:%d", this, categoryKey, presenter.hashCode());
         presenter.onAttach(this);
         layoutManager.scrollToPosition(scrolledPosition);
     }
@@ -117,7 +117,7 @@ public class HatebuFeedFragment extends Fragment implements HatebuFeedContract.F
     @Override
     public void onPause() {
         super.onPause();
-        Timber.d("%s onPause", this);
+        Timber.d("%s[category:%s] onPause", this, categoryKey);
         scrolledPosition = layoutManager.findFirstVisibleItemPosition();
         presenter.onDetach();
     }
