@@ -6,9 +6,11 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.VisibleForTesting;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,15 +29,15 @@ import timber.log.Timber;
  */
 
 public class HatebuFeedFragment extends Fragment implements HatebuFeedContract.FragmentView {
-    private static final String EXTRA_CATEGORY_KEY = "category_key";
+    private static final String EXTRA_CATEGORY_KEY          = "category_key";
     private static final String EXTRA_SCROLLED_POSITION_KEY = "scrolled_position";
-    private FragmentHatebuFeedBinding                     binding;
-    private String                                        categoryKey;
-    private FeedAdapter                                   adapter;
-    private LinearLayoutManager                           layoutManager;
-    private int                                           scrolledPosition;
+    private FragmentHatebuFeedBinding binding;
+    private String                    categoryKey;
+    private FeedAdapter               adapter;
+    private LinearLayoutManager       layoutManager;
+    private int                       scrolledPosition;
     @Inject
-            HatebuFeedActivityPresenter activityPresenter;
+    HatebuFeedActivityPresenter parentPresenter;
     private HatebuFeedContract.ChildPresenter presenter;
 
 
@@ -59,7 +61,7 @@ public class HatebuFeedFragment extends Fragment implements HatebuFeedContract.F
         Timber.d("%s[category:%s] onAttach to %s", this, categoryKey, context.toString());
         if (context instanceof Activity) {
             CustomApplication.getActivityComponent((Activity) context).inject(this);
-            presenter = activityPresenter.getOrCreateFragmentPresenter(categoryKey);
+            presenter = parentPresenter.getOrCreateFragmentPresenter(categoryKey);
         }
     }
 
@@ -127,6 +129,11 @@ public class HatebuFeedFragment extends Fragment implements HatebuFeedContract.F
         Timber.d("%s[category:%s] onSaveInstanceState", this, categoryKey);
         scrolledPosition = layoutManager.findFirstVisibleItemPosition();
         outState.putInt(EXTRA_SCROLLED_POSITION_KEY, scrolledPosition);
+    }
+
+    @VisibleForTesting
+    RecyclerView getRecyclerView() {
+        return binding.recyclerView;
     }
 
     @Override

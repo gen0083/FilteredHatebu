@@ -1,12 +1,12 @@
 package jp.gcreate.product.filteredhatebu.ui.feedlist;
 
 
-import android.content.Context;
-import android.content.Intent;
-import android.support.test.InstrumentationRegistry;
+import android.support.test.espresso.Espresso;
+import android.support.test.espresso.IdlingResource;
 import android.support.test.espresso.ViewInteraction;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
+import android.support.v7.widget.RecyclerView;
 import android.test.suitebuilder.annotation.LargeTest;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +23,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import jp.gcreate.product.filteredhatebu.R;
-import jp.gcreate.product.filteredhatebu.di.AppDataModule;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.Espresso.pressBack;
@@ -42,23 +41,18 @@ import static org.hamcrest.Matchers.is;
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 public class HatebuFeedActivityTest {
-
     @Rule
     public ActivityTestRule<HatebuFeedActivity> mActivityTestRule = new ActivityTestRule<>(
-            HatebuFeedActivity.class, false, false);
+            HatebuFeedActivity.class);
 
     @Before
     public void setUp() {
-        // clear database before launch activity
-        Context context = InstrumentationRegistry.getTargetContext();
-        context.deleteDatabase(AppDataModule.ORMA_FILE);
-        Intent i = new Intent(context, HatebuFeedActivity.class);
-        mActivityTestRule.launchActivity(i);
+        mActivityTestRule.getActivity().presenter.initialzieFilterRepository();
     }
 
     @After
     public void tearDown() {
-        mActivityTestRule.getActivity().filterRepository.deleteAll();
+        mActivityTestRule.getActivity().presenter.initialzieFilterRepository();
     }
 
     @Test
@@ -97,6 +91,10 @@ public class HatebuFeedActivityTest {
 
     @Test
     public void サブディレクトリ込で登録後test1は表示test3は表示されない() {
+        // wait for item set
+        IdlingResource idlingResource = new ItemSetIdlingResource(mActivityTestRule.getActivity().getRecyclerView());
+        Espresso.registerIdlingResources(idlingResource);
+
         ViewInteraction recyclerView = onView(
                 allOf(withId(R.id.recycler_view), isDisplayed()));
         recyclerView.perform(actionOnItemAtPosition(2, click()));
@@ -138,6 +136,8 @@ public class HatebuFeedActivityTest {
                               1),
                       isDisplayed()));
         textView2.check(doesNotExist());
+
+        Espresso.unregisterIdlingResources(idlingResource);
     }
 
     @Test
@@ -160,6 +160,9 @@ public class HatebuFeedActivityTest {
 
     @Test
     public void フィルタ追加後カテゴリの記事も非表示になる() {
+        IdlingResource firstOne = new ItemSetIdlingResource(mActivityTestRule.getActivity().getRecyclerView());
+        Espresso.registerIdlingResources(firstOne);
+
         onView(allOf(withId(R.id.recycler_view), isDisplayed()))
                 .perform(actionOnItemAtPosition(0, click()));
 
@@ -192,6 +195,9 @@ public class HatebuFeedActivityTest {
 
         onView(allOf(withText("テクノロジー"), isDisplayed())).perform(click());
 
+        IdlingResource secondOne = new ItemSetIdlingResource(mActivityTestRule.getActivity().getRecyclerView());
+        Espresso.registerIdlingResources(secondOne);
+
         onView(allOf(withId(R.id.title),
                      withText("category test"),
                      childAtPosition(
@@ -202,6 +208,8 @@ public class HatebuFeedActivityTest {
                              1),
                      isDisplayed()))
                 .check(doesNotExist());
+
+        Espresso.unregisterIdlingResources(firstOne, secondOne);
     }
 
     private static Matcher<View> childAtPosition(
@@ -221,5 +229,37 @@ public class HatebuFeedActivityTest {
                        && view.equals(((ViewGroup) parent).getChildAt(position));
             }
         };
+    }
+
+    private class ItemSetIdlingResource implements IdlingResource {
+        private ResourceCallback callback;
+        private RecyclerView recyclerView;
+
+        public ItemSetIdlingResource(RecyclerView recyclerView) {
+            this.recyclerView = recyclerView;
+        }
+
+        @Override
+        public String getName() {
+            return this.getClass().getSimpleName() + recyclerView;
+        }
+
+        @Override
+        public boolean isIdleNow() {
+            boolean idle = isItemLoaded(recyclerView);
+            if (idle && callback != null) {
+                callback.onTransitionToIdle();
+            }
+            return idle;
+        }
+
+        @Override
+        public void registerIdleTransitionCallback(ResourceCallback callback) {
+            this.callback = callback;
+        }
+
+        private boolean isItemLoaded(RecyclerView recyclerView) {
+            return recyclerView.getAdapter() != null && recyclerView.getAdapter().getItemCount() != 0;
+        }
     }
 }

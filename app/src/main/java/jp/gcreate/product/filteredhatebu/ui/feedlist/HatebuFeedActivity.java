@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.annotation.VisibleForTesting;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -77,6 +79,11 @@ public class HatebuFeedActivity extends AppCompatActivity implements HatebuFeedC
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @VisibleForTesting
+    RecyclerView getRecyclerView() {
+        return ((HatebuFeedFragment)adapter.getItem(binding.viewPager.getCurrentItem())).getRecyclerView();
     }
 
     @Override

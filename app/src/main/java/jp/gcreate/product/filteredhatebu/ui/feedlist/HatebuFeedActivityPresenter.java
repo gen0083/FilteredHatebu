@@ -1,5 +1,6 @@
 package jp.gcreate.product.filteredhatebu.ui.feedlist;
 
+import android.support.annotation.VisibleForTesting;
 import android.support.v4.app.Fragment;
 
 import java.util.ArrayList;
@@ -90,6 +91,11 @@ public class HatebuFeedActivityPresenter implements HatebuFeedContract.ParentPre
     @Override
     public int getCount() {
         return keys.size();
+    }
+
+    @VisibleForTesting
+    void initialzieFilterRepository() {
+        filterRepository.deleteAll();
     }
 
     public static class HatebuCategory {
