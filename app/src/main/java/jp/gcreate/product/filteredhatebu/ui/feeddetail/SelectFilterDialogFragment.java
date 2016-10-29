@@ -36,7 +36,7 @@ public class SelectFilterDialogFragment extends DialogFragment {
             callback = (Callback) context;
         } else {
             throw new RuntimeException(
-                    "Activity " + this + " called is must implement Callback interface.");
+                    "ActivityView " + this + " called is must implement Callback interface.");
         }
     }
 

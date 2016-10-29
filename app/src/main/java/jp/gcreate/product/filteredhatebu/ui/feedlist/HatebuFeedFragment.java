@@ -26,7 +26,7 @@ import timber.log.Timber;
  * Copyright 2016 G-CREATE
  */
 
-public class HatebuFeedFragment extends Fragment implements HatebuFeedContract.Fragment.View {
+public class HatebuFeedFragment extends Fragment implements HatebuFeedContract.FragmentView {
     private static final String EXTRA_CATEGORY_KEY = "category_key";
     private static final String EXTRA_SCROLLED_POSITION_KEY = "scrolled_position";
     private FragmentHatebuFeedBinding                     binding;
@@ -36,7 +36,7 @@ public class HatebuFeedFragment extends Fragment implements HatebuFeedContract.F
     private int                                           scrolledPosition;
     @Inject
             HatebuFeedActivityPresenter activityPresenter;
-    private HatebuFeedContract.Fragment.FragmentPresenter presenter;
+    private HatebuFeedContract.ChildPresenter presenter;
 
 
     public static HatebuFeedFragment createInstance(String category) {

@@ -21,11 +21,11 @@ import timber.log.Timber;
 public class FeedAdapter extends RecyclerView.Adapter<DataBindingViewHolder<ItemHatebuFeedBinding>>
         implements View.OnClickListener {
     private static final String FAVICON_URL = "https://favicon.hatena.ne.jp/?url=";
-    private Context                      context;
-    private RecyclerView                 recyclerView;
-    private HatebuFeedContract.Fragment.FragmentPresenter presenter;
+    private Context                                    context;
+    private RecyclerView                               recyclerView;
+    private HatebuFeedContract.ChildPresenter presenter;
 
-    public FeedAdapter(Context context, HatebuFeedContract.Fragment.FragmentPresenter presenter) {
+    public FeedAdapter(Context context, HatebuFeedContract.ChildPresenter presenter) {
         this.context = context;
         this.presenter = presenter;
     }

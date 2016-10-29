@@ -1,5 +1,7 @@
 package jp.gcreate.product.filteredhatebu.ui.feedlist;
 
+import android.support.v4.app.Fragment;
+
 import jp.gcreate.product.filteredhatebu.model.HatebuFeedItem;
 
 /**
@@ -7,45 +9,59 @@ import jp.gcreate.product.filteredhatebu.model.HatebuFeedItem;
  */
 
 public interface HatebuFeedContract {
-    interface Activity {
-        interface View {
-            void showLoading();
-            void hideLoading();
-            void notifyDataSetChanged();
-        }
+    interface ActivityView {
+        void showLoading();
 
-        interface ActivityPresenter {
-            void onAttach(View view);
-            void onDetach();
-            // For fragments in ViewPager
-            Fragment.FragmentPresenter getOrCreateFragmentPresenter(String key);
-            // PagerAdapter
-            android.support.v4.app.Fragment getItem(int position);
-            String getPageTitle(int position);
-            int getCount();
-        }
+        void hideLoading();
+
+        void notifyDataSetChanged();
     }
 
-    interface Fragment {
-        interface View {
-            void showLoading();
-            void hideLoading();
-            void showNetworkError();
-            void showNewContentsDoseNotExist();
-            void launchFeedDetailActivity(HatebuFeedItem item);
-            // RecyclerView
-            void notifyDataSetChanged();
-            void notifyItemChanged(int position);
-        }
+    interface ParentPresenter {
+        void onAttach(ActivityView activity);
 
-        interface FragmentPresenter {
-            void onAttach(View view);
-            void onDetach();
-            void reloadList();
-            // RecyclerAdapter
-            HatebuFeedItem getItem(int position);
-            int getItemCount();
-            void onClick(int position);
-        }
+        void onDetach();
+
+        // For fragments in ViewPager
+        ChildPresenter getOrCreateFragmentPresenter(String key);
+
+        // PagerAdapter
+        Fragment getItem(int position);
+
+        String getPageTitle(int position);
+
+        int getCount();
+    }
+
+    interface FragmentView {
+        void showLoading();
+
+        void hideLoading();
+
+        void showNetworkError();
+
+        void showNewContentsDoseNotExist();
+
+        void launchFeedDetailActivity(HatebuFeedItem item);
+
+        // RecyclerView
+        void notifyDataSetChanged();
+
+        void notifyItemChanged(int position);
+    }
+
+    interface ChildPresenter {
+        void onAttach(FragmentView view);
+
+        void onDetach();
+
+        void reloadList();
+
+        // RecyclerAdapter
+        HatebuFeedItem getItem(int position);
+
+        int getItemCount();
+
+        void onClick(int position);
     }
 }

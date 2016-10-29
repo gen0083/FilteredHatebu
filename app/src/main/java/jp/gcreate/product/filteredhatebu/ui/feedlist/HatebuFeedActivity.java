@@ -21,7 +21,7 @@ import jp.gcreate.product.filteredhatebu.ui.option.LicensesDialogFragment;
  * Copyright 2016 G-CREATE
  */
 
-public class HatebuFeedActivity extends AppCompatActivity implements HatebuFeedContract.Activity.View {
+public class HatebuFeedActivity extends AppCompatActivity implements HatebuFeedContract.ActivityView {
     private static final String TAG_LICENSE = "license";
     private ActivityFeedBinding binding;
     private ActivityComponent component;

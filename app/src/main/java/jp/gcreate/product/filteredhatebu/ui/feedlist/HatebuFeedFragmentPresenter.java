@@ -21,14 +21,14 @@ import timber.log.Timber;
  * Copyright 2016 G-CREATE
  */
 
-public class HatebuFeedFragmentPresenter implements HatebuFeedContract.Fragment.FragmentPresenter {
-    private final String                           categoryKey;
-    private       FeedsBurnerClienet               feedsBurnerClienet;
-    private       HatenaClient.XmlService          hatenaCategoryService;
-    private       FilterRepository                 filterRepository;
-    private       HatebuFeedContract.Fragment.View view;
-    private       Observable<HatebuFeed>           feedObservable;
-    private long previousModifiedTime;
+public class HatebuFeedFragmentPresenter implements HatebuFeedContract.ChildPresenter {
+    private final String                                   categoryKey;
+    private       FeedsBurnerClienet                       feedsBurnerClienet;
+    private       HatenaClient.XmlService                  hatenaCategoryService;
+    private       FilterRepository                         filterRepository;
+    private       HatebuFeedContract.FragmentView view;
+    private       Observable<HatebuFeed>                   feedObservable;
+    private       long                                     previousModifiedTime;
     private List<HatebuFeedItem> originList   = new ArrayList<>();
     private List<HatebuFeedItem> filteredList = new ArrayList<>();
     private boolean              isFirstTime  = true;
@@ -58,7 +58,7 @@ public class HatebuFeedFragmentPresenter implements HatebuFeedContract.Fragment.
     }
 
     @Override
-    public void onAttach(HatebuFeedContract.Fragment.View view) {
+    public void onAttach(HatebuFeedContract.FragmentView view) {
         this.view = view;
         if (isFirstTime) {
             reloadList();

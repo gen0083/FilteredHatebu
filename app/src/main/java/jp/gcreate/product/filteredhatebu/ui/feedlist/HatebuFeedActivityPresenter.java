@@ -18,8 +18,8 @@ import jp.gcreate.product.filteredhatebu.di.Scope.ActivityScope;
  */
 
 @ActivityScope
-public class HatebuFeedActivityPresenter implements HatebuFeedContract.Activity.ActivityPresenter {
-    private HatebuFeedContract.Activity.View view;
+public class HatebuFeedActivityPresenter implements HatebuFeedContract.ParentPresenter {
+    private HatebuFeedContract.ActivityView activity;
     private List<HatebuCategory>                         keys          = new ArrayList<>();
     private HashMap<String, HatebuFeedFragment>          fragments     = new HashMap<>();
     private HashMap<String, HatebuFeedFragmentPresenter> presenters    = new HashMap<>();
@@ -38,8 +38,8 @@ public class HatebuFeedActivityPresenter implements HatebuFeedContract.Activity.
     }
 
     @Override
-    public void onAttach(HatebuFeedContract.Activity.View view) {
-        this.view = view;
+    public void onAttach(HatebuFeedContract.ActivityView activity) {
+        this.activity = activity;
         if (!isInitialized) {
             keys.add(new HatebuCategory("", "総合"));
             keys.add(new HatebuCategory("general", "一般"));
@@ -48,16 +48,16 @@ public class HatebuFeedActivityPresenter implements HatebuFeedContract.Activity.
             keys.add(new HatebuCategory("game", "アニメとゲーム"));
             isInitialized = true;
         }
-        view.notifyDataSetChanged();
+        activity.notifyDataSetChanged();
     }
 
     @Override
     public void onDetach() {
-        this.view = null;
+        this.activity = null;
     }
 
     @Override
-    public HatebuFeedContract.Fragment.FragmentPresenter getOrCreateFragmentPresenter(String key) {
+    public HatebuFeedContract.ChildPresenter getOrCreateFragmentPresenter(String key) {
         if (presenters.containsKey(key)) {
             return presenters.get(key);
         } else {
