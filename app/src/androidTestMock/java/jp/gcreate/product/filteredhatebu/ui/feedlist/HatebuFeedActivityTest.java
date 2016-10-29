@@ -1,11 +1,13 @@
 package jp.gcreate.product.filteredhatebu.ui.feedlist;
 
 
+import android.content.Intent;
 import android.support.test.espresso.Espresso;
 import android.support.test.espresso.IdlingResource;
 import android.support.test.espresso.ViewInteraction;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
+import android.support.v4.view.PagerAdapter;
 import android.support.v7.widget.RecyclerView;
 import android.test.suitebuilder.annotation.LargeTest;
 import android.view.View;
@@ -43,10 +45,11 @@ import static org.hamcrest.Matchers.is;
 public class HatebuFeedActivityTest {
     @Rule
     public ActivityTestRule<HatebuFeedActivity> mActivityTestRule = new ActivityTestRule<>(
-            HatebuFeedActivity.class);
+            HatebuFeedActivity.class, false, false);
 
     @Before
     public void setUp() {
+        mActivityTestRule.launchActivity(new Intent());
         mActivityTestRule.getActivity().presenter.initialzieFilterRepository();
     }
 
@@ -93,7 +96,8 @@ public class HatebuFeedActivityTest {
     public void サブディレクトリ込で登録後test1は表示test3は表示されない() {
         // wait for item set
         IdlingResource idlingResource = new ItemSetIdlingResource(mActivityTestRule.getActivity().getRecyclerView());
-        Espresso.registerIdlingResources(idlingResource);
+        IdlingResource pagerIdling = new ViewPagerIdlingResource(mActivityTestRule.getActivity().getPagerAdapter());
+        Espresso.registerIdlingResources(idlingResource, pagerIdling);
 
         ViewInteraction recyclerView = onView(
                 allOf(withId(R.id.recycler_view), isDisplayed()));
@@ -260,6 +264,38 @@ public class HatebuFeedActivityTest {
 
         private boolean isItemLoaded(RecyclerView recyclerView) {
             return recyclerView.getAdapter() != null && recyclerView.getAdapter().getItemCount() != 0;
+        }
+    }
+
+    private class ViewPagerIdlingResource implements IdlingResource {
+        private ResourceCallback callback;
+        private PagerAdapter adapter;
+
+        public ViewPagerIdlingResource(PagerAdapter adapter) {
+            this.adapter = adapter;
+        }
+
+        @Override
+        public String getName() {
+            return this.getClass().getSimpleName();
+        }
+
+        @Override
+        public boolean isIdleNow() {
+            boolean isIdle = setUpDone();
+            if (isIdle && callback != null) {
+                callback.onTransitionToIdle();
+            }
+            return isIdle;
+        }
+
+        @Override
+        public void registerIdleTransitionCallback(ResourceCallback callback) {
+            this.callback = callback;
+        }
+
+        private boolean setUpDone() {
+            return adapter.getCount() != 0;
         }
     }
 }

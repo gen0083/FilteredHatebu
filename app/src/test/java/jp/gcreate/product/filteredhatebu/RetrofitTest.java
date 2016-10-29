@@ -24,7 +24,7 @@ import rx.functions.Action1;
 
 public class RetrofitTest {
     private Retrofit     retrofit;
-    private HatenaClient service;
+    private HatenaClient.JsonService service;
     private String BASE_URL = "http://b.hatena.ne.jp/";
 
     @Before
@@ -47,7 +47,7 @@ public class RetrofitTest {
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
-        service = retrofit.create(HatenaClient.class);
+        service = retrofit.create(HatenaClient.JsonService.class);
     }
 
     @Test

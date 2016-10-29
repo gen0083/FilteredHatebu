@@ -22,7 +22,7 @@ import rx.functions.Action1;
 
 public class HatebuFeedTest {
     private static final String BASE_URL = "http://b.hatena.ne.jp/";
-    private HatenaClient service;
+    private HatenaClient.XmlService service;
 
     @Before
     public void setUp() {
@@ -44,7 +44,7 @@ public class HatebuFeedTest {
                 .addConverterFactory(SimpleXmlConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
-        service = retrofit.create(HatenaClient.class);
+        service = retrofit.create(HatenaClient.XmlService.class);
     }
 
     @Test

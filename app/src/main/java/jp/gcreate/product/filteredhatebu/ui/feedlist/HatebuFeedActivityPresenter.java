@@ -21,10 +21,10 @@ import jp.gcreate.product.filteredhatebu.di.Scope.ActivityScope;
 @ActivityScope
 public class HatebuFeedActivityPresenter implements HatebuFeedContract.ParentPresenter {
     private HatebuFeedContract.ActivityView activity;
-    private List<HatebuCategory>                         keys          = new ArrayList<>();
-    private HashMap<String, HatebuFeedFragment>          fragments     = new HashMap<>();
-    private HashMap<String, HatebuFeedFragmentPresenter> presenters    = new HashMap<>();
-    private boolean                                      isInitialized = false;
+    private List<HatebuCategory>                         keys        = new ArrayList<>();
+    private HashMap<String, HatebuFeedFragment>          fragments   = new HashMap<>();
+    private HashMap<String, HatebuFeedFragmentPresenter> presenters  = new HashMap<>();
+    private boolean                                      isFirstTime = true;
     private FeedsBurnerClienet      feedsBurnerClienet;
     private HatenaClient.XmlService hatenaXmlService;
     private FilterRepository        filterRepository;
@@ -41,13 +41,13 @@ public class HatebuFeedActivityPresenter implements HatebuFeedContract.ParentPre
     @Override
     public void onAttach(HatebuFeedContract.ActivityView activity) {
         this.activity = activity;
-        if (!isInitialized) {
+        if (isFirstTime) {
             keys.add(new HatebuCategory("", "総合"));
             keys.add(new HatebuCategory("general", "一般"));
             keys.add(new HatebuCategory("it", "テクノロジー"));
             keys.add(new HatebuCategory("life", "暮らし"));
             keys.add(new HatebuCategory("game", "アニメとゲーム"));
-            isInitialized = true;
+            isFirstTime = false;
         }
         activity.notifyDataSetChanged();
     }
