@@ -15,26 +15,16 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.View;
 
 import javax.inject.Inject;
 
 import jp.gcreate.product.filteredhatebu.CustomApplication;
 import jp.gcreate.product.filteredhatebu.R;
-import jp.gcreate.product.filteredhatebu.api.HatenaClient;
-import jp.gcreate.product.filteredhatebu.data.FilterRepository;
 import jp.gcreate.product.filteredhatebu.databinding.ActivityHatebuFeedDetailBinding;
 import jp.gcreate.product.filteredhatebu.di.ActivityComponent;
-import jp.gcreate.product.filteredhatebu.model.HatebuBookmark;
-import jp.gcreate.product.filteredhatebu.model.HatebuEntry;
 import jp.gcreate.product.filteredhatebu.model.HatebuFeedItem;
 import jp.gcreate.product.filteredhatebu.ui.common.BitmapUtil;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
 import timber.log.Timber;
 
 /**
@@ -42,20 +32,18 @@ import timber.log.Timber;
  */
 
 public class HatebuFeedDetailActivity extends AppCompatActivity
-        implements SelectFilterDialogFragment.Callback {
-    private static final String TAG            = "FeedDetailActivity";
+        implements SelectFilterDialogFragment.Callback, HatebuFeedDetailContract.View {
     private static final String EXTRA_ITEM_KEY = "feed_item_key";
+    private static final String EXTRA_BOTTOM_SHEET_STATE_KEY = "bottom_sheet_state";
+    private static final String EXTRA_COMMENT_POSITION_KEY = "comments_position";
     private static final int INTENT_SHARE_CODE = 1;
     private ActivityHatebuFeedDetailBinding   binding;
     private HatebuFeedItem                    item;
     private ActivityComponent                 component;
-    private Subscription                      bookmarkSubscription;
     private BookmarkCommentsAdapter           adapter;
+    private LinearLayoutManager layoutManager;
     private BottomSheetBehavior<RecyclerView> bottomSheetBehavior;
-    @Inject
-    HatenaClient.JsonService     service;
-    @Inject
-    FilterRepository filterRepository;
+    @Inject HatebuFeedDetailPresenter presenter;
 
     public static Intent createIntent(Context context, HatebuFeedItem item) {
         Intent i = new Intent(context, HatebuFeedDetailActivity.class);
@@ -101,44 +89,42 @@ public class HatebuFeedDetailActivity extends AppCompatActivity
     }
 
     private void setupRecyclerView() {
-        adapter = new BookmarkCommentsAdapter(this);
+        adapter = new BookmarkCommentsAdapter(this, presenter);
         RecyclerView r = binding.recyclerView;
-        r.setLayoutManager(new LinearLayoutManager(this));
+        layoutManager = new LinearLayoutManager(this);
+        r.setLayoutManager(layoutManager);
         r.setAdapter(adapter);
         bottomSheetBehavior = BottomSheetBehavior.from(r);
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
+    protected void onResume() {
+        super.onResume();
         binding.setItem(item);
-        bookmarkSubscription = service
-                .getEntry(item.getLink())
-                .subscribeOn(Schedulers.io())
-                .flatMapIterable(new Func1<HatebuEntry, Iterable<HatebuBookmark>>() {
-                    @Override
-                    public Iterable<HatebuBookmark> call(HatebuEntry hatebuEntry) {
-                        return hatebuEntry.getBookmarks();
-                    }
-                }).filter(new Func1<HatebuBookmark, Boolean>() {
-                    @Override
-                    public Boolean call(HatebuBookmark hatebuBookmark) {
-                        return !TextUtils.isEmpty(hatebuBookmark.getComment());
-                    }
-                }).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<HatebuBookmark>() {
-                    @Override
-                    public void call(HatebuBookmark hatebuBookmark) {
-                        adapter.addItem(hatebuBookmark);
-                    }
-                });
+        presenter.onAttach(this, item);
     }
 
     @Override
-    protected void onStop() {
-        super.onStop();
-        if (bookmarkSubscription != null && !bookmarkSubscription.isUnsubscribed()) {
-            bookmarkSubscription.unsubscribe();
+    protected void onPause() {
+        super.onPause();
+        presenter.onDetach();
+    }
+
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putInt(EXTRA_COMMENT_POSITION_KEY, layoutManager.findFirstCompletelyVisibleItemPosition());
+        outState.putInt(EXTRA_BOTTOM_SHEET_STATE_KEY, bottomSheetBehavior.getState());
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        if (savedInstanceState != null) {
+            int position = savedInstanceState.getInt(EXTRA_COMMENT_POSITION_KEY, 0);
+            int state = savedInstanceState.getInt(EXTRA_BOTTOM_SHEET_STATE_KEY, BottomSheetBehavior.STATE_COLLAPSED);
+            layoutManager.scrollToPosition(position);
+            bottomSheetBehavior.setState(state);
         }
     }
 
@@ -190,15 +176,45 @@ public class HatebuFeedDetailActivity extends AppCompatActivity
     @Override
     public void onSelected(final String selected) {
         Timber.d("%s onSelected from AlertDialog selected:%s", this, selected);
-        filterRepository.insertFilter(selected);
+        presenter.addFilter(selected);
         Snackbar.make(binding.title, getString(R.string.add_filter_done, selected),
                       Snackbar.LENGTH_SHORT)
                 .setAction(R.string.cancel, new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        filterRepository.deleteFilter(selected);
+                        presenter.cancelAddedFilter();
                     }
                 })
                 .show();
+    }
+
+    @Override
+    public void showLoading() {
+
+    }
+
+    @Override
+    public void hideLoading() {
+
+    }
+
+    @Override
+    public void showNoComments() {
+
+    }
+
+    @Override
+    public void notifyDataSetChanged() {
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void notifyItemChanged(int position) {
+        adapter.notifyItemChanged(position);
+    }
+
+    @Override
+    public void notifyItemInserted(int position) {
+        adapter.notifyItemInserted(position);
     }
 }

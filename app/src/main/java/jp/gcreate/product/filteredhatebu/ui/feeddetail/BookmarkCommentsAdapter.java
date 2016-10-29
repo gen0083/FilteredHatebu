@@ -6,9 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import jp.gcreate.product.filteredhatebu.R;
 import jp.gcreate.product.filteredhatebu.databinding.ItemEntryBookmarksBinding;
 import jp.gcreate.product.filteredhatebu.model.HatebuBookmark;
@@ -20,15 +17,11 @@ import jp.gcreate.product.filteredhatebu.ui.common.DataBindingViewHolder;
 
 public class BookmarkCommentsAdapter extends RecyclerView.Adapter<DataBindingViewHolder<ItemEntryBookmarksBinding>> {
     private final Context             context;
-    private List<HatebuBookmark> list;
+    private HatebuFeedDetailPresenter presenter;
 
-    public BookmarkCommentsAdapter(Context context) {
-        this(context, new ArrayList<HatebuBookmark>());
-    }
-
-    public BookmarkCommentsAdapter(Context context, List<HatebuBookmark> list) {
+    public BookmarkCommentsAdapter(Context context, HatebuFeedDetailPresenter presenter) {
         this.context = context;
-        this.list = list;
+        this.presenter = presenter;
     }
 
     @Override
@@ -40,23 +33,13 @@ public class BookmarkCommentsAdapter extends RecyclerView.Adapter<DataBindingVie
     @Override
     public void onBindViewHolder(DataBindingViewHolder<ItemEntryBookmarksBinding> holder, int position) {
         ItemEntryBookmarksBinding binding = holder.getBinding();
-        HatebuBookmark bookmark = list.get(position);
+        HatebuBookmark bookmark = presenter.getItem(position);
         binding.setBookmark(bookmark);
         binding.executePendingBindings();
     }
 
     @Override
     public int getItemCount() {
-        return list.size();
-    }
-
-    public void setList(List<HatebuBookmark> list) {
-        this.list = list;
-        notifyDataSetChanged();
-    }
-
-    public void addItem(HatebuBookmark item) {
-        list.add(item);
-        notifyItemChanged(list.size());
+        return presenter.getItemCount();
     }
 }
