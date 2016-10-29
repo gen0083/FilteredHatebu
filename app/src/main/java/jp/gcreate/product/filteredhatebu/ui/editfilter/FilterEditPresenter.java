@@ -1,5 +1,7 @@
 package jp.gcreate.product.filteredhatebu.ui.editfilter;
 
+import android.support.annotation.VisibleForTesting;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -71,15 +73,17 @@ public class FilterEditPresenter implements FilterEditContract.Presenter {
 
     @Override
     public void delete(int position) {
-        deletePrevious();
+        int previous = deletePrevious();
+        // if position bigger than previous one it produce IndexOutBoundsException
+        if (previous <= position) position--;
         deletedItem = new DeletedITem<>(position, list.get(position));
         if (view != null) {
             view.notifyItemChanged(position);
         }
     }
 
-    private void deletePrevious() {
-        if (deletedItem == null) return;
+    private int deletePrevious() {
+        if (deletedItem == null) return Integer.MAX_VALUE;
         int position = deletedItem.getPosition();
         list.remove(position);
         filterRepository.deleteFilter(deletedItem.getItem().getFilter());
@@ -87,6 +91,7 @@ public class FilterEditPresenter implements FilterEditContract.Presenter {
             view.notifyItemRemoved(position);
         }
         deletedItem = null;
+        return position;
     }
 
     @Override
@@ -112,5 +117,10 @@ public class FilterEditPresenter implements FilterEditContract.Presenter {
     @Override
     public boolean isDeleted(int position) {
         return (deletedItem != null && deletedItem.getPosition() == position);
+    }
+
+    @VisibleForTesting
+    List<UriFilter> getList() {
+        return list;
     }
 }
