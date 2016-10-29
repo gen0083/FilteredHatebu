@@ -118,13 +118,14 @@ public class HatebuFeedFragment extends Fragment implements HatebuFeedContract.F
     public void onPause() {
         super.onPause();
         Timber.d("%s[category:%s] onPause", this, categoryKey);
-        scrolledPosition = layoutManager.findFirstVisibleItemPosition();
         presenter.onDetach();
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
+        Timber.d("%s[category:%s] onSaveInstanceState", this, categoryKey);
+        scrolledPosition = layoutManager.findFirstVisibleItemPosition();
         outState.putInt(EXTRA_SCROLLED_POSITION_KEY, scrolledPosition);
     }
 
