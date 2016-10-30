@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.github.gfx.ribbonizer'
 apply plugin: 'com.cookpad.android.licensetools'
 apply plugin: 'io.fabric'
+apply plugin: 'com.github.triplet.play'
 
 android {
     apply from: "${System.getenv('HOME')}/.android-mykey/FilteredHatebu.sign.gradle", to: android
@@ -12,8 +13,8 @@ android {
         applicationId "jp.gcreate.product.filteredhatebu"
         minSdkVersion 15
         targetSdkVersion 24
-        versionCode 1
-        versionName "16.10.0"
+        versionCode 3
+        versionName "v16.10.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     productFlavors {
@@ -51,6 +52,11 @@ ribbonizer {
     }
 
     forcedVariantsNames "mockRelease"
+}
+
+play {
+    track = 'production'
+    jsonFile = file(System.getenv('HOME') + "/.android-mykey/filteredhatebu_play_api.json")
 }
 
 dependencies {
