@@ -1,7 +1,6 @@
 package jp.gcreate.product.filteredhatebu.data;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 import javax.inject.Inject;
 
@@ -39,9 +38,6 @@ public class FilterDataSourceOrma implements FilterDataSource {
                         List<UriFilter> list = orma.selectFromUriFilter()
                                                    .executeAsObservable().toList().toBlocking()
                                                    .single();
-                        if (list.size() == 0) {
-                            singleSubscriber.onError(new NoSuchElementException("No data."));
-                        }
                         singleSubscriber.onSuccess(list);
                     }
                 })

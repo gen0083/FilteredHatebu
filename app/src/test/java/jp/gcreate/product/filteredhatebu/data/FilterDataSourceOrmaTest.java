@@ -81,7 +81,9 @@ public class FilterDataSourceOrmaTest {
         sut.getFilterAll()
            .subscribe(test);
         test.awaitTerminalEvent();
-        test.assertError(NoSuchElementException.class);
+        assertThat(test.getOnNextEvents().size(), is(1));
+        List<UriFilter> actual = test.getOnNextEvents().get(0);
+        assertThat(actual.size(), is(0));
     }
 
     @Test
