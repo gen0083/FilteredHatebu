@@ -11,6 +11,7 @@ import jp.gcreate.product.filteredhatebu.model.HatebuFeedItem;
 import jp.gcreate.product.filteredhatebu.model.UriFilter;
 import rx.Observable;
 import rx.Single;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.functions.Func1;
@@ -21,28 +22,25 @@ import timber.log.Timber;
  * Copyright 2016 G-CREATE
  */
 
-public class HatebuFeedFragmentPresenter implements HatebuFeedContract.ChildPresenter {
-    private final String                                   categoryKey;
-    private       FeedsBurnerClienet                       feedsBurnerClienet;
-    private       HatenaClient.XmlService                  hatenaCategoryService;
-    private       FilterRepository                         filterRepository;
+class HatebuFeedFragmentPresenter implements HatebuFeedContract.ChildPresenter {
+    private final String                          categoryKey;
+    private       FilterRepository                filterRepository;
     private       HatebuFeedContract.FragmentView view;
-    private       Observable<HatebuFeed>                   feedObservable;
-    private       long                                     previousModifiedTime;
+    private       Observable<HatebuFeed>          feedObservable;
+    private       long                            previousModifiedTime;
+    private       Subscription                    loadingSubscription;
     private List<HatebuFeedItem> originList   = new ArrayList<>();
     private List<HatebuFeedItem> filteredList = new ArrayList<>();
     private boolean              isFirstTime  = true;
 
-    public HatebuFeedFragmentPresenter(String key,
-                                       FeedsBurnerClienet feedsBurnerClienet,
-                                       HatenaClient.XmlService hatenaService,
-                                       FilterRepository filterRepository) {
+    HatebuFeedFragmentPresenter(String key,
+                                FeedsBurnerClienet feedsBurnerClienet,
+                                HatenaClient.XmlService hatenaService,
+                                FilterRepository filterRepository) {
         this.categoryKey = key;
-        this.feedsBurnerClienet = feedsBurnerClienet;
-        this.hatenaCategoryService = hatenaService;
         this.filterRepository = filterRepository;
         feedObservable = (key.equals("")) ? feedsBurnerClienet.getHotentryFeed() :
-                         hatenaCategoryService.getCategoryFeed(categoryKey);
+                         hatenaService.getCategoryFeed(categoryKey);
         filterRepository.listenModified()
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(new Action1<Long>() {
@@ -74,7 +72,11 @@ public class HatebuFeedFragmentPresenter implements HatebuFeedContract.ChildPres
 
     @Override
     public void reloadList() {
-        feedObservable
+        if (isLoading()) {
+            Timber.d("%s[cat:%s] is now loading, skip reloading", this, categoryKey);
+            return;
+        }
+        loadingSubscription = feedObservable
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action1<HatebuFeed>() {
@@ -84,10 +86,12 @@ public class HatebuFeedFragmentPresenter implements HatebuFeedContract.ChildPres
                         Timber.d("feed got: %d", hatebuFeed.getItemList().size());
                         List<HatebuFeedItem> newList = hatebuFeed.getItemList();
                         if (originList.containsAll(newList)) {
+                            Timber.d("there are not new one.");
                             if (view != null) {
                                 view.showNewContentsDoseNotExist();
                             }
                         } else {
+                            Timber.d("got new feeds");
                             originList = newList;
                             updateFilteredList();
                         }
@@ -104,12 +108,18 @@ public class HatebuFeedFragmentPresenter implements HatebuFeedContract.ChildPres
                 });
     }
 
+    private boolean isLoading() {
+        return loadingSubscription != null && !loadingSubscription.isUnsubscribed();
+    }
+
     private void updateFilteredList() {
         filterRepository.getFilterAll()
                         .subscribeOn(Schedulers.io())
                         .map(new Func1<List<UriFilter>, List<HatebuFeedItem>>() {
                             @Override
                             public List<HatebuFeedItem> call(List<UriFilter> uriFilters) {
+                                Timber.d("updateFilteredList map to List<HatebuFeedItem> on %s ",
+                                         Thread.currentThread());
                                 filteredList = new ArrayList<>();
                                 for (final HatebuFeedItem item : originList) {
                                     boolean isFiltered = false;
@@ -129,6 +139,7 @@ public class HatebuFeedFragmentPresenter implements HatebuFeedContract.ChildPres
                                     @Override
                                     public Single<? extends List<HatebuFeedItem>> call(
                                             Throwable throwable) {
+                                        Timber.d("updateFilteredList onError at getFilterAll");
                                         filteredList.addAll(originList);
                                         return Single.just(filteredList);
                                     }
@@ -137,6 +148,7 @@ public class HatebuFeedFragmentPresenter implements HatebuFeedContract.ChildPres
                         .subscribe(new Action1<List<HatebuFeedItem>>() {
                             @Override
                             public void call(List<HatebuFeedItem> filteredList) {
+                                Timber.d("updateFilteredList done on %s", Thread.currentThread());
                                 if (view != null) {
                                     view.notifyDataSetChanged();
                                 }

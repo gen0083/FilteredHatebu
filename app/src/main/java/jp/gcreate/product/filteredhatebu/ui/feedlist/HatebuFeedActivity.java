@@ -69,6 +69,9 @@ public class HatebuFeedActivity extends AppCompatActivity implements HatebuFeedC
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         switch (id) {
+            case R.id.reload_feeds:
+                presenter.reloadFeeds();
+                return true;
             case R.id.edit_filter:
                 Intent intent = new Intent(this, FilterEditActivity.class);
                 startActivity(intent);

@@ -72,6 +72,13 @@ public class HatebuFeedActivityPresenter implements HatebuFeedContract.ParentPre
     }
 
     @Override
+    public void reloadFeeds() {
+        for (HatebuFeedContract.ChildPresenter presenter : presenters.values()) {
+            presenter.reloadList();
+        }
+    }
+
+    @Override
     public Fragment getItem(int position) {
         final String key = keys.get(position).key;
         if (fragments.containsKey(key)) {
@@ -98,11 +105,11 @@ public class HatebuFeedActivityPresenter implements HatebuFeedContract.ParentPre
         filterRepository.deleteAll();
     }
 
-    public static class HatebuCategory {
-        public String key;
+    private static class HatebuCategory {
+        String key;
         public String title;
 
-        public HatebuCategory(String key, String title) {
+        HatebuCategory(String key, String title) {
             this.key = key;
             this.title = title;
         }

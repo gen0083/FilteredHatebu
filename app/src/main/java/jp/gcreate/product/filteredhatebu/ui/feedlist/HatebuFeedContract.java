@@ -8,7 +8,7 @@ import jp.gcreate.product.filteredhatebu.model.HatebuFeedItem;
  * Copyright 2016 G-CREATE
  */
 
-public interface HatebuFeedContract {
+interface HatebuFeedContract {
     interface ActivityView {
         void showLoading();
 
@@ -24,6 +24,8 @@ public interface HatebuFeedContract {
 
         // For fragments in ViewPager
         ChildPresenter getOrCreateFragmentPresenter(String key);
+
+        void reloadFeeds();
 
         // PagerAdapter
         Fragment getItem(int position);

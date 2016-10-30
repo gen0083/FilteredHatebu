@@ -11,4 +11,5 @@
     <string name="move_to_the_site">サイトへ移動</string>
     <string name="add_filter">フィルタを追加</string>
     <string name="delete_done">%sを削除しました</string>
+    <string name="reload_feeds">更新</string>
 </resources>
