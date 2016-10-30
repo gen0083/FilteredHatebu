@@ -73,13 +73,13 @@ public class FilterEditPresenter implements FilterEditContract.Presenter {
 
     @Override
     public void delete(int position) {
-        int previous = deletePrevious();
         // if position bigger than previous one it produce IndexOutBoundsException
-        if (previous <= position) position--;
-        deletedItem = new DeletedITem<>(position, list.get(position));
         if (view != null) {
             view.notifyItemChanged(position);
         }
+        int previous = deletePrevious();
+        if (previous <= position) position--;
+        deletedItem = new DeletedITem<>(position, list.get(position));
     }
 
     private int deletePrevious() {
