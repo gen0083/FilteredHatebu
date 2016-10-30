@@ -122,6 +122,27 @@ public class HatebuFeedItem implements Parcelable {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof HatebuFeedItem)) return false;
+        HatebuFeedItem t = (HatebuFeedItem) obj;
+        // non required fields these may be null
+        boolean isSame = true;
+        isSame &= (this.description == null) ? t.getDescription() == null
+                                             : this.description.equals(t.getDescription());
+        isSame &= (this.subject == null) ? t.getSubject() == null
+                                         : this.subject.equals(t.getSubject());
+
+        // required fields
+        isSame &= this.about.equals(t.getAbout()) &&
+                  this.title.equals(t.getTitle()) &&
+                  this.link.equals(t.getLink()) &&
+                  this.encoded.equals(t.getEncoded()) &&
+                  this.date.equals(t.getDate()) &&
+                  this.count == t.getCount();
+        return isSame;
+    }
+
+    @Override
     public int describeContents() {
         return 0;
     }

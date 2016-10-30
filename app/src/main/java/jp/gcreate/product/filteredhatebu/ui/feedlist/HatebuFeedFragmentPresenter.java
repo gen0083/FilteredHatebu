@@ -94,6 +94,7 @@ class HatebuFeedFragmentPresenter implements HatebuFeedContract.ChildPresenter {
                             Timber.d("got new feeds");
                             originList = newList;
                             updateFilteredList();
+                            Timber.d("after call updateFilteredList()");
                         }
                     }
                 }, new Action1<Throwable>() {
