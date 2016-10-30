@@ -40,16 +40,18 @@ interface HatebuFeedContract {
 
         void hideLoading();
 
-        void showNetworkError();
+        void notifyFilterUpdated();
 
-        void showNewContentsDoseNotExist();
+        void notifyNewContentsFetched();
+
+        void notifyNewContentsDoseNotExist();
+
+        void showNetworkError();
 
         void launchFeedDetailActivity(HatebuFeedItem item);
 
         // RecyclerView
         void notifyDataSetChanged();
-
-        void notifyItemChanged(int position);
     }
 
     interface ChildPresenter {

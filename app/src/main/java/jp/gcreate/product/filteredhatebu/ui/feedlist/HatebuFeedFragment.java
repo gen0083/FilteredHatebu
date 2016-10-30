@@ -7,6 +7,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -147,13 +148,25 @@ public class HatebuFeedFragment extends Fragment implements HatebuFeedContract.F
     }
 
     @Override
+    public void notifyFilterUpdated() {
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void notifyNewContentsFetched() {
+        adapter.notifyDataSetChanged();
+        layoutManager.scrollToPosition(0);
+    }
+
+    @Override
     public void showNetworkError() {
         Timber.e("Network error");
     }
 
     @Override
-    public void showNewContentsDoseNotExist() {
+    public void notifyNewContentsDoseNotExist() {
         Timber.d("New contents dose not exist.");
+        Snackbar.make(binding.getRoot(), R.string.new_contents_dose_not_exist, Snackbar.LENGTH_SHORT).show();
     }
 
     @Override
@@ -165,10 +178,5 @@ public class HatebuFeedFragment extends Fragment implements HatebuFeedContract.F
     @Override
     public void notifyDataSetChanged() {
         adapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public void notifyItemChanged(int position) {
-        adapter.notifyItemChanged(position);
     }
 }

@@ -10,7 +10,6 @@ import jp.gcreate.product.filteredhatebu.model.HatebuFeed;
 import jp.gcreate.product.filteredhatebu.model.HatebuFeedItem;
 import jp.gcreate.product.filteredhatebu.model.UriFilter;
 import rx.Observable;
-import rx.Single;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
@@ -36,21 +35,45 @@ class HatebuFeedFragmentPresenter implements HatebuFeedContract.ChildPresenter {
     HatebuFeedFragmentPresenter(String key,
                                 FeedsBurnerClienet feedsBurnerClienet,
                                 HatenaClient.XmlService hatenaService,
-                                FilterRepository filterRepository) {
+                                final FilterRepository filterRepository) {
         this.categoryKey = key;
         this.filterRepository = filterRepository;
         feedObservable = (key.equals("")) ? feedsBurnerClienet.getHotentryFeed() :
                          hatenaService.getCategoryFeed(categoryKey);
         filterRepository.listenModified()
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new Action1<Long>() {
+                        .subscribeOn(Schedulers.io())
+                        .filter(new Func1<Long, Boolean>() {
                             @Override
-                            public void call(Long time) {
-                                if (time > previousModifiedTime) {
-                                    // list updated
-                                    updateFilteredList();
+                            public Boolean call(Long updated) {
+                                return updated > previousModifiedTime;
+                            }
+                        })
+                        .doOnNext(new Action1<Long>() {
+                            @Override
+                            public void call(Long updated) {
+                                previousModifiedTime = updated;
+                            }
+                        })
+                        .concatMap(new Func1<Long, Observable<List<UriFilter>>>() {
+                            @Override
+                            public Observable<List<UriFilter>> call(Long aLong) {
+                                return filterRepository.getFilterAll().toObservable();
+                            }
+                        })
+                        .map(new Func1<List<UriFilter>, List<HatebuFeedItem>>() {
+                            @Override
+                            public List<HatebuFeedItem> call(List<UriFilter> uriFilters) {
+                                return filterOriginList(originList, uriFilters);
+                            }
+                        })
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Action1<List<HatebuFeedItem>>() {
+                            @Override
+                            public void call(List<HatebuFeedItem> hatebuFeedItems) {
+                                filteredList = hatebuFeedItems;
+                                if (view != null) {
+                                    view.notifyFilterUpdated();
                                 }
-                                previousModifiedTime = time;
                             }
                         });
     }
@@ -62,7 +85,6 @@ class HatebuFeedFragmentPresenter implements HatebuFeedContract.ChildPresenter {
             reloadList();
             isFirstTime = false;
         }
-        view.notifyDataSetChanged();
     }
 
     @Override
@@ -78,23 +100,51 @@ class HatebuFeedFragmentPresenter implements HatebuFeedContract.ChildPresenter {
         }
         loadingSubscription = feedObservable
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<HatebuFeed>() {
+                .map(new Func1<HatebuFeed, List<HatebuFeedItem>>() {
                     @Override
-                    public void call(HatebuFeed hatebuFeed) {
-                        // HatebuFeedはレスポンス本体で、実際に必要な各記事のリストはgetItemListで取得する
-                        Timber.d("feed got: %d", hatebuFeed.getItemList().size());
-                        List<HatebuFeedItem> newList = hatebuFeed.getItemList();
-                        if (originList.containsAll(newList)) {
+                    public List<HatebuFeedItem> call(HatebuFeed hatebuFeed) {
+                        return hatebuFeed.getItemList();
+                    }
+                })
+                .filter(new Func1<List<HatebuFeedItem>, Boolean>() {
+                    @Override
+                    public Boolean call(List<HatebuFeedItem> newList) {
+                        // 新しい記事の内容を全て含む＝新しい記事なしを意味する
+                        // 新しい内容がある場合のみ値を流す
+                        return !originList.containsAll(newList);
+                    }
+                })
+                .map(new Func1<List<HatebuFeedItem>, List<HatebuFeedItem>>() {
+                    @Override
+                    public List<HatebuFeedItem> call(List<HatebuFeedItem> hatebuFeedItems) {
+                        originList = new ArrayList<HatebuFeedItem>(hatebuFeedItems);
+                        // 別スレッドで処理しているのでblockingで問題ない
+                        List<UriFilter> filters = filterRepository.getFilterAll().toBlocking().value();
+                        // フィルタ処理した後のリストを流す
+                        return filterOriginList(hatebuFeedItems, filters);
+                    }
+                })
+                // 新着記事がない場合値が流れないので空のリストを流す
+                .defaultIfEmpty(new ArrayList<HatebuFeedItem>())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<List<HatebuFeedItem>>() {
+                    @Override
+                    public void call(List<HatebuFeedItem> filtered) {
+                        // defaultIfEmpty Listのサイズが0なら新しいFeedがなかったことを意味する
+                        // (.filterの部分で値が止まってしまった状態)
+                        if (filtered.size() == 0) {
                             Timber.d("there are not new one.");
                             if (view != null) {
-                                view.showNewContentsDoseNotExist();
+                                Timber.d("notify to view new contents dose not exist.");
+                                view.notifyNewContentsDoseNotExist();
                             }
                         } else {
                             Timber.d("got new feeds");
-                            originList = newList;
-                            updateFilteredList();
-                            Timber.d("after call updateFilteredList()");
+                            filteredList = filtered;
+                            if (view != null) {
+                                Timber.d("notify to view got new contents.");
+                                view.notifyNewContentsFetched();
+                            }
                         }
                     }
                 }, new Action1<Throwable>() {
@@ -113,48 +163,19 @@ class HatebuFeedFragmentPresenter implements HatebuFeedContract.ChildPresenter {
         return loadingSubscription != null && !loadingSubscription.isUnsubscribed();
     }
 
-    private void updateFilteredList() {
-        filterRepository.getFilterAll()
-                        .subscribeOn(Schedulers.io())
-                        .map(new Func1<List<UriFilter>, List<HatebuFeedItem>>() {
-                            @Override
-                            public List<HatebuFeedItem> call(List<UriFilter> uriFilters) {
-                                Timber.d("updateFilteredList map to List<HatebuFeedItem> on %s ",
-                                         Thread.currentThread());
-                                filteredList = new ArrayList<>();
-                                for (final HatebuFeedItem item : originList) {
-                                    boolean isFiltered = false;
-                                    for (UriFilter f : uriFilters) {
-                                        isFiltered = f.isFilteredUrl(item.getLink());
-                                        if (isFiltered) break;
-                                    }
-                                    if (!isFiltered) {
-                                        filteredList.add(item);
-                                    }
-                                }
-                                return filteredList;
-                            }
-                        })
-                        .onErrorResumeNext(
-                                new Func1<Throwable, Single<? extends List<HatebuFeedItem>>>() {
-                                    @Override
-                                    public Single<? extends List<HatebuFeedItem>> call(
-                                            Throwable throwable) {
-                                        Timber.d("updateFilteredList onError at getFilterAll");
-                                        filteredList.addAll(originList);
-                                        return Single.just(filteredList);
-                                    }
-                                })
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new Action1<List<HatebuFeedItem>>() {
-                            @Override
-                            public void call(List<HatebuFeedItem> filteredList) {
-                                Timber.d("updateFilteredList done on %s", Thread.currentThread());
-                                if (view != null) {
-                                    view.notifyDataSetChanged();
-                                }
-                            }
-                        });
+    private List<HatebuFeedItem> filterOriginList(final List<HatebuFeedItem> origin,
+                                                  final List<UriFilter> filters) {
+        if (filters.size() == 0) return new ArrayList<>(origin);
+        List<HatebuFeedItem> filteredList = new ArrayList<>();
+        for (HatebuFeedItem item : origin) {
+            boolean isFiltered = false;
+            for (UriFilter f : filters) {
+                isFiltered = f.isFilteredUrl(item.getLink());
+                if (isFiltered) break;
+            }
+            if (!isFiltered) filteredList.add(item);
+        }
+        return filteredList;
     }
 
     @Override
