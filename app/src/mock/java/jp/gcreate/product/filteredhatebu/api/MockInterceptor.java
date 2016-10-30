@@ -28,6 +28,7 @@ import timber.log.Timber;
 public class MockInterceptor implements Interceptor {
     private Context context;
     private Pattern categoryUrl;
+    private int     count;
 
     @Inject
     public MockInterceptor(@ApplicationContext Context context) {
@@ -43,7 +44,8 @@ public class MockInterceptor implements Interceptor {
             return mockedFeedsBurnerResponse(chain.request());
         }
         if (HatenaClient.BASE_URL.contains(url.host())) {
-            if (url.encodedPath().equals("/entry/json/") || url.encodedPath().equals("/entry/jsonlite/")) {
+            if (url.encodedPath().equals("/entry/json/") ||
+                url.encodedPath().equals("/entry/jsonlite/")) {
                 if (url.query().contains("test.com/")) {
                     return mockedHatebuEntry(chain.request());
                 } else {
@@ -59,13 +61,23 @@ public class MockInterceptor implements Interceptor {
     }
 
     private Response mockedFeedsBurnerResponse(Request request) throws IOException {
-        return new Response.Builder()
+        // フィードの再取得を行った際に、表示中と変化がない場合はリストを更新しない
+        // しかしこの挙動は、テストがしづらい（新しい記事が返ってくるかどうかは時間が経過しないと確認できない）
+        // そこで、mockレスポンスは5回に1回異なるフィードを返すことで
+        // 新しいフィードが取得できたときをエミュレートする
+        count++;
+        Response.Builder builder = new Response.Builder()
                 .request(request)
                 .protocol(Protocol.HTTP_1_1)
                 .code(200)
-                .message("ok")
-                .body(ResponseBody.create(MediaType.parse("application/xml"), openFile("mock_hatebu_hotentry.rss")))
-                .build();
+                .message("ok");
+        builder = (count % 5 != 0) ?
+                  builder.body(ResponseBody.create(MediaType.parse("application/xml"),
+                                                   openFile("mock_hatebu_hotentry.rss")))
+                                   :
+                  builder.body(ResponseBody.create(MediaType.parse("application/xml"),
+                                                   openFile("mock_hatebu_hotentry2.rss")));
+        return builder.build();
     }
 
     private Response mockedHatebuCategory(Request request) throws IOException {
@@ -74,7 +86,8 @@ public class MockInterceptor implements Interceptor {
                 .protocol(Protocol.HTTP_1_1)
                 .code(200)
                 .message("ok")
-                .body(ResponseBody.create(MediaType.parse("application/xml"), openFile("mock_hatebu_hotentry_category.rss")))
+                .body(ResponseBody.create(MediaType.parse("application/xml"),
+                                          openFile("mock_hatebu_hotentry_category.rss")))
                 .build();
     }
 
@@ -84,7 +97,8 @@ public class MockInterceptor implements Interceptor {
                 .protocol(Protocol.HTTP_1_1)
                 .code(200)
                 .message("ok")
-                .body(ResponseBody.create(MediaType.parse("application/json"), openFile("mock_hatebu_entry.json")))
+                .body(ResponseBody.create(MediaType.parse("application/json"),
+                                          openFile("mock_hatebu_entry.json")))
                 .build();
     }
 
@@ -94,7 +108,8 @@ public class MockInterceptor implements Interceptor {
                 .protocol(Protocol.HTTP_1_1)
                 .code(200)
                 .message("ok")
-                .body(ResponseBody.create(MediaType.parse("application/json"), openFile("mock_hatebu_entry_no_comment.json")))
+                .body(ResponseBody.create(MediaType.parse("application/json"),
+                                          openFile("mock_hatebu_entry_no_comment.json")))
                 .build();
     }
 
@@ -109,10 +124,10 @@ public class MockInterceptor implements Interceptor {
     }
 
     private String openFile(String filename) throws IOException {
-        InputStream stream = context.getAssets().open(filename);
+        InputStream    stream = context.getAssets().open(filename);
         BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
-        String line;
-        StringBuilder sb = new StringBuilder();
+        String         line;
+        StringBuilder  sb     = new StringBuilder();
         while ((line = reader.readLine()) != null) {
             sb.append(line);
         }
