@@ -17,7 +17,7 @@ import timber.log.Timber;
  */
 public class FilterRepository implements FilterDataSource {
     private List<UriFilter> cachedList = new ArrayList<>();
-    private boolean         isDirty    = true;
+    boolean         isDirty    = true;
     private FilterDataSource localDataSource;
     private SerializedSubject<Long, Long> onModifiedObserver = new SerializedSubject<>(
             BehaviorSubject.<Long>create());
@@ -78,6 +78,13 @@ public class FilterRepository implements FilterDataSource {
     @Override
     public void deleteFilter(String delete) {
         localDataSource.deleteFilter(delete);
+        isDirty = true;
+        onModifiedObserver.onNext(System.currentTimeMillis());
+    }
+
+    @Override
+    public void deleteAll() {
+        localDataSource.deleteAll();
         isDirty = true;
         onModifiedObserver.onNext(System.currentTimeMillis());
     }

@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.github.gfx.ribbonizer'
 apply plugin: 'com.cookpad.android.licensetools'
 apply plugin: 'io.fabric'
+apply plugin: 'com.github.triplet.play'
 
 android {
     apply from: "${System.getenv('HOME')}/.android-mykey/FilteredHatebu.sign.gradle", to: android
@@ -12,9 +13,16 @@ android {
         applicationId "jp.gcreate.product.filteredhatebu"
         minSdkVersion 15
         targetSdkVersion 24
-        versionCode 1
-        versionName "16.10.0"
+        versionCode 3
+        versionName "v16.10.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    productFlavors {
+        mock {
+            applicationIdSuffix ".mock"
+        }
+        prod {
+        }
     }
     buildTypes {
         debug {
@@ -32,6 +40,23 @@ android {
     dataBinding {
         enabled = true
     }
+}
+
+ribbonizer {
+    builder { variant, iconFile ->
+        if (variant.flavorName == "mock") {
+            return yellowRibbonFilter(variant, iconFile)
+        } else {
+            return greenRibbonFilter(variant, iconFile)
+        }
+    }
+
+    forcedVariantsNames "mockRelease"
+}
+
+play {
+    track = 'production'
+    jsonFile = file(System.getenv('HOME') + "/.android-mykey/filteredhatebu_play_api.json")
 }
 
 dependencies {
@@ -90,10 +115,18 @@ dependencies {
     }
 
     def junit4 = 'junit:junit:4.12'
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    def espresso_ver = '2.2.2'
+    androidTestCompile("com.android.support.test.espresso:espresso-core:$espresso_ver", {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    androidTestCompile "com.android.support.test.espresso:espresso-contrib:$espresso_ver", {
+        exclude group: 'com.android.support', module: 'support-annotations'
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude group: 'com.android.support', module: 'design'
+        exclude group: 'com.android.support', module: 'recyclerview-v7'
+    }
     androidTestCompile junit4
     testCompile junit4
     testCompile "org.robolectric:robolectric:3.1.2"
+    testCompile 'org.mockito:mockito-core:1.10.19'
 }

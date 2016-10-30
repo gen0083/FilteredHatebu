@@ -75,6 +75,11 @@ public class FilterRepositoryTest {
                     }
                 }
             }
+
+            @Override
+            public void deleteAll() {
+                source = new ArrayList<>();
+            }
         };
         sut = new FilterRepository(testSource);
     }

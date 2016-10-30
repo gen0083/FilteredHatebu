@@ -1,11 +1,11 @@
 package jp.gcreate.product.filteredhatebu.di;
 
 import dagger.Subcomponent;
-import jp.gcreate.product.filteredhatebu.activity.FilterEditActivity;
-import jp.gcreate.product.filteredhatebu.activity.HatebuFeedActivity;
-import jp.gcreate.product.filteredhatebu.activity.HatebuFeedDetailActivity;
+import jp.gcreate.product.filteredhatebu.ui.editfilter.FilterEditActivity;
+import jp.gcreate.product.filteredhatebu.ui.feedlist.HatebuFeedActivity;
+import jp.gcreate.product.filteredhatebu.ui.feeddetail.HatebuFeedDetailActivity;
 import jp.gcreate.product.filteredhatebu.di.Scope.ActivityScope;
-import jp.gcreate.product.filteredhatebu.fragment.HatebuFeedFragment;
+import jp.gcreate.product.filteredhatebu.ui.feedlist.HatebuFeedFragment;
 
 /**
  * Copyright 2016 G-CREATE

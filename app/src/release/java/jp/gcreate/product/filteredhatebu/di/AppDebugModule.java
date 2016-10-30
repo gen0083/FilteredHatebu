@@ -7,6 +7,7 @@ import dagger.Provides;
 import jp.gcreate.product.filteredhatebu.di.Scope.AppScope;
 import jp.gcreate.product.filteredhatebu.util.ReleaseLogTree;
 import jp.gcreate.product.filteredhatebu.util.StethoWrapper;
+import okhttp3.logging.HttpLoggingInterceptor;
 import timber.log.Timber;
 
 /**
@@ -31,5 +32,11 @@ public class AppDebugModule {
     @AppScope
     public CrashlyticsCore providesCrashlyticsCore() {
         return new CrashlyticsCore.Builder().build();
+    }
+
+    @Provides
+    @AppScope
+    public HttpLoggingInterceptor provideHttpLoggingInterceptor() {
+        return new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.NONE);
     }
 }

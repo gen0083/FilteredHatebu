@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-import jp.gcreate.product.filteredhatebu.api.HatebuEntryService;
+import jp.gcreate.product.filteredhatebu.api.HatenaClient;
 import jp.gcreate.product.filteredhatebu.model.HatebuBookmark;
 import jp.gcreate.product.filteredhatebu.model.HatebuEntry;
 import okhttp3.OkHttpClient;
@@ -23,8 +23,8 @@ import rx.functions.Action1;
  */
 
 public class RetrofitTest {
-    private Retrofit           retrofit;
-    private HatebuEntryService service;
+    private Retrofit     retrofit;
+    private HatenaClient.JsonService service;
     private String BASE_URL = "http://b.hatena.ne.jp/";
 
     @Before
@@ -47,7 +47,7 @@ public class RetrofitTest {
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
-        service = retrofit.create(HatebuEntryService.class);
+        service = retrofit.create(HatenaClient.JsonService.class);
     }
 
     @Test

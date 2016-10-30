@@ -81,7 +81,7 @@
                     android:paddingLeft="16dp"
                     android:paddingRight="16dp"
                     android:paddingTop="8dp"
-                    android:text="サイトへ移動"
+                    android:text="@string/move_to_the_site"
                     />
 
                 <Button
@@ -93,7 +93,7 @@
                     android:paddingLeft="16dp"
                     android:paddingRight="16dp"
                     android:paddingTop="8dp"
-                    android:text="フィルタを追加"
+                    android:text="@string/add_filter"
                     />
 
                 <ImageView
@@ -107,6 +107,7 @@
                     android:src="@drawable/ic_share"
                     android:background="?attr/selectableItemBackground"
                     android:clickable="true"
+                    android:contentDescription="@string/share_url"
                     android:tint="@color/colorAccent"
                     />
 

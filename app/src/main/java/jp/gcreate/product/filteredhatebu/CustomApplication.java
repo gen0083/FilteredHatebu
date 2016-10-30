@@ -28,8 +28,8 @@ import timber.log.Timber;
 
 public class CustomApplication extends Application {
     private AppComponent appComponent;
-    private HashMap<String, ActivityComponent> activityComponentSet = new HashMap<>();
-    private HashMap<String, ActivityModule> activityModuleMap = new HashMap<>();
+    private HashMap<String, ActivityComponent> activityComponentMap = new HashMap<>();
+    private HashMap<String, ActivityModule>    activityModuleMap    = new HashMap<>();
     @Inject @ApplicationContext
     Context      context;
     @Inject
@@ -79,15 +79,15 @@ public class CustomApplication extends Application {
     }
 
     public boolean hasComponent(String key) {
-        return activityComponentSet.containsKey(key);
+        return activityComponentMap.containsKey(key) && activityModuleMap.containsKey(key);
     }
 
     public ActivityComponent getActivityComponent(String key) {
-        return activityComponentSet.get(key);
+        return activityComponentMap.get(key);
     }
 
     public void setActivityComponent(String key, ActivityComponent component) {
-        activityComponentSet.put(key, component);
+        activityComponentMap.put(key, component);
     }
 
     public void setActivityModule(String key, ActivityModule module) {
@@ -96,9 +96,5 @@ public class CustomApplication extends Application {
 
     public ActivityModule getActivityModule(String key) {
         return activityModuleMap.get(key);
-    }
-
-    public boolean hasModule(String key) {
-        return activityModuleMap.containsKey(key);
     }
 }

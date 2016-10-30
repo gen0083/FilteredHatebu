@@ -4,28 +4,71 @@
     >
 
     <data>
+        <import type="android.view.View" />
         <variable
             name="item"
             type="jp.gcreate.product.filteredhatebu.model.UriFilter"
             />
+        <variable
+            name="isDeleted"
+            type="boolean"
+            />
     </data>
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="?attr/listPreferredItemHeight"
-        android:orientation="vertical"
-        android:gravity="center_vertical"
-        android:padding="@dimen/item_padding"
-        android:background="@color/grey_50"
         >
-
-        <TextView
-            android:id="@+id/filter"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@{item.filter}"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-            />
+            android:layout_height="?attr/listPreferredItemHeight"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="@dimen/item_padding"
+            android:background="@color/colorAccent"
+            android:visibility="@{isDeleted ? View.VISIBLE : View.GONE}"
+            >
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/message"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@{@string/delete_done(item.filter)}"
+                android:textColor="@color/white"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                />
+
+            <TextView
+                android:id="@+id/cancel_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cancel"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                android:clickable="true"
+                android:textColor="@color/white"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="?attr/listPreferredItemHeight"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="@dimen/item_padding"
+            android:background="@color/grey_50"
+            android:visibility="@{isDeleted ? View.GONE : View.VISIBLE}"
+            >
+
+            <TextView
+                android:id="@+id/filter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@{item.filter}"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                />
+
+        </LinearLayout>
+    </FrameLayout>
 </layout>
