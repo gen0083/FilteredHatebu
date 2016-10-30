@@ -72,15 +72,17 @@ public class HatebuFeedActivityPresenter implements HatebuFeedContract.ParentPre
     }
 
     @Override
-    public void reloadFeeds() {
-        for (HatebuFeedContract.ChildPresenter presenter : presenters.values()) {
-            presenter.reloadList();
-        }
+    public void reloadFeeds(int position) {
+        presenters.get(getKey(position)).reloadList();
+    }
+
+    private String getKey(int position) {
+        return keys.get(position).key;
     }
 
     @Override
     public Fragment getItem(int position) {
-        final String key = keys.get(position).key;
+        final String key = getKey(position);
         if (fragments.containsKey(key)) {
             return fragments.get(key);
         } else {

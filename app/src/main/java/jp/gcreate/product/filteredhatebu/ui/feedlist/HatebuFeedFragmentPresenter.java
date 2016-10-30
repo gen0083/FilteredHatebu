@@ -85,6 +85,9 @@ class HatebuFeedFragmentPresenter implements HatebuFeedContract.ChildPresenter {
             reloadList();
             isFirstTime = false;
         }
+        // これを呼ばないとviewがattachされていないときに発生した変更が反映されない
+        // (フィルタを追加したのにフィルタされないとか)
+        view.notifyDataSetChanged();
     }
 
     @Override
@@ -117,7 +120,7 @@ class HatebuFeedFragmentPresenter implements HatebuFeedContract.ChildPresenter {
                 .map(new Func1<List<HatebuFeedItem>, List<HatebuFeedItem>>() {
                     @Override
                     public List<HatebuFeedItem> call(List<HatebuFeedItem> hatebuFeedItems) {
-                        originList = new ArrayList<HatebuFeedItem>(hatebuFeedItems);
+                        originList = hatebuFeedItems;
                         // 別スレッドで処理しているのでblockingで問題ない
                         List<UriFilter> filters = filterRepository.getFilterAll().toBlocking().value();
                         // フィルタ処理した後のリストを流す

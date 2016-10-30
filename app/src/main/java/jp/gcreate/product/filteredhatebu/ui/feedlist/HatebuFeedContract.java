@@ -25,7 +25,7 @@ interface HatebuFeedContract {
         // For fragments in ViewPager
         ChildPresenter getOrCreateFragmentPresenter(String key);
 
-        void reloadFeeds();
+        void reloadFeeds(int position);
 
         // PagerAdapter
         Fragment getItem(int position);

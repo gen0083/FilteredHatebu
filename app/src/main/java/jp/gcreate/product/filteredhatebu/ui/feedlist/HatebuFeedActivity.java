@@ -70,7 +70,7 @@ public class HatebuFeedActivity extends AppCompatActivity implements HatebuFeedC
         int id = item.getItemId();
         switch (id) {
             case R.id.reload_feeds:
-                presenter.reloadFeeds();
+                presenter.reloadFeeds(binding.viewPager.getCurrentItem());
                 return true;
             case R.id.edit_filter:
                 Intent intent = new Intent(this, FilterEditActivity.class);
