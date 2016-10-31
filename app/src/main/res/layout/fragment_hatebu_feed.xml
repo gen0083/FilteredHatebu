@@ -19,7 +19,7 @@
             tools:listitem="@layout/item_hatebu_feed"
             />
 
-        <android.support.v4.widget.ContentLoadingProgressBar
+        <ProgressBar
             android:id="@+id/progress_bar"
             style="?android:attr/progressBarStyleLarge"
             android:layout_width="wrap_content"

@@ -140,13 +140,14 @@ public class HatebuFeedFragment extends Fragment implements HatebuFeedContract.F
     @Override
     public void showLoading() {
         Timber.d("start loading animation");
-        binding.progressBar.show();
+        binding.progressBar.setIndeterminate(true);
+        binding.progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideLoading() {
         Timber.d("stop loading animation");
-        binding.progressBar.hide();
+        binding.progressBar.setVisibility(View.GONE);
     }
 
     @Override
