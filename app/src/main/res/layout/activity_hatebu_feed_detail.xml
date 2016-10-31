@@ -121,6 +121,8 @@
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             android:background="#88fafafa"
+            android:scrollbars="vertical"
+            android:fadeScrollbars="false"
             app:layout_behavior="@string/bottom_sheet_behavior"
             app:behavior_peekHeight="100dp"
             tools:listitem="@layout/item_entry_bookmarks"
