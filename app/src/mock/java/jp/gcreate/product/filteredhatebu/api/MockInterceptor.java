@@ -6,11 +6,13 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.inject.Inject;
 
+import jp.gcreate.product.filteredhatebu.BuildConfig;
 import jp.gcreate.product.filteredhatebu.di.qualifier.ApplicationContext;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
@@ -40,6 +42,16 @@ public class MockInterceptor implements Interceptor {
     public Response intercept(Chain chain) throws IOException {
         HttpUrl url = chain.request().url();
         Timber.d("url:%s path:%s", url, url.encodedPath());
+
+        // Simulate slow network on debug build
+        if (BuildConfig.DEBUG) {
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
         if (FeedsBurnerClienet.BASE_URL.contains(url.host())) {
             return mockedFeedsBurnerResponse(chain.request());
         }

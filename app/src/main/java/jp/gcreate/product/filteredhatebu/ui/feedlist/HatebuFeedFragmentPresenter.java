@@ -71,9 +71,7 @@ class HatebuFeedFragmentPresenter implements HatebuFeedContract.ChildPresenter {
                             @Override
                             public void call(List<HatebuFeedItem> hatebuFeedItems) {
                                 filteredList = hatebuFeedItems;
-                                if (view != null) {
-                                    view.notifyFilterUpdated();
-                                }
+                                notifyFilterUpdated();
                             }
                         });
     }
@@ -84,6 +82,11 @@ class HatebuFeedFragmentPresenter implements HatebuFeedContract.ChildPresenter {
         if (isFirstTime) {
             reloadList();
             isFirstTime = false;
+        }
+        if (isLoading()) {
+            showLoading();
+        } else {
+            hideLoading();
         }
         // これを呼ばないとviewがattachされていないときに発生した変更が反映されない
         // (フィルタを追加したのにフィルタされないとか)
@@ -101,6 +104,7 @@ class HatebuFeedFragmentPresenter implements HatebuFeedContract.ChildPresenter {
             Timber.d("%s[cat:%s] is now loading, skip reloading", this, categoryKey);
             return;
         }
+        showLoading();
         loadingSubscription = feedObservable
                 .subscribeOn(Schedulers.io())
                 .map(new Func1<HatebuFeed, List<HatebuFeedItem>>() {
@@ -133,21 +137,16 @@ class HatebuFeedFragmentPresenter implements HatebuFeedContract.ChildPresenter {
                 .subscribe(new Action1<List<HatebuFeedItem>>() {
                     @Override
                     public void call(List<HatebuFeedItem> filtered) {
+                        hideLoading();
                         // defaultIfEmpty Listのサイズが0なら新しいFeedがなかったことを意味する
                         // (.filterの部分で値が止まってしまった状態)
                         if (filtered.size() == 0) {
                             Timber.d("there are not new one.");
-                            if (view != null) {
-                                Timber.d("notify to view new contents dose not exist.");
-                                view.notifyNewContentsDoseNotExist();
-                            }
+                            notifyNewContentsDoseNotExist();
                         } else {
                             Timber.d("got new feeds");
                             filteredList = filtered;
-                            if (view != null) {
-                                Timber.d("notify to view got new contents.");
-                                view.notifyNewContentsFetched();
-                            }
+                            notifyNewContentsFetched();
                         }
                     }
                 }, new Action1<Throwable>() {
@@ -155,9 +154,8 @@ class HatebuFeedFragmentPresenter implements HatebuFeedContract.ChildPresenter {
                     public void call(Throwable throwable) {
                         Timber.e("error %s", throwable.getMessage());
                         throwable.printStackTrace();
-                        if (view != null) {
-                            view.showNetworkError();
-                        }
+                        hideLoading();
+                        showNetworkError();
                     }
                 });
     }
@@ -197,4 +195,41 @@ class HatebuFeedFragmentPresenter implements HatebuFeedContract.ChildPresenter {
             view.launchFeedDetailActivity(filteredList.get(position));
         }
     }
+
+    private void showLoading() {
+        if (view != null) {
+            view.showLoading();
+        }
+    }
+
+    private void hideLoading() {
+        if (view != null) {
+            view.hideLoading();
+        }
+    }
+
+    private void notifyFilterUpdated() {
+        if (view != null) {
+            view.notifyFilterUpdated();
+        }
+    }
+
+    private void notifyNewContentsFetched() {
+        if (view != null) {
+            view.notifyNewContentsFetched();
+        }
+    }
+
+    private void notifyNewContentsDoseNotExist() {
+        if (view != null) {
+            view.notifyNewContentsDoseNotExist();
+        }
+    }
+
+    private void showNetworkError() {
+        if (view != null) {
+            view.showNetworkError();
+        }
+    }
+
 }

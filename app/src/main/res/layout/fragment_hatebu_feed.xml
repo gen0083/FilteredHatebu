@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     >
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -19,5 +19,13 @@
             tools:listitem="@layout/item_hatebu_feed"
             />
 
-    </LinearLayout>
+        <android.support.v4.widget.ContentLoadingProgressBar
+            android:id="@+id/progress_bar"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_gravity="center"
+            />
+    </FrameLayout>
 </layout>
