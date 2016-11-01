@@ -163,7 +163,7 @@ public class HatebuFeedFragment extends Fragment implements HatebuFeedContract.F
     @Override
     public void notifyNewContentsFetched() {
         adapter.notifyDataSetChanged();
-        layoutManager.scrollToPosition(0);
+        layoutManager.smoothScrollToPosition(binding.recyclerView, null, 0);
         Snackbar.make(binding.getRoot(), R.string.new_contents_fetched, Snackbar.LENGTH_SHORT).show();
     }
 
