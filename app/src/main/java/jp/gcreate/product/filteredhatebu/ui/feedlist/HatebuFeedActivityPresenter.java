@@ -13,6 +13,7 @@ import jp.gcreate.product.filteredhatebu.api.FeedsBurnerClienet;
 import jp.gcreate.product.filteredhatebu.api.HatenaClient;
 import jp.gcreate.product.filteredhatebu.data.FilterRepository;
 import jp.gcreate.product.filteredhatebu.di.Scope.ActivityScope;
+import timber.log.Timber;
 
 /**
  * Copyright 2016 G-CREATE
@@ -22,7 +23,6 @@ import jp.gcreate.product.filteredhatebu.di.Scope.ActivityScope;
 public class HatebuFeedActivityPresenter implements HatebuFeedContract.ParentPresenter {
     private HatebuFeedContract.ActivityView activity;
     private List<HatebuCategory>                         keys        = new ArrayList<>();
-    private HashMap<String, HatebuFeedFragment>          fragments   = new HashMap<>();
     private HashMap<String, HatebuFeedFragmentPresenter> presenters  = new HashMap<>();
     private boolean                                      isFirstTime = true;
     private FeedsBurnerClienet      feedsBurnerClienet;
@@ -48,8 +48,8 @@ public class HatebuFeedActivityPresenter implements HatebuFeedContract.ParentPre
             keys.add(new HatebuCategory("life", "暮らし"));
             keys.add(new HatebuCategory("game", "アニメとゲーム"));
             isFirstTime = false;
+            activity.notifyDataSetChanged();
         }
-        activity.notifyDataSetChanged();
     }
 
     @Override
@@ -82,14 +82,9 @@ public class HatebuFeedActivityPresenter implements HatebuFeedContract.ParentPre
 
     @Override
     public Fragment getItem(int position) {
-        final String key = getKey(position);
-        if (fragments.containsKey(key)) {
-            return fragments.get(key);
-        } else {
-            HatebuFeedFragment f = HatebuFeedFragment.createInstance(key);
-            fragments.put(key, f);
-            return f;
-        }
+        Timber.d("pager adapter requested getItem(%d)", position);
+        String key = getKey(position);
+        return HatebuFeedFragment.createInstance(key);
     }
 
     @Override

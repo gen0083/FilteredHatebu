@@ -87,6 +87,7 @@ public class HatebuFeedDetailActivityTest {
         @Override
         public boolean isIdleNow() {
             // TODO: 要改善！ アダプターサイズで判定すると、コメントなしのケースで待機できない
+            // use progressbar.isShown()
             boolean isIdle = adapter.getItemCount() != 0;
             if (isIdle && callback != null) {
                 callback.onTransitionToIdle();

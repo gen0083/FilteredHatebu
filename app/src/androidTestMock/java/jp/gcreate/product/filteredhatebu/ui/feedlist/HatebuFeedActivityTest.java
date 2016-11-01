@@ -8,8 +8,6 @@ import android.support.test.espresso.ViewInteraction;
 import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
-import android.support.v4.view.PagerAdapter;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
@@ -43,6 +41,8 @@ import static org.hamcrest.Matchers.is;
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 public class HatebuFeedActivityTest {
+    private IdlingResource idlingResource;
+
     @Rule
     public ActivityTestRule<HatebuFeedActivity> mActivityTestRule = new ActivityTestRule<>(
             HatebuFeedActivity.class, false, false);
@@ -51,11 +51,14 @@ public class HatebuFeedActivityTest {
     public void setUp() {
         mActivityTestRule.launchActivity(new Intent());
         mActivityTestRule.getActivity().presenter.initialzieFilterRepository();
+        idlingResource = new ItemSetIdlingResource( mActivityTestRule.getActivity());
+        Espresso.registerIdlingResources(idlingResource);
     }
 
     @After
     public void tearDown() {
         mActivityTestRule.getActivity().presenter.initialzieFilterRepository();
+        Espresso.unregisterIdlingResources(idlingResource);
     }
 
     @Test
@@ -94,11 +97,6 @@ public class HatebuFeedActivityTest {
 
     @Test
     public void サブディレクトリ込で登録後test1は表示test3は表示されない() {
-        // wait for item set
-        IdlingResource idlingResource = new ItemSetIdlingResource(mActivityTestRule.getActivity().getRecyclerView());
-        IdlingResource pagerIdling = new ViewPagerIdlingResource(mActivityTestRule.getActivity().getPagerAdapter());
-        Espresso.registerIdlingResources(idlingResource, pagerIdling);
-
         ViewInteraction recyclerView = onView(
                 allOf(withId(R.id.recycler_view), isDisplayed()));
         recyclerView.perform(actionOnItemAtPosition(2, click()));
@@ -140,8 +138,6 @@ public class HatebuFeedActivityTest {
                               1),
                       isDisplayed()));
         textView2.check(doesNotExist());
-
-        Espresso.unregisterIdlingResources(idlingResource);
     }
 
     @Test
@@ -164,9 +160,6 @@ public class HatebuFeedActivityTest {
 
     @Test
     public void フィルタ追加後カテゴリの記事も非表示になる() {
-        IdlingResource firstOne = new ItemSetIdlingResource(mActivityTestRule.getActivity().getRecyclerView());
-        Espresso.registerIdlingResources(firstOne);
-
         onView(allOf(withId(R.id.recycler_view), isDisplayed()))
                 .perform(actionOnItemAtPosition(0, click()));
 
@@ -188,19 +181,16 @@ public class HatebuFeedActivityTest {
         pressBack();
 
         onView(allOf(withId(R.id.title), withText("test1"),
-                      childAtPosition(
-                              childAtPosition(
-                                      IsInstanceOf.<View>instanceOf(
-                                              android.widget.LinearLayout.class),
-                                      0),
-                              1),
-                      isDisplayed()))
+                     childAtPosition(
+                             childAtPosition(
+                                     IsInstanceOf.<View>instanceOf(
+                                             android.widget.LinearLayout.class),
+                                     0),
+                             1),
+                     isDisplayed()))
                 .check(doesNotExist());
 
         onView(allOf(withText("テクノロジー"), isDisplayed())).perform(click());
-
-        IdlingResource secondOne = new ItemSetIdlingResource(mActivityTestRule.getActivity().getRecyclerView());
-        Espresso.registerIdlingResources(secondOne);
 
         onView(allOf(withId(R.id.title),
                      withText("category test"),
@@ -213,7 +203,7 @@ public class HatebuFeedActivityTest {
                      isDisplayed()))
                 .check(doesNotExist());
 
-        Espresso.unregisterIdlingResources(firstOne, secondOne);
+        Espresso.unregisterIdlingResources(idlingResource);
     }
 
     private static Matcher<View> childAtPosition(
@@ -236,21 +226,21 @@ public class HatebuFeedActivityTest {
     }
 
     private class ItemSetIdlingResource implements IdlingResource {
-        private ResourceCallback callback;
-        private RecyclerView recyclerView;
+        private ResourceCallback   callback;
+        private HatebuFeedActivity activity;
 
-        public ItemSetIdlingResource(RecyclerView recyclerView) {
-            this.recyclerView = recyclerView;
+        public ItemSetIdlingResource(HatebuFeedActivity activity) {
+            this.activity = activity;
         }
 
         @Override
         public String getName() {
-            return this.getClass().getSimpleName() + recyclerView;
+            return this.getClass().getSimpleName() + activity;
         }
 
         @Override
         public boolean isIdleNow() {
-            boolean idle = isItemLoaded(recyclerView);
+            boolean idle = !activity.isFeedLoading();
             if (idle && callback != null) {
                 callback.onTransitionToIdle();
             }
@@ -260,42 +250,6 @@ public class HatebuFeedActivityTest {
         @Override
         public void registerIdleTransitionCallback(ResourceCallback callback) {
             this.callback = callback;
-        }
-
-        private boolean isItemLoaded(RecyclerView recyclerView) {
-            return recyclerView.getAdapter() != null && recyclerView.getAdapter().getItemCount() != 0;
-        }
-    }
-
-    private class ViewPagerIdlingResource implements IdlingResource {
-        private ResourceCallback callback;
-        private PagerAdapter adapter;
-
-        public ViewPagerIdlingResource(PagerAdapter adapter) {
-            this.adapter = adapter;
-        }
-
-        @Override
-        public String getName() {
-            return this.getClass().getSimpleName();
-        }
-
-        @Override
-        public boolean isIdleNow() {
-            boolean isIdle = setUpDone();
-            if (isIdle && callback != null) {
-                callback.onTransitionToIdle();
-            }
-            return isIdle;
-        }
-
-        @Override
-        public void registerIdleTransitionCallback(ResourceCallback callback) {
-            this.callback = callback;
-        }
-
-        private boolean setUpDone() {
-            return adapter.getCount() != 0;
         }
     }
 }

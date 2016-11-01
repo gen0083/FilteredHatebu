@@ -137,6 +137,11 @@ public class HatebuFeedFragment extends Fragment implements HatebuFeedContract.F
         return binding.recyclerView;
     }
 
+    @VisibleForTesting
+    boolean isLoading() {
+        return binding.progressBar.isShown();
+    }
+
     @Override
     public void showLoading() {
         Timber.d("start loading animation");

@@ -19,6 +19,7 @@ import jp.gcreate.product.filteredhatebu.databinding.ActivityFeedBinding;
 import jp.gcreate.product.filteredhatebu.di.ActivityComponent;
 import jp.gcreate.product.filteredhatebu.ui.editfilter.FilterEditActivity;
 import jp.gcreate.product.filteredhatebu.ui.option.LicensesDialogFragment;
+import timber.log.Timber;
 
 /**
  * Copyright 2016 G-CREATE
@@ -85,9 +86,20 @@ public class HatebuFeedActivity extends AppCompatActivity implements HatebuFeedC
         return super.onOptionsItemSelected(item);
     }
 
+    private HatebuFeedFragment getCurrentFragment() {
+
+        return (HatebuFeedFragment) adapter.instantiateItem(binding.viewPager,
+                                                            binding.viewPager.getCurrentItem());
+    }
+
     @VisibleForTesting
     RecyclerView getRecyclerView() {
-        return ((HatebuFeedFragment)adapter.getItem(binding.viewPager.getCurrentItem())).getRecyclerView();
+        return getCurrentFragment().getRecyclerView();
+    }
+
+    @VisibleForTesting
+    boolean isFeedLoading() {
+        return getCurrentFragment().isLoading();
     }
 
     @VisibleForTesting
@@ -107,6 +119,7 @@ public class HatebuFeedActivity extends AppCompatActivity implements HatebuFeedC
 
     @Override
     public void notifyDataSetChanged() {
+        Timber.d("notify view pager adapter's data changed.");
         adapter.notifyDataSetChanged();
     }
 }
