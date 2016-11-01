@@ -17,6 +17,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.FrameLayout;
 
 import javax.inject.Inject;
 
@@ -38,13 +39,13 @@ public class HatebuFeedDetailActivity extends AppCompatActivity
     private static final String EXTRA_BOTTOM_SHEET_STATE_KEY = "bottom_sheet_state";
     private static final String EXTRA_COMMENT_POSITION_KEY = "comments_position";
     private static final int INTENT_SHARE_CODE = 1;
-    private ActivityHatebuFeedDetailBinding   binding;
-    private HatebuFeedItem                    item;
-    private ActivityComponent                 component;
-    private BookmarkCommentsAdapter           adapter;
-    private LinearLayoutManager layoutManager;
-    private BottomSheetBehavior<RecyclerView> bottomSheetBehavior;
-    @Inject HatebuFeedDetailPresenter presenter;
+    private ActivityHatebuFeedDetailBinding  binding;
+    private HatebuFeedItem                   item;
+    private ActivityComponent                component;
+    private BookmarkCommentsAdapter          adapter;
+    private LinearLayoutManager              layoutManager;
+    private BottomSheetBehavior<FrameLayout> bottomSheetBehavior;
+    @Inject HatebuFeedDetailPresenter        presenter;
 
     public static Intent createIntent(Context context, HatebuFeedItem item) {
         Intent i = new Intent(context, HatebuFeedDetailActivity.class);
@@ -95,7 +96,7 @@ public class HatebuFeedDetailActivity extends AppCompatActivity
         layoutManager = new LinearLayoutManager(this);
         r.setLayoutManager(layoutManager);
         r.setAdapter(adapter);
-        bottomSheetBehavior = BottomSheetBehavior.from(r);
+        bottomSheetBehavior = BottomSheetBehavior.from(binding.bottomSheetContainer);
     }
 
     @Override
@@ -174,6 +175,11 @@ public class HatebuFeedDetailActivity extends AppCompatActivity
         return adapter;
     }
 
+    @VisibleForTesting
+    boolean isCommentLoadFinished() {
+        return !binding.progressBar.isShown();
+    }
+
     @Override
     public void onCanceled() {
         Timber.d("%s onCanceled from AlertDialog.", this);
@@ -196,17 +202,22 @@ public class HatebuFeedDetailActivity extends AppCompatActivity
 
     @Override
     public void showLoading() {
-
+        Timber.d("loading comments");
+        binding.commentStatus.setVisibility(View.GONE);
+        binding.progressBar.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void hideLoading() {
-
+        Timber.d("finish loading comments");
+        binding.progressBar.setVisibility(View.GONE);
     }
 
     @Override
     public void showNoComments() {
-
+        Timber.d("No comments");
+        binding.commentStatus.setVisibility(View.VISIBLE);
+        binding.recyclerView.setVisibility(View.GONE);
     }
 
     @Override

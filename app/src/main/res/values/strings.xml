@@ -14,4 +14,5 @@
     <string name="reload_feeds">更新</string>
     <string name="new_contents_dose_not_exist">新しい記事はありませんでした。</string>
     <string name="new_contents_fetched">新着記事を取得しました。</string>
+    <string name="no_comments">コメントはありません</string>
 </resources>

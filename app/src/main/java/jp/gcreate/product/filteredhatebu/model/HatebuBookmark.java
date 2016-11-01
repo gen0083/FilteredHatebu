@@ -5,10 +5,12 @@ package jp.gcreate.product.filteredhatebu.model;
  */
 
 public class HatebuBookmark {
-    String   user;
-    String[] tags;
-    String   timestamp;
-    String   comment;
+    public static final HatebuBookmark EMPTY = new HatebuBookmark("", new String[]{""}, "", "");
+
+    private String   user;
+    private String[] tags;
+    private String   timestamp;
+    private String   comment;
 
     public HatebuBookmark(String user, String[] tags, String timestamp, String comment) {
         this.user = user;

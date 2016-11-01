@@ -15,7 +15,6 @@ import jp.gcreate.product.filteredhatebu.R;
 import jp.gcreate.product.filteredhatebu.model.HatebuFeedItem;
 
 import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
@@ -40,7 +39,7 @@ public class HatebuFeedDetailActivityTest {
         activityTestRule.launchActivity(
                 HatebuFeedDetailActivity.createIntent(InstrumentationRegistry.getTargetContext(),
                                                       item));
-        AdapterIdlingResource idlingResource = new AdapterIdlingResource(activityTestRule.getActivity().getAdapter());
+        CommentLoadIdlingResource idlingResource = new CommentLoadIdlingResource(activityTestRule.getActivity());
         Espresso.registerIdlingResources(idlingResource);
 
         onView(allOf(withId(R.id.comment),
@@ -61,22 +60,20 @@ public class HatebuFeedDetailActivityTest {
         activityTestRule.launchActivity(
                 HatebuFeedDetailActivity.createIntent(InstrumentationRegistry.getTargetContext(),
                                                       item));
-//        AdapterIdlingResource idlingResource = new AdapterIdlingResource(activityTestRule.getActivity().getAdapter());
-//        Espresso.registerIdlingResources(idlingResource);
+        CommentLoadIdlingResource idlingResource = new CommentLoadIdlingResource(activityTestRule.getActivity());
+        Espresso.registerIdlingResources(idlingResource);
 
-        // TODO: コメントなしを実装したら、メッセージが表示されているかどうかで判定する
-        onView(allOf(withId(R.id.comment),
-                     withText("test")))
-                .check(doesNotExist());
-//        Espresso.unregisterIdlingResources(idlingResource);
+        onView(withId(R.id.comment_status))
+                .check(matches(isDisplayed()));
+        Espresso.unregisterIdlingResources(idlingResource);
     }
 
-    private static class AdapterIdlingResource implements IdlingResource {
+    private static class CommentLoadIdlingResource implements IdlingResource {
         private ResourceCallback callback;
-        private BookmarkCommentsAdapter adapter;
+        private HatebuFeedDetailActivity activity;
 
-        public AdapterIdlingResource(BookmarkCommentsAdapter adapter) {
-            this.adapter = adapter;
+        public CommentLoadIdlingResource(HatebuFeedDetailActivity activity) {
+            this.activity = activity;
         }
 
         @Override
@@ -86,9 +83,7 @@ public class HatebuFeedDetailActivityTest {
 
         @Override
         public boolean isIdleNow() {
-            // TODO: 要改善！ アダプターサイズで判定すると、コメントなしのケースで待機できない
-            // use progressbar.isShown()
-            boolean isIdle = adapter.getItemCount() != 0;
+            boolean isIdle = activity.isCommentLoadFinished();
             if (isIdle && callback != null) {
                 callback.onTransitionToIdle();
             }
