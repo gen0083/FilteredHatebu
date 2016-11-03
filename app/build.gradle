@@ -4,9 +4,12 @@ apply plugin: 'com.cookpad.android.licensetools'
 apply plugin: 'io.fabric'
 apply plugin: 'com.github.triplet.play'
 
-android {
-    apply from: "${System.getenv('HOME')}/.android-mykey/FilteredHatebu.sign.gradle", to: android
+ext {
+    ciBuild = System.getenv("CI") == "true"
+    travisBuild = System.getenv("TRAVIS") == "true"
+}
 
+android {
     compileSdkVersion 25
     buildToolsVersion "25.0.0"
     defaultConfig {
@@ -22,6 +25,30 @@ android {
             applicationIdSuffix ".mock"
         }
         prod {
+        }
+    }
+    signingConfigs {
+        debug {
+            storeFile rootProject.file('debug.keystore')
+            storePassword 'android'
+            keyAlias 'androiddebugkey'
+            keyPassword 'android'
+        }
+        release {
+            // Travisでだけリリースビルドを行う
+            if (travisBuild) {
+                storeFile rootProject.file('release.keystore')
+                storePassword System.getenv('filtered_hatebu_pass')
+                keyAlias System.getenv('filtered_hatebu_alias')
+                keyPassword System.getenv('filtered_hatebu_key_pass')
+            }
+            // ローカルビルド
+            if (!ciBuild) {
+                storeFile rootProject.file('release.keystore')
+                storePassword getProperty('filtered_hatebu_pass')
+                keyAlias getProperty('filtered_hatebu_alias')
+                keyPassword getProperty('filtered_hatebu_key_pass')
+            }
         }
     }
     buildTypes {
@@ -40,6 +67,9 @@ android {
     dataBinding {
         enabled = true
     }
+    dexOptions {
+        preDexLibraries = !ciBuild
+    }
 }
 
 ribbonizer {
@@ -56,7 +86,9 @@ ribbonizer {
 
 play {
     track = 'production'
-    jsonFile = file(System.getenv('HOME') + "/.android-mykey/filteredhatebu_play_api.json")
+    if (!ciBuild) {
+        jsonFile = rootProject.file("filteredhatebu_play_api.json")
+    }
 }
 
 dependencies {
@@ -129,4 +161,29 @@ dependencies {
     testCompile junit4
     testCompile "org.robolectric:robolectric:3.1.2"
     testCompile 'org.mockito:mockito-core:1.10.19'
+}
+
+/*
+ * On Travis-CI androidTest failed as java.lang.IllegalAccessError: Class ref in pre-verified class resolved to unexpected implementation
+ * at android.databinding.DataBindingUtil.<clinit>(DataBindingUtil.java:31)
+ *
+ * This is workaround for it.
+ *
+ * Workaround for https://code.google.com/p/android/issues/detail?id=182715
+ *
+ * The Android Gradle plugin is creating DataBindingExportBuildInfoTasks for the instrumentation
+ * APK that generates from the app APKs layouts. This creates duplicate classes in the app and
+ * instrumentation APK which leads to
+ *      java.lang.IllegalAccessError: Class ref in pre-verified class resolved to unexpected implementation
+ * on older devices.
+ *
+ * The workaround is to get the DataBindingExportBuildInfoTasks tasks for the instrumentation APK
+ * and delete the files right after it creates them.
+ */
+tasks.withType(com.android.build.gradle.internal.tasks.databinding.DataBindingExportBuildInfoTask) { task ->
+    if (task.name.endsWith("AndroidTest")) {
+        task.finalizedBy(tasks.create("${task.name}Workaround") << {
+            task.output.deleteDir()
+        })
+    }
 }

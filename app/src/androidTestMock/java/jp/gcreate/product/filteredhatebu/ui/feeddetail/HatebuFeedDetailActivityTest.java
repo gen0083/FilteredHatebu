@@ -39,7 +39,9 @@ public class HatebuFeedDetailActivityTest {
         activityTestRule.launchActivity(
                 HatebuFeedDetailActivity.createIntent(InstrumentationRegistry.getTargetContext(),
                                                       item));
-        CommentLoadIdlingResource idlingResource = new CommentLoadIdlingResource(activityTestRule.getActivity());
+
+        CommentLoadIdlingResource idlingResource =
+                new CommentLoadIdlingResource(activityTestRule.getActivity());
         Espresso.registerIdlingResources(idlingResource);
 
         onView(allOf(withId(R.id.comment),
@@ -60,7 +62,9 @@ public class HatebuFeedDetailActivityTest {
         activityTestRule.launchActivity(
                 HatebuFeedDetailActivity.createIntent(InstrumentationRegistry.getTargetContext(),
                                                       item));
-        CommentLoadIdlingResource idlingResource = new CommentLoadIdlingResource(activityTestRule.getActivity());
+
+        CommentLoadIdlingResource idlingResource = new CommentLoadIdlingResource(
+                activityTestRule.getActivity());
         Espresso.registerIdlingResources(idlingResource);
 
         onView(withId(R.id.comment_status))
@@ -69,7 +73,7 @@ public class HatebuFeedDetailActivityTest {
     }
 
     private static class CommentLoadIdlingResource implements IdlingResource {
-        private ResourceCallback callback;
+        private ResourceCallback         callback;
         private HatebuFeedDetailActivity activity;
 
         public CommentLoadIdlingResource(HatebuFeedDetailActivity activity) {
