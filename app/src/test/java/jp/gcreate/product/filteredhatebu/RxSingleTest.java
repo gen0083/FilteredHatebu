@@ -2,13 +2,13 @@ package jp.gcreate.product.filteredhatebu;
 
 import org.junit.Test;
 
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 import rx.Single;
 import rx.SingleSubscriber;
 import rx.Subscription;
 import rx.functions.Action1;
-import rx.observers.TestSubscriber;
 import rx.schedulers.Schedulers;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -66,14 +66,21 @@ public class RxSingleTest {
 
     @Test
     public void onSuccess後はunsubscribeされる() throws InterruptedException {
-        TestSubscriber<String> test = new TestSubscriber<>();
+        // this test is unstable on ci. This code is bad design.
+        final CountDownLatch latch = new CountDownLatch(1);
+        final String[]       test  = {""};
         Subscription s = source
                 .subscribeOn(Schedulers.io())
-                .subscribe(test);
+                .subscribe(new Action1<String>() {
+                    @Override
+                    public void call(String s) {
+                        test[0] = s;
+                        latch.countDown();
+                    }
+                });
         assertThat(s.isUnsubscribed(), is(false));
-        test.awaitTerminalEvent(3, TimeUnit.SECONDS);
-        test.assertValue("test");
-        test.onCompleted();
+        latch.await(5, TimeUnit.SECONDS);
+        assertThat(test[0], is("test"));
         assertThat(s.isUnsubscribed(), is(true));
     }
 }

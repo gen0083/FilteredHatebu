@@ -1,0 +1,54 @@
+language: android
+android:
+  components:
+  - tools
+  - platform-tools
+  - build-tools-25.0.0
+  - android-25
+  - extra-google-google_play_services
+  - extra-google-m2repository
+  - extra-android-m2repository
+  - addon-google_apis-google-19
+  - sys-img-armeabi-v7a-android-19
+jdk:
+  - oraclejdk8
+before_install:
+  - openssl aes-256-cbc -K $encrypted_da784680a32e_key -iv $encrypted_da784680a32e_iv -in encrypted.tar.enc -out encrypted.tar -d
+  - tar xvf encrypted.tar
+  - echo $ANDROID_HOME
+  - mkdir -p $ANDROID_HOME/licenses
+  - echo -e "e6b7c2ab7fa2298c15165e9583d0acf0b04a2232\n8933bad161af4178b1185d1a37fbf41ea5269c55" > $ANDROID_HOME/licenses/android-sdk-license
+env:
+  global:
+  - ADB_INSTALL_TIMEOUT=10
+  - secure: IQ48XiX7PbRLtpX7S0lPjDFLb4IcyKFrjGkhiYtqGdw18vmx6SegkMgilGXYqKMXT5U1lK02Fb4m+H0gO1lZ4qCzaW8HJ2ST6ylXhmYKEoel8ad5ylArAbY6qk8LkDdGEK56EkNdh6xzZxpRkW7XwBE/lD2bOnGh4gw4uNomxwbvQYGHzax2acn25INJ7RMLadirsirzBQUpaESS2k/00qwZp+jLzBh/gYzOWezGNFj1UIPoKXSmZiXBJAWIHzQKcmYp2VGqlYE+m/ggQXrqwx2ipaDSx1mDeVJRV/Zn7flAx/UoopgbMKasJdR9oe5aB5dQMtWCUyRQrsaDkb+l/PnXNjvDpFdB0FgSRHMslW5DggqzorNSEzE7vrEDeBDR4qqs+grPvrQdLh/mviBOs5TfEX7QTh64Mn+g6fgjDVbYjYl0qGcEPQYc3dEyl0vJxKZh7iyLF1n2SRbJ76prT3WU83A7sJ2Quzm0rwYNto2xRoEcEKwzQbwZHDATZjjo5xxR7y0GQiyKPMZ7che6tF241X9Px5gloVJhSezSIjFWVmp+737DxoEToHVXQtfS4Mvvwm40huWOfMoM2rubxUrXEgWyo1BZvAD+UWW/opeSGO7xgcS7txj++4ncPS8pR1kOt5vkR3Z56rn+7d84ZR31EiojUkQwCeomgVfbSGc=
+  - secure: A2NSDz0WT83G35HfnEK3RLtMDJu8ahB4t/+WqFqNw4tvi73WqCpqhEARMeXH0UzuLWX8S9GXqJe/qAfYPxRp2htUB920gvdbRepsVSmwWRnVeYtF3K3AcpyGe6uTYMQaA48FDrJ29k1OcbHoc7hWGPsXQsUINo8DK7Sx6TI6qq4eLENVnLVca5BnauZIQ0o+xXvx/LiIHRSFvwYq/vB+ACSnwoBp1zY8cdgz7hHY+1yliu6sDVRnCQntBiiIoTJo5HN4LEwjz+ofY75Vg+F/2KypOPYXTOSKO/HH/KPM2NeJC+5EH9f2Y35W1MDgW+eJQl6mtD0U0CfKH6SXXcKKoCGLs20ru2gTg6xRSjTLPqg8vPZ6hOC6FCgXmwRv+yral5CqyFblUe6+hQycJqrRLmgZO2V1Yi0Yo/li4i3MUsMxJmXCvHMq8NF+vnsk0GIo6UxesG2ep75sdUFg2UrAN+bGRuXRo++CpW5yQIVGaQnq/TuuMuS7LvwlpPQqwWEt6J0wNY9ot8FNMxyLLGq/6SYO3316ABkxBU32UC9T59aQdFGoEohIGQC92J72vR0Q3rUw1XpNsfR8wxfbQ03w6ckyEst/fbOWdnZdPK3Fg6iescsiwcXLx73OWAksB/HXMWgc2aY2B1qhI/VznBtYyHSJ3vEaBL1m5jiH1mysqLo=
+  - secure: WtelRe5hbiS8SIkZJrzRIXIXZJHSaPZHO8VfcHLJMs9FCboI6NR0AIx4XDTivLmygzLmvhZJ6V/D+mzprZvjpz/HRRgbeXFL563k8kcolsGubxkXOIYKHeJbJ5GEU7MiluwUuWXRfdpw//n4WBLpZ2T2Py32NplUAmSQlwW5t0GQiYutdzwt4VIQZHBB4X43mZsOGRmISjBPp1lrs47GRFgMwTZemKoZzdBKvvFeyh7IEVxKvjf9Bd/c3PLhgPf3SnTJdOEMPBIFPuRaWPSinghmJ0qaMC2E8pYjn17u4lz9jatXkAjOg4HTFS2k6ve/W3xSgxxNugs743D06ay6LK3cOhniexeSwtKiYqKrY76SlDIAiKS8M1olUWPHuvvh7jSZADHU6u6JBYf0/cjCcvJ6aBCJLhduxQYPnsepQ8SmCIhTrkZzA+UHPsy5dnxxouuIaD7nSzpXaxjogGD6jtiexgkNcQZBME9mf+6cOfjs40hBowtwu1JmAI4eY46ttcIKpoUV0hRGCi3G+Z9Ujiu56kj5nGP9fXKT7ywiD4gJKltO4F8TBvpqv4nS6p7BBls1RakTG8rqsNXVJpoyQl/PMsnPzSaXbSgYJmzFH1N4A3rQdw9pn7qN0krZQV19oXIgLJa9B0X4iWE6o/+GmiAvjCgfgjnyIikIyZ+soLU=
+before_cache:
+  - rm -f $HOME/.gradle/caches/modules-2/modules-2.lock
+cache:
+  directories:
+    - "$HOME/.gradle/caches/"
+    - "$HOME/.gradle/wrapper/"
+script:
+  - "./gradlew testProdDebugUnitTest"
+  - echo no | android create avd --force -n test -t android-19 --abi armeabi-v7a
+  - emulator -avd test -no-skin -no-audio -no-window &
+  - android-wait-for-emulator
+  - sleep 10
+  - adb shell settings put global window_animation_scale 0
+  - adb shell settings put global transition_animation_scale 0
+  - adb shell settings put global animator_duration_scale 0
+  - adb shell input keyevent 82
+  - "./gradlew connectedAndroidTest"
+notifications:
+  slack:
+    secure: PyCqXWFVULLq19pk2Q2fpKlQp0+ETvWe+n7wV6+Xy7J6KBoKVarQ4bBqWJEUAq9AKn1nzW0WUsyZRA1+QvYHpeQZF+e3ayyTiBJetLfwCRAzW6EHRHRTBBeMwV0v6Aft0k07uJpu3d89+joHo/7Eg7tlvbCgXj1obq9YrXWGmNJnEf0XWbfs6O4pl0tnRDJ90eRJPlWRD6AdMHb+B5N38bJ7YMhEgp+Vd3tZ+PzxOLHMV/LOpA5Eb8dbnJFtVpD2yuo10dggjNSJ2peDocpC1aAV6LkSCgC/UoHJpn2FUT3OnYUyHHyX5lt1Z3BbuYh0DMyockR/cG3ctCl7V63FoOPxEo57xqpgfMIJVU88VgVNF21GFAA8LSrYzJ7hCjP0zcw58iUecm9Fi6G//ZL7HLt66Wf/oqT821vCyZBQI+JSb3/EdpyN6V5wkZ/p5lOjMe+gVophlxElggjo87iH+jDwaEfPm/2nlrasPpR8mx5zFR/WUvJZVy21EQrc8poOw3WQKWHpIdx9uBgPrHDGA4PQ76wJNLy8/pnTBfKfyW9VDLwLl4Qoerj2W9lUIgS68ZtAyecIjV7UcHyzO1rXoDVQLo/q+c4ZC5K7Ca1EdcGhqmhkc85qZUt5p/KnsTXhjVbWe8X1GHBGgTFbQwg8SCcauqTYq4sC24Lpl99eq5o=
+  email: false
+sudo: false
+deploy:
+  provider: script
+  script: scripts/deploy.sh
+  on:
+    branch: master
+    condition: $TRAVIS_PULL_REQUEST = true

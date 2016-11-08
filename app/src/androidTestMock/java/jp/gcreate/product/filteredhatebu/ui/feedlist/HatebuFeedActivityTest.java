@@ -1,7 +1,6 @@
 package jp.gcreate.product.filteredhatebu.ui.feedlist;
 
 
-import android.content.Intent;
 import android.support.test.espresso.Espresso;
 import android.support.test.espresso.IdlingResource;
 import android.support.test.espresso.ViewInteraction;
@@ -24,6 +23,7 @@ import org.junit.runner.RunWith;
 
 import jp.gcreate.product.filteredhatebu.R;
 
+import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.click;
@@ -31,12 +31,10 @@ import static android.support.test.espresso.assertion.ViewAssertions.doesNotExis
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static android.support.test.espresso.matcher.ViewMatchers.withClassName;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
-import static android.support.test.espresso.matcher.ViewMatchers.withParent;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.anything;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
@@ -44,12 +42,11 @@ public class HatebuFeedActivityTest {
     private IdlingResource idlingResource;
 
     @Rule
-    public ActivityTestRule<HatebuFeedActivity> mActivityTestRule = new ActivityTestRule<>(
-            HatebuFeedActivity.class, false, false);
+    public ActivityTestRule<HatebuFeedActivity> mActivityTestRule =
+            new ActivityTestRule<>(HatebuFeedActivity.class);
 
     @Before
     public void setUp() {
-        mActivityTestRule.launchActivity(new Intent());
         mActivityTestRule.getActivity().presenter.initialzieFilterRepository();
         idlingResource = new ItemSetIdlingResource( mActivityTestRule.getActivity());
         Espresso.registerIdlingResources(idlingResource);
@@ -63,23 +60,15 @@ public class HatebuFeedActivityTest {
 
     @Test
     public void フィルタを追加したら該当記事が表示されない() {
-        ViewInteraction recyclerView = onView(
-                allOf(withId(R.id.recycler_view), isDisplayed()));
-        recyclerView.perform(actionOnItemAtPosition(0, click()));
+        onView(allOf(withId(R.id.recycler_view), isDisplayed()))
+                .perform(actionOnItemAtPosition(0, click()));
 
-        ViewInteraction appCompatButton = onView(
-                allOf(withId(R.id.add_filter_button), withText("フィルタを追加"), isDisplayed()));
-        appCompatButton.perform(click());
+        onView(withId(R.id.add_filter_button))
+                .perform(click());
 
-        ViewInteraction appCompatTextView = onView(
-                allOf(withId(android.R.id.text1), withText("test.com/"),
-                      childAtPosition(
-                              allOf(withClassName(
-                                      is("com.android.internal.app.AlertController$RecycleListView")),
-                                    withParent(withClassName(is("android.widget.FrameLayout")))),
-                              0),
-                      isDisplayed()));
-        appCompatTextView.perform(click());
+        onData(anything())
+                .atPosition(0)
+                .perform(click());
 
         pressBack();
 
@@ -105,15 +94,9 @@ public class HatebuFeedActivityTest {
                 allOf(withId(R.id.add_filter_button), withText("フィルタを追加"), isDisplayed()));
         appCompatButton.perform(click());
 
-        ViewInteraction appCompatTextView = onView(
-                allOf(withId(android.R.id.text1), withText("test.com/test/"),
-                      childAtPosition(
-                              allOf(withClassName(
-                                      is("com.android.internal.app.AlertController$RecycleListView")),
-                                    withParent(withClassName(is("android.widget.FrameLayout")))),
-                              1),
-                      isDisplayed()));
-        appCompatTextView.perform(click());
+        onData(anything())
+                .atPosition(1)
+                .perform(click());
 
         pressBack();
 
@@ -168,15 +151,10 @@ public class HatebuFeedActivityTest {
                       isDisplayed()))
                 .perform(click());
 
-        ViewInteraction appCompatTextView = onView(
-                allOf(withId(android.R.id.text1), withText("test.com/"),
-                      childAtPosition(
-                              allOf(withClassName(
-                                      is("com.android.internal.app.AlertController$RecycleListView")),
-                                    withParent(withClassName(is("android.widget.FrameLayout")))),
-                              0),
-                      isDisplayed()));
-        appCompatTextView.perform(click());
+        // test.comをフィルタに追加
+        onData(anything())
+                .atPosition(0)
+                .perform(click());
 
         pressBack();
 

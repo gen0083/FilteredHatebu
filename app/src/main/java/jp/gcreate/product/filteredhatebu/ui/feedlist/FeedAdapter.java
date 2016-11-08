@@ -46,6 +46,8 @@ public class FeedAdapter extends RecyclerView.Adapter<DataBindingViewHolder<Item
         Timber.v("%s onBindViewHolder position:%d item:%s", this, position, item);
         binding.setItem(item);
         Picasso.with(context)
+                .cancelRequest(binding.favicon);
+        Picasso.with(context)
                .load(FAVICON_URL + item.getLink())
                .placeholder(R.drawable.favicon_placeholder)
                .error(R.drawable.favicon_placeholder)

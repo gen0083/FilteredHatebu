@@ -7,3 +7,5 @@
 /build
 /captures
 .externalNativeBuild
+release.keystore
+filteredhatebu_play_api.json

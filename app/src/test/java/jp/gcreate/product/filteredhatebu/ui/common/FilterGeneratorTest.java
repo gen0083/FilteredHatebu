@@ -6,8 +6,6 @@ import org.junit.runner.RunWith;
 
 import java.util.List;
 
-import jp.gcreate.product.filteredhatebu.ui.common.FilterGenerator;
-
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -16,7 +14,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
  */
 @RunWith(Enclosed.class)
 public class FilterGeneratorTest {
-    public static class フィルタ候補生成 {
+    public static class GenerateCandidate {
         @Test
         public void ホスト部2つサブディレクトリあり() {
             List<String> actual = FilterGenerator
@@ -55,7 +53,7 @@ public class FilterGeneratorTest {
     }
 
 
-    public static class ホスト部分 {
+    public static class Host {
         @Test
         public void ホスト部2つ() {
             String actual = FilterGenerator.getHost("http://test.com/hoge/fuga");
@@ -81,7 +79,7 @@ public class FilterGeneratorTest {
         }
     }
 
-    public static class サブドメインを除去 {
+    public static class RemoveSubDomain {
 
         @Test
         public void ホスト部が2つ() {
@@ -108,7 +106,7 @@ public class FilterGeneratorTest {
         }
     }
 
-    public static class サブディレクトリ {
+    public static class SubDirectory {
         @Test
         public void サブディレクトリあり() {
             String actual = FilterGenerator.getHostAndSubDirectory("http://test.com/subuser/123");
@@ -128,7 +126,7 @@ public class FilterGeneratorTest {
         }
     }
 
-    public static class サブドメインの除去メソッド {
+    public static class MethodRemoveSubDomain {
         @Test
         public void ホスト部が2つ() {
             String actual = FilterGenerator.removeSubDomain("test.com/");
