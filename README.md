@@ -1,6 +1,12 @@
 Filtered Hatebu
 ===============
 
+- TravisCI [![Build Status](https://travis-ci.org/gen0083/FilteredHatebu.svg?branch=develop)](https://travis-ci.org/gen0083/FilteredHatebu)
+- CircleCI [![CircleCI](https://circleci.com/gh/gen0083/FilteredHatebu/tree/develop.svg?style=svg)](https://circleci.com/gh/gen0083/FilteredHatebu/tree/develop)
+- Wercker [![wercker status](https://app.wercker.com/status/0f3eacbd625cd767b1f12e4e460eec03/s/develop "wercker status")](https://app.wercker.com/project/byKey/0f3eacbd625cd767b1f12e4e460eec03)
+
+---
+
 個人的な勉強・練習用に作ったはてブリーダーアプリです。アプリはGoogle Playで公開しています。
 
 <a href='https://play.google.com/store/apps/details?id=jp.gcreate.product.filteredhatebu&utm_source=global_co&utm_medium=prtnr&utm_content=Mar2515&utm_campaign=PartBadge&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img width="200" alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png'/></a>
