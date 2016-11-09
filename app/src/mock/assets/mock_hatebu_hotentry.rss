@@ -41,7 +41,7 @@
         </items>
         <atom10:link xmlns:atom10="http://www.w3.org/2005/Atom" rel="self" type="application/rdf+xml" href="http://feeds.feedburner.com/hatena/b/hotentry" /><feedburner:info xmlns:feedburner="http://rssnamespace.org/feedburner/ext/1.0" uri="hatena/b/hotentry" /><atom10:link xmlns:atom10="http://www.w3.org/2005/Atom" rel="hub" href="http://pubsubhubbub.appspot.com/" /></channel>
     <item rdf:about="http://test.com/hoge">
-        <title>test1</title>
+        <title>test0-1</title>
         <link>http://test.com/hoge</link>
         <description>test1's description</description>
         <content:encoded><![CDATA[test1's description]]></content:encoded>
@@ -51,7 +51,7 @@
     </item>
     <item rdf:about="http://test2.com/abc/def">
         <title>test2</title>
-        <link>http://test1.com/abc/def</link>
+        <link>http://test2.com/abc/def</link>
         <description>あいうえおかきくけこ</description>
         <content:encoded><![CDATA[あいうえおかきくけこ]]></content:encoded>
         <dc:date>2016-10-24T12:03:54+09:00</dc:date>
@@ -59,7 +59,7 @@
         <hatena:bookmarkcount>302</hatena:bookmarkcount>
     </item>
     <item rdf:about="http://test.com/test/is/difficult">
-        <title>test3</title>
+        <title>test0-2</title>
         <link>http://test.com/test/is/difficult</link>
         <description>Test is difficult. This is the same domain with first article.</description>
         <content:encoded><![CDATA[Test is difficult. This is the same domain with first article.]]></content:encoded>
@@ -67,26 +67,35 @@
         <dc:subject>学び</dc:subject>
         <hatena:bookmarkcount>355</hatena:bookmarkcount>
     </item>
-    <item rdf:about="http://www.test4.jp/hl?a=20161024-00000323-oric-ent">
+    <item rdf:about="http://www.test4.com/hl?a=20161024-00000323-oric-ent">
         <title>test4</title>
-        <link>http://www.test4.jp/hl?a=20161024-00000323-oric-ent</link>
+        <link>http://www.test4.com/hl?a=20161024-00000323-oric-ent</link>
         <description>4th description</description>
         <content:encoded><![CDATA[4th description]]></content:encoded>
         <dc:date>2016-10-24T12:44:14+09:00</dc:date>
         <dc:subject>アニメとゲーム</dc:subject>
         <hatena:bookmarkcount>232</hatena:bookmarkcount>
     </item>
-    <item rdf:about="http://test5.net/articles/-/141117">
+    <item rdf:about="http://test5.com/articles/-/141117">
         <title>test5</title>
-        <link>http://test5.net/articles/-/141117</link>
+        <link>http://test5.com/articles/-/141117</link>
         <description>test5</description>
         <content:encoded><![CDATA[test5]]></content:encoded>
         <dc:date>2016-10-24T08:20:47+09:00</dc:date>
         <dc:subject>政治と経済</dc:subject>
         <hatena:bookmarkcount>342</hatena:bookmarkcount>
     </item>
-    <item rdf:about="http://www.test.com/test/manager">
+    <item rdf:about="http://test6.com/360/G036098/20161024011/">
         <title>test6</title>
+        <link>http://test6.com/360/G036098/20161024011/</link>
+        <description>6th test.</description>
+        <content:encoded><![CDATA[7th test.]]></content:encoded>
+        <dc:date>2016-10-24T12:25:37+09:00</dc:date>
+        <dc:subject>アニメとゲーム</dc:subject>
+        <hatena:bookmarkcount>187</hatena:bookmarkcount>
+    </item>
+    <item rdf:about="http://www.test.com/test/manager">
+        <title>test0-3</title>
         <link>http://www.test.com/test/manager</link>
         <description>Manager</description>
         <content:encoded><![CDATA[Manager]]></content:encoded>
@@ -94,63 +103,54 @@
         <dc:subject>テクノロジー</dc:subject>
         <hatena:bookmarkcount>307</hatena:bookmarkcount>
     </item>
-    <item rdf:about="http://abc.com/360/G036098/20161024011/">
-        <title>test7</title>
-        <link>http://abc.com/360/G036098/20161024011/</link>
-        <description>7th test.</description>
-        <content:encoded><![CDATA[7th test.]]></content:encoded>
-        <dc:date>2016-10-24T12:25:37+09:00</dc:date>
-        <dc:subject>アニメとゲーム</dc:subject>
-        <hatena:bookmarkcount>187</hatena:bookmarkcount>
-    </item>
-    <item rdf:about="http://test8.jp/articles/-/50023">
+    <item rdf:about="http://test8.com/articles/-/50023">
         <title>test8</title>
-        <link>http://test8.jp/articles/-/50023</link>
+        <link>http://test8.com/articles/-/50023</link>
         <description>ABCDEFG</description>
         <content:encoded><![CDATA[ABCDEFG]]></content:encoded>
         <dc:date>2016-10-24T07:34:53+09:00</dc:date>
         <dc:subject>世の中</dc:subject>
         <hatena:bookmarkcount>307</hatena:bookmarkcount>
     </item>
-    <item rdf:about="http://test9.net/articles/ASJBS1S6BJBSUHBI005.html">
+    <item rdf:about="http://test9.com/articles/ASJBS1S6BJBSUHBI005.html">
         <title>test9</title>
-        <link>http://test9.net/articles/ASJBS1S6BJBSUHBI005.html</link>
+        <link>http://test9.com/articles/ASJBS1S6BJBSUHBI005.html</link>
         <description>one two three</description>
         <content:encoded><![CDATA[one two three]]></content:encoded>
         <dc:date>2016-10-24T11:26:20+09:00</dc:date>
         <dc:subject>世の中</dc:subject>
         <hatena:bookmarkcount>193</hatena:bookmarkcount>
     </item>
-    <item rdf:about="http://test.10.jp/kiji/93581/">
+    <item rdf:about="http://test10.com/kiji/93581/">
         <title>test10</title>
-        <link>http://test.10.jp/kiji/93581/</link>
+        <link>http://test10.com/kiji/93581/</link>
         <description>test dot</description>
         <content:encoded><![CDATA[test dot]]></content:encoded>
         <dc:date>2016-10-24T12:29:12+09:00</dc:date>
         <dc:subject>おもしろ</dc:subject>
         <hatena:bookmarkcount>125</hatena:bookmarkcount>
     </item>
-    <item rdf:about="http://test11.uk/20161024003339">
+    <item rdf:about="http://test11.com/20161024003339">
         <title>test11</title>
-        <link>http://test11.uk/20161024003339</link>
+        <link>http://test11.com/20161024003339</link>
         <description>test11</description>
         <content:encoded><![CDATA[test11]]></content:encoded>
         <dc:date>2016-10-24T01:00:07+09:00</dc:date>
         <dc:subject>おもしろ</dc:subject>
         <hatena:bookmarkcount>393</hatena:bookmarkcount>
     </item>
-    <item rdf:about="http://test12.tv/">
+    <item rdf:about="http://test12.com/">
         <title>test12</title>
-        <link>http://test12.tv/</link>
+        <link>http://test12.com/</link>
         <description>test12</description>
         <content:encoded><![CDATA[test12]]></content:encoded>
         <dc:date>2016-10-24T09:33:20+09:00</dc:date>
         <dc:subject>テクノロジー</dc:subject>
         <hatena:bookmarkcount>266</hatena:bookmarkcount>
     </item>
-    <item rdf:about="http://test13.go.jp/index.html">
+    <item rdf:about="http://test13.com/index.html">
         <title>test13</title>
-        <link>http://test13.go.jp/index.html</link>
+        <link>http://test13.com/index.html</link>
         <description>test13</description>
         <content:encoded><![CDATA[test13]]></content:encoded>
         <dc:date>2016-10-24T15:16:05+09:00</dc:date>
@@ -175,27 +175,27 @@
         <dc:subject>暮らし</dc:subject>
         <hatena:bookmarkcount>172</hatena:bookmarkcount>
     </item>
-    <item rdf:about="http://test16.jp/articles/-/48185">
+    <item rdf:about="http://test16.com/articles/-/48185">
         <title>test16</title>
-        <link>http://test16.jp/articles/-/48185</link>
+        <link>http://test16.com/articles/-/48185</link>
         <description>test16</description>
         <content:encoded><![CDATA[test16]]></content:encoded>
         <dc:date>2016-10-24T07:56:04+09:00</dc:date>
         <dc:subject>政治と経済</dc:subject>
         <hatena:bookmarkcount>225</hatena:bookmarkcount>
     </item>
-    <item rdf:about="http://test17.org/wp/2840">
+    <item rdf:about="http://test17.com/wp/2840">
         <title>test17</title>
-        <link>http://test17.org/wp/2840</link>
+        <link>http://test17.com/wp/2840</link>
         <description>test17</description>
         <content:encoded><![CDATA[test17]]></content:encoded>
         <dc:date>2016-10-23T23:01:13+09:00</dc:date>
         <dc:subject>テクノロジー</dc:subject>
         <hatena:bookmarkcount>553</hatena:bookmarkcount>
     </item>
-    <item rdf:about="http://test18.jp/articles/20161024/k00/00e/040/123000c">
+    <item rdf:about="http://test18.com/articles/20161024/k00/00e/040/123000c">
         <title>test18</title>
-        <link>http://test18.jp/articles/20161024/k00/00e/040/123000c</link>
+        <link>http://test18.com/articles/20161024/k00/00e/040/123000c</link>
         <description>test18</description>
         <content:encoded><![CDATA[test18]]></content:encoded>
         <dc:date>2016-10-24T08:42:55+09:00</dc:date>
@@ -211,27 +211,27 @@
         <dc:subject>暮らし</dc:subject>
         <hatena:bookmarkcount>70</hatena:bookmarkcount>
     </item>
-    <item rdf:about="http://test20.jp/">
+    <item rdf:about="http://test20.com/">
         <title>test20</title>
-        <link>http://test20.jp/</link>
+        <link>http://test20.com/</link>
         <description>test20</description>
         <content:encoded><![CDATA[test20]]></content:encoded>
         <dc:date>2016-10-23T22:53:36+09:00</dc:date>
         <dc:subject>テクノロジー</dc:subject>
         <hatena:bookmarkcount>150</hatena:bookmarkcount>
     </item>
-    <item rdf:about="http://test21.jp/20161024005709">
+    <item rdf:about="http://test21.com/20161024005709">
         <title>test21</title>
-        <link>http://test21.jp/20161024005709</link>
+        <link>http://test21.com/20161024005709</link>
         <description>test21</description>
         <content:encoded><![CDATA[test21]]></content:encoded>
         <dc:date>2016-10-24T00:58:44+09:00</dc:date>
         <dc:subject>暮らし</dc:subject>
         <hatena:bookmarkcount>284</hatena:bookmarkcount>
     </item>
-    <item rdf:about="http://test22.co.jp/hl?a=20161024-00000001-maiall-soci">
+    <item rdf:about="http://test22.com/hl?a=20161024-00000001-maiall-soci">
         <title>test22</title>
-        <link>http://test22.co.jp/hl?a=20161024-00000001-maiall-soci</link>
+        <link>http://test22.com/hl?a=20161024-00000001-maiall-soci</link>
         <description>test22</description>
         <content:encoded><![CDATA[test22]]></content:encoded>
         <dc:date>2016-10-24T11:10:55+09:00</dc:date>
@@ -256,9 +256,9 @@
         <dc:subject>テクノロジー</dc:subject>
         <hatena:bookmarkcount>66</hatena:bookmarkcount>
     </item>
-    <item rdf:about="http://test25.co.jp/news/2080417/full/">
+    <item rdf:about="http://test25.com/news/2080417/full/">
         <title>test25</title>
-        <link>http://test25.co.jp/news/2080417/full/</link>
+        <link>http://test25.com/news/2080417/full/</link>
         <description>test25</description>
         <content:encoded><![CDATA[test25]]></content:encoded>
         <dc:date>2016-10-24T12:49:31+09:00</dc:date>
@@ -283,27 +283,27 @@
         <dc:subject>学び</dc:subject>
         <hatena:bookmarkcount>692</hatena:bookmarkcount>
     </item>
-    <item rdf:about="http://test28.hatenablog.com/entry/serge.paugam">
+    <item rdf:about="http://test28.com/entry/serge.paugam">
         <title>test28</title>
-        <link>http://test28.hatenablog.com/entry/serge.paugam</link>
+        <link>http://test28.com/entry/serge.paugam</link>
         <description>test28</description>
         <content:encoded><![CDATA[test28]]></content:encoded>
         <dc:date>2016-10-23T21:52:16+09:00</dc:date>
         <dc:subject>政治と経済</dc:subject>
         <hatena:bookmarkcount>910</hatena:bookmarkcount>
     </item>
-    <item rdf:about="http://test29.jp/medicalinsurance/">
+    <item rdf:about="http://test29.com/medicalinsurance/">
         <title>test29</title>
-        <link>http://test29.jp/medicalinsurance/</link>
+        <link>http://test29.com/medicalinsurance/</link>
         <description>test29</description>
         <content:encoded><![CDATA[test29]]></content:encoded>
         <dc:date>2016-10-24T10:31:12+09:00</dc:date>
         <dc:subject>政治と経済</dc:subject>
         <hatena:bookmarkcount>96</hatena:bookmarkcount>
     </item>
-    <item rdf:about="http://test30.jp/">
+    <item rdf:about="http://test30.com/">
         <title>test30</title>
-        <link>http://test30.jp/</link>
+        <link>http://test30.com/</link>
         <description>test30</description>
         <content:encoded><![CDATA[test30]]></content:encoded>
         <dc:date>2016-10-24T11:36:43+09:00</dc:date>

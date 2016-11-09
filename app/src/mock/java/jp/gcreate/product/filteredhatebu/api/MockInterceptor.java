@@ -3,6 +3,7 @@ package jp.gcreate.product.filteredhatebu.api;
 import android.content.Context;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -14,6 +15,7 @@ import javax.inject.Inject;
 
 import jp.gcreate.product.filteredhatebu.BuildConfig;
 import jp.gcreate.product.filteredhatebu.di.qualifier.ApplicationContext;
+import jp.gcreate.product.filteredhatebu.ui.feedlist.FeedAdapter;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
@@ -53,21 +55,31 @@ public class MockInterceptor implements Interceptor {
         }
 
         if (FeedsBurnerClienet.BASE_URL.contains(url.host())) {
+            // 総合ページのモックフィードを返す
             return mockedFeedsBurnerResponse(chain.request());
         }
         if (HatenaClient.BASE_URL.contains(url.host())) {
+            // HatebuFeedDetailActivity
             if (url.encodedPath().equals("/entry/json/") ||
                 url.encodedPath().equals("/entry/jsonlite/")) {
                 if (url.query().contains("test.com/")) {
+                    // コメントありのページを返す（test.comはモックに2件だけ用意されている）
                     return mockedHatebuEntry(chain.request());
                 } else {
+                    // それ以外はコメントなしを返す
                     return mockedHatebuEntryNoComment(chain.request());
                 }
             }
+            // カテゴリのモックフィードを返す
             Matcher m = categoryUrl.matcher(url.encodedPath());
             if (m.find()) {
                 return mockedHatebuCategory(chain.request());
             }
+        }
+
+        // favicon
+        if (FeedAdapter.FAVICON_URL.contains(url.host())) {
+            return mockedFaviconWithParameter(chain.request(), url.queryParameter("url"));
         }
         return mockedNotFound(chain.request());
     }
@@ -76,13 +88,9 @@ public class MockInterceptor implements Interceptor {
         // フィードの再取得を行った際に、表示中と変化がない場合はリストを更新しない
         // しかしこの挙動は、テストがしづらい（新しい記事が返ってくるかどうかは時間が経過しないと確認できない）
         // そこで、mockレスポンスは5回に1回異なるフィードを返すことで
-        // 新しいフィードが取得できたときをエミュレートする
+        // 新しいフィードが取得できたときの挙動を確認する
         count++;
-        Response.Builder builder = new Response.Builder()
-                .request(request)
-                .protocol(Protocol.HTTP_1_1)
-                .code(200)
-                .message("ok");
+        Response.Builder builder = createBaseResponseOk(request);
         builder = (count % 5 != 0) ?
                   builder.body(ResponseBody.create(MediaType.parse("application/xml"),
                                                    openFile("mock_hatebu_hotentry.rss")))
@@ -93,36 +101,49 @@ public class MockInterceptor implements Interceptor {
     }
 
     private Response mockedHatebuCategory(Request request) throws IOException {
-        return new Response.Builder()
-                .request(request)
-                .protocol(Protocol.HTTP_1_1)
-                .code(200)
-                .message("ok")
+        return createBaseResponseOk(request)
                 .body(ResponseBody.create(MediaType.parse("application/xml"),
                                           openFile("mock_hatebu_hotentry_category.rss")))
                 .build();
     }
 
     private Response mockedHatebuEntry(Request request) throws IOException {
-        return new Response.Builder()
-                .request(request)
-                .protocol(Protocol.HTTP_1_1)
-                .code(200)
-                .message("ok")
+        return createBaseResponseOk(request)
                 .body(ResponseBody.create(MediaType.parse("application/json"),
                                           openFile("mock_hatebu_entry.json")))
                 .build();
     }
 
     private Response mockedHatebuEntryNoComment(Request request) throws IOException {
+        return createBaseResponseOk(request)
+                .body(ResponseBody.create(MediaType.parse("application/json"),
+                                          openFile("mock_hatebu_entry_no_comment.json")))
+                .build();
+    }
+
+    private Response mockedFaviconWithParameter(Request request, String parameter) throws IOException {
+        String[] params = {"test", "test2", "test4", "test5", "test6", "test8", "test9", "test10",
+                           "test11", "test12", "test13", "test14", "test15", "test16", "test17",
+                           "test18", "test19", "test20", "test21", "test22", "test23", "test24",
+                           "test25", "test26", "test27", "test28", "test29", "test30"};
+        for (String param : params) {
+            if (parameter.contains(param + ".com")) return mockedFaviconWithFileName(request, param + ".png");
+        }
+        return mockedNotFound(request);
+    }
+
+    private Response mockedFaviconWithFileName(Request request, String fileName) throws IOException {
+        return createBaseResponseOk(request)
+                .body(ResponseBody.create(MediaType.parse("image/png"), openImageFile(fileName)))
+                .build();
+    }
+
+    private Response.Builder createBaseResponseOk(Request request) {
         return new Response.Builder()
                 .request(request)
                 .protocol(Protocol.HTTP_1_1)
                 .code(200)
-                .message("ok")
-                .body(ResponseBody.create(MediaType.parse("application/json"),
-                                          openFile("mock_hatebu_entry_no_comment.json")))
-                .build();
+                .message("ok");
     }
 
     private Response mockedNotFound(Request request) throws IOException {
@@ -146,5 +167,18 @@ public class MockInterceptor implements Interceptor {
         reader.close();
         stream.close();
         return sb.toString();
+    }
+
+    private byte[] openImageFile(String fileName) throws IOException {
+        InputStream inputStream   = context.getAssets().open(fileName);
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        byte[] bytes              = new byte[1024];
+        while(inputStream.read(bytes) > 0) {
+            out.write(bytes);
+        }
+        byte[] image = out.toByteArray();
+        out.close();
+        inputStream.close();
+        return image;
     }
 }

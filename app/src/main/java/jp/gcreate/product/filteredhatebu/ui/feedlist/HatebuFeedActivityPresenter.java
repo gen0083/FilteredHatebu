@@ -13,6 +13,7 @@ import jp.gcreate.product.filteredhatebu.api.FeedsBurnerClienet;
 import jp.gcreate.product.filteredhatebu.api.HatenaClient;
 import jp.gcreate.product.filteredhatebu.data.FilterRepository;
 import jp.gcreate.product.filteredhatebu.di.Scope.ActivityScope;
+import jp.gcreate.product.filteredhatebu.ui.common.FaviconUtil;
 import timber.log.Timber;
 
 /**
@@ -28,14 +29,17 @@ public class HatebuFeedActivityPresenter implements HatebuFeedContract.ParentPre
     private FeedsBurnerClienet      feedsBurnerClienet;
     private HatenaClient.XmlService hatenaXmlService;
     private FilterRepository        filterRepository;
+    private FaviconUtil             faviconUtil;
 
     @Inject
     public HatebuFeedActivityPresenter(FeedsBurnerClienet feedsBurnerClienet,
                                        HatenaClient.XmlService hatenaXmlService,
-                                       FilterRepository filterRepository) {
+                                       FilterRepository filterRepository,
+                                       FaviconUtil faviconUtil) {
         this.feedsBurnerClienet = feedsBurnerClienet;
         this.hatenaXmlService = hatenaXmlService;
         this.filterRepository = filterRepository;
+        this.faviconUtil = faviconUtil;
     }
 
     @Override
@@ -65,7 +69,8 @@ public class HatebuFeedActivityPresenter implements HatebuFeedContract.ParentPre
             HatebuFeedFragmentPresenter p = new HatebuFeedFragmentPresenter(key,
                                                                             feedsBurnerClienet,
                                                                             hatenaXmlService,
-                                                                            filterRepository);
+                                                                            filterRepository,
+                                                                            faviconUtil);
             presenters.put(key, p);
             return p;
         }
