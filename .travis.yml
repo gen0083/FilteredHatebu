@@ -51,4 +51,3 @@ deploy:
   script: scripts/deploy.sh
   on:
     branch: master
-    condition: $TRAVIS_PULL_REQUEST = true
