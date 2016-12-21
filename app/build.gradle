@@ -94,7 +94,7 @@ play {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
-    def support_ver = "25.0.0"
+    def support_ver = "25.1.0"
     compile "com.android.support:appcompat-v7:$support_ver"
     compile "com.android.support:design:$support_ver"
     compile "com.android.support:recyclerview-v7:$support_ver"
