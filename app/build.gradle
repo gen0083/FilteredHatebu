@@ -16,8 +16,8 @@ android {
         applicationId "jp.gcreate.product.filteredhatebu"
         minSdkVersion 15
         targetSdkVersion 24
-        versionCode 6
-        versionName "v16.11.1"
+        versionCode 7
+        versionName "v16.12.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     productFlavors {
@@ -94,7 +94,7 @@ play {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
-    def support_ver = "25.0.0"
+    def support_ver = "25.1.0"
     compile "com.android.support:appcompat-v7:$support_ver"
     compile "com.android.support:design:$support_ver"
     compile "com.android.support:recyclerview-v7:$support_ver"
@@ -108,6 +108,7 @@ dependencies {
     compile 'io.reactivex:rxjava:1.2.2'
     compile 'io.reactivex:rxandroid:1.2.1'
     compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.jakewharton.picasso:picasso2-okhttp3-downloader:1.1.0'
     compile 'com.jakewharton.threetenabp:threetenabp:1.0.4'
 
     def orma_version = '3.0.0'

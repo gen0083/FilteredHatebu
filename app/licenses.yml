@@ -99,6 +99,12 @@
   license: The Apache Software License, Version 2.0
   licenseUrl: http://www.apache.org/licenses/LICENSE-2.0.txt
   url: https://github.com/JakeWharton/timber
+- artifact: com.jakewharton.picasso:picasso2-okhttp3-downloader:+
+  name: Picasso 2 OkHttp 3 Client
+  copyrightHolder: Jake Wharton
+  license: Apache License Version 2.0
+  licenseUrl: http://www.apache.org/licenses/LICENSE-2.0.txt
+  url: https://github.com/JakeWharton/picasso2-okhttp3-downloader
 - artifact: com.crashlytics.sdk.android:answers:+
   name: Android SDK Answers
   copyrightHolder: Crashlytics, Inc.

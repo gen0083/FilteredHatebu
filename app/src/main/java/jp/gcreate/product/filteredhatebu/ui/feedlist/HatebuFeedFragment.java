@@ -23,6 +23,7 @@ import jp.gcreate.product.filteredhatebu.R;
 import jp.gcreate.product.filteredhatebu.databinding.FragmentHatebuFeedBinding;
 import jp.gcreate.product.filteredhatebu.model.HatebuFeedItem;
 import jp.gcreate.product.filteredhatebu.ui.feeddetail.HatebuFeedDetailActivity;
+import okhttp3.OkHttpClient;
 import timber.log.Timber;
 
 /**
@@ -39,6 +40,8 @@ public class HatebuFeedFragment extends Fragment implements HatebuFeedContract.F
     private int                       scrolledPosition;
     @Inject
     HatebuFeedActivityPresenter parentPresenter;
+    @Inject
+    OkHttpClient client;
     private HatebuFeedContract.ChildPresenter presenter;
 
 

@@ -101,7 +101,7 @@ public class HatebuFeedActivityTest {
         pressBack();
 
         ViewInteraction textView = onView(
-                allOf(withId(R.id.title), withText("test1"),
+                allOf(withId(R.id.title), withText("test0-1"),
                       childAtPosition(
                               childAtPosition(
                                       IsInstanceOf.<View>instanceOf(

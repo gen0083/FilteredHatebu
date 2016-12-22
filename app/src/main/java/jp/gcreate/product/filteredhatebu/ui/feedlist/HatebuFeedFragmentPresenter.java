@@ -1,5 +1,7 @@
 package jp.gcreate.product.filteredhatebu.ui.feedlist;
 
+import android.graphics.drawable.Drawable;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +11,7 @@ import jp.gcreate.product.filteredhatebu.data.FilterRepository;
 import jp.gcreate.product.filteredhatebu.model.HatebuFeed;
 import jp.gcreate.product.filteredhatebu.model.HatebuFeedItem;
 import jp.gcreate.product.filteredhatebu.model.UriFilter;
+import jp.gcreate.product.filteredhatebu.ui.common.FaviconUtil;
 import rx.Observable;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
@@ -28,6 +31,7 @@ class HatebuFeedFragmentPresenter implements HatebuFeedContract.ChildPresenter {
     private       Observable<HatebuFeed>          feedObservable;
     private       long                            previousModifiedTime;
     private       Subscription                    loadingSubscription;
+    private       FaviconUtil                     faviconUtil;
     private List<HatebuFeedItem> originList   = new ArrayList<>();
     private List<HatebuFeedItem> filteredList = new ArrayList<>();
     private boolean              isFirstTime  = true;
@@ -35,9 +39,11 @@ class HatebuFeedFragmentPresenter implements HatebuFeedContract.ChildPresenter {
     HatebuFeedFragmentPresenter(String key,
                                 FeedsBurnerClienet feedsBurnerClienet,
                                 HatenaClient.XmlService hatenaService,
-                                final FilterRepository filterRepository) {
+                                final FilterRepository filterRepository,
+                                FaviconUtil faviconUtil) {
         this.categoryKey = key;
         this.filterRepository = filterRepository;
+        this.faviconUtil = faviconUtil;
         feedObservable = (key.equals("")) ? feedsBurnerClienet.getHotentryFeed() :
                          hatenaService.getCategoryFeed(categoryKey);
         filterRepository.listenModified()
@@ -126,7 +132,8 @@ class HatebuFeedFragmentPresenter implements HatebuFeedContract.ChildPresenter {
                     public List<HatebuFeedItem> call(List<HatebuFeedItem> hatebuFeedItems) {
                         originList = hatebuFeedItems;
                         // 別スレッドで処理しているのでblockingで問題ない
-                        List<UriFilter> filters = filterRepository.getFilterAll().toBlocking().value();
+                        List<UriFilter> filters = filterRepository.getFilterAll().toBlocking()
+                                                                  .value();
                         // フィルタ処理した後のリストを流す
                         return filterOriginList(hatebuFeedItems, filters);
                     }
@@ -158,6 +165,11 @@ class HatebuFeedFragmentPresenter implements HatebuFeedContract.ChildPresenter {
                         showNetworkError();
                     }
                 });
+    }
+
+    @Override
+    public Observable<Drawable> fetchFavicon(String url) {
+        return faviconUtil.fetchFavicon(url);
     }
 
     private boolean isLoading() {

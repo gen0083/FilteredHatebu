@@ -8,6 +8,10 @@
         android:width="16dp"
         android:height="16dp"
         />
+    <stroke
+        android:width="1px"
+        android:color="@color/amber_50"
+        />
 
     <solid
         android:color="@color/white"
