@@ -72,6 +72,25 @@ public class HatebuFeedDetailActivityTest {
         Espresso.unregisterIdlingResources(idlingResource);
     }
 
+    @Test
+    public void コメントがnullのケース() {
+        // 対象のページがコメント不許可の設定がされている場合、bookmarksがjsonレスポンスに含まれない場合がある
+
+        HatebuFeedItem item = new HatebuFeedItem();
+        // www.test4.comはbookmarksが存在しないjsonを返却するようにモックしている
+        item.setLink("http://www.test4.com/hoge");
+
+        activityTestRule.launchActivity(HatebuFeedDetailActivity.createIntent(InstrumentationRegistry.getTargetContext(),
+                                                                              item));
+
+        CommentLoadIdlingResource idlingResource = new CommentLoadIdlingResource(activityTestRule.getActivity());
+        Espresso.registerIdlingResources(idlingResource);
+
+        onView(withId(R.id.comment_status))
+                .check(matches(isDisplayed()));
+        Espresso.unregisterIdlingResources(idlingResource);
+    }
+
     private static class CommentLoadIdlingResource implements IdlingResource {
         private ResourceCallback         callback;
         private HatebuFeedDetailActivity activity;
