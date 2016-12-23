@@ -3,10 +3,11 @@ package jp.gcreate.product.filteredhatebu.ui.feedlist;
 
 import android.support.test.espresso.Espresso;
 import android.support.test.espresso.IdlingResource;
-import android.support.test.espresso.ViewInteraction;
+import android.support.test.espresso.matcher.BoundedMatcher;
 import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
@@ -22,24 +23,24 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import jp.gcreate.product.filteredhatebu.R;
+import jp.gcreate.product.filteredhatebu.databinding.ItemHatebuFeedBinding;
+import jp.gcreate.product.filteredhatebu.ui.common.DataBindingViewHolder;
 
-import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
-import static android.support.test.espresso.Espresso.pressBack;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.doesNotExist;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
-import static android.support.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
+import static android.support.test.espresso.contrib.RecyclerViewActions.scrollToHolder;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
-import static org.hamcrest.Matchers.anything;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 public class HatebuFeedActivityTest {
-    private IdlingResource idlingResource;
+    private IdlingResource              idlingResource;
+    private HatebuFeedActivityPresenter presenter;
 
     @Rule
     public ActivityTestRule<HatebuFeedActivity> mActivityTestRule =
@@ -47,88 +48,72 @@ public class HatebuFeedActivityTest {
 
     @Before
     public void setUp() {
-        mActivityTestRule.getActivity().presenter.initialzieFilterRepository();
-        idlingResource = new ItemSetIdlingResource( mActivityTestRule.getActivity());
+        presenter = mActivityTestRule.getActivity().presenter;
+        presenter.initialzieFilterRepository();
+        idlingResource = new ItemSetIdlingResource(mActivityTestRule.getActivity());
         Espresso.registerIdlingResources(idlingResource);
     }
 
     @After
     public void tearDown() {
-        mActivityTestRule.getActivity().presenter.initialzieFilterRepository();
+        presenter.initialzieFilterRepository();
         Espresso.unregisterIdlingResources(idlingResource);
     }
 
     @Test
-    public void フィルタを追加したら該当記事が表示されない() {
+    public void フィルタ無しの場合表示されている() {
+        onView(allOf(withId(R.id.url), withText("test.com/hoge")))
+                .check(matches(isDisplayed()));
+        onView(allOf(withId(R.id.url), withText("test.com/test/is/difficult")))
+                .check(matches(isDisplayed()));
         onView(allOf(withId(R.id.recycler_view), isDisplayed()))
-                .perform(actionOnItemAtPosition(0, click()));
-
-        onView(withId(R.id.add_filter_button))
-                .perform(click());
-
-        onData(anything())
-                .atPosition(0)
-                .perform(click());
-
-        pressBack();
-
-        ViewInteraction textView = onView(
-                allOf(withId(R.id.title), withText("test1"),
-                      childAtPosition(
-                              childAtPosition(
-                                      IsInstanceOf.<View>instanceOf(
-                                              android.widget.LinearLayout.class),
-                                      0),
-                              1),
-                      isDisplayed()));
-        textView.check(doesNotExist());
+                .perform(scrollToHolder(withHolderUrlText("www.test.com/test/manager")));
+        onView(allOf(withId(R.id.url), withText("www.test.com/test/manager")))
+                .check(matches(isDisplayed()));
     }
 
     @Test
-    public void サブディレクトリ込で登録後test1は表示test3は表示されない() {
-        ViewInteraction recyclerView = onView(
-                allOf(withId(R.id.recycler_view), isDisplayed()));
-        recyclerView.perform(actionOnItemAtPosition(2, click()));
+    public void フィルタを追加したら該当記事が表示されない() {
+        presenter.addFilter("test.com/");
+        onView(allOf(withId(R.id.url), withText("test.com/hoge")))
+                .check(doesNotExist());
+        onView(allOf(withId(R.id.url), withText("test.com/test/is/difficult")))
+                .check(doesNotExist());
+        onView(allOf(withId(R.id.url), withText("www.test.com/test/manager")))
+                .check(doesNotExist());
+        // ちなみにこれだとテストとして不適当
+        // doesNotExistでは表示されていないから存在していないのか、
+        // アイテムとして存在しているがViewHolderにBindされていないから存在しないのかがわからない
+        // 例えば以下のtest30.com/はアイテムとして存在しているが、
+        // アイテムの最後尾に存在するためRecyclerViewにBindされていないためにこのテストは通る
+        // アイテムの存在・不存在のチェックには使ってはいけない
+        onView(allOf(withId(R.id.url), withText("test30.com/")))
+                .check(doesNotExist());
+    }
 
-        ViewInteraction appCompatButton = onView(
-                allOf(withId(R.id.add_filter_button), withText("フィルタを追加"), isDisplayed()));
-        appCompatButton.perform(click());
+    @Test
+    public void サブディレクトリ込で登録した場合test01はフィルタされない() {
+        presenter.addFilter("test.com/test/");
+        onView(allOf(withId(R.id.url), withText("test.com/hoge"),
+                     isDisplayed()))
+                .check(matches(isDisplayed()));
 
-        onData(anything())
-                .atPosition(1)
-                .perform(click());
-
-        pressBack();
-
-        ViewInteraction textView = onView(
-                allOf(withId(R.id.title), withText("test0-1"),
-                      childAtPosition(
-                              childAtPosition(
-                                      IsInstanceOf.<View>instanceOf(
-                                              android.widget.LinearLayout.class),
-                                      0),
-                              1),
-                      isDisplayed()));
-        textView.check(matches(isDisplayed()));
-
-        ViewInteraction textView2 = onView(
-                allOf(withId(R.id.title), withText("test3"),
-                      childAtPosition(
-                              childAtPosition(
-                                      IsInstanceOf.<View>instanceOf(
-                                              android.widget.LinearLayout.class),
-                                      0),
-                              1),
-                      isDisplayed()));
-        textView2.check(doesNotExist());
+        onView(allOf(withId(R.id.url), withText("test.com/test/is/difficult"),
+                     childAtPosition(
+                             childAtPosition(
+                                     IsInstanceOf.<View>instanceOf(
+                                             android.widget.LinearLayout.class),
+                                     0),
+                             1),
+                     isDisplayed()))
+                .check(doesNotExist());
     }
 
     @Test
     public void カテゴリフィードが表示できる() {
         onView(allOf(withText("テクノロジー"), isDisplayed())).perform(click());
 
-        ViewInteraction textView = onView(
-                allOf(withId(R.id.title),
+        onView(allOf(withId(R.id.title),
                       withText("category test"),
                       childAtPosition(
                               childAtPosition(
@@ -136,29 +121,15 @@ public class HatebuFeedActivityTest {
                                               android.widget.LinearLayout.class),
                                       0),
                               1),
-                      isDisplayed()));
-        textView.check(
-                matches(withText("category test")));
+                      isDisplayed()))
+                .check(matches(withText("category test")));
     }
 
     @Test
     public void フィルタ追加後カテゴリの記事も非表示になる() {
-        onView(allOf(withId(R.id.recycler_view), isDisplayed()))
-                .perform(actionOnItemAtPosition(0, click()));
-
-        onView(
-                allOf(withId(R.id.add_filter_button), withText("フィルタを追加"),
-                      isDisplayed()))
-                .perform(click());
-
-        // test.comをフィルタに追加
-        onData(anything())
-                .atPosition(0)
-                .perform(click());
-
-        pressBack();
-
-        onView(allOf(withId(R.id.title), withText("test1"),
+        presenter.addFilter("test.com/");
+        // test.comがフィルタされて非表示になったことをチェック
+        onView(allOf(withId(R.id.url), withText("test.com/hoge"),
                      childAtPosition(
                              childAtPosition(
                                      IsInstanceOf.<View>instanceOf(
@@ -168,10 +139,10 @@ public class HatebuFeedActivityTest {
                      isDisplayed()))
                 .check(doesNotExist());
 
+        // 総合以外のカテゴリでtest.comの記事が非表示になっているか確認
         onView(allOf(withText("テクノロジー"), isDisplayed())).perform(click());
-
-        onView(allOf(withId(R.id.title),
-                     withText("category test"),
+        onView(allOf(withId(R.id.url),
+                     withText("test.com/a/b/c"),
                      childAtPosition(
                              childAtPosition(
                                      IsInstanceOf.<View>instanceOf(
@@ -180,8 +151,6 @@ public class HatebuFeedActivityTest {
                              1),
                      isDisplayed()))
                 .check(doesNotExist());
-
-        Espresso.unregisterIdlingResources(idlingResource);
     }
 
     private static Matcher<View> childAtPosition(
@@ -199,6 +168,26 @@ public class HatebuFeedActivityTest {
                 ViewParent parent = view.getParent();
                 return parent instanceof ViewGroup && parentMatcher.matches(parent)
                        && view.equals(((ViewGroup) parent).getChildAt(position));
+            }
+        };
+    }
+
+    public static Matcher<RecyclerView.ViewHolder> withHolderUrlText(final String text) {
+        return new BoundedMatcher<RecyclerView.ViewHolder, DataBindingViewHolder>
+                (DataBindingViewHolder.class) {
+
+            @Override
+            public void describeTo(Description description) {
+                description.appendText("No ViewHolder found with text: " + text);
+            }
+
+            @Override
+            protected boolean matchesSafely(DataBindingViewHolder item) {
+                ItemHatebuFeedBinding binding = (ItemHatebuFeedBinding) item.getBinding();
+                if (binding.url == null) {
+                    return false;
+                }
+                return binding.url.getText().toString().contains(text);
             }
         };
     }

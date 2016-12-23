@@ -98,6 +98,11 @@ public class HatebuFeedActivityPresenter implements HatebuFeedContract.ParentPre
         filterRepository.deleteAll();
     }
 
+    @VisibleForTesting
+    void addFilter(String filter) {
+        filterRepository.insertFilter(filter);
+    }
+
     private static class HatebuCategory {
         String key;
         public String title;
