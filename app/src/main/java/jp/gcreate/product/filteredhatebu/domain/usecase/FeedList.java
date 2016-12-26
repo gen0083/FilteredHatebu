@@ -9,6 +9,8 @@ import jp.gcreate.product.filteredhatebu.api.FeedsBurnerClienet;
 import jp.gcreate.product.filteredhatebu.api.HatenaClient;
 import jp.gcreate.product.filteredhatebu.data.FilterRepository;
 import jp.gcreate.product.filteredhatebu.di.Scope.ActivityScope;
+import jp.gcreate.product.filteredhatebu.di.qualifier.ObserveOn;
+import jp.gcreate.product.filteredhatebu.di.qualifier.SubscribeOn;
 import jp.gcreate.product.filteredhatebu.model.HatebuFeed;
 import jp.gcreate.product.filteredhatebu.model.HatebuFeedItem;
 import jp.gcreate.product.filteredhatebu.model.UriFilter;
@@ -32,8 +34,8 @@ public class FeedList {
     public FeedList(FeedsBurnerClienet feedsBurnerClienet,
                     HatenaClient.XmlService hatenaXmlService,
                     FilterRepository filterRepository,
-                    Scheduler subscribeOn,
-                    Scheduler observeOn) {
+                    @SubscribeOn Scheduler subscribeOn,
+                    @ObserveOn Scheduler observeOn) {
         this.feedsBurnerClienet = feedsBurnerClienet;
         this.hatenaXmlService = hatenaXmlService;
         this.filterRepository = filterRepository;
