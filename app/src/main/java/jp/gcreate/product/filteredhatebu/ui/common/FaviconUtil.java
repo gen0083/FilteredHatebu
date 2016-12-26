@@ -83,9 +83,12 @@ public class FaviconUtil {
                             subscriber.onNext(drawable);
                             subscriber.onCompleted();
                         }catch (Exception e) {
-                            Timber.e(e);
+                            // faviconが取得できなかった場合placeHolderをそのままFaviconとして扱う
+                            // faviconが存在しないかBitmapとして処理できなかいケース
+                            // eでログを出すと本当のエラーと紛らわしいのでwにしている
+                            Timber.w(e);
                             memoryCache.put(domain, placeHolder);
-                            subscriber.onError(e);
+                            subscriber.onCompleted();
                         }
                     }
                 });
