@@ -5,12 +5,9 @@ import android.graphics.drawable.Drawable;
 import java.util.ArrayList;
 import java.util.List;
 
-import jp.gcreate.product.filteredhatebu.api.FeedsBurnerClienet;
-import jp.gcreate.product.filteredhatebu.api.HatenaClient;
 import jp.gcreate.product.filteredhatebu.data.FilterRepository;
-import jp.gcreate.product.filteredhatebu.model.HatebuFeed;
+import jp.gcreate.product.filteredhatebu.domain.usecase.GetFilteredFeedList;
 import jp.gcreate.product.filteredhatebu.model.HatebuFeedItem;
-import jp.gcreate.product.filteredhatebu.model.UriFilter;
 import jp.gcreate.product.filteredhatebu.ui.common.FaviconUtil;
 import rx.Observable;
 import rx.Subscription;
@@ -26,26 +23,21 @@ import timber.log.Timber;
 
 class HatebuFeedFragmentPresenter implements HatebuFeedContract.ChildPresenter {
     private final String                          categoryKey;
-    private       FilterRepository                filterRepository;
+    private       GetFilteredFeedList             getFilteredFeedList;
     private       HatebuFeedContract.FragmentView view;
-    private       Observable<HatebuFeed>          feedObservable;
     private       long                            previousModifiedTime;
     private       Subscription                    loadingSubscription;
     private       FaviconUtil                     faviconUtil;
-    private List<HatebuFeedItem> originList   = new ArrayList<>();
     private List<HatebuFeedItem> filteredList = new ArrayList<>();
     private boolean              isFirstTime  = true;
 
     HatebuFeedFragmentPresenter(String key,
-                                FeedsBurnerClienet feedsBurnerClienet,
-                                HatenaClient.XmlService hatenaService,
+                                final GetFilteredFeedList getFilteredFeedList,
                                 final FilterRepository filterRepository,
-                                FaviconUtil faviconUtil) {
+                                final FaviconUtil faviconUtil) {
         this.categoryKey = key;
-        this.filterRepository = filterRepository;
+        this.getFilteredFeedList = getFilteredFeedList;
         this.faviconUtil = faviconUtil;
-        feedObservable = (key.equals("")) ? feedsBurnerClienet.getHotentryFeed() :
-                         hatenaService.getCategoryFeed(categoryKey);
         filterRepository.listenModified()
                         .subscribeOn(Schedulers.io())
                         .filter(new Func1<Long, Boolean>() {
@@ -60,16 +52,16 @@ class HatebuFeedFragmentPresenter implements HatebuFeedContract.ChildPresenter {
                                 previousModifiedTime = updated;
                             }
                         })
-                        .concatMap(new Func1<Long, Observable<List<UriFilter>>>() {
+                        .concatMap(new Func1<Long, Observable<List<HatebuFeedItem>>>() {
                             @Override
-                            public Observable<List<UriFilter>> call(Long aLong) {
-                                return filterRepository.getFilterAll().toObservable();
+                            public Observable<List<HatebuFeedItem>> call(Long aLong) {
+                                return getFilteredFeedList.getFilteredList(categoryKey);
                             }
                         })
-                        .map(new Func1<List<UriFilter>, List<HatebuFeedItem>>() {
+                        .filter(new Func1<List<HatebuFeedItem>, Boolean>() {
                             @Override
-                            public List<HatebuFeedItem> call(List<UriFilter> uriFilters) {
-                                return filterOriginList(originList, uriFilters);
+                            public Boolean call(List<HatebuFeedItem> hatebuFeedItems) {
+                                return checkBothListsAreEqual(hatebuFeedItems, filteredList);
                             }
                         })
                         .observeOn(AndroidSchedulers.mainThread())
@@ -111,47 +103,17 @@ class HatebuFeedFragmentPresenter implements HatebuFeedContract.ChildPresenter {
             return;
         }
         showLoading();
-        loadingSubscription = feedObservable
-                .subscribeOn(Schedulers.io())
-                .map(new Func1<HatebuFeed, List<HatebuFeedItem>>() {
-                    @Override
-                    public List<HatebuFeedItem> call(HatebuFeed hatebuFeed) {
-                        return hatebuFeed.getItemList();
-                    }
-                })
-                .filter(new Func1<List<HatebuFeedItem>, Boolean>() {
-                    @Override
-                    public Boolean call(List<HatebuFeedItem> newList) {
-                        // 新しい記事の内容を全て含む＝新しい記事なしを意味する
-                        // 新しい内容がある場合のみ値を流す
-                        return !originList.containsAll(newList);
-                    }
-                })
-                .map(new Func1<List<HatebuFeedItem>, List<HatebuFeedItem>>() {
-                    @Override
-                    public List<HatebuFeedItem> call(List<HatebuFeedItem> hatebuFeedItems) {
-                        originList = hatebuFeedItems;
-                        // 別スレッドで処理しているのでblockingで問題ない
-                        List<UriFilter> filters = filterRepository.getFilterAll().toBlocking()
-                                                                  .value();
-                        // フィルタ処理した後のリストを流す
-                        return filterOriginList(hatebuFeedItems, filters);
-                    }
-                })
-                // 新着記事がない場合値が流れないので空のリストを流す
-                .defaultIfEmpty(new ArrayList<HatebuFeedItem>())
-                .observeOn(AndroidSchedulers.mainThread())
+        loadingSubscription = getFilteredFeedList
+                .getFilteredList(categoryKey)
                 .subscribe(new Action1<List<HatebuFeedItem>>() {
                     @Override
                     public void call(List<HatebuFeedItem> filtered) {
                         hideLoading();
-                        // defaultIfEmpty Listのサイズが0なら新しいFeedがなかったことを意味する
-                        // (.filterの部分で値が止まってしまった状態)
-                        if (filtered.size() == 0) {
-                            Timber.d("there are not new one.");
+                        if (checkBothListsAreEqual(filtered, filteredList)) {
+                            Timber.d("Feeds are not updated.");
                             notifyNewContentsDoseNotExist();
                         } else {
-                            Timber.d("got new feeds");
+                            Timber.d("Got some new feeds.");
                             filteredList = filtered;
                             notifyNewContentsFetched();
                         }
@@ -167,6 +129,16 @@ class HatebuFeedFragmentPresenter implements HatebuFeedContract.ChildPresenter {
                 });
     }
 
+    private boolean checkBothListsAreEqual(List<HatebuFeedItem> a, List<HatebuFeedItem> b) {
+        if (a.size() != b.size()) return false;
+        for (int i = 0; i < a.size(); i++) {
+            if (!(a.get(i).equals(b.get(i)))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     @Override
     public Observable<Drawable> fetchFavicon(String url) {
         return faviconUtil.fetchFavicon(url);
@@ -174,21 +146,6 @@ class HatebuFeedFragmentPresenter implements HatebuFeedContract.ChildPresenter {
 
     private boolean isLoading() {
         return loadingSubscription != null && !loadingSubscription.isUnsubscribed();
-    }
-
-    private List<HatebuFeedItem> filterOriginList(final List<HatebuFeedItem> origin,
-                                                  final List<UriFilter> filters) {
-        if (filters.size() == 0) return new ArrayList<>(origin);
-        List<HatebuFeedItem> filteredList = new ArrayList<>();
-        for (HatebuFeedItem item : origin) {
-            boolean isFiltered = false;
-            for (UriFilter f : filters) {
-                isFiltered = f.isFilteredUrl(item.getLink());
-                if (isFiltered) break;
-            }
-            if (!isFiltered) filteredList.add(item);
-        }
-        return filteredList;
     }
 
     @Override

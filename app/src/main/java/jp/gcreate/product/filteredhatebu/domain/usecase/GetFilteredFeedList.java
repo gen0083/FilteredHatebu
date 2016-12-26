@@ -23,7 +23,7 @@ import rx.functions.Func1;
  */
 
 @ActivityScope
-public class FeedList {
+public class GetFilteredFeedList {
     private FeedsBurnerClienet feedsBurnerClienet;
     private HatenaClient.XmlService hatenaXmlService;
     private FilterRepository filterRepository;
@@ -31,11 +31,11 @@ public class FeedList {
     private Scheduler observeOn;
 
     @Inject
-    public FeedList(FeedsBurnerClienet feedsBurnerClienet,
-                    HatenaClient.XmlService hatenaXmlService,
-                    FilterRepository filterRepository,
-                    @SubscribeOn Scheduler subscribeOn,
-                    @ObserveOn Scheduler observeOn) {
+    public GetFilteredFeedList(FeedsBurnerClienet feedsBurnerClienet,
+                               HatenaClient.XmlService hatenaXmlService,
+                               FilterRepository filterRepository,
+                               @SubscribeOn Scheduler subscribeOn,
+                               @ObserveOn Scheduler observeOn) {
         this.feedsBurnerClienet = feedsBurnerClienet;
         this.hatenaXmlService = hatenaXmlService;
         this.filterRepository = filterRepository;

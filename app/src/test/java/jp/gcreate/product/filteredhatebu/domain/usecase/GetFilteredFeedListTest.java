@@ -31,8 +31,8 @@ import static org.mockito.MockitoAnnotations.initMocks;
 /**
  * Copyright 2016 G-CREATE
  */
-public class FeedListTest {
-    private FeedList sut;
+public class GetFilteredFeedListTest {
+    private GetFilteredFeedList sut;
     @Mock
     FeedsBurnerClienet      feedsBurnerClienet;
     @Mock
@@ -43,8 +43,8 @@ public class FeedListTest {
     @Before
     public void setUp() throws Exception {
         initMocks(this);
-        sut = new FeedList(feedsBurnerClienet, hatenaXmlService, filterRepository,
-                           Schedulers.immediate(), Schedulers.immediate());
+        sut = new GetFilteredFeedList(feedsBurnerClienet, hatenaXmlService, filterRepository,
+                                      Schedulers.immediate(), Schedulers.immediate());
         ClassLoader loader       = getClass().getClassLoader();
         Serializer  serializer   = new Persister();
         File        feedsBurner  = new File(
