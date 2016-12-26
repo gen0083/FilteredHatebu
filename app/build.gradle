@@ -70,6 +70,13 @@ android {
     dexOptions {
         preDexLibraries = !ciBuild
     }
+    sourceSets {
+        mock {
+            // androidTest用のmock用ファイルをJunit Testでも利用するための設定
+            // getClass().getClassLoader().getResources()でアクセスできるようにする
+            test.resources.srcDirs += "src/mock/assets"
+        }
+    }
 }
 
 ribbonizer {
