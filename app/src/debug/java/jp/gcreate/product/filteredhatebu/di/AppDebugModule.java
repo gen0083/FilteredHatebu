@@ -2,7 +2,6 @@ package jp.gcreate.product.filteredhatebu.di;
 
 import android.content.Context;
 
-import com.crashlytics.android.core.CrashlyticsCore;
 import com.jakewharton.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
 
@@ -31,12 +30,6 @@ public class AppDebugModule {
     @AppScope
     public Timber.Tree providesTimberTree() {
         return new Timber.DebugTree();
-    }
-
-    @Provides
-    @AppScope
-    public CrashlyticsCore providesCrashlyticsCore() {
-        return new CrashlyticsCore.Builder().disabled(true).build();
     }
 
     @Provides

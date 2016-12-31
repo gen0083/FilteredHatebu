@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 
-import com.crashlytics.android.Crashlytics;
-import com.crashlytics.android.core.CrashlyticsCore;
 import com.jakewharton.threetenabp.AndroidThreeTen;
 import com.squareup.picasso.Picasso;
 
@@ -13,7 +11,6 @@ import java.util.HashMap;
 
 import javax.inject.Inject;
 
-import io.fabric.sdk.android.Fabric;
 import jp.gcreate.product.filteredhatebu.di.ActivityComponent;
 import jp.gcreate.product.filteredhatebu.di.ActivityModule;
 import jp.gcreate.product.filteredhatebu.di.AppComponent;
@@ -37,8 +34,6 @@ public class CustomApplication extends Application {
     StethoWrapper stetho;
     @Inject
     Timber.Tree tree;
-    @Inject
-    CrashlyticsCore crashlyticsCore;
     @Inject
     Picasso.Builder picassoBuilder;
 
@@ -76,7 +71,6 @@ public class CustomApplication extends Application {
         Timber.plant(tree);
         stetho.install();
         AndroidThreeTen.init(this);
-        Fabric.with(this, new Crashlytics.Builder().core(crashlyticsCore).build());
         Picasso.setSingletonInstance(picassoBuilder.build());
 
         Timber.d("application:%s", context.toString());
