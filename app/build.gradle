@@ -108,6 +108,7 @@ dependencies {
     compile "com.android.support:customtabs:$support_ver"
 
     def play_services_version = "10.0.1"
+    compile "com.google.firebase:firebase-core:$play_services_version"
     compile "com.google.firebase:firebase-crash:$play_services_version"
 
     compile 'com.google.dagger:dagger:2.7'
