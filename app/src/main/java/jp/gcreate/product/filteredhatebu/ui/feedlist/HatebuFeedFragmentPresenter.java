@@ -61,7 +61,7 @@ class HatebuFeedFragmentPresenter implements HatebuFeedContract.ChildPresenter {
                         .filter(new Func1<List<HatebuFeedItem>, Boolean>() {
                             @Override
                             public Boolean call(List<HatebuFeedItem> hatebuFeedItems) {
-                                return checkBothListsAreEqual(hatebuFeedItems, filteredList);
+                                return !checkBothListsAreEqual(hatebuFeedItems, filteredList);
                             }
                         })
                         .observeOn(AndroidSchedulers.mainThread())
