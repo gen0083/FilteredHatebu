@@ -7,8 +7,11 @@ import com.google.gson.annotations.SerializedName;
  */
 
 public class HatebuRelatedEntry {
+    @SerializedName("title")
     String title;
+    @SerializedName("count")
     int    count;
+    @SerializedName("url")
     String url;
     @SerializedName("entry_url")
     String entryUrl;
