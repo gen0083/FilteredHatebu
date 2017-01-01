@@ -194,4 +194,7 @@ tasks.withType(com.android.build.gradle.internal.tasks.databinding.DataBindingEx
         })
     }
 }
-apply plugin: 'com.google.gms.google-services'
+
+if (!ciBuild || travisBuild) {
+    apply plugin: 'com.google.gms.google-services'
+}
