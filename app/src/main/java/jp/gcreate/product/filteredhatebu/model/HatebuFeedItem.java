@@ -11,6 +11,7 @@ import org.simpleframework.xml.Root;
 
 /**
  * Copyright 2016 G-CREATE
+ * 人気エントリーで配信される1つ1つの記事
  */
 
 @Root(strict = false)

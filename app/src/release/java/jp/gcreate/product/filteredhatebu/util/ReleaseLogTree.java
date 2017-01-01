@@ -17,6 +17,7 @@ public class ReleaseLogTree extends Timber.Tree {
             return;
         }
 
+        FirebaseCrash.log(message);
         if (t != null) {
             FirebaseCrash.logcat(priority, tag, message);
             FirebaseCrash.report(t);
