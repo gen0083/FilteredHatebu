@@ -1,6 +1,7 @@
 package jp.gcreate.product.filteredhatebu.ui.feedlist;
 
 import android.graphics.drawable.Drawable;
+import android.support.annotation.VisibleForTesting;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +25,7 @@ import timber.log.Timber;
 class HatebuFeedFragmentPresenter implements HatebuFeedContract.ChildPresenter {
     private final String                          categoryKey;
     private       GetFilteredFeedList             getFilteredFeedList;
+    private       FilterRepository                filterRepository;
     private       HatebuFeedContract.FragmentView view;
     private       long                            previousModifiedTime;
     private       Subscription                    loadingSubscription;
@@ -37,6 +39,7 @@ class HatebuFeedFragmentPresenter implements HatebuFeedContract.ChildPresenter {
                                 final FaviconUtil faviconUtil) {
         this.categoryKey = key;
         this.getFilteredFeedList = getFilteredFeedList;
+        this.filterRepository = filterRepository;
         this.faviconUtil = faviconUtil;
         filterRepository.listenModified()
                         .subscribeOn(Schedulers.io())
@@ -199,6 +202,16 @@ class HatebuFeedFragmentPresenter implements HatebuFeedContract.ChildPresenter {
         if (view != null) {
             view.showNetworkError();
         }
+    }
+
+    @VisibleForTesting
+    void addFilter(String filter) {
+        filterRepository.insertFilter(filter);
+    }
+
+    @VisibleForTesting
+    void initializeFilter() {
+        filterRepository.deleteAll();
     }
 
 }
