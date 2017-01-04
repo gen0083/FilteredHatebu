@@ -1,6 +1,10 @@
 package jp.gcreate.product.filteredhatebu.model;
 
 import org.junit.Test;
+import org.simpleframework.xml.Serializer;
+import org.simpleframework.xml.core.Persister;
+
+import java.io.File;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -135,5 +139,15 @@ public class HatebuFeedItemTest {
         b.setCount(1);
 
         assertThat(a.equals(b), is(false));
+    }
+
+    @Test
+    public void decode() throws Exception {
+        Serializer serializer = new Persister();
+        File file = new File(getClass().getClassLoader().getResource("mock_hatebu_hotentry.rss").getFile());
+        HatebuFeed feed = serializer.read(HatebuFeed.class, file);
+        HatebuFeedItem actual = feed.getItemList().get(0);
+        assertThat(actual.getTitle(), is("test0-1"));
+        assertThat(actual.getLink(), is("http://test.com/hoge"));
     }
 }

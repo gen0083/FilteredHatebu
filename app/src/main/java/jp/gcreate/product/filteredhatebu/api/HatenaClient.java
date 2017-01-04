@@ -2,7 +2,6 @@ package jp.gcreate.product.filteredhatebu.api;
 
 import jp.gcreate.product.filteredhatebu.model.HatebuEntry;
 import jp.gcreate.product.filteredhatebu.model.HatebuFeed;
-import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
@@ -20,7 +19,7 @@ public interface HatenaClient {
         Observable<HatebuEntry> getEntry(@Query("url") String url);
 
         @GET("entry/jsonlite/")
-        Call<HatebuEntry> getEntryNoRelated(@Query("url") String url);
+        Observable<HatebuEntry> getEntryNoRelated(@Query("url") String url);
     }
 
     interface XmlService {

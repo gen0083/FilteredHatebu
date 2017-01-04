@@ -64,10 +64,13 @@ public class MockInterceptor implements Interceptor {
                 url.encodedPath().equals("/entry/jsonlite/")) {
                 if (url.query().contains("test.com/")) {
                     // コメントありのページを返す（test.comはモックに2件だけ用意されている）
-                    return mockedHatebuEntry(chain.request());
+                    return mockedHatebuEntry(chain.request(), "mock_hatebu_entry.json");
+                } else if(url.query().contains("http://www.test4.com/")) {
+                    // コメントが許可されていないページ（Bookmarksがnull）
+                    return mockedHatebuEntry(chain.request(), "mock_hatebu_entry_disallow_comment.json");
                 } else {
                     // それ以外はコメントなしを返す
-                    return mockedHatebuEntryNoComment(chain.request());
+                    return mockedHatebuEntry(chain.request(), "mock_hatebu_entry_no_comment.json");
                 }
             }
             // カテゴリのモックフィードを返す
@@ -107,17 +110,10 @@ public class MockInterceptor implements Interceptor {
                 .build();
     }
 
-    private Response mockedHatebuEntry(Request request) throws IOException {
+    private Response mockedHatebuEntry(Request request, String jsonFile) throws IOException {
         return createBaseResponseOk(request)
                 .body(ResponseBody.create(MediaType.parse("application/json"),
-                                          openFile("mock_hatebu_entry.json")))
-                .build();
-    }
-
-    private Response mockedHatebuEntryNoComment(Request request) throws IOException {
-        return createBaseResponseOk(request)
-                .body(ResponseBody.create(MediaType.parse("application/json"),
-                                          openFile("mock_hatebu_entry_no_comment.json")))
+                                          openFile(jsonFile)))
                 .build();
     }
 

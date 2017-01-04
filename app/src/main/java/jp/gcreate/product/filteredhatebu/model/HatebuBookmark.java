@@ -1,5 +1,7 @@
 package jp.gcreate.product.filteredhatebu.model;
 
+import com.google.gson.annotations.SerializedName;
+
 /**
  * Copyright 2016 G-CREATE
  */
@@ -7,9 +9,13 @@ package jp.gcreate.product.filteredhatebu.model;
 public class HatebuBookmark {
     public static final HatebuBookmark EMPTY = new HatebuBookmark("", new String[]{""}, "", "");
 
+    @SerializedName("user")
     private String   user;
+    @SerializedName("tags")
     private String[] tags;
+    @SerializedName("timestamp")
     private String   timestamp;
+    @SerializedName("comment")
     private String   comment;
 
     public HatebuBookmark(String user, String[] tags, String timestamp, String comment) {

@@ -35,10 +35,10 @@ import timber.log.Timber;
 
 public class HatebuFeedDetailActivity extends AppCompatActivity
         implements SelectFilterDialogFragment.Callback, HatebuFeedDetailContract.View {
-    private static final String EXTRA_ITEM_KEY = "feed_item_key";
+    private static final String EXTRA_ITEM_KEY               = "feed_item_key";
     private static final String EXTRA_BOTTOM_SHEET_STATE_KEY = "bottom_sheet_state";
-    private static final String EXTRA_COMMENT_POSITION_KEY = "comments_position";
-    private static final int INTENT_SHARE_CODE = 1;
+    private static final String EXTRA_COMMENT_POSITION_KEY   = "comments_position";
+    private static final int    INTENT_SHARE_CODE            = 1;
     private ActivityHatebuFeedDetailBinding  binding;
     private HatebuFeedItem                   item;
     private ActivityComponent                component;
@@ -115,7 +115,8 @@ public class HatebuFeedDetailActivity extends AppCompatActivity
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putInt(EXTRA_COMMENT_POSITION_KEY, layoutManager.findFirstCompletelyVisibleItemPosition());
+        outState.putInt(EXTRA_COMMENT_POSITION_KEY,
+                        layoutManager.findFirstCompletelyVisibleItemPosition());
         outState.putInt(EXTRA_BOTTOM_SHEET_STATE_KEY, bottomSheetBehavior.getState());
     }
 
@@ -124,7 +125,8 @@ public class HatebuFeedDetailActivity extends AppCompatActivity
         super.onRestoreInstanceState(savedInstanceState);
         if (savedInstanceState != null) {
             int position = savedInstanceState.getInt(EXTRA_COMMENT_POSITION_KEY, 0);
-            int state = savedInstanceState.getInt(EXTRA_BOTTOM_SHEET_STATE_KEY, BottomSheetBehavior.STATE_COLLAPSED);
+            int state    = savedInstanceState
+                    .getInt(EXTRA_BOTTOM_SHEET_STATE_KEY, BottomSheetBehavior.STATE_COLLAPSED);
             layoutManager.scrollToPosition(position);
             bottomSheetBehavior.setState(state);
         }
@@ -143,7 +145,8 @@ public class HatebuFeedDetailActivity extends AppCompatActivity
         final Bitmap shareIcon = BitmapUtil.getBitmap(this, R.drawable.ic_share);
         final Bitmap closeIcon = BitmapUtil.getBitmap(this, R.drawable.ic_arrow_back);
         final PendingIntent shareIntent = PendingIntent
-                .getActivity(this, INTENT_SHARE_CODE, createShareUrlIntent(url), PendingIntent.FLAG_UPDATE_CURRENT);
+                .getActivity(this, INTENT_SHARE_CODE, createShareUrlIntent(url),
+                             PendingIntent.FLAG_UPDATE_CURRENT);
         CustomTabsIntent i = new CustomTabsIntent.Builder()
                 .setToolbarColor(ContextCompat.getColor(this, R.color.colorPrimary))
                 .setShowTitle(true)
@@ -168,16 +171,6 @@ public class HatebuFeedDetailActivity extends AppCompatActivity
     private void openFilterDialog() {
         SelectFilterDialogFragment f = SelectFilterDialogFragment.newInstance(item.getLink());
         f.show(getSupportFragmentManager(), "dialog");
-    }
-
-    @VisibleForTesting
-    BookmarkCommentsAdapter getAdapter() {
-        return adapter;
-    }
-
-    @VisibleForTesting
-    boolean isCommentLoadFinished() {
-        return !binding.progressBar.isShown();
     }
 
     @Override
@@ -233,5 +226,10 @@ public class HatebuFeedDetailActivity extends AppCompatActivity
     @Override
     public void notifyItemInserted(int position) {
         adapter.notifyItemInserted(position);
+    }
+
+    @VisibleForTesting
+    boolean isCommentLoadFinished() {
+        return !binding.progressBar.isShown();
     }
 }

@@ -27,49 +27,69 @@ import static org.hamcrest.CoreMatchers.allOf;
 @LargeTest
 @RunWith(AndroidJUnit4.class)
 public class HatebuFeedDetailActivityTest {
+    private IdlingResource idlingResource;
     @Rule
     public ActivityTestRule<HatebuFeedDetailActivity> activityTestRule =
-            new ActivityTestRule<HatebuFeedDetailActivity>(HatebuFeedDetailActivity.class, false, false);
+            new ActivityTestRule<HatebuFeedDetailActivity>(HatebuFeedDetailActivity.class, false,
+                                                           false);
+
+    private void registerIdlingResource() {
+        idlingResource = new CommentLoadIdlingResource(activityTestRule.getActivity());
+        Espresso.registerIdlingResources(idlingResource);
+    }
+
+    private void unregisterIdlingResouce() {
+        Espresso.unregisterIdlingResources(idlingResource);
+    }
 
     @Test
     public void コメントが表示される() {
+        // set up
         HatebuFeedItem item = new HatebuFeedItem();
         item.setLink("http://test.com/");
-
-        activityTestRule.launchActivity(
-                HatebuFeedDetailActivity.createIntent(InstrumentationRegistry.getTargetContext(),
-                                                      item));
-
-        CommentLoadIdlingResource idlingResource =
-                new CommentLoadIdlingResource(activityTestRule.getActivity());
-        Espresso.registerIdlingResources(idlingResource);
-
+        activityTestRule.launchActivity(HatebuFeedDetailActivity.createIntent(
+                InstrumentationRegistry.getTargetContext(), item));
+        registerIdlingResource();
+        // assertion
         onView(allOf(withId(R.id.comment),
                      withText("test")))
                 .check(matches(isDisplayed()));
-
-        Espresso.unregisterIdlingResources(idlingResource);
+        // tear down
+        unregisterIdlingResouce();
     }
 
     @Test
     public void コメントなしのケース() {
         //どの記事を開いても最初に開いたURLのコメントが表示されたケースに対応するテストコード
         //ついでにコメントなしのケースをチェックするテストケースでもある
-
+        // set up
         HatebuFeedItem item = new HatebuFeedItem();
         item.setLink("http://aaa.com/");
-
-        activityTestRule.launchActivity(
-                HatebuFeedDetailActivity.createIntent(InstrumentationRegistry.getTargetContext(),
-                                                      item));
-
-        CommentLoadIdlingResource idlingResource = new CommentLoadIdlingResource(
-                activityTestRule.getActivity());
-        Espresso.registerIdlingResources(idlingResource);
-
+        activityTestRule.launchActivity(HatebuFeedDetailActivity.createIntent(
+                InstrumentationRegistry.getTargetContext(), item));
+        registerIdlingResource();
+        // assertion
         onView(withId(R.id.comment_status))
                 .check(matches(isDisplayed()));
-        Espresso.unregisterIdlingResources(idlingResource);
+        // tear down
+        unregisterIdlingResouce();
+    }
+
+    @Test
+    public void コメントがnullのケース() {
+        // 対象のページがコメント不許可の設定がされている場合、bookmarksがjsonレスポンスに含まれない場合がある
+        // set up
+        HatebuFeedItem item = new HatebuFeedItem();
+        // www.test4.comはbookmarksが存在しないjsonを返却するようにモックしている
+        item.setLink("http://www.test4.com/hoge");
+        activityTestRule.launchActivity(HatebuFeedDetailActivity.createIntent(
+                InstrumentationRegistry.getTargetContext(), item));
+        registerIdlingResource();
+        // assertion
+        onView(withId(R.id.comment_status))
+                .check(matches(isDisplayed()));
+        // tear down
+        unregisterIdlingResouce();
     }
 
     private static class CommentLoadIdlingResource implements IdlingResource {

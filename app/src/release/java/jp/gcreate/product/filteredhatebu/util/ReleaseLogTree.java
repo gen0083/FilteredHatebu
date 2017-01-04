@@ -2,7 +2,7 @@ package jp.gcreate.product.filteredhatebu.util;
 
 import android.util.Log;
 
-import com.crashlytics.android.Crashlytics;
+import com.google.firebase.crash.FirebaseCrash;
 
 import timber.log.Timber;
 
@@ -17,6 +17,10 @@ public class ReleaseLogTree extends Timber.Tree {
             return;
         }
 
-        Crashlytics.log(priority, tag, message);
+        FirebaseCrash.log(message);
+        if (t != null) {
+            FirebaseCrash.logcat(priority, tag, message);
+            FirebaseCrash.report(t);
+        }
     }
 }

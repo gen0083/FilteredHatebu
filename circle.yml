@@ -12,6 +12,8 @@ dependencies:
     - echo y | android -s update sdk -u -a -t "tools"
     - echo y | android -s update sdk -u -a -t "platform-tools"
     - echo y | android -s update sdk -u -a -t "extra-android-m2repository"
+    - echo y | android -s update sdk -u -a -t "extra-google-google_play_services"
+    - echo y | android -s update sdk -u -a -t "extra-google-m2repository"
 test:
   override:
     - ./gradlew testMockDebugUnitTest

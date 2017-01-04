@@ -89,16 +89,25 @@ public class HatebuFeedDetailPresenter implements HatebuFeedDetailContract.Prese
                 .flatMapIterable(new Func1<HatebuEntry, Iterable<HatebuBookmark>>() {
                     @Override
                     public Iterable<HatebuBookmark> call(HatebuEntry hatebuEntry) {
+                        List<HatebuBookmark> bookmarks = hatebuEntry.getBookmarks();
+                        // コメント許可されていないページの場合、ここがnullになって落ちるが、この形では
+                        // nullの場合に何かするという処理が難しい
+                        if (bookmarks == null) {
+                            throw new NullPointerException("This url has no hatena bookmarks.");
+                        }
+                        Timber.d("bookmarks size=%d", bookmarks.size());
                         return hatebuEntry.getBookmarks();
                     }
-                }).filter(new Func1<HatebuBookmark, Boolean>() {
+                })
+                .filter(new Func1<HatebuBookmark, Boolean>() {
                     @Override
                     public Boolean call(HatebuBookmark hatebuBookmark) {
                         return !TextUtils.isEmpty(hatebuBookmark.getComment());
                     }
-                }).observeOn(AndroidSchedulers.mainThread())
+                })
+                .observeOn(AndroidSchedulers.mainThread())
                 .defaultIfEmpty(HatebuBookmark.EMPTY)
-                .doOnCompleted(new Action0() {
+                .doOnUnsubscribe(new Action0() {
                     @Override
                     public void call() {
                         hideLoading();
@@ -112,6 +121,14 @@ public class HatebuFeedDetailPresenter implements HatebuFeedDetailContract.Prese
                         } else {
                             comments.add(hatebuBookmark);
                             notifyItemInserted(comments.size());
+                        }
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        if (throwable instanceof NullPointerException) {
+                            Timber.d("This url has no hatena bookmarks. Probably the site owner disallow hatebu comments.");
+                            showNoComments();
                         }
                     }
                 });

@@ -37,11 +37,11 @@ import timber.log.Timber;
 public class FaviconUtil {
     public static final String FAVICON_URL = "https://favicon.hatena.ne.jp/?url=";
     private OkHttpClient client;
-    private Resources resources;
+    private Resources    resources;
     private HashMap<String, Drawable> memoryCache = new HashMap<>();
     private Drawable placeHolder;
-    private int    width;
-    private int    height;
+    private int      width;
+    private int      height;
 
     @Inject
     public FaviconUtil(OkHttpClient client, @ApplicationContext Context context) {
@@ -77,15 +77,21 @@ public class FaviconUtil {
                         try {
                             Bitmap bitmap = BitmapFactory
                                     .decodeStream(response.body().byteStream());
-                            Bitmap scaled = Bitmap.createScaledBitmap(bitmap, width, height, false);
+                            Bitmap         scaled   = Bitmap
+                                    .createScaledBitmap(bitmap, width, height, false);
                             BitmapDrawable drawable = new BitmapDrawable(resources, scaled);
                             memoryCache.put(domain, drawable);
                             subscriber.onNext(drawable);
                             subscriber.onCompleted();
-                        }catch (Exception e) {
-                            Timber.e(e);
+                        } catch (Exception e) {
+                            // faviconが取得できなかった場合placeHolderをそのままFaviconとして扱う
+                            // faviconが存在しないかBitmapとして処理できなかいケース
+                            // eでログを出すと本当のエラーと紛らわしいのでwにしている
+                            Timber.w(e);
                             memoryCache.put(domain, placeHolder);
-                            subscriber.onError(e);
+                            subscriber.onCompleted();
+                        } finally {
+                            response.close();
                         }
                     }
                 });
@@ -98,8 +104,8 @@ public class FaviconUtil {
                 });
             }
         }, Emitter.BackpressureMode.NONE)
-                  .subscribeOn(Schedulers.io())
-                  .observeOn(AndroidSchedulers.mainThread());
+                         .subscribeOn(Schedulers.io())
+                         .observeOn(AndroidSchedulers.mainThread());
     }
 
     String substringUntilDomain(String url) {

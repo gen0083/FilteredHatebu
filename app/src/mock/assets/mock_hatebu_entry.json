@@ -11,9 +11,9 @@
   "count": 5742,
   "bookmarks": [
     {
-      "comment": "",
+      "comment": "test",
       "timestamp": "2016/10/18 15:43:10",
-      "user": "Karage_Ageta",
+      "user": "test",
       "tags": [
         "bookmark"
       ]
@@ -79,7 +79,7 @@
       "tags": []
     },
     {
-      "comment": "test",
+      "comment": "test2",
       "timestamp": "2016/10/02 16:41:57",
       "user": "ryuji108it",
       "tags": [

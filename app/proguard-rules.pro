@@ -16,6 +16,9 @@
 #   public *;
 #}
 
+# okio warnings
+-dontwarn okio.**
+
 # OkHttp3
 -keepattributes Signature
 -keepattributes *Annotation*

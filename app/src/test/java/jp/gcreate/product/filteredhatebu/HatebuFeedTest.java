@@ -7,14 +7,17 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 import jp.gcreate.product.filteredhatebu.api.HatenaClient;
+import jp.gcreate.product.filteredhatebu.model.HatebuEntry;
 import jp.gcreate.product.filteredhatebu.model.HatebuFeed;
 import jp.gcreate.product.filteredhatebu.model.HatebuFeedItem;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 import rx.functions.Action1;
+import rx.observers.TestSubscriber;
 
 /**
  * Copyright 2016 G-CREATE
@@ -23,6 +26,7 @@ import rx.functions.Action1;
 public class HatebuFeedTest {
     private static final String BASE_URL = "http://b.hatena.ne.jp/";
     private HatenaClient.XmlService service;
+    private HatenaClient.JsonService jsonService;
 
     @Before
     public void setUp() {
@@ -45,6 +49,14 @@ public class HatebuFeedTest {
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
         service = retrofit.create(HatenaClient.XmlService.class);
+
+        Retrofit forJson = new Retrofit.Builder()
+                 .baseUrl(BASE_URL)
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build();
+        jsonService = forJson.create(HatenaClient.JsonService.class);
     }
 
     @Test
@@ -69,5 +81,29 @@ public class HatebuFeedTest {
                     }
                 });
         latch.await(30, TimeUnit.SECONDS);
+    }
+
+    @Test
+    public void コメント取得() throws InterruptedException {
+        TestSubscriber       test  = TestSubscriber.create();
+        final CountDownLatch latch = new CountDownLatch(1);
+        jsonService.getEntryNoRelated("http://serihiro.hatenablog.com/entry/2016/12/22/000000")
+                .subscribe(new Action1<HatebuEntry>() {
+                    @Override
+                    public void call(HatebuEntry hatebuEntry) {
+                        System.out.println(hatebuEntry);
+                        latch.countDown();
+                    }
+                }, new Action1<Throwable>() {
+                    @Override
+                    public void call(Throwable throwable) {
+                        System.out.println(throwable);
+                        throwable.printStackTrace();
+                        latch.countDown();
+                    }
+                });
+        latch.await(10, TimeUnit.SECONDS);
+//        test.awaitTerminalEvent();
+
     }
 }

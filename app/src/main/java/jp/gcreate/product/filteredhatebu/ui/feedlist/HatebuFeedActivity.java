@@ -5,9 +5,7 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.VisibleForTesting;
-import android.support.v4.view.PagerAdapter;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -92,21 +90,6 @@ public class HatebuFeedActivity extends AppCompatActivity implements HatebuFeedC
                                                             binding.viewPager.getCurrentItem());
     }
 
-    @VisibleForTesting
-    RecyclerView getRecyclerView() {
-        return getCurrentFragment().getRecyclerView();
-    }
-
-    @VisibleForTesting
-    boolean isFeedLoading() {
-        return getCurrentFragment().isLoading();
-    }
-
-    @VisibleForTesting
-    PagerAdapter getPagerAdapter() {
-        return adapter;
-    }
-
     @Override
     public void showLoading() {
 
@@ -121,5 +104,10 @@ public class HatebuFeedActivity extends AppCompatActivity implements HatebuFeedC
     public void notifyDataSetChanged() {
         Timber.d("notify view pager adapter's data changed.");
         adapter.notifyDataSetChanged();
+    }
+
+    @VisibleForTesting
+    boolean isFeedLoading() {
+        return getCurrentFragment().isLoading();
     }
 }

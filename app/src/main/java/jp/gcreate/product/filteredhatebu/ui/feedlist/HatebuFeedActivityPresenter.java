@@ -9,10 +9,9 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import jp.gcreate.product.filteredhatebu.api.FeedsBurnerClienet;
-import jp.gcreate.product.filteredhatebu.api.HatenaClient;
 import jp.gcreate.product.filteredhatebu.data.FilterRepository;
 import jp.gcreate.product.filteredhatebu.di.Scope.ActivityScope;
+import jp.gcreate.product.filteredhatebu.domain.usecase.GetFilteredFeedList;
 import jp.gcreate.product.filteredhatebu.ui.common.FaviconUtil;
 import timber.log.Timber;
 
@@ -26,18 +25,13 @@ public class HatebuFeedActivityPresenter implements HatebuFeedContract.ParentPre
     private List<HatebuCategory>                         keys        = new ArrayList<>();
     private HashMap<String, HatebuFeedFragmentPresenter> presenters  = new HashMap<>();
     private boolean                                      isFirstTime = true;
-    private FeedsBurnerClienet      feedsBurnerClienet;
-    private HatenaClient.XmlService hatenaXmlService;
-    private FilterRepository        filterRepository;
-    private FaviconUtil             faviconUtil;
+    private GetFilteredFeedList getFilteredFeedList;
+    private FilterRepository    filterRepository;
+    private FaviconUtil         faviconUtil;
 
     @Inject
-    public HatebuFeedActivityPresenter(FeedsBurnerClienet feedsBurnerClienet,
-                                       HatenaClient.XmlService hatenaXmlService,
-                                       FilterRepository filterRepository,
-                                       FaviconUtil faviconUtil) {
-        this.feedsBurnerClienet = feedsBurnerClienet;
-        this.hatenaXmlService = hatenaXmlService;
+    public HatebuFeedActivityPresenter(GetFilteredFeedList getFilteredFeedList, FilterRepository filterRepository, FaviconUtil faviconUtil) {
+        this.getFilteredFeedList = getFilteredFeedList;
         this.filterRepository = filterRepository;
         this.faviconUtil = faviconUtil;
     }
@@ -67,10 +61,7 @@ public class HatebuFeedActivityPresenter implements HatebuFeedContract.ParentPre
             return presenters.get(key);
         } else {
             HatebuFeedFragmentPresenter p = new HatebuFeedFragmentPresenter(key,
-                                                                            feedsBurnerClienet,
-                                                                            hatenaXmlService,
-                                                                            filterRepository,
-                                                                            faviconUtil);
+                                                                            getFilteredFeedList, filterRepository, faviconUtil);
             presenters.put(key, p);
             return p;
         }
@@ -105,6 +96,11 @@ public class HatebuFeedActivityPresenter implements HatebuFeedContract.ParentPre
     @VisibleForTesting
     void initialzieFilterRepository() {
         filterRepository.deleteAll();
+    }
+
+    @VisibleForTesting
+    void addFilter(String filter) {
+        filterRepository.insertFilter(filter);
     }
 
     private static class HatebuCategory {

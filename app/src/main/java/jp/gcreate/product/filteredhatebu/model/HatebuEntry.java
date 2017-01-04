@@ -9,8 +9,11 @@ import java.util.List;
  */
 
 public class HatebuEntry {
+    @SerializedName("title")
     String title;
+    @SerializedName("count")
     int    count;
+    @SerializedName("url")
     String url;
     @SerializedName("entry_url")
     String entryUrl;
@@ -18,7 +21,9 @@ public class HatebuEntry {
     String screenshotUrl;
     @SerializedName("eid")
     int    entryId;
+    @SerializedName("bookmarks")
     List<HatebuBookmark>     bookmarks;
+    @SerializedName("related")
     List<HatebuRelatedEntry> related;
 
     public HatebuEntry(String title, int count, String url, String entryUrl,
