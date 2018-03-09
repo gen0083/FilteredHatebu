@@ -1,10 +1,9 @@
 package jp.gcreate.product.filteredhatebu;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
 import org.threeten.bp.LocalDateTime;
+import org.threeten.bp.ZoneId;
+import org.threeten.bp.ZonedDateTime;
 import org.threeten.bp.format.DateTimeFormatter;
 import org.threeten.bp.format.DateTimeParseException;
 import org.threeten.bp.temporal.ChronoUnit;
@@ -16,10 +15,16 @@ import static org.hamcrest.MatcherAssert.assertThat;
  * Copyright 2016 G-CREATE
  */
 
-@RunWith(RobolectricTestRunner.class)
-@Config(sdk = 19, manifest = Config.NONE)
 public class ThreeTenAbpTest {
     private static final String TIME_STRINGS = "2016-10-19T09:19:23+09:00";
+
+    @Test
+    public void convert_zoned_date_time() {
+        ZonedDateTime time = ZonedDateTime.parse(TIME_STRINGS);
+        System.out.println(time);
+        ZonedDateTime zdt = ZonedDateTime.now(ZoneId.of("Asia/Tokyo"));
+        System.out.println(zdt);
+    }
 
     @Test
     public void convert_date_time() {
