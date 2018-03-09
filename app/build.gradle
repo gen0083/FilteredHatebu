@@ -10,7 +10,6 @@ ext {
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.2"
     defaultConfig {
         applicationId "jp.gcreate.product.filteredhatebu"
         minSdkVersion 15
@@ -18,12 +17,23 @@ android {
         versionCode 9
         versionName "v17.1.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
     }
+
+    // flavorDimensionsはproductFlavorsをどの次元で切り分けているかを定義するもの
+    // 同じdimensionなら並列に並ぶ（ここでは使うnetworkでflavorを分けているので名前をnetworkとしている）
+    // productFlavorsを定義する場合、少なくとも1つflavorDimensionsを定義する必要がある
+    flavorDimensions "network"
     productFlavors {
         mock {
             applicationIdSuffix ".mock"
+            // flavorDimensionsが1つしかないなら省略しても結果は同じ
+            dimension "network"
         }
         prod {
+            // mockとprodが同じdimensionならmockDebug/prodDebugとなるが
+            // これを仮に別のdimensionにしたらmockProdDebugとかになる
+            dimension "network"
         }
     }
     signingConfigs {
