@@ -9,39 +9,28 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-        key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+         key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - run:
-        name: Download Dependencies
-        command: ./gradlew androidDependencies
+         name: Download Dependencies
+         command: ./gradlew androidDependencies
       - save_cache:
-        paths:
-          - ~/.gradle
-        key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+         paths:
+           - ~/.gradle
+         key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - run:
-        name: Unit Test
-        command: ./gradlew testMockDebugUnitTest
-      - run:
-        name: Instrumentation Test
-        command: |
-          circle-android wait-for-boot
-          # sleepを挟んでおいたほうがテストが安定した
-          sleep 10
-          adb shell settings put global window_animation_scale 0
-          adb shell settings put global transition_animation_scale 0
-          adb shell settings put global animator_duration_scale 0
-          adb shell input keyevent 82
-          ./gradlew connectedMockDebugAndroidTest
+         name: Unit Test
+         command: ./gradlew testMockDebugUnitTest
       - store_artifacts:
-        paths: app/build/reports
-        destination: reports
+         path: app/build/reports
+         destination: reports
       - run:
-        name: Post to slack
-        command: |
-          curl -s -S -X POST --data-urlencode "payload={'channel': '#ci', 'username': 'circleci', \
-          'text': 'test report :\n JUnit : \
-          <https://$CIRCLE_BUILD_NUM-72186590-gh.circle-artifacts.com/0$CIRCLE_TEST_REPORTS/tests/mockDebug/index.html| \
-          junit test report > \
-          \nUI test : \
-          <https://$CIRCLE_BUILD_NUM-72186590-gh.circle-artifacts.com/0$CIRCLE_TEST_REPORTS/androidTests/connected/flavors/MOCK/index.html| \
-          Espresso test report > \
-          (build $CIRCLE_BUILD_NUM)' }" $SLACK_TEST_HOOK >/dev/null
+         name: Post to slack
+         command: |
+           curl -s -S -X POST --data-urlencode "payload={'channel': '#ci', 'username': 'circleci', \
+           'text': 'test report :\n JUnit : \
+           <https://$CIRCLE_BUILD_NUM-72186590-gh.circle-artifacts.com/0$CIRCLE_TEST_REPORTS/tests/mockDebug/index.html| \
+           junit test report > \
+           \nUI test : \
+           <https://$CIRCLE_BUILD_NUM-72186590-gh.circle-artifacts.com/0$CIRCLE_TEST_REPORTS/androidTests/connected/flavors/MOCK/index.html| \
+           Espresso test report > \
+           (build $CIRCLE_BUILD_NUM)' }" $SLACK_TEST_HOOK >/dev/null
