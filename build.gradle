@@ -8,7 +8,8 @@ buildscript {
     }
     dependencies {
         classpath "com.android.tools.build:gradle:$android_gradle_version"
-        classpath 'com.github.gfx.ribbonizer:plugin:0.6.0'
+        // https://github.com/maskarade/gradle-android-ribbonizer-plugin
+        classpath 'com.github.gfx.ribbonizer:ribbonizer-plugin:2.1.0'
         // https://github.com/cookpad/license-tools-plugin
         classpath 'com.cookpad.android.licensetools:license-tools-plugin:1.2.0'
         // https://github.com/Triple-T/gradle-play-publisher
