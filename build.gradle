@@ -9,7 +9,8 @@ buildscript {
     dependencies {
         classpath "com.android.tools.build:gradle:$android_gradle_version"
         classpath 'com.github.gfx.ribbonizer:plugin:0.6.0'
-        classpath 'com.cookpad.android.licensetools:license-tools-plugin:0.18.0'
+        // https://github.com/cookpad/license-tools-plugin
+        classpath 'com.cookpad.android.licensetools:license-tools-plugin:1.2.0'
         classpath 'com.github.triplet.gradle:play-publisher:1.1.5'
 
         // NOTE: Do not place your application dependencies here; they belong
