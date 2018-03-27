@@ -9,11 +9,11 @@ ext {
 }
 
 android {
-    compileSdkVersion 25
+    compileSdkVersion 27
     defaultConfig {
         applicationId "jp.gcreate.product.filteredhatebu"
         minSdkVersion 15
-        targetSdkVersion 25
+        targetSdkVersion 27
         versionCode 9
         versionName "v17.1.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
