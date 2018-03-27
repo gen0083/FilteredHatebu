@@ -110,7 +110,7 @@ play {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    def support_ver = "25.1.0"
+    def support_ver = "27.1.0"
     implementation "com.android.support:appcompat-v7:$support_ver"
     implementation "com.android.support:design:$support_ver"
     implementation "com.android.support:recyclerview-v7:$support_ver"
