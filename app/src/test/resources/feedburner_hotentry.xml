@@ -1,0 +1,1141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://purl.org/rss/1.0/" xmlns:admin="http://webns.net/mvcb/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:hatena="http://www.hatena.ne.jp/info/xmlns#" xmlns:syn="http://purl.org/rss/1.0/modules/syndication/" xmlns:taxo="http://purl.org/rss/1.0/modules/taxonomy/">
+
+    <channel rdf:about="http://b.hatena.ne.jp/hotentry/all">
+        <title>はてなブックマーク - 人気エントリー - 総合</title>
+        <link>http://b.hatena.ne.jp/hotentry/all</link>
+        <description>最近の人気エントリー</description>
+        <items>
+            <rdf:Seq>
+                <rdf:li rdf:resource="http://takagi-hiromitsu.jp/diary/20180617.html" />
+                <rdf:li rdf:resource="https://anond.hatelabo.jp/20180619081926" />
+                <rdf:li rdf:resource="https://www.asahi.com/articles/ASL5T1FBPL5SUHBI06J.html" />
+                <rdf:li rdf:resource="https://anond.hatelabo.jp/20180619153225" />
+                <rdf:li rdf:resource="http://portal.nifty.com/kiji/180619203179_1.htm" />
+                <rdf:li rdf:resource="https://www3.nhk.or.jp/news/html/20180619/k10011486521000.html" />
+                <rdf:li rdf:resource="https://togetter.com/li/1238760" />
+                <rdf:li rdf:resource="https://anond.hatelabo.jp/20180619041344" />
+                <rdf:li rdf:resource="https://www.hotpepper.jp/mesitsu/entry/edajun/18-00113" />
+                <rdf:li rdf:resource="https://www.publickey1.jp/blog/18/webdriverw3cweb.html" />
+                <rdf:li rdf:resource="http://twitter.com/jtl_President/status/1008846795743494146" />
+                <rdf:li rdf:resource="https://www.asahi.com/articles/ASL6M4K0LL6MTLVB00J.html" />
+                <rdf:li rdf:resource="https://employment.en-japan.com/engineerhub/entry/2018/06/19/110000" />
+                <rdf:li rdf:resource="https://note.mu/regista13/n/nba821cc75a28" />
+                <rdf:li rdf:resource="https://www3.nhk.or.jp/news/html/20180619/k10011484781000.html" />
+                <rdf:li rdf:resource="http://twitter.com/konishihiroyuki/status/1009059454329876480" />
+                <rdf:li rdf:resource="https://tateyamakaito.hatenablog.com/entry/2018/06/17/214107" />
+                <rdf:li rdf:resource="https://anond.hatelabo.jp/20180619130756" />
+                <rdf:li rdf:resource="https://forest.watch.impress.co.jp/docs/news/1128271.html" />
+                <rdf:li rdf:resource="https://www.asahi.com/articles/ASL6M3C3LL6MPTIL010.html" />
+                <rdf:li rdf:resource="https://seleck.cc/1230" />
+                <rdf:li rdf:resource="https://www.asahi.com/articles/ASL6M3JY1L6MTIPE00G.html" />
+                <rdf:li rdf:resource="http://jinzai.pecori.jp/domain/2018/06/19/aota/" />
+                <rdf:li rdf:resource="https://togetter.com/li/1238478" />
+                <rdf:li rdf:resource="https://headlines.yahoo.co.jp/hl?a=20180619-00000007-goal-socc" />
+                <rdf:li rdf:resource="http://www.itmedia.co.jp/news/articles/1806/19/news055.html" />
+                <rdf:li rdf:resource="http://kabumatome.doorblog.jp/archives/65920793.html" />
+                <rdf:li rdf:resource="http://blogos.com/article/305370/" />
+                <rdf:li rdf:resource="https://anond.hatelabo.jp/20180619120705" />
+                <rdf:li rdf:resource="https://www3.nhk.or.jp/news/html/20180619/k10011485081000.html" />
+            </rdf:Seq>
+        </items>
+        <atom10:link xmlns:atom10="http://www.w3.org/2005/Atom" rel="self" type="application/rdf+xml" href="http://feeds.feedburner.com/hatena/b/hotentry" /><feedburner:info xmlns:feedburner="http://rssnamespace.org/feedburner/ext/1.0" uri="hatena/b/hotentry" /><atom10:link xmlns:atom10="http://www.w3.org/2005/Atom" rel="hub" href="http://pubsubhubbub.appspot.com/" /></channel>
+    <item rdf:about="http://takagi-hiromitsu.jp/diary/20180617.html">
+        <title>高木浩光＠自宅の日記 - 魔女狩り商法に翻弄された田舎警察 Coinhive事件 大本営報道はまさに現代の魔女狩りだ</title>
+        <link>http://takagi-hiromitsu.jp/diary/20180617.html</link>
+        <description>■ 魔女狩り商法に翻弄された田舎警察 Coinhive事件 大本営報道はまさに現代の魔女狩りだ
+            前回の日記（6月11日23時46分公開）の件はその後、以下のように展開した。
+            6月12日
+            他人PCで仮想通貨獲得 了解得ず「採掘」初立件 神奈川県警など,*1 毎日新聞, 6月12日朝刊
+            仮想通貨マイニング（Coinhive）で家宅捜索を受けた話, ...</description>
+        <dc:date>2018-06-19T07:26:29Z</dc:date>
+        <dc:subject>世の中</dc:subject>
+        <dc:subject>あとで読む</dc:subject>
+        <dc:subject>セキュリティ</dc:subject>
+        <dc:subject>警察</dc:subject>
+        <dc:subject>security</dc:subject>
+        <dc:subject>coinhive</dc:subject>
+        <dc:subject>事件</dc:subject>
+        <dc:subject>法律</dc:subject>
+        <dc:subject>高木浩光</dc:subject>
+        <dc:subject>law</dc:subject>
+        <dc:subject>報道</dc:subject>
+        <taxo:topics>
+            <rdf:Bag>
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%81%82%E3%81%A8%E3%81%A7%E8%AA%AD%E3%82%80" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%82%BB%E3%82%AD%E3%83%A5%E3%83%AA%E3%83%86%E3%82%A3" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E8%AD%A6%E5%AF%9F" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=security" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=coinhive" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E4%BA%8B%E4%BB%B6" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E6%B3%95%E5%BE%8B" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E9%AB%98%E6%9C%A8%E6%B5%A9%E5%85%89" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=law" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E5%A0%B1%E9%81%93" />
+            </rdf:Bag>
+        </taxo:topics>
+        <hatena:bookmarkcount>505</hatena:bookmarkcount>
+        <content:encoded><![CDATA[
+<blockquote cite="http://takagi-hiromitsu.jp/diary/20180617.html" title="高木浩光＠自宅の日記 - 魔女狩り商法に翻弄された田舎警察 Coinhive事件 大本営報道はまさに現代の魔女狩りだ"><cite><img src="https://cdn-ak2.favicon.st-hatena.com/?url=http%3A%2F%2Ftakagi-hiromitsu.jp%2F" alt="" /> <a href="http://takagi-hiromitsu.jp/diary/20180617.html">高木浩光＠自宅の日記 - 魔女狩り商法に翻弄された田舎警察 Coinhive事件 大本営報道はまさに現代の魔女狩りだ</a></cite><p><a href="http://takagi-hiromitsu.jp/diary/20180617.html"><img src="" alt="高木浩光＠自宅の日記 - 魔女狩り商法に翻弄された田舎警察 Coinhive事件 大本営報道はまさに現代の魔女狩りだ" title="高木浩光＠自宅の日記 - 魔女狩り商法に翻弄された田舎警察 Coinhive事件 大本営報道はまさに現代の魔女狩りだ" class="entry-image" /></a></p><p>■ 魔女狩り商法に翻弄された田舎警察 Coinhive事件 大本営報道はまさに現代の魔女狩りだ
+前回の日記（6月11日23時46分公開）の件はその後、以下のように展開した。
+6月12日
+他人PCで仮想通貨獲得 了解得ず「採掘」初立件 神奈川県警など,*1 毎日新聞, 6月12日朝刊
+仮想通貨マイニング（Coinhive）で家宅捜索を受けた話, ...</p><p><a href="http://b.hatena.ne.jp/entry/takagi-hiromitsu.jp/diary/20180617.html"><img src="http://b.hatena.ne.jp/entry/image/http://takagi-hiromitsu.jp/diary/20180617.html" alt="はてなブックマーク - 高木浩光＠自宅の日記 - 魔女狩り商法に翻弄された田舎警察 Coinhive事件 大本営報道はまさに現代の魔女狩りだ" title="はてなブックマーク - 高木浩光＠自宅の日記 - 魔女狩り商法に翻弄された田舎警察 Coinhive事件 大本営報道はまさに現代の魔女狩りだ" border="0" style="border: none" /></a> <a href="http://b.hatena.ne.jp/entry/takagi-hiromitsu.jp/diary/20180617.html"><img src="http://b.hatena.ne.jp/images/append.gif" border="0" alt="はてなブックマークに追加" title="はてなブックマークに追加" /></a></p></blockquote><img src="http://feeds.feedburner.com/~r/hatena/b/hotentry/~4/zpDkq48DrXw" height="1" width="1" alt=""/>]]></content:encoded>
+    </item>
+    <item rdf:about="https://anond.hatelabo.jp/20180619081926">
+        <title>最初は嫌いだったけど、物語が進むにつれて好きになるキャラっている？</title>
+        <link>https://anond.hatelabo.jp/20180619081926</link>
+        <description>最初は何こいつを思ってたけど、実は、良いやつだなと思ったり、印象が変わったりするキャラいる？</description>
+        <dc:date>2018-06-18T23:33:54Z</dc:date>
+        <dc:subject>おもしろ</dc:subject>
+        <dc:subject>あとで読む</dc:subject>
+        <dc:subject>増田</dc:subject>
+        <dc:subject>ネタ</dc:subject>
+        <dc:subject>キャラクター</dc:subject>
+        <dc:subject>考察</dc:subject>
+        <dc:subject>character</dc:subject>
+        <dc:subject>アニメ</dc:subject>
+        <dc:subject>物語</dc:subject>
+        <dc:subject>コメ</dc:subject>
+        <dc:subject>writing</dc:subject>
+        <taxo:topics>
+            <rdf:Bag>
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%81%82%E3%81%A8%E3%81%A7%E8%AA%AD%E3%82%80" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E5%A2%97%E7%94%B0" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%83%8D%E3%82%BF" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%82%AD%E3%83%A3%E3%83%A9%E3%82%AF%E3%82%BF%E3%83%BC" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E8%80%83%E5%AF%9F" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=character" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%82%A2%E3%83%8B%E3%83%A1" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E7%89%A9%E8%AA%9E" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%82%B3%E3%83%A1" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=writing" />
+            </rdf:Bag>
+        </taxo:topics>
+        <hatena:bookmarkcount>625</hatena:bookmarkcount>
+        <content:encoded><![CDATA[
+<blockquote cite="https://anond.hatelabo.jp/20180619081926" title="最初は嫌いだったけど、物語が進むにつれて好きになるキャラっている？"><cite><img src="https://cdn-ak2.favicon.st-hatena.com/?url=https%3A%2F%2Fanond.hatelabo.jp%2F" alt="" /> <a href="https://anond.hatelabo.jp/20180619081926">最初は嫌いだったけど、物語が進むにつれて好きになるキャラっている？</a></cite><p><a href="https://anond.hatelabo.jp/20180619081926"><img src="https://cdn-ak-scissors.b.st-hatena.com/image/square/7d1d01079eff061d6fd2ac87dfa690bdb4d2fe9d/height=90;version=1;width=120/https%3A%2F%2Fanond.hatelabo.jp%2Fimages%2Fog-image-1500.gif" alt="最初は嫌いだったけど、物語が進むにつれて好きになるキャラっている？" title="最初は嫌いだったけど、物語が進むにつれて好きになるキャラっている？" class="entry-image" /></a></p><p>最初は何こいつを思ってたけど、実は、良いやつだなと思ったり、印象が変わったりするキャラいる？</p><p><a href="http://b.hatena.ne.jp/entry/s/anond.hatelabo.jp/20180619081926"><img src="http://b.hatena.ne.jp/entry/image/https://anond.hatelabo.jp/20180619081926" alt="はてなブックマーク - 最初は嫌いだったけど、物語が進むにつれて好きになるキャラっている？" title="はてなブックマーク - 最初は嫌いだったけど、物語が進むにつれて好きになるキャラっている？" border="0" style="border: none" /></a> <a href="http://b.hatena.ne.jp/entry/s/anond.hatelabo.jp/20180619081926"><img src="http://b.hatena.ne.jp/images/append.gif" border="0" alt="はてなブックマークに追加" title="はてなブックマークに追加" /></a></p></blockquote><img src="http://feeds.feedburner.com/~r/hatena/b/hotentry/~4/JuXOe0JTsH0" height="1" width="1" alt=""/>]]></content:encoded>
+    </item>
+    <item rdf:about="https://www.asahi.com/articles/ASL5T1FBPL5SUHBI06J.html">
+        <title>ガンジーもタージマハルも…　インドで進む歴史書き換え：朝日新聞デジタル</title>
+        <link>https://www.asahi.com/articles/ASL5T1FBPL5SUHBI06J.html</link>
+        <description>インドのモディ首相が就任して４年。この間、自国の歴史の書き換えが進んでいる。ヒンドゥー教徒以外はインド人ではないとの考えに傾き、神話と史実を混同する。イスラム教徒など少数者に対する排外意識を強めかねない。（ニューデリー＝奈良部健）
+            インド西部ラジャスタン州で一昨年、公立校の社会科教科書から初代首相...</description>
+        <dc:date>2018-06-19T07:08:23Z</dc:date>
+        <dc:subject>世の中</dc:subject>
+        <dc:subject>歴史</dc:subject>
+        <dc:subject>あとで読む</dc:subject>
+        <dc:subject>インド</dc:subject>
+        <dc:subject>教育</dc:subject>
+        <dc:subject>歴史修正主義</dc:subject>
+        <dc:subject>社会</dc:subject>
+        <dc:subject>国際</dc:subject>
+        <dc:subject>政治</dc:subject>
+        <dc:subject>history</dc:subject>
+        <dc:subject>India</dc:subject>
+        <taxo:topics>
+            <rdf:Bag>
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E6%AD%B4%E5%8F%B2" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%81%82%E3%81%A8%E3%81%A7%E8%AA%AD%E3%82%80" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%82%A4%E3%83%B3%E3%83%89" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E6%95%99%E8%82%B2" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E6%AD%B4%E5%8F%B2%E4%BF%AE%E6%AD%A3%E4%B8%BB%E7%BE%A9" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E7%A4%BE%E4%BC%9A" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E5%9B%BD%E9%9A%9B" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E6%94%BF%E6%B2%BB" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=history" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=India" />
+            </rdf:Bag>
+        </taxo:topics>
+        <hatena:bookmarkcount>342</hatena:bookmarkcount>
+        <content:encoded><![CDATA[
+<blockquote cite="https://www.asahi.com/articles/ASL5T1FBPL5SUHBI06J.html" title="ガンジーもタージマハルも…　インドで進む歴史書き換え：朝日新聞デジタル"><cite><img src="https://cdn-ak2.favicon.st-hatena.com/?url=https%3A%2F%2Fwww.asahi.com%2F" alt="" /> <a href="https://www.asahi.com/articles/ASL5T1FBPL5SUHBI06J.html">ガンジーもタージマハルも…　インドで進む歴史書き換え：朝日新聞デジタル</a></cite><p><a href="https://www.asahi.com/articles/ASL5T1FBPL5SUHBI06J.html"><img src="https://cdn-ak-scissors.b.st-hatena.com/image/square/830f412d0df265fe9ad583a7a1912b3ee37d4596/height=90;version=1;width=120/https%3A%2F%2Fwww.asahicom.jp%2Farticles%2Fimages%2Fc_AS20180615002227_comm.jpg" alt="ガンジーもタージマハルも…　インドで進む歴史書き換え：朝日新聞デジタル" title="ガンジーもタージマハルも…　インドで進む歴史書き換え：朝日新聞デジタル" class="entry-image" /></a></p><p>インドのモディ首相が就任して４年。この間、自国の歴史の書き換えが進んでいる。ヒンドゥー教徒以外はインド人ではないとの考えに傾き、神話と史実を混同する。イスラム教徒など少数者に対する排外意識を強めかねない。（ニューデリー＝奈良部健）
+インド西部ラジャスタン州で一昨年、公立校の社会科教科書から初代首相...</p><p><a href="http://b.hatena.ne.jp/entry/s/www.asahi.com/articles/ASL5T1FBPL5SUHBI06J.html"><img src="http://b.hatena.ne.jp/entry/image/https://www.asahi.com/articles/ASL5T1FBPL5SUHBI06J.html" alt="はてなブックマーク - ガンジーもタージマハルも…　インドで進む歴史書き換え：朝日新聞デジタル" title="はてなブックマーク - ガンジーもタージマハルも…　インドで進む歴史書き換え：朝日新聞デジタル" border="0" style="border: none" /></a> <a href="http://b.hatena.ne.jp/entry/s/www.asahi.com/articles/ASL5T1FBPL5SUHBI06J.html"><img src="http://b.hatena.ne.jp/images/append.gif" border="0" alt="はてなブックマークに追加" title="はてなブックマークに追加" /></a></p></blockquote><img src="http://feeds.feedburner.com/~r/hatena/b/hotentry/~4/4lzOk4y-v1I" height="1" width="1" alt=""/>]]></content:encoded>
+    </item>
+    <item rdf:about="https://anond.hatelabo.jp/20180619153225">
+        <title>仕事辞めて牛タン食べた</title>
+        <link>https://anond.hatelabo.jp/20180619153225</link>
+        <description>今さっき仕事辞めてきたから、記念に安すぎず高すぎない好きなものを食べたくて、ランチ御膳4000円くらいの牛タン屋に来てみました。この開放感をゴリゴリに噛み締めたかったので、ちょっと歯ごたえがあるものにしようと思って。かすかにジャズの流れる店内に入り、4500円の特上御膳セットを注文。すみやかに運ばれてき...</description>
+        <dc:date>2018-06-19T06:46:46Z</dc:date>
+        <dc:subject>暮らし</dc:subject>
+        <dc:subject>あとで読む</dc:subject>
+        <dc:subject>増田</dc:subject>
+        <dc:subject>食</dc:subject>
+        <dc:subject>仙台</dc:subject>
+        <dc:subject>人生</dc:subject>
+        <dc:subject>仕事</dc:subject>
+        <dc:subject>生活</dc:subject>
+        <dc:subject>よい文章</dc:subject>
+        <dc:subject>work</dc:subject>
+        <dc:subject>ブログ</dc:subject>
+        <taxo:topics>
+            <rdf:Bag>
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%81%82%E3%81%A8%E3%81%A7%E8%AA%AD%E3%82%80" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E5%A2%97%E7%94%B0" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E9%A3%9F" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E4%BB%99%E5%8F%B0" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E4%BA%BA%E7%94%9F" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E4%BB%95%E4%BA%8B" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E7%94%9F%E6%B4%BB" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%82%88%E3%81%84%E6%96%87%E7%AB%A0" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=work" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%83%96%E3%83%AD%E3%82%B0" />
+            </rdf:Bag>
+        </taxo:topics>
+        <hatena:bookmarkcount>264</hatena:bookmarkcount>
+        <content:encoded><![CDATA[
+<blockquote cite="https://anond.hatelabo.jp/20180619153225" title="仕事辞めて牛タン食べた"><cite><img src="https://cdn-ak2.favicon.st-hatena.com/?url=https%3A%2F%2Fanond.hatelabo.jp%2F" alt="" /> <a href="https://anond.hatelabo.jp/20180619153225">仕事辞めて牛タン食べた</a></cite><p><a href="https://anond.hatelabo.jp/20180619153225"><img src="https://cdn-ak-scissors.b.st-hatena.com/image/square/7d1d01079eff061d6fd2ac87dfa690bdb4d2fe9d/height=90;version=1;width=120/https%3A%2F%2Fanond.hatelabo.jp%2Fimages%2Fog-image-1500.gif" alt="仕事辞めて牛タン食べた" title="仕事辞めて牛タン食べた" class="entry-image" /></a></p><p>今さっき仕事辞めてきたから、記念に安すぎず高すぎない好きなものを食べたくて、ランチ御膳4000円くらいの牛タン屋に来てみました。この開放感をゴリゴリに噛み締めたかったので、ちょっと歯ごたえがあるものにしようと思って。かすかにジャズの流れる店内に入り、4500円の特上御膳セットを注文。すみやかに運ばれてき...</p><p><a href="http://b.hatena.ne.jp/entry/s/anond.hatelabo.jp/20180619153225"><img src="http://b.hatena.ne.jp/entry/image/https://anond.hatelabo.jp/20180619153225" alt="はてなブックマーク - 仕事辞めて牛タン食べた" title="はてなブックマーク - 仕事辞めて牛タン食べた" border="0" style="border: none" /></a> <a href="http://b.hatena.ne.jp/entry/s/anond.hatelabo.jp/20180619153225"><img src="http://b.hatena.ne.jp/images/append.gif" border="0" alt="はてなブックマークに追加" title="はてなブックマークに追加" /></a></p></blockquote><img src="http://feeds.feedburner.com/~r/hatena/b/hotentry/~4/_IGY8yoonvI" height="1" width="1" alt=""/>]]></content:encoded>
+    </item>
+    <item rdf:about="http://portal.nifty.com/kiji/180619203179_1.htm">
+        <title>「へえ～ここに出るのか～」選手権 - デイリーポータルZ</title>
+        <link>http://portal.nifty.com/kiji/180619203179_1.htm</link>
+        <description>知らない道を歩いて心細くなったあと、知ってる大通りに出る。そんなとき人は言う。「へえ～、ここに出るのか～」と。
+            そんな「ここに出るのか」体験は気持ちがいい。今回は純粋に「ここに出るのか」だけを味わうために、お互いが自慢の「ここに出る」道を案内した。
+            題して、「へえ～ここに出るのか～」選手権である。</description>
+        <dc:date>2018-06-19T02:15:36Z</dc:date>
+        <dc:subject>おもしろ</dc:subject>
+        <dc:subject>あとで読む</dc:subject>
+        <dc:subject>散歩</dc:subject>
+        <dc:subject>東京</dc:subject>
+        <dc:subject>dpz</dc:subject>
+        <dc:subject>旅</dc:subject>
+        <dc:subject>デイリーポータルZ</dc:subject>
+        <dc:subject>地図</dc:subject>
+        <dc:subject>地理</dc:subject>
+        <dc:subject>funny</dc:subject>
+        <dc:subject>人</dc:subject>
+        <taxo:topics>
+            <rdf:Bag>
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%81%82%E3%81%A8%E3%81%A7%E8%AA%AD%E3%82%80" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E6%95%A3%E6%AD%A9" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E6%9D%B1%E4%BA%AC" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=dpz" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E6%97%85" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%83%87%E3%82%A4%E3%83%AA%E3%83%BC%E3%83%9D%E3%83%BC%E3%82%BF%E3%83%ABZ" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E5%9C%B0%E5%9B%B3" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E5%9C%B0%E7%90%86" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=funny" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E4%BA%BA" />
+            </rdf:Bag>
+        </taxo:topics>
+        <hatena:bookmarkcount>401</hatena:bookmarkcount>
+        <content:encoded><![CDATA[
+<blockquote cite="http://portal.nifty.com/kiji/180619203179_1.htm" title="「へえ～ここに出るのか～」選手権 - デイリーポータルZ"><cite><img src="https://cdn-ak2.favicon.st-hatena.com/?url=http%3A%2F%2Fportal.nifty.com%2F" alt="" /> <a href="http://portal.nifty.com/kiji/180619203179_1.htm">「へえ～ここに出るのか～」選手権 - デイリーポータルZ</a></cite><p><a href="http://portal.nifty.com/kiji/180619203179_1.htm"><img src="https://cdn-ak-scissors.b.st-hatena.com/image/square/5fe1f0b8c6eb879b122132e1c4a017f3ffbccaa9/height=90;version=1;width=120/http%3A%2F%2Fportal.nifty.com%2F2018%2F06%2F19%2Fa%2Fimg%2Fpc%2Ftop.jpg" alt="「へえ～ここに出るのか～」選手権 - デイリーポータルZ" title="「へえ～ここに出るのか～」選手権 - デイリーポータルZ" class="entry-image" /></a></p><p>知らない道を歩いて心細くなったあと、知ってる大通りに出る。そんなとき人は言う。「へえ～、ここに出るのか～」と。
+そんな「ここに出るのか」体験は気持ちがいい。今回は純粋に「ここに出るのか」だけを味わうために、お互いが自慢の「ここに出る」道を案内した。
+題して、「へえ～ここに出るのか～」選手権である。</p><p><a href="http://b.hatena.ne.jp/entry/portal.nifty.com/kiji/180619203179_1.htm"><img src="http://b.hatena.ne.jp/entry/image/http://portal.nifty.com/kiji/180619203179_1.htm" alt="はてなブックマーク - 「へえ～ここに出るのか～」選手権 - デイリーポータルZ" title="はてなブックマーク - 「へえ～ここに出るのか～」選手権 - デイリーポータルZ" border="0" style="border: none" /></a> <a href="http://b.hatena.ne.jp/entry/portal.nifty.com/kiji/180619203179_1.htm"><img src="http://b.hatena.ne.jp/images/append.gif" border="0" alt="はてなブックマークに追加" title="はてなブックマークに追加" /></a></p></blockquote><img src="http://feeds.feedburner.com/~r/hatena/b/hotentry/~4/LLT3vuYQBi0" height="1" width="1" alt=""/>]]></content:encoded>
+    </item>
+    <item rdf:about="https://www3.nhk.or.jp/news/html/20180619/k10011486521000.html">
+        <title>サッカーＷ杯 日本がコロンビアに勝利 | NHKニュース</title>
+        <link>https://www3.nhk.or.jp/news/html/20180619/k10011486521000.html</link>
+        <description>サッカーワールドカップロシア大会の１次リーグ、グループＨ、日本は初戦でコロンビアと対戦し、香川真司選手と大迫勇也選手のゴールで２対１で勝ちました。日本はワールドカップ、２大会ぶりの勝利です。</description>
+        <dc:date>2018-06-19T13:57:04Z</dc:date>
+        <dc:subject>世の中</dc:subject>
+        <dc:subject>スポーツ</dc:subject>
+        <dc:subject>サッカー</dc:subject>
+        <dc:subject>あとで読む</dc:subject>
+        <dc:subject>これはすばらしい</dc:subject>
+        <dc:subject>ワールドカップ</dc:subject>
+        <dc:subject>日本代表</dc:subject>
+        <dc:subject>Worldcup</dc:subject>
+        <dc:subject>海外</dc:subject>
+        <dc:subject>JFA</dc:subject>
+        <dc:subject>Football</dc:subject>
+        <taxo:topics>
+            <rdf:Bag>
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%82%B9%E3%83%9D%E3%83%BC%E3%83%84" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%82%B5%E3%83%83%E3%82%AB%E3%83%BC" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%81%82%E3%81%A8%E3%81%A7%E8%AA%AD%E3%82%80" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%81%93%E3%82%8C%E3%81%AF%E3%81%99%E3%81%B0%E3%82%89%E3%81%97%E3%81%84" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%83%AF%E3%83%BC%E3%83%AB%E3%83%89%E3%82%AB%E3%83%83%E3%83%97" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E6%97%A5%E6%9C%AC%E4%BB%A3%E8%A1%A8" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=Worldcup" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E6%B5%B7%E5%A4%96" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=JFA" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=Football" />
+            </rdf:Bag>
+        </taxo:topics>
+        <hatena:bookmarkcount>102</hatena:bookmarkcount>
+        <content:encoded><![CDATA[
+<blockquote cite="https://www3.nhk.or.jp/news/html/20180619/k10011486521000.html" title="サッカーＷ杯 日本がコロンビアに勝利 | NHKニュース"><cite><img src="https://cdn-ak2.favicon.st-hatena.com/?url=https%3A%2F%2Fwww3.nhk.or.jp%2F" alt="" /> <a href="https://www3.nhk.or.jp/news/html/20180619/k10011486521000.html">サッカーＷ杯 日本がコロンビアに勝利 | NHKニュース</a></cite><p><a href="https://www3.nhk.or.jp/news/html/20180619/k10011486521000.html"><img src="https://cdn-ak-scissors.b.st-hatena.com/image/square/508c60509cfa33c9f0cbbf349fca09a1c3bf396d/height=90;version=1;width=120/https%3A%2F%2Fwww3.nhk.or.jp%2Fnews%2Fimg%2Ffb_futa16_600px.png" alt="サッカーＷ杯 日本がコロンビアに勝利 | NHKニュース" title="サッカーＷ杯 日本がコロンビアに勝利 | NHKニュース" class="entry-image" /></a></p><p>サッカーワールドカップロシア大会の１次リーグ、グループＨ、日本は初戦でコロンビアと対戦し、香川真司選手と大迫勇也選手のゴールで２対１で勝ちました。日本はワールドカップ、２大会ぶりの勝利です。</p><p><a href="http://b.hatena.ne.jp/entry/s/www3.nhk.or.jp/news/html/20180619/k10011486521000.html"><img src="http://b.hatena.ne.jp/entry/image/https://www3.nhk.or.jp/news/html/20180619/k10011486521000.html" alt="はてなブックマーク - サッカーＷ杯 日本がコロンビアに勝利 | NHKニュース" title="はてなブックマーク - サッカーＷ杯 日本がコロンビアに勝利 | NHKニュース" border="0" style="border: none" /></a> <a href="http://b.hatena.ne.jp/entry/s/www3.nhk.or.jp/news/html/20180619/k10011486521000.html"><img src="http://b.hatena.ne.jp/images/append.gif" border="0" alt="はてなブックマークに追加" title="はてなブックマークに追加" /></a></p></blockquote><img src="http://feeds.feedburner.com/~r/hatena/b/hotentry/~4/yVgiAknm0v4" height="1" width="1" alt=""/>]]></content:encoded>
+    </item>
+    <item rdf:about="https://togetter.com/li/1238760">
+        <title>地震によって新卒社員7人が一斉に辞めてしまった会社…その原因は部長の発言にあった？『“非常時に社員を守れない会社は嫌だ”と連名で退職届が出た』 - Togetter</title>
+        <link>https://togetter.com/li/1238760</link>
+        <description>大坂の知人に地震大丈夫？と連絡したら別の問題が
+            新卒７人が一斉に辞めたらしく、原因は部長だとか。
+            電車が止まり出勤できない旨を伝えたら、何が何でもこいと指示を出され、非常時に社員を守れない会社は嫌だと連名で退職届でたそうだ。
+            なおその事が人事部長と社長にバレて、部長の首話が出てると</description>
+        <dc:date>2018-06-19T02:53:21Z</dc:date>
+        <dc:subject>世の中</dc:subject>
+        <dc:subject>あとで読む</dc:subject>
+        <dc:subject>togetter</dc:subject>
+        <dc:subject>地震</dc:subject>
+        <dc:subject>ネタ</dc:subject>
+        <dc:subject>会社</dc:subject>
+        <dc:subject>twitter</dc:subject>
+        <dc:subject>組織</dc:subject>
+        <dc:subject>災害</dc:subject>
+        <dc:subject>work</dc:subject>
+        <dc:subject>ブコメしたいだけ</dc:subject>
+        <taxo:topics>
+            <rdf:Bag>
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%81%82%E3%81%A8%E3%81%A7%E8%AA%AD%E3%82%80" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=togetter" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E5%9C%B0%E9%9C%87" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%83%8D%E3%82%BF" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E4%BC%9A%E7%A4%BE" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=twitter" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E7%B5%84%E7%B9%94" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E7%81%BD%E5%AE%B3" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=work" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%83%96%E3%82%B3%E3%83%A1%E3%81%97%E3%81%9F%E3%81%84%E3%81%A0%E3%81%91" />
+            </rdf:Bag>
+        </taxo:topics>
+        <hatena:bookmarkcount>301</hatena:bookmarkcount>
+        <content:encoded><![CDATA[
+<blockquote cite="https://togetter.com/li/1238760" title="地震によって新卒社員7人が一斉に辞めてしまった会社…その原因は部長の発言にあった？『“非常時に社員を守れない会社は嫌だ”と連名で退職届が出た』 - Togetter"><cite><img src="https://cdn-ak2.favicon.st-hatena.com/?url=https%3A%2F%2Ftogetter.com%2F" alt="" /> <a href="https://togetter.com/li/1238760">地震によって新卒社員7人が一斉に辞めてしまった会社…その原因は部長の発言にあった？『“非常時に社員を守れない会社は嫌だ”と連名で退職届が出た』 - Togetter</a></cite><p><a href="https://togetter.com/li/1238760"><img src="https://cdn-ak-scissors.b.st-hatena.com/image/square/173a1b6bd7c556b42cbef24a73e069ad13a7e1aa/height=90;version=1;width=120/http%3A%2F%2Fpimg.togetter.com%2Fd7814659a66a31173699db9c315df3d4ff47a292%2F68747470733a2f2f7062732e7477696d672e636f6d2f6d656469612f44663766774269564141414f5f65462e6a70673a6c61726765%3Fw%3D1200%26h%3D630%26t%3Dc" alt="地震によって新卒社員7人が一斉に辞めてしまった会社…その原因は部長の発言にあった？『“非常時に社員を守れない会社は嫌だ”と連名で退職届が出た』 - Togetter" title="地震によって新卒社員7人が一斉に辞めてしまった会社…その原因は部長の発言にあった？『“非常時に社員を守れない会社は嫌だ”と連名で退職届が出た』 - Togetter" class="entry-image" /></a></p><p>大坂の知人に地震大丈夫？と連絡したら別の問題が
+新卒７人が一斉に辞めたらしく、原因は部長だとか。
+電車が止まり出勤できない旨を伝えたら、何が何でもこいと指示を出され、非常時に社員を守れない会社は嫌だと連名で退職届でたそうだ。
+なおその事が人事部長と社長にバレて、部長の首話が出てると</p><p><a href="http://b.hatena.ne.jp/entry/s/togetter.com/li/1238760"><img src="http://b.hatena.ne.jp/entry/image/https://togetter.com/li/1238760" alt="はてなブックマーク - 地震によって新卒社員7人が一斉に辞めてしまった会社…その原因は部長の発言にあった？『“非常時に社員を守れない会社は嫌だ”と連名で退職届が出た』 - Togetter" title="はてなブックマーク - 地震によって新卒社員7人が一斉に辞めてしまった会社…その原因は部長の発言にあった？『“非常時に社員を守れない会社は嫌だ”と連名で退職届が出た』 - Togetter" border="0" style="border: none" /></a> <a href="http://b.hatena.ne.jp/entry/s/togetter.com/li/1238760"><img src="http://b.hatena.ne.jp/images/append.gif" border="0" alt="はてなブックマークに追加" title="はてなブックマークに追加" /></a></p></blockquote><img src="http://feeds.feedburner.com/~r/hatena/b/hotentry/~4/XZqpO3xrai4" height="1" width="1" alt=""/>]]></content:encoded>
+    </item>
+    <item rdf:about="https://anond.hatelabo.jp/20180619041344">
+        <title>童貞だとバレない方法はないものか</title>
+        <link>https://anond.hatelabo.jp/20180619041344</link>
+        <description>３０歳にして初めて女性と付き合えてそろそろより深い関係になりたいところなんだが
+            経験ないって事がバレるの怖いな。
+            腰ふる練習は２５歳位からほぼ毎日欠かさずしてるからなんとかなんとかなる自信はあるがブラ外す時にバレそうだ。
+            女の子が自分で取るのを見るのが好きなんだ、と言おうか。</description>
+        <dc:date>2018-06-19T00:42:13Z</dc:date>
+        <dc:subject>おもしろ</dc:subject>
+        <dc:subject>あとで読む</dc:subject>
+        <dc:subject>増田</dc:subject>
+        <dc:subject>ネタ</dc:subject>
+        <dc:subject>sexuality</dc:subject>
+        <dc:subject>人生</dc:subject>
+        <dc:subject>男女</dc:subject>
+        <dc:subject>haji</dc:subject>
+        <dc:subject>anonymousdiary</dc:subject>
+        <dc:subject>あとで消す</dc:subject>
+        <dc:subject>勘違い</dc:subject>
+        <taxo:topics>
+            <rdf:Bag>
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%81%82%E3%81%A8%E3%81%A7%E8%AA%AD%E3%82%80" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E5%A2%97%E7%94%B0" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%83%8D%E3%82%BF" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=sexuality" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E4%BA%BA%E7%94%9F" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E7%94%B7%E5%A5%B3" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=haji" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=anonymousdiary" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%81%82%E3%81%A8%E3%81%A7%E6%B6%88%E3%81%99" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E5%8B%98%E9%81%95%E3%81%84" />
+            </rdf:Bag>
+        </taxo:topics>
+        <hatena:bookmarkcount>316</hatena:bookmarkcount>
+        <content:encoded><![CDATA[
+<blockquote cite="https://anond.hatelabo.jp/20180619041344" title="童貞だとバレない方法はないものか"><cite><img src="https://cdn-ak2.favicon.st-hatena.com/?url=https%3A%2F%2Fanond.hatelabo.jp%2F" alt="" /> <a href="https://anond.hatelabo.jp/20180619041344">童貞だとバレない方法はないものか</a></cite><p><a href="https://anond.hatelabo.jp/20180619041344"><img src="https://cdn-ak-scissors.b.st-hatena.com/image/square/7d1d01079eff061d6fd2ac87dfa690bdb4d2fe9d/height=90;version=1;width=120/https%3A%2F%2Fanond.hatelabo.jp%2Fimages%2Fog-image-1500.gif" alt="童貞だとバレない方法はないものか" title="童貞だとバレない方法はないものか" class="entry-image" /></a></p><p>３０歳にして初めて女性と付き合えてそろそろより深い関係になりたいところなんだが
+経験ないって事がバレるの怖いな。
+腰ふる練習は２５歳位からほぼ毎日欠かさずしてるからなんとかなんとかなる自信はあるがブラ外す時にバレそうだ。
+女の子が自分で取るのを見るのが好きなんだ、と言おうか。</p><p><a href="http://b.hatena.ne.jp/entry/s/anond.hatelabo.jp/20180619041344"><img src="http://b.hatena.ne.jp/entry/image/https://anond.hatelabo.jp/20180619041344" alt="はてなブックマーク - 童貞だとバレない方法はないものか" title="はてなブックマーク - 童貞だとバレない方法はないものか" border="0" style="border: none" /></a> <a href="http://b.hatena.ne.jp/entry/s/anond.hatelabo.jp/20180619041344"><img src="http://b.hatena.ne.jp/images/append.gif" border="0" alt="はてなブックマークに追加" title="はてなブックマークに追加" /></a></p></blockquote><img src="http://feeds.feedburner.com/~r/hatena/b/hotentry/~4/DPKsfm2rAjE" height="1" width="1" alt=""/>]]></content:encoded>
+    </item>
+    <item rdf:about="https://www.hotpepper.jp/mesitsu/entry/edajun/18-00113">
+        <title>大葉の大量消費に！超簡単「大葉ソース」で本気でおかわりしたくなる焼きうどんが完成【エダジュン】 - メシ通 | ホットペッパーグルメ</title>
+        <link>https://www.hotpepper.jp/mesitsu/entry/edajun/18-00113</link>
+        <description>こんにちは、料理研究家のエダジュンです。
+            暑くなると安くなって、スーパーでも手に入りやすくなる「大葉」。ただ、安くてたっぷり買ったのはいいけれど、使い切れずに冷蔵庫の奥のほうでしおれさせてしまうのが夏のあるある……。そこで今回は、大葉の大量消費におすすめ、大活躍間違いなしの万能ソース！ これでつくる...</description>
+        <dc:date>2018-06-19T06:01:44Z</dc:date>
+        <dc:subject>暮らし</dc:subject>
+        <dc:subject>レシピ</dc:subject>
+        <dc:subject>あとで読む</dc:subject>
+        <dc:subject>料理</dc:subject>
+        <dc:subject>うどん</dc:subject>
+        <dc:subject>大葉</dc:subject>
+        <dc:subject>食</dc:subject>
+        <dc:subject>recipe</dc:subject>
+        <dc:subject>麺</dc:subject>
+        <dc:subject>簡単</dc:subject>
+        <dc:subject>しそ</dc:subject>
+        <taxo:topics>
+            <rdf:Bag>
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%83%AC%E3%82%B7%E3%83%94" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%81%82%E3%81%A8%E3%81%A7%E8%AA%AD%E3%82%80" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E6%96%99%E7%90%86" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%81%86%E3%81%A9%E3%82%93" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E5%A4%A7%E8%91%89" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E9%A3%9F" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=recipe" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E9%BA%BA" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E7%B0%A1%E5%8D%98" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%81%97%E3%81%9D" />
+            </rdf:Bag>
+        </taxo:topics>
+        <hatena:bookmarkcount>240</hatena:bookmarkcount>
+        <content:encoded><![CDATA[
+<blockquote cite="https://www.hotpepper.jp/mesitsu/entry/edajun/18-00113" title="大葉の大量消費に！超簡単「大葉ソース」で本気でおかわりしたくなる焼きうどんが完成【エダジュン】 - メシ通 | ホットペッパーグルメ"><cite><img src="https://cdn-ak2.favicon.st-hatena.com/?url=https%3A%2F%2Fwww.hotpepper.jp%2F" alt="" /> <a href="https://www.hotpepper.jp/mesitsu/entry/edajun/18-00113">大葉の大量消費に！超簡単「大葉ソース」で本気でおかわりしたくなる焼きうどんが完成【エダジュン】 - メシ通 | ホットペッパーグルメ</a></cite><p><a href="https://www.hotpepper.jp/mesitsu/entry/edajun/18-00113"><img src="https://cdn-ak-scissors.b.st-hatena.com/image/square/95461ed2eec584230ada3991c4de5746873fb481/height=90;version=1;width=120/https%3A%2F%2Fcdn-ak.f.st-hatena.com%2Fimages%2Ffotolife%2Fe%2Fedajun%2F20180618%2F20180618104142.jpg" alt="大葉の大量消費に！超簡単「大葉ソース」で本気でおかわりしたくなる焼きうどんが完成【エダジュン】 - メシ通 | ホットペッパーグルメ" title="大葉の大量消費に！超簡単「大葉ソース」で本気でおかわりしたくなる焼きうどんが完成【エダジュン】 - メシ通 | ホットペッパーグルメ" class="entry-image" /></a></p><p>こんにちは、料理研究家のエダジュンです。
+暑くなると安くなって、スーパーでも手に入りやすくなる「大葉」。ただ、安くてたっぷり買ったのはいいけれど、使い切れずに冷蔵庫の奥のほうでしおれさせてしまうのが夏のあるある……。そこで今回は、大葉の大量消費におすすめ、大活躍間違いなしの万能ソース！ これでつくる...</p><p><a href="http://b.hatena.ne.jp/entry/s/www.hotpepper.jp/mesitsu/entry/edajun/18-00113"><img src="http://b.hatena.ne.jp/entry/image/https://www.hotpepper.jp/mesitsu/entry/edajun/18-00113" alt="はてなブックマーク - 大葉の大量消費に！超簡単「大葉ソース」で本気でおかわりしたくなる焼きうどんが完成【エダジュン】 - メシ通 | ホットペッパーグルメ" title="はてなブックマーク - 大葉の大量消費に！超簡単「大葉ソース」で本気でおかわりしたくなる焼きうどんが完成【エダジュン】 - メシ通 | ホットペッパーグルメ" border="0" style="border: none" /></a> <a href="http://b.hatena.ne.jp/entry/s/www.hotpepper.jp/mesitsu/entry/edajun/18-00113"><img src="http://b.hatena.ne.jp/images/append.gif" border="0" alt="はてなブックマークに追加" title="はてなブックマークに追加" /></a></p></blockquote><img src="http://feeds.feedburner.com/~r/hatena/b/hotentry/~4/n5jjWxtehX8" height="1" width="1" alt=""/>]]></content:encoded>
+    </item>
+    <item rdf:about="https://www.publickey1.jp/blog/18/webdriverw3cweb.html">
+        <title>「WebDriver」がW3Cの勧告に到達。Webブラウザのテスト自動化などを実現 － Publickey</title>
+        <link>https://www.publickey1.jp/blog/18/webdriverw3cweb.html</link>
+        <description>Web技術の標準を策定するWorld Wide Web Consortium（W3C）のBrowser Testing and Toolsワーキンググループは、「WebDriver」が6月5日付けで勧告に到達したことを発表しました。
+            WebDriverは、Webブラウザを外部から操作することを可能にし、Webアプリケーションのテストなどの自動化を実現する技術です。
+            主要なWebブラ...</description>
+        <dc:date>2018-06-18T15:31:53Z</dc:date>
+        <dc:subject>テクノロジー</dc:subject>
+        <dc:subject>あとで読む</dc:subject>
+        <dc:subject>webdriver</dc:subject>
+        <dc:subject>selenium</dc:subject>
+        <dc:subject>web</dc:subject>
+        <dc:subject>ブラウザ</dc:subject>
+        <dc:subject>テスト</dc:subject>
+        <dc:subject>開発</dc:subject>
+        <dc:subject>W3C</dc:subject>
+        <dc:subject>技術</dc:subject>
+        <dc:subject>test</dc:subject>
+        <taxo:topics>
+            <rdf:Bag>
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%81%82%E3%81%A8%E3%81%A7%E8%AA%AD%E3%82%80" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=webdriver" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=selenium" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=web" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%83%96%E3%83%A9%E3%82%A6%E3%82%B6" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%83%86%E3%82%B9%E3%83%88" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E9%96%8B%E7%99%BA" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=W3C" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E6%8A%80%E8%A1%93" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=test" />
+            </rdf:Bag>
+        </taxo:topics>
+        <hatena:bookmarkcount>452</hatena:bookmarkcount>
+        <content:encoded><![CDATA[
+<blockquote cite="https://www.publickey1.jp/blog/18/webdriverw3cweb.html" title="「WebDriver」がW3Cの勧告に到達。Webブラウザのテスト自動化などを実現 － Publickey"><cite><img src="https://cdn-ak2.favicon.st-hatena.com/?url=https%3A%2F%2Fwww.publickey1.jp%2F" alt="" /> <a href="https://www.publickey1.jp/blog/18/webdriverw3cweb.html">「WebDriver」がW3Cの勧告に到達。Webブラウザのテスト自動化などを実現 － Publickey</a></cite><p><a href="https://www.publickey1.jp/blog/18/webdriverw3cweb.html"><img src="https://cdn-ak-scissors.b.st-hatena.com/image/square/ff01d222078cd6cb1bda248216926629cd9892b6/height=90;version=1;width=120/https%3A%2F%2Fwww.publickey1.jp%2F2018%2Fwebdriver01.gif" alt="「WebDriver」がW3Cの勧告に到達。Webブラウザのテスト自動化などを実現 － Publickey" title="「WebDriver」がW3Cの勧告に到達。Webブラウザのテスト自動化などを実現 － Publickey" class="entry-image" /></a></p><p>Web技術の標準を策定するWorld Wide Web Consortium（W3C）のBrowser Testing and Toolsワーキンググループは、「WebDriver」が6月5日付けで勧告に到達したことを発表しました。
+WebDriverは、Webブラウザを外部から操作することを可能にし、Webアプリケーションのテストなどの自動化を実現する技術です。
+主要なWebブラ...</p><p><a href="http://b.hatena.ne.jp/entry/s/www.publickey1.jp/blog/18/webdriverw3cweb.html"><img src="http://b.hatena.ne.jp/entry/image/https://www.publickey1.jp/blog/18/webdriverw3cweb.html" alt="はてなブックマーク - 「WebDriver」がW3Cの勧告に到達。Webブラウザのテスト自動化などを実現 － Publickey" title="はてなブックマーク - 「WebDriver」がW3Cの勧告に到達。Webブラウザのテスト自動化などを実現 － Publickey" border="0" style="border: none" /></a> <a href="http://b.hatena.ne.jp/entry/s/www.publickey1.jp/blog/18/webdriverw3cweb.html"><img src="http://b.hatena.ne.jp/images/append.gif" border="0" alt="はてなブックマークに追加" title="はてなブックマークに追加" /></a></p></blockquote><img src="http://feeds.feedburner.com/~r/hatena/b/hotentry/~4/uENOjSYoFQI" height="1" width="1" alt=""/>]]></content:encoded>
+    </item>
+    <item rdf:about="http://twitter.com/jtl_President/status/1008846795743494146">
+        <title>川淵三郎（日本トップリーグ連携機構会長）さんのツイート: "ハリルホジッチ監督の時、ほとんど勝てる可能性がないので、オランダ、イタリア、アメリカのサッカーファンのことを考えれ</title>
+        <link>http://twitter.com/jtl_President/status/1008846795743494146</link>
+        <description>ハリルホジッチ監督の時、ほとんど勝てる可能性がないので、オランダ、イタリア、アメリカのサッカーファンのことを考えれば出場出来るだけラッキーと考えてW杯を楽しんでくださいと講演などで話していた。西野監督に変わった今は何か起きるかも知れないというドキドキ感が今朝になっ自分に出てきた。</description>
+        <dc:date>2018-06-18T23:39:53Z</dc:date>
+        <dc:subject>エンタメ</dc:subject>
+        <dc:subject>あとで読む</dc:subject>
+        <dc:subject>サッカー</dc:subject>
+        <dc:subject>これはひどい</dc:subject>
+        <dc:subject>バカじゃないの？</dc:subject>
+        <dc:subject>何言ってんの？</dc:subject>
+        <dc:subject>日本</dc:subject>
+        <dc:subject>twitter</dc:subject>
+        <dc:subject>またおまえか</dc:subject>
+        <dc:subject>football</dc:subject>
+        <dc:subject>buzz</dc:subject>
+        <taxo:topics>
+            <rdf:Bag>
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%81%82%E3%81%A8%E3%81%A7%E8%AA%AD%E3%82%80" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%82%B5%E3%83%83%E3%82%AB%E3%83%BC" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%81%93%E3%82%8C%E3%81%AF%E3%81%B2%E3%81%A9%E3%81%84" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%83%90%E3%82%AB%E3%81%98%E3%82%83%E3%81%AA%E3%81%84%E3%81%AE%EF%BC%9F" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E4%BD%95%E8%A8%80%E3%81%A3%E3%81%A6%E3%82%93%E3%81%AE%EF%BC%9F" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E6%97%A5%E6%9C%AC" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=twitter" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%81%BE%E3%81%9F%E3%81%8A%E3%81%BE%E3%81%88%E3%81%8B" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=football" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=buzz" />
+            </rdf:Bag>
+        </taxo:topics>
+        <hatena:bookmarkcount>368</hatena:bookmarkcount>
+        <content:encoded><![CDATA[
+<blockquote cite="http://twitter.com/jtl_President/status/1008846795743494146" title="川淵三郎（日本トップリーグ連携機構会長）さんのツイート: &quot;ハリルホジッチ監督の時、ほとんど勝てる可能性がないので、オランダ、イタリア、アメリカのサッカーファンのことを考えれ"><cite><img src="https://cdn-ak2.favicon.st-hatena.com/?url=https%3A%2F%2Ftwitter.com%2Fjtl_President" alt="" /> <a href="http://twitter.com/jtl_President/status/1008846795743494146">川淵三郎（日本トップリーグ連携機構会長）さんのツイート: &quot;ハリルホジッチ監督の時、ほとんど勝てる可能性がないので、オランダ、イタリア、アメリカのサッカーファンのことを考えれ</a></cite><p><a href="http://twitter.com/jtl_President/status/1008846795743494146"><img src="https://cdn-ak-scissors.b.st-hatena.com/image/square/ec3c960f9d2e05d0757aa3127ead84c40ed37739/height=90;version=1;width=120/https%3A%2F%2Fpbs.twimg.com%2Fprofile_images%2F971986667249713152%2FSoQZiwaO.jpg" alt="川淵三郎（日本トップリーグ連携機構会長）さんのツイート: &quot;ハリルホジッチ監督の時、ほとんど勝てる可能性がないので、オランダ、イタリア、アメリカのサッカーファンのことを考えれ" title="川淵三郎（日本トップリーグ連携機構会長）さんのツイート: &quot;ハリルホジッチ監督の時、ほとんど勝てる可能性がないので、オランダ、イタリア、アメリカのサッカーファンのことを考えれ" class="entry-image" /></a></p><p>ハリルホジッチ監督の時、ほとんど勝てる可能性がないので、オランダ、イタリア、アメリカのサッカーファンのことを考えれば出場出来るだけラッキーと考えてW杯を楽しんでくださいと講演などで話していた。西野監督に変わった今は何か起きるかも知れないというドキドキ感が今朝になっ自分に出てきた。</p><p><a href="http://b.hatena.ne.jp/entry/twitter.com/jtl_President/status/1008846795743494146"><img src="http://b.hatena.ne.jp/entry/image/http://twitter.com/jtl_President/status/1008846795743494146" alt="はてなブックマーク - 川淵三郎（日本トップリーグ連携機構会長）さんのツイート: &quot;ハリルホジッチ監督の時、ほとんど勝てる可能性がないので、オランダ、イタリア、アメリカのサッカーファンのことを考えれ" title="はてなブックマーク - 川淵三郎（日本トップリーグ連携機構会長）さんのツイート: &quot;ハリルホジッチ監督の時、ほとんど勝てる可能性がないので、オランダ、イタリア、アメリカのサッカーファンのことを考えれ" border="0" style="border: none" /></a> <a href="http://b.hatena.ne.jp/entry/twitter.com/jtl_President/status/1008846795743494146"><img src="http://b.hatena.ne.jp/images/append.gif" border="0" alt="はてなブックマークに追加" title="はてなブックマークに追加" /></a></p></blockquote><img src="http://feeds.feedburner.com/~r/hatena/b/hotentry/~4/_6ZipWHuLy0" height="1" width="1" alt=""/>]]></content:encoded>
+    </item>
+    <item rdf:about="https://www.asahi.com/articles/ASL6M4K0LL6MTLVB00J.html">
+        <title>夜にスマホいじる妻を脇差しで刺した疑い　７７歳夫逮捕：朝日新聞デジタル</title>
+        <link>https://www.asahi.com/articles/ASL6M4K0LL6MTLVB00J.html</link>
+        <description>妻を脇差しで刺してけがを負わせたとして、熊本県警は１９日、熊本市東区東本町の無職の男（７７）を傷害容疑で逮捕したと発表した。妻が深夜までスマートフォンをいじっていたことをきっかけに口論になったとみられており、男は容疑を認めている。
+            熊本東署によると、男は同日午前１時ごろ、自宅で妻（７３）を脇差しで...</description>
+        <dc:date>2018-06-19T09:31:51Z</dc:date>
+        <dc:subject>世の中</dc:subject>
+        <dc:subject>あとで読む</dc:subject>
+        <dc:subject>事件</dc:subject>
+        <dc:subject>社会</dc:subject>
+        <dc:subject>news</dc:subject>
+        <dc:subject>朝日新聞</dc:subject>
+        <dc:subject>スマホ</dc:subject>
+        <dc:subject>痛い</dc:subject>
+        <dc:subject>えーぇぇ……</dc:subject>
+        <dc:subject>Asahi</dc:subject>
+        <dc:subject>あとで消す</dc:subject>
+        <taxo:topics>
+            <rdf:Bag>
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%81%82%E3%81%A8%E3%81%A7%E8%AA%AD%E3%82%80" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E4%BA%8B%E4%BB%B6" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E7%A4%BE%E4%BC%9A" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=news" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E6%9C%9D%E6%97%A5%E6%96%B0%E8%81%9E" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%82%B9%E3%83%9E%E3%83%9B" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E7%97%9B%E3%81%84" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%81%88%E3%83%BC%E3%81%87%E3%81%87%E2%80%A6%E2%80%A6" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=Asahi" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%81%82%E3%81%A8%E3%81%A7%E6%B6%88%E3%81%99" />
+            </rdf:Bag>
+        </taxo:topics>
+        <hatena:bookmarkcount>127</hatena:bookmarkcount>
+        <content:encoded><![CDATA[
+<blockquote cite="https://www.asahi.com/articles/ASL6M4K0LL6MTLVB00J.html" title="夜にスマホいじる妻を脇差しで刺した疑い　７７歳夫逮捕：朝日新聞デジタル"><cite><img src="https://cdn-ak2.favicon.st-hatena.com/?url=https%3A%2F%2Fwww.asahi.com%2F" alt="" /> <a href="https://www.asahi.com/articles/ASL6M4K0LL6MTLVB00J.html">夜にスマホいじる妻を脇差しで刺した疑い　７７歳夫逮捕：朝日新聞デジタル</a></cite><p><a href="https://www.asahi.com/articles/ASL6M4K0LL6MTLVB00J.html"><img src="https://cdn-ak-scissors.b.st-hatena.com/image/square/85ef1cb11e843257bc2999bc024d56518ce801c9/height=90;version=1;width=120/https%3A%2F%2Fwww.asahicom.jp%2Fimages%2Flogo_ogp.png" alt="夜にスマホいじる妻を脇差しで刺した疑い　７７歳夫逮捕：朝日新聞デジタル" title="夜にスマホいじる妻を脇差しで刺した疑い　７７歳夫逮捕：朝日新聞デジタル" class="entry-image" /></a></p><p>妻を脇差しで刺してけがを負わせたとして、熊本県警は１９日、熊本市東区東本町の無職の男（７７）を傷害容疑で逮捕したと発表した。妻が深夜までスマートフォンをいじっていたことをきっかけに口論になったとみられており、男は容疑を認めている。
+熊本東署によると、男は同日午前１時ごろ、自宅で妻（７３）を脇差しで...</p><p><a href="http://b.hatena.ne.jp/entry/s/www.asahi.com/articles/ASL6M4K0LL6MTLVB00J.html"><img src="http://b.hatena.ne.jp/entry/image/https://www.asahi.com/articles/ASL6M4K0LL6MTLVB00J.html" alt="はてなブックマーク - 夜にスマホいじる妻を脇差しで刺した疑い　７７歳夫逮捕：朝日新聞デジタル" title="はてなブックマーク - 夜にスマホいじる妻を脇差しで刺した疑い　７７歳夫逮捕：朝日新聞デジタル" border="0" style="border: none" /></a> <a href="http://b.hatena.ne.jp/entry/s/www.asahi.com/articles/ASL6M4K0LL6MTLVB00J.html"><img src="http://b.hatena.ne.jp/images/append.gif" border="0" alt="はてなブックマークに追加" title="はてなブックマークに追加" /></a></p></blockquote><img src="http://feeds.feedburner.com/~r/hatena/b/hotentry/~4/8cqkaQKEaWE" height="1" width="1" alt=""/>]]></content:encoded>
+    </item>
+    <item rdf:about="https://employment.en-japan.com/engineerhub/entry/2018/06/19/110000">
+        <title>「Go言語らしさ」とは何か？　Simplicityの哲学を理解し、Go Wayに沿った開発を進めることの良さ - エンジニアHub｜若手Webエンジニアのキャリアを考える！</title>
+        <link>https://employment.en-japan.com/engineerhub/entry/2018/06/19/110000</link>
+        <description>id:Songmuと申します。はてな東京オフィスでチーフエンジニアを務め、Mackerelというサーバー監視のSaaS開発においてプロダクトマネージャーを担当しています。
+            筆者が勤めている株式会社はてなでは、2013年よりGo言語を開発に用いるようになりました。導入当初はMackerelで用いられる監視エージェントであるmackerel-ag...</description>
+        <dc:date>2018-06-19T02:07:08Z</dc:date>
+        <dc:subject>テクノロジー</dc:subject>
+        <dc:subject>あとで読む</dc:subject>
+        <dc:subject>golang</dc:subject>
+        <dc:subject>go</dc:subject>
+        <dc:subject>開発</dc:subject>
+        <dc:subject>言語</dc:subject>
+        <dc:subject>設計</dc:subject>
+        <dc:subject>ツール</dc:subject>
+        <dc:subject>web</dc:subject>
+        <dc:subject>エンジニア</dc:subject>
+        <dc:subject>コード</dc:subject>
+        <taxo:topics>
+            <rdf:Bag>
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%81%82%E3%81%A8%E3%81%A7%E8%AA%AD%E3%82%80" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=golang" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=go" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E9%96%8B%E7%99%BA" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E8%A8%80%E8%AA%9E" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E8%A8%AD%E8%A8%88" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%83%84%E3%83%BC%E3%83%AB" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=web" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%8B%E3%82%A2" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%82%B3%E3%83%BC%E3%83%89" />
+            </rdf:Bag>
+        </taxo:topics>
+        <hatena:bookmarkcount>333</hatena:bookmarkcount>
+        <content:encoded><![CDATA[
+<blockquote cite="https://employment.en-japan.com/engineerhub/entry/2018/06/19/110000" title="「Go言語らしさ」とは何か？　Simplicityの哲学を理解し、Go Wayに沿った開発を進めることの良さ - エンジニアHub｜若手Webエンジニアのキャリアを考える！"><cite><img src="https://cdn-ak2.favicon.st-hatena.com/?url=https%3A%2F%2Femployment.en-japan.com%2F" alt="" /> <a href="https://employment.en-japan.com/engineerhub/entry/2018/06/19/110000">「Go言語らしさ」とは何か？　Simplicityの哲学を理解し、Go Wayに沿った開発を進めることの良さ - エンジニアHub｜若手Webエンジニアのキャリアを考える！</a></cite><p><a href="https://employment.en-japan.com/engineerhub/entry/2018/06/19/110000"><img src="https://cdn-ak-scissors.b.st-hatena.com/image/square/4a0b471c1f0832dae3e61c89fdf780827c146beb/height=90;version=1;width=120/https%3A%2F%2Fcdn-ak.f.st-hatena.com%2Fimages%2Ffotolife%2Fb%2Fblog-media%2F20180612%2F20180612182457.jpg" alt="「Go言語らしさ」とは何か？　Simplicityの哲学を理解し、Go Wayに沿った開発を進めることの良さ - エンジニアHub｜若手Webエンジニアのキャリアを考える！" title="「Go言語らしさ」とは何か？　Simplicityの哲学を理解し、Go Wayに沿った開発を進めることの良さ - エンジニアHub｜若手Webエンジニアのキャリアを考える！" class="entry-image" /></a></p><p>id:Songmuと申します。はてな東京オフィスでチーフエンジニアを務め、Mackerelというサーバー監視のSaaS開発においてプロダクトマネージャーを担当しています。
+筆者が勤めている株式会社はてなでは、2013年よりGo言語を開発に用いるようになりました。導入当初はMackerelで用いられる監視エージェントであるmackerel-ag...</p><p><a href="http://b.hatena.ne.jp/entry/s/employment.en-japan.com/engineerhub/entry/2018/06/19/110000"><img src="http://b.hatena.ne.jp/entry/image/https://employment.en-japan.com/engineerhub/entry/2018/06/19/110000" alt="はてなブックマーク - 「Go言語らしさ」とは何か？　Simplicityの哲学を理解し、Go Wayに沿った開発を進めることの良さ - エンジニアHub｜若手Webエンジニアのキャリアを考える！" title="はてなブックマーク - 「Go言語らしさ」とは何か？　Simplicityの哲学を理解し、Go Wayに沿った開発を進めることの良さ - エンジニアHub｜若手Webエンジニアのキャリアを考える！" border="0" style="border: none" /></a> <a href="http://b.hatena.ne.jp/entry/s/employment.en-japan.com/engineerhub/entry/2018/06/19/110000"><img src="http://b.hatena.ne.jp/images/append.gif" border="0" alt="はてなブックマークに追加" title="はてなブックマークに追加" /></a></p></blockquote><img src="http://feeds.feedburner.com/~r/hatena/b/hotentry/~4/y8s1UV5rP4w" height="1" width="1" alt=""/>]]></content:encoded>
+    </item>
+    <item rdf:about="https://note.mu/regista13/n/nba821cc75a28">
+        <title>日本サッカーにおいて「本田圭佑」とは何だったのか？そしてロシアW杯へ｜レジー｜note</title>
+        <link>https://note.mu/regista13/n/nba821cc75a28</link>
+        <description>『砕かれたハリルホジッチ・プラン』の著者、五百蔵容さんと本を起点にいろいろお話を伺ったインタビュー連載企画5回目、最終回です。過去の連載はこちら。
+            最終回は、2010年代の日本サッカーを語るうえで欠かせない存在、本田圭佑という選手についての話題から。彼がプレーヤーとして直面している現実と、本田を「ケイ...</description>
+        <dc:date>2018-06-18T23:17:49Z</dc:date>
+        <dc:subject>エンタメ</dc:subject>
+        <dc:subject>あとで読む</dc:subject>
+        <dc:subject>サッカー</dc:subject>
+        <dc:subject>スポーツ</dc:subject>
+        <dc:subject>日本</dc:subject>
+        <dc:subject>ワールドカップ</dc:subject>
+        <dc:subject>sports</dc:subject>
+        <dc:subject>考察</dc:subject>
+        <dc:subject>Soccer</dc:subject>
+        <dc:subject>インタビュー</dc:subject>
+        <dc:subject>人間</dc:subject>
+        <taxo:topics>
+            <rdf:Bag>
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%81%82%E3%81%A8%E3%81%A7%E8%AA%AD%E3%82%80" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%82%B5%E3%83%83%E3%82%AB%E3%83%BC" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%82%B9%E3%83%9D%E3%83%BC%E3%83%84" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E6%97%A5%E6%9C%AC" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%83%AF%E3%83%BC%E3%83%AB%E3%83%89%E3%82%AB%E3%83%83%E3%83%97" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=sports" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E8%80%83%E5%AF%9F" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=Soccer" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%82%A4%E3%83%B3%E3%82%BF%E3%83%93%E3%83%A5%E3%83%BC" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E4%BA%BA%E9%96%93" />
+            </rdf:Bag>
+        </taxo:topics>
+        <hatena:bookmarkcount>380</hatena:bookmarkcount>
+        <content:encoded><![CDATA[
+<blockquote cite="https://note.mu/regista13/n/nba821cc75a28" title="日本サッカーにおいて「本田圭佑」とは何だったのか？そしてロシアW杯へ｜レジー｜note"><cite><img src="https://cdn-ak2.favicon.st-hatena.com/?url=https%3A%2F%2Fnote.mu%2F" alt="" /> <a href="https://note.mu/regista13/n/nba821cc75a28">日本サッカーにおいて「本田圭佑」とは何だったのか？そしてロシアW杯へ｜レジー｜note</a></cite><p><a href="https://note.mu/regista13/n/nba821cc75a28"><img src="https://cdn-ak-scissors.b.st-hatena.com/image/square/8e5d687d60417faf859e7599356f7b4952a67383/height=90;version=1;width=120/https%3A%2F%2Fd2l930y2yx77uc.cloudfront.net%2Fproduction%2Fuploads%2Fimages%2F6848386%2Frectangle_large_type_2_85f19360ca18bf9058584ce29ac071db.jpg" alt="日本サッカーにおいて「本田圭佑」とは何だったのか？そしてロシアW杯へ｜レジー｜note" title="日本サッカーにおいて「本田圭佑」とは何だったのか？そしてロシアW杯へ｜レジー｜note" class="entry-image" /></a></p><p>『砕かれたハリルホジッチ・プラン』の著者、五百蔵容さんと本を起点にいろいろお話を伺ったインタビュー連載企画5回目、最終回です。過去の連載はこちら。
+最終回は、2010年代の日本サッカーを語るうえで欠かせない存在、本田圭佑という選手についての話題から。彼がプレーヤーとして直面している現実と、本田を「ケイ...</p><p><a href="http://b.hatena.ne.jp/entry/s/note.mu/regista13/n/nba821cc75a28"><img src="http://b.hatena.ne.jp/entry/image/https://note.mu/regista13/n/nba821cc75a28" alt="はてなブックマーク - 日本サッカーにおいて「本田圭佑」とは何だったのか？そしてロシアW杯へ｜レジー｜note" title="はてなブックマーク - 日本サッカーにおいて「本田圭佑」とは何だったのか？そしてロシアW杯へ｜レジー｜note" border="0" style="border: none" /></a> <a href="http://b.hatena.ne.jp/entry/s/note.mu/regista13/n/nba821cc75a28"><img src="http://b.hatena.ne.jp/images/append.gif" border="0" alt="はてなブックマークに追加" title="はてなブックマークに追加" /></a></p></blockquote><img src="http://feeds.feedburner.com/~r/hatena/b/hotentry/~4/4BfZrzAFoCY" height="1" width="1" alt=""/>]]></content:encoded>
+    </item>
+    <item rdf:about="https://www3.nhk.or.jp/news/html/20180619/k10011484781000.html">
+        <title>Ｗ杯サッカー アイスランド 初戦視聴率99.6％ | NHKニュース</title>
+        <link>https://www3.nhk.or.jp/news/html/20180619/k10011484781000.html</link>
+        <description>サッカーワールドカップ初出場の人口35万のアイスランドでは、初戦の視聴率が国内で99％を超えていたと、アイスランドサッカー協会が発表し、ほぼすべての国民が熱狂して試合を観戦した様子がうかがえます。
+            前回大会でＭＶＰのメッシ選手のペナルティーキックで得点を許さないなど、強豪相手に１対１の同点に持ち込んで...</description>
+        <dc:date>2018-06-18T23:34:04Z</dc:date>
+        <dc:subject>世の中</dc:subject>
+        <dc:subject>スポーツ</dc:subject>
+        <dc:subject>あとで読む</dc:subject>
+        <dc:subject>アイスランド</dc:subject>
+        <dc:subject>テレビ</dc:subject>
+        <dc:subject>サッカー</dc:subject>
+        <dc:subject>football</dc:subject>
+        <dc:subject>ワールドカップ</dc:subject>
+        <dc:subject>社会</dc:subject>
+        <dc:subject>海外</dc:subject>
+        <dc:subject>Sports</dc:subject>
+        <taxo:topics>
+            <rdf:Bag>
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%82%B9%E3%83%9D%E3%83%BC%E3%83%84" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%81%82%E3%81%A8%E3%81%A7%E8%AA%AD%E3%82%80" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%82%A2%E3%82%A4%E3%82%B9%E3%83%A9%E3%83%B3%E3%83%89" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%83%86%E3%83%AC%E3%83%93" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%82%B5%E3%83%83%E3%82%AB%E3%83%BC" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=football" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%83%AF%E3%83%BC%E3%83%AB%E3%83%89%E3%82%AB%E3%83%83%E3%83%97" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E7%A4%BE%E4%BC%9A" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E6%B5%B7%E5%A4%96" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=Sports" />
+            </rdf:Bag>
+        </taxo:topics>
+        <hatena:bookmarkcount>385</hatena:bookmarkcount>
+        <content:encoded><![CDATA[
+<blockquote cite="https://www3.nhk.or.jp/news/html/20180619/k10011484781000.html" title="Ｗ杯サッカー アイスランド 初戦視聴率99.6％ | NHKニュース"><cite><img src="https://cdn-ak2.favicon.st-hatena.com/?url=https%3A%2F%2Fwww3.nhk.or.jp%2F" alt="" /> <a href="https://www3.nhk.or.jp/news/html/20180619/k10011484781000.html">Ｗ杯サッカー アイスランド 初戦視聴率99.6％ | NHKニュース</a></cite><p><a href="https://www3.nhk.or.jp/news/html/20180619/k10011484781000.html"><img src="https://cdn-ak-scissors.b.st-hatena.com/image/square/508c60509cfa33c9f0cbbf349fca09a1c3bf396d/height=90;version=1;width=120/https%3A%2F%2Fwww3.nhk.or.jp%2Fnews%2Fimg%2Ffb_futa16_600px.png" alt="Ｗ杯サッカー アイスランド 初戦視聴率99.6％ | NHKニュース" title="Ｗ杯サッカー アイスランド 初戦視聴率99.6％ | NHKニュース" class="entry-image" /></a></p><p>サッカーワールドカップ初出場の人口35万のアイスランドでは、初戦の視聴率が国内で99％を超えていたと、アイスランドサッカー協会が発表し、ほぼすべての国民が熱狂して試合を観戦した様子がうかがえます。
+前回大会でＭＶＰのメッシ選手のペナルティーキックで得点を許さないなど、強豪相手に１対１の同点に持ち込んで...</p><p><a href="http://b.hatena.ne.jp/entry/s/www3.nhk.or.jp/news/html/20180619/k10011484781000.html"><img src="http://b.hatena.ne.jp/entry/image/https://www3.nhk.or.jp/news/html/20180619/k10011484781000.html" alt="はてなブックマーク - Ｗ杯サッカー アイスランド 初戦視聴率99.6％ | NHKニュース" title="はてなブックマーク - Ｗ杯サッカー アイスランド 初戦視聴率99.6％ | NHKニュース" border="0" style="border: none" /></a> <a href="http://b.hatena.ne.jp/entry/s/www3.nhk.or.jp/news/html/20180619/k10011484781000.html"><img src="http://b.hatena.ne.jp/images/append.gif" border="0" alt="はてなブックマークに追加" title="はてなブックマークに追加" /></a></p></blockquote><img src="http://feeds.feedburner.com/~r/hatena/b/hotentry/~4/G5xfn9nWQG8" height="1" width="1" alt=""/>]]></content:encoded>
+    </item>
+    <item rdf:about="http://twitter.com/konishihiroyuki/status/1009059454329876480">
+        <title>小西ひろゆき （参議院議員）さんのツイート: "Ｗ杯。主審の目の前でハンド反則でシュートを止めたコロンビア選手。チームを救うための究極の行為は一発レッドカード。反則は絶対悪、</title>
+        <link>http://twitter.com/konishihiroyuki/status/1009059454329876480</link>
+        <description>Ｗ杯。主審の目の前でハンド反則でシュートを止めたコロンビア選手。チームを救うための究極の行為は一発レッドカード。反則は絶対悪、退場も最悪ミスだが、我が身を捨てた執念の行為に、あの瞬間に何もせず、失点承知でシュートを見送るだけの国会議員が何人いるだろうかと考えた。安倍政治は罪深い。</description>
+        <dc:date>2018-06-19T13:12:33Z</dc:date>
+        <dc:subject>エンタメ</dc:subject>
+        <dc:subject>小西洋之</dc:subject>
+        <dc:subject>Tweet</dc:subject>
+        <dc:subject>政治</dc:subject>
+        <dc:subject>twitter</dc:subject>
+        <dc:subject>W杯</dc:subject>
+        <dc:subject>社会</dc:subject>
+        <dc:subject>twitter界隈</dc:subject>
+        <dc:subject>発言</dc:subject>
+        <dc:subject>ホットエントリ</dc:subject>
+        <dc:subject>アベノセイダーズ</dc:subject>
+        <taxo:topics>
+            <rdf:Bag>
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E5%B0%8F%E8%A5%BF%E6%B4%8B%E4%B9%8B" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=Tweet" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E6%94%BF%E6%B2%BB" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=twitter" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=W%E6%9D%AF" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E7%A4%BE%E4%BC%9A" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=twitter%E7%95%8C%E9%9A%88" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E7%99%BA%E8%A8%80" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%83%9B%E3%83%83%E3%83%88%E3%82%A8%E3%83%B3%E3%83%88%E3%83%AA" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%82%A2%E3%83%99%E3%83%8E%E3%82%BB%E3%82%A4%E3%83%80%E3%83%BC%E3%82%BA" />
+            </rdf:Bag>
+        </taxo:topics>
+        <hatena:bookmarkcount>74</hatena:bookmarkcount>
+        <content:encoded><![CDATA[
+<blockquote cite="http://twitter.com/konishihiroyuki/status/1009059454329876480" title="小西ひろゆき （参議院議員）さんのツイート: &quot;Ｗ杯。主審の目の前でハンド反則でシュートを止めたコロンビア選手。チームを救うための究極の行為は一発レッドカード。反則は絶対悪、"><cite><img src="https://cdn-ak2.favicon.st-hatena.com/?url=https%3A%2F%2Ftwitter.com%2Fkonishihiroyuki" alt="" /> <a href="http://twitter.com/konishihiroyuki/status/1009059454329876480">小西ひろゆき （参議院議員）さんのツイート: &quot;Ｗ杯。主審の目の前でハンド反則でシュートを止めたコロンビア選手。チームを救うための究極の行為は一発レッドカード。反則は絶対悪、</a></cite><p><a href="http://twitter.com/konishihiroyuki/status/1009059454329876480"><img src="https://cdn-ak-scissors.b.st-hatena.com/image/square/c03a95fbefd42fb18a42863a9ffe3b66dd9535f6/height=90;version=1;width=120/https%3A%2F%2Fpbs.twimg.com%2Fprofile_images%2F746193231%2FImg7220.JPG" alt="小西ひろゆき （参議院議員）さんのツイート: &quot;Ｗ杯。主審の目の前でハンド反則でシュートを止めたコロンビア選手。チームを救うための究極の行為は一発レッドカード。反則は絶対悪、" title="小西ひろゆき （参議院議員）さんのツイート: &quot;Ｗ杯。主審の目の前でハンド反則でシュートを止めたコロンビア選手。チームを救うための究極の行為は一発レッドカード。反則は絶対悪、" class="entry-image" /></a></p><p>Ｗ杯。主審の目の前でハンド反則でシュートを止めたコロンビア選手。チームを救うための究極の行為は一発レッドカード。反則は絶対悪、退場も最悪ミスだが、我が身を捨てた執念の行為に、あの瞬間に何もせず、失点承知でシュートを見送るだけの国会議員が何人いるだろうかと考えた。安倍政治は罪深い。</p><p><a href="http://b.hatena.ne.jp/entry/twitter.com/konishihiroyuki/status/1009059454329876480"><img src="http://b.hatena.ne.jp/entry/image/http://twitter.com/konishihiroyuki/status/1009059454329876480" alt="はてなブックマーク - 小西ひろゆき （参議院議員）さんのツイート: &quot;Ｗ杯。主審の目の前でハンド反則でシュートを止めたコロンビア選手。チームを救うための究極の行為は一発レッドカード。反則は絶対悪、" title="はてなブックマーク - 小西ひろゆき （参議院議員）さんのツイート: &quot;Ｗ杯。主審の目の前でハンド反則でシュートを止めたコロンビア選手。チームを救うための究極の行為は一発レッドカード。反則は絶対悪、" border="0" style="border: none" /></a> <a href="http://b.hatena.ne.jp/entry/twitter.com/konishihiroyuki/status/1009059454329876480"><img src="http://b.hatena.ne.jp/images/append.gif" border="0" alt="はてなブックマークに追加" title="はてなブックマークに追加" /></a></p></blockquote><img src="http://feeds.feedburner.com/~r/hatena/b/hotentry/~4/gZN-HgrsMvQ" height="1" width="1" alt=""/>]]></content:encoded>
+    </item>
+    <item rdf:about="https://tateyamakaito.hatenablog.com/entry/2018/06/17/214107">
+        <title>東大で降年、留年、休学をしてこれから退学する話 - TateyamaKaito’s diary</title>
+        <link>https://tateyamakaito.hatenablog.com/entry/2018/06/17/214107</link>
+        <description>退学することをほぼ決めてから、ブログをいろいろ見たりしていると、あまりにも優秀な人が多くて悔しくなってきたので書きました。これは人生の失敗談と、これからがんばっていくぞという話です。
+            1年目
+            僕はもともと頭の出来が悪くて、それを人より何倍もの時間をかけてカバーする人間でした。ゲームをしたり、友達と遊...</description>
+        <dc:date>2018-06-18T17:18:53Z</dc:date>
+        <dc:subject>テクノロジー</dc:subject>
+        <dc:subject>あとで読む</dc:subject>
+        <dc:subject>人生</dc:subject>
+        <dc:subject>プログラミング</dc:subject>
+        <dc:subject>数学</dc:subject>
+        <dc:subject>教育</dc:subject>
+        <dc:subject>大学</dc:subject>
+        <dc:subject>環境</dc:subject>
+        <dc:subject>仕事</dc:subject>
+        <dc:subject>メンタルヘルス</dc:subject>
+        <dc:subject>健康</dc:subject>
+        <taxo:topics>
+            <rdf:Bag>
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%81%82%E3%81%A8%E3%81%A7%E8%AA%AD%E3%82%80" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E4%BA%BA%E7%94%9F" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E6%95%B0%E5%AD%A6" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E6%95%99%E8%82%B2" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E5%A4%A7%E5%AD%A6" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E7%92%B0%E5%A2%83" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E4%BB%95%E4%BA%8B" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%83%A1%E3%83%B3%E3%82%BF%E3%83%AB%E3%83%98%E3%83%AB%E3%82%B9" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E5%81%A5%E5%BA%B7" />
+            </rdf:Bag>
+        </taxo:topics>
+        <hatena:bookmarkcount>439</hatena:bookmarkcount>
+        <content:encoded><![CDATA[
+<blockquote cite="https://tateyamakaito.hatenablog.com/entry/2018/06/17/214107" title="東大で降年、留年、休学をしてこれから退学する話 - TateyamaKaito’s diary"><cite><img src="https://cdn-ak2.favicon.st-hatena.com/?url=https%3A%2F%2Ftateyamakaito.hatenablog.com%2F" alt="" /> <a href="https://tateyamakaito.hatenablog.com/entry/2018/06/17/214107">東大で降年、留年、休学をしてこれから退学する話 - TateyamaKaito’s diary</a></cite><p><a href="https://tateyamakaito.hatenablog.com/entry/2018/06/17/214107"><img src="https://cdn-ak-scissors.b.st-hatena.com/image/square/1db2a014bdea7ae25967aced483f3e5eca394182/height=90;version=1;width=120/https%3A%2F%2Fcdn.blog.st-hatena.com%2Fimages%2Ftheme%2Fog-image-1500.png" alt="東大で降年、留年、休学をしてこれから退学する話 - TateyamaKaito’s diary" title="東大で降年、留年、休学をしてこれから退学する話 - TateyamaKaito’s diary" class="entry-image" /></a></p><p>退学することをほぼ決めてから、ブログをいろいろ見たりしていると、あまりにも優秀な人が多くて悔しくなってきたので書きました。これは人生の失敗談と、これからがんばっていくぞという話です。
+1年目
+僕はもともと頭の出来が悪くて、それを人より何倍もの時間をかけてカバーする人間でした。ゲームをしたり、友達と遊...</p><p><a href="http://b.hatena.ne.jp/entry/s/tateyamakaito.hatenablog.com/entry/2018/06/17/214107"><img src="http://b.hatena.ne.jp/entry/image/https://tateyamakaito.hatenablog.com/entry/2018/06/17/214107" alt="はてなブックマーク - 東大で降年、留年、休学をしてこれから退学する話 - TateyamaKaito’s diary" title="はてなブックマーク - 東大で降年、留年、休学をしてこれから退学する話 - TateyamaKaito’s diary" border="0" style="border: none" /></a> <a href="http://b.hatena.ne.jp/entry/s/tateyamakaito.hatenablog.com/entry/2018/06/17/214107"><img src="http://b.hatena.ne.jp/images/append.gif" border="0" alt="はてなブックマークに追加" title="はてなブックマークに追加" /></a></p></blockquote><img src="http://feeds.feedburner.com/~r/hatena/b/hotentry/~4/D6qfsxP0Szw" height="1" width="1" alt=""/>]]></content:encoded>
+    </item>
+    <item rdf:about="https://anond.hatelabo.jp/20180619130756">
+        <title>俺はイタリアン</title>
+        <link>https://anond.hatelabo.jp/20180619130756</link>
+        <description>お前もイタリアン</description>
+        <dc:date>2018-06-19T04:08:39Z</dc:date>
+        <dc:subject>暮らし</dc:subject>
+        <dc:subject>増田</dc:subject>
+        <dc:subject>ネタ</dc:subject>
+        <dc:subject>あとで読む</dc:subject>
+        <dc:subject>コピペ</dc:subject>
+        <dc:subject>anonymousdiary</dc:subject>
+        <dc:subject>あとで消す</dc:subject>
+        <dc:subject>ブコメ大喜利</dc:subject>
+        <dc:subject>言いたいだけ</dc:subject>
+        <dc:subject>生活</dc:subject>
+        <dc:subject>雑なブコメ</dc:subject>
+        <taxo:topics>
+            <rdf:Bag>
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E5%A2%97%E7%94%B0" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%83%8D%E3%82%BF" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%81%82%E3%81%A8%E3%81%A7%E8%AA%AD%E3%82%80" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%82%B3%E3%83%94%E3%83%9A" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=anonymousdiary" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%81%82%E3%81%A8%E3%81%A7%E6%B6%88%E3%81%99" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%83%96%E3%82%B3%E3%83%A1%E5%A4%A7%E5%96%9C%E5%88%A9" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E8%A8%80%E3%81%84%E3%81%9F%E3%81%84%E3%81%A0%E3%81%91" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E7%94%9F%E6%B4%BB" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E9%9B%91%E3%81%AA%E3%83%96%E3%82%B3%E3%83%A1" />
+            </rdf:Bag>
+        </taxo:topics>
+        <hatena:bookmarkcount>132</hatena:bookmarkcount>
+        <content:encoded><![CDATA[
+<blockquote cite="https://anond.hatelabo.jp/20180619130756" title="俺はイタリアン"><cite><img src="https://cdn-ak2.favicon.st-hatena.com/?url=https%3A%2F%2Fanond.hatelabo.jp%2F" alt="" /> <a href="https://anond.hatelabo.jp/20180619130756">俺はイタリアン</a></cite><p><a href="https://anond.hatelabo.jp/20180619130756"><img src="https://cdn-ak-scissors.b.st-hatena.com/image/square/7d1d01079eff061d6fd2ac87dfa690bdb4d2fe9d/height=90;version=1;width=120/https%3A%2F%2Fanond.hatelabo.jp%2Fimages%2Fog-image-1500.gif" alt="俺はイタリアン" title="俺はイタリアン" class="entry-image" /></a></p><p>お前もイタリアン</p><p><a href="http://b.hatena.ne.jp/entry/s/anond.hatelabo.jp/20180619130756"><img src="http://b.hatena.ne.jp/entry/image/https://anond.hatelabo.jp/20180619130756" alt="はてなブックマーク - 俺はイタリアン" title="はてなブックマーク - 俺はイタリアン" border="0" style="border: none" /></a> <a href="http://b.hatena.ne.jp/entry/s/anond.hatelabo.jp/20180619130756"><img src="http://b.hatena.ne.jp/images/append.gif" border="0" alt="はてなブックマークに追加" title="はてなブックマークに追加" /></a></p></blockquote><img src="http://feeds.feedburner.com/~r/hatena/b/hotentry/~4/pC-dZ7iocu8" height="1" width="1" alt=""/>]]></content:encoded>
+    </item>
+    <item rdf:about="https://forest.watch.impress.co.jp/docs/news/1128271.html">
+        <title>どんな難しい計算や質問にも答えてくれる“WolframAlpha”、日本語版が公開 - 窓の杜</title>
+        <link>https://forest.watch.impress.co.jp/docs/news/1128271.html</link>
+        <description />
+        <dc:date>2018-06-19T00:21:39Z</dc:date>
+        <dc:subject>学び</dc:subject>
+        <dc:subject>あとで読む</dc:subject>
+        <dc:subject>数学</dc:subject>
+        <dc:subject>web</dc:subject>
+        <dc:subject>教育</dc:subject>
+        <dc:subject>ツール</dc:subject>
+        <dc:subject>日本語</dc:subject>
+        <dc:subject>サービス</dc:subject>
+        <dc:subject>math</dc:subject>
+        <dc:subject>WolframAlpha</dc:subject>
+        <dc:subject>webサービス</dc:subject>
+        <taxo:topics>
+            <rdf:Bag>
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%81%82%E3%81%A8%E3%81%A7%E8%AA%AD%E3%82%80" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E6%95%B0%E5%AD%A6" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=web" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E6%95%99%E8%82%B2" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%83%84%E3%83%BC%E3%83%AB" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E6%97%A5%E6%9C%AC%E8%AA%9E" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=math" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=WolframAlpha" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=web%E3%82%B5%E3%83%BC%E3%83%93%E3%82%B9" />
+            </rdf:Bag>
+        </taxo:topics>
+        <hatena:bookmarkcount>269</hatena:bookmarkcount>
+        <content:encoded><![CDATA[
+<blockquote cite="https://forest.watch.impress.co.jp/docs/news/1128271.html" title="どんな難しい計算や質問にも答えてくれる“WolframAlpha”、日本語版が公開 - 窓の杜"><cite><img src="https://cdn-ak2.favicon.st-hatena.com/?url=https%3A%2F%2Fforest.watch.impress.co.jp%2F" alt="" /> <a href="https://forest.watch.impress.co.jp/docs/news/1128271.html">どんな難しい計算や質問にも答えてくれる“WolframAlpha”、日本語版が公開 - 窓の杜</a></cite><p><a href="https://forest.watch.impress.co.jp/docs/news/1128271.html"><img src="https://cdn-ak-scissors.b.st-hatena.com/image/square/d9806ac868b9dc0c6d44e12cf20a7a7483a1e7d8/height=90;version=1;width=120/https%3A%2F%2Fforest.watch.impress.co.jp%2Fimg%2Fwf%2Flist%2F1128%2F271%2Fimage1.jpg" alt="どんな難しい計算や質問にも答えてくれる“WolframAlpha”、日本語版が公開 - 窓の杜" title="どんな難しい計算や質問にも答えてくれる“WolframAlpha”、日本語版が公開 - 窓の杜" class="entry-image" /></a></p><p></p><p><a href="http://b.hatena.ne.jp/entry/s/forest.watch.impress.co.jp/docs/news/1128271.html"><img src="http://b.hatena.ne.jp/entry/image/https://forest.watch.impress.co.jp/docs/news/1128271.html" alt="はてなブックマーク - どんな難しい計算や質問にも答えてくれる“WolframAlpha”、日本語版が公開 - 窓の杜" title="はてなブックマーク - どんな難しい計算や質問にも答えてくれる“WolframAlpha”、日本語版が公開 - 窓の杜" border="0" style="border: none" /></a> <a href="http://b.hatena.ne.jp/entry/s/forest.watch.impress.co.jp/docs/news/1128271.html"><img src="http://b.hatena.ne.jp/images/append.gif" border="0" alt="はてなブックマークに追加" title="はてなブックマークに追加" /></a></p></blockquote><img src="http://feeds.feedburner.com/~r/hatena/b/hotentry/~4/RLsT7EWytKA" height="1" width="1" alt=""/>]]></content:encoded>
+    </item>
+    <item rdf:about="https://www.asahi.com/articles/ASL6M3C3LL6MPTIL010.html">
+        <title>加計理事長、首相との面会否定　獣医学部新設巡り初会見：朝日新聞デジタル</title>
+        <link>https://www.asahi.com/articles/ASL6M3C3LL6MPTIL010.html</link>
+        <description>愛媛県今治市での獣医学部新設をめぐり、学校法人「加計（かけ）学園」の加計孝太郎理事長が１９日、岡山市の学園内で記者会見した。県の文書に書かれている加計氏と安倍晋三首相の面会がなかったと県に謝罪した問題について、学園の渡辺良人事務局長を減給（月額１０％を６カ月）の懲戒処分にしたと発表した。自身は監...</description>
+        <dc:date>2018-06-19T03:24:07Z</dc:date>
+        <dc:subject>世の中</dc:subject>
+        <dc:subject>あとで読む</dc:subject>
+        <dc:subject>加計学園</dc:subject>
+        <dc:subject>政治</dc:subject>
+        <dc:subject>安倍政権</dc:subject>
+        <dc:subject>これはひどい</dc:subject>
+        <dc:subject>安倍晋三</dc:subject>
+        <dc:subject>教育</dc:subject>
+        <dc:subject>自民党</dc:subject>
+        <dc:subject>だめだこりゃ</dc:subject>
+        <dc:subject>加計学園問題</dc:subject>
+        <taxo:topics>
+            <rdf:Bag>
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%81%82%E3%81%A8%E3%81%A7%E8%AA%AD%E3%82%80" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E5%8A%A0%E8%A8%88%E5%AD%A6%E5%9C%92" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E6%94%BF%E6%B2%BB" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E5%AE%89%E5%80%8D%E6%94%BF%E6%A8%A9" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%81%93%E3%82%8C%E3%81%AF%E3%81%B2%E3%81%A9%E3%81%84" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E5%AE%89%E5%80%8D%E6%99%8B%E4%B8%89" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E6%95%99%E8%82%B2" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E8%87%AA%E6%B0%91%E5%85%9A" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%81%A0%E3%82%81%E3%81%A0%E3%81%93%E3%82%8A%E3%82%83" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E5%8A%A0%E8%A8%88%E5%AD%A6%E5%9C%92%E5%95%8F%E9%A1%8C" />
+            </rdf:Bag>
+        </taxo:topics>
+        <hatena:bookmarkcount>158</hatena:bookmarkcount>
+        <content:encoded><![CDATA[
+<blockquote cite="https://www.asahi.com/articles/ASL6M3C3LL6MPTIL010.html" title="加計理事長、首相との面会否定　獣医学部新設巡り初会見：朝日新聞デジタル"><cite><img src="https://cdn-ak2.favicon.st-hatena.com/?url=https%3A%2F%2Fwww.asahi.com%2F" alt="" /> <a href="https://www.asahi.com/articles/ASL6M3C3LL6MPTIL010.html">加計理事長、首相との面会否定　獣医学部新設巡り初会見：朝日新聞デジタル</a></cite><p><a href="https://www.asahi.com/articles/ASL6M3C3LL6MPTIL010.html"><img src="https://cdn-ak-scissors.b.st-hatena.com/image/square/427c5e144fa63e842a92c55cc006b5ca6fabfedc/height=90;version=1;width=120/https%3A%2F%2Fwww.asahicom.jp%2Farticles%2Fimages%2Fc_AS20180619001735_comm.jpg" alt="加計理事長、首相との面会否定　獣医学部新設巡り初会見：朝日新聞デジタル" title="加計理事長、首相との面会否定　獣医学部新設巡り初会見：朝日新聞デジタル" class="entry-image" /></a></p><p>愛媛県今治市での獣医学部新設をめぐり、学校法人「加計（かけ）学園」の加計孝太郎理事長が１９日、岡山市の学園内で記者会見した。県の文書に書かれている加計氏と安倍晋三首相の面会がなかったと県に謝罪した問題について、学園の渡辺良人事務局長を減給（月額１０％を６カ月）の懲戒処分にしたと発表した。自身は監...</p><p><a href="http://b.hatena.ne.jp/entry/s/www.asahi.com/articles/ASL6M3C3LL6MPTIL010.html"><img src="http://b.hatena.ne.jp/entry/image/https://www.asahi.com/articles/ASL6M3C3LL6MPTIL010.html" alt="はてなブックマーク - 加計理事長、首相との面会否定　獣医学部新設巡り初会見：朝日新聞デジタル" title="はてなブックマーク - 加計理事長、首相との面会否定　獣医学部新設巡り初会見：朝日新聞デジタル" border="0" style="border: none" /></a> <a href="http://b.hatena.ne.jp/entry/s/www.asahi.com/articles/ASL6M3C3LL6MPTIL010.html"><img src="http://b.hatena.ne.jp/images/append.gif" border="0" alt="はてなブックマークに追加" title="はてなブックマークに追加" /></a></p></blockquote><img src="http://feeds.feedburner.com/~r/hatena/b/hotentry/~4/8r0O6YBz6aI" height="1" width="1" alt=""/>]]></content:encoded>
+    </item>
+    <item rdf:about="https://seleck.cc/1230">
+        <title>ノンプログラマーが半年で400以上の業務を自動化！メルカリが作る「Karakuri」とは | SELECK</title>
+        <link>https://seleck.cc/1230</link>
+        <description>〜ノンプログラマーでも、ルーティン業務を「自動化」できる！社員の3人に1人が「Zapier」を活用し、全社で400以上のワークフローを自動化した事例〜
+            ルーティン業務を自動化したいけれど、その仕組みを作れるエンジニアのリソースが足りない…という課題をお持ちではないだろうか。
+            株式会社メルカリでは、このような課...</description>
+        <dc:date>2018-06-19T03:31:10Z</dc:date>
+        <dc:subject>テクノロジー</dc:subject>
+        <dc:subject>あとで読む</dc:subject>
+        <dc:subject>自動化</dc:subject>
+        <dc:subject>仕事</dc:subject>
+        <dc:subject>メルカリ</dc:subject>
+        <dc:subject>効率化</dc:subject>
+        <dc:subject>エンジニア</dc:subject>
+        <dc:subject>Zapier</dc:subject>
+        <dc:subject>slack</dc:subject>
+        <dc:subject>フロー</dc:subject>
+        <dc:subject>業務効率化</dc:subject>
+        <taxo:topics>
+            <rdf:Bag>
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%81%82%E3%81%A8%E3%81%A7%E8%AA%AD%E3%82%80" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E8%87%AA%E5%8B%95%E5%8C%96" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E4%BB%95%E4%BA%8B" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%83%A1%E3%83%AB%E3%82%AB%E3%83%AA" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E5%8A%B9%E7%8E%87%E5%8C%96" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%82%A8%E3%83%B3%E3%82%B8%E3%83%8B%E3%82%A2" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=Zapier" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=slack" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%83%95%E3%83%AD%E3%83%BC" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E6%A5%AD%E5%8B%99%E5%8A%B9%E7%8E%87%E5%8C%96" />
+            </rdf:Bag>
+        </taxo:topics>
+        <hatena:bookmarkcount>202</hatena:bookmarkcount>
+        <content:encoded><![CDATA[
+<blockquote cite="https://seleck.cc/1230" title="ノンプログラマーが半年で400以上の業務を自動化！メルカリが作る「Karakuri」とは | SELECK"><cite><img src="https://cdn-ak2.favicon.st-hatena.com/?url=https%3A%2F%2Fseleck.cc%2F" alt="" /> <a href="https://seleck.cc/1230">ノンプログラマーが半年で400以上の業務を自動化！メルカリが作る「Karakuri」とは | SELECK</a></cite><p><a href="https://seleck.cc/1230"><img src="https://cdn-ak-scissors.b.st-hatena.com/image/square/67374efb1fca45f1bef8cc60afe16c6b1207927d/height=90;version=1;width=120/https%3A%2F%2Fdvljqgv78zqdf.cloudfront.net%2F5385cf5b-d02f-4773-9816-43f9e5652d6f.jpg" alt="ノンプログラマーが半年で400以上の業務を自動化！メルカリが作る「Karakuri」とは | SELECK" title="ノンプログラマーが半年で400以上の業務を自動化！メルカリが作る「Karakuri」とは | SELECK" class="entry-image" /></a></p><p>〜ノンプログラマーでも、ルーティン業務を「自動化」できる！社員の3人に1人が「Zapier」を活用し、全社で400以上のワークフローを自動化した事例〜
+ルーティン業務を自動化したいけれど、その仕組みを作れるエンジニアのリソースが足りない…という課題をお持ちではないだろうか。
+株式会社メルカリでは、このような課...</p><p><a href="http://b.hatena.ne.jp/entry/s/seleck.cc/1230"><img src="http://b.hatena.ne.jp/entry/image/https://seleck.cc/1230" alt="はてなブックマーク - ノンプログラマーが半年で400以上の業務を自動化！メルカリが作る「Karakuri」とは | SELECK" title="はてなブックマーク - ノンプログラマーが半年で400以上の業務を自動化！メルカリが作る「Karakuri」とは | SELECK" border="0" style="border: none" /></a> <a href="http://b.hatena.ne.jp/entry/s/seleck.cc/1230"><img src="http://b.hatena.ne.jp/images/append.gif" border="0" alt="はてなブックマークに追加" title="はてなブックマークに追加" /></a></p></blockquote><img src="http://feeds.feedburner.com/~r/hatena/b/hotentry/~4/MEYJt3o7KGU" height="1" width="1" alt=""/>]]></content:encoded>
+    </item>
+    <item rdf:about="https://www.asahi.com/articles/ASL6M3JY1L6MTIPE00G.html">
+        <title>東名あおり運転事故、デマ書き込み容疑で１１人書類送検：朝日新聞デジタル</title>
+        <link>https://www.asahi.com/articles/ASL6M3JY1L6MTIPE00G.html</link>
+        <description>神奈川県大井町の東名高速で昨年６月、あおり運転を受けて停止したワゴン車が大型トラックに追突され、夫婦が死亡した事故をめぐり、無関係の建設会社（北九州市）に関するデマや個人情報をネット上に書き込んだなどとして、福岡県警は１９日、福岡市などに住む男１１人を名誉毀損（きそん）容疑で書類送検し、発表した...</description>
+        <dc:date>2018-06-19T02:56:41Z</dc:date>
+        <dc:subject>世の中</dc:subject>
+        <dc:subject>あとで読む</dc:subject>
+        <dc:subject>デマ</dc:subject>
+        <dc:subject>社会</dc:subject>
+        <dc:subject>web</dc:subject>
+        <dc:subject>ネット</dc:subject>
+        <dc:subject>news</dc:subject>
+        <dc:subject>犯罪</dc:subject>
+        <dc:subject>trend affiliate</dc:subject>
+        <dc:subject>事件</dc:subject>
+        <dc:subject>flame</dc:subject>
+        <taxo:topics>
+            <rdf:Bag>
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%81%82%E3%81%A8%E3%81%A7%E8%AA%AD%E3%82%80" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%83%87%E3%83%9E" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E7%A4%BE%E4%BC%9A" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=web" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%83%8D%E3%83%83%E3%83%88" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=news" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E7%8A%AF%E7%BD%AA" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=trend%20affiliate" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E4%BA%8B%E4%BB%B6" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=flame" />
+            </rdf:Bag>
+        </taxo:topics>
+        <hatena:bookmarkcount>161</hatena:bookmarkcount>
+        <content:encoded><![CDATA[
+<blockquote cite="https://www.asahi.com/articles/ASL6M3JY1L6MTIPE00G.html" title="東名あおり運転事故、デマ書き込み容疑で１１人書類送検：朝日新聞デジタル"><cite><img src="https://cdn-ak2.favicon.st-hatena.com/?url=https%3A%2F%2Fwww.asahi.com%2F" alt="" /> <a href="https://www.asahi.com/articles/ASL6M3JY1L6MTIPE00G.html">東名あおり運転事故、デマ書き込み容疑で１１人書類送検：朝日新聞デジタル</a></cite><p><a href="https://www.asahi.com/articles/ASL6M3JY1L6MTIPE00G.html"><img src="https://cdn-ak-scissors.b.st-hatena.com/image/square/85ef1cb11e843257bc2999bc024d56518ce801c9/height=90;version=1;width=120/https%3A%2F%2Fwww.asahicom.jp%2Fimages%2Flogo_ogp.png" alt="東名あおり運転事故、デマ書き込み容疑で１１人書類送検：朝日新聞デジタル" title="東名あおり運転事故、デマ書き込み容疑で１１人書類送検：朝日新聞デジタル" class="entry-image" /></a></p><p>神奈川県大井町の東名高速で昨年６月、あおり運転を受けて停止したワゴン車が大型トラックに追突され、夫婦が死亡した事故をめぐり、無関係の建設会社（北九州市）に関するデマや個人情報をネット上に書き込んだなどとして、福岡県警は１９日、福岡市などに住む男１１人を名誉毀損（きそん）容疑で書類送検し、発表した...</p><p><a href="http://b.hatena.ne.jp/entry/s/www.asahi.com/articles/ASL6M3JY1L6MTIPE00G.html"><img src="http://b.hatena.ne.jp/entry/image/https://www.asahi.com/articles/ASL6M3JY1L6MTIPE00G.html" alt="はてなブックマーク - 東名あおり運転事故、デマ書き込み容疑で１１人書類送検：朝日新聞デジタル" title="はてなブックマーク - 東名あおり運転事故、デマ書き込み容疑で１１人書類送検：朝日新聞デジタル" border="0" style="border: none" /></a> <a href="http://b.hatena.ne.jp/entry/s/www.asahi.com/articles/ASL6M3JY1L6MTIPE00G.html"><img src="http://b.hatena.ne.jp/images/append.gif" border="0" alt="はてなブックマークに追加" title="はてなブックマークに追加" /></a></p></blockquote><img src="http://feeds.feedburner.com/~r/hatena/b/hotentry/~4/PCxHdfecEic" height="1" width="1" alt=""/>]]></content:encoded>
+    </item>
+    <item rdf:about="http://jinzai.pecori.jp/domain/2018/06/19/aota/">
+        <title>LINE青田努さんがの考え方が勉強になりすぎる！神パワポまとめ | 転職キャンパス</title>
+        <link>http://jinzai.pecori.jp/domain/2018/06/19/aota/</link>
+        <description>青田努さんとは、人材業界出身者は知らない人はいないのではないでしょうか？
+            私が青田さんを知ったキッカケはオンラインスクール「Schoo（スク―）」で講師を務められていたのがきっかけです。
+            同じ人材業界にいたものの、直接お会いした事はなく、プクコが勝手にファンになってフェイスブックをくまなくチェックしてい...</description>
+        <dc:date>2018-06-18T23:41:45Z</dc:date>
+        <dc:subject>政治と経済</dc:subject>
+        <dc:subject>あとで読む</dc:subject>
+        <dc:subject>考え方</dc:subject>
+        <dc:subject>キャリア</dc:subject>
+        <dc:subject>教育</dc:subject>
+        <dc:subject>勉強</dc:subject>
+        <dc:subject>仕事</dc:subject>
+        <dc:subject>転職</dc:subject>
+        <dc:subject>人生</dc:subject>
+        <dc:subject> ビジネスモデル</dc:subject>
+        <dc:subject>人材</dc:subject>
+        <taxo:topics>
+            <rdf:Bag>
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%81%82%E3%81%A8%E3%81%A7%E8%AA%AD%E3%82%80" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E8%80%83%E3%81%88%E6%96%B9" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%82%AD%E3%83%A3%E3%83%AA%E3%82%A2" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E6%95%99%E8%82%B2" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E5%8B%89%E5%BC%B7" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E4%BB%95%E4%BA%8B" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E8%BB%A2%E8%81%B7" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E4%BA%BA%E7%94%9F" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%20%E3%83%93%E3%82%B8%E3%83%8D%E3%82%B9%E3%83%A2%E3%83%87%E3%83%AB" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E4%BA%BA%E6%9D%90" />
+            </rdf:Bag>
+        </taxo:topics>
+        <hatena:bookmarkcount>309</hatena:bookmarkcount>
+        <content:encoded><![CDATA[
+<blockquote cite="http://jinzai.pecori.jp/domain/2018/06/19/aota/" title="LINE青田努さんがの考え方が勉強になりすぎる！神パワポまとめ | 転職キャンパス"><cite><img src="https://cdn-ak2.favicon.st-hatena.com/?url=http%3A%2F%2Fjinzai.pecori.jp%2F" alt="" /> <a href="http://jinzai.pecori.jp/domain/2018/06/19/aota/">LINE青田努さんがの考え方が勉強になりすぎる！神パワポまとめ | 転職キャンパス</a></cite><p><a href="http://jinzai.pecori.jp/domain/2018/06/19/aota/"><img src="https://cdn-ak-scissors.b.st-hatena.com/image/square/aed0e256964593ff0a46ee40fffeb5a42bc3240c/height=90;version=1;width=120/https%3A%2F%2Fi1.wp.com%2Fjinzai.pecori.jp%2Fdomain%2Fwp-content%2Fuploads%2F2018%2F06%2Fman-3376349_1280-1.jpg%3Ffit%3D680%252C409" alt="LINE青田努さんがの考え方が勉強になりすぎる！神パワポまとめ | 転職キャンパス" title="LINE青田努さんがの考え方が勉強になりすぎる！神パワポまとめ | 転職キャンパス" class="entry-image" /></a></p><p>青田努さんとは、人材業界出身者は知らない人はいないのではないでしょうか？
+私が青田さんを知ったキッカケはオンラインスクール「Schoo（スク―）」で講師を務められていたのがきっかけです。
+同じ人材業界にいたものの、直接お会いした事はなく、プクコが勝手にファンになってフェイスブックをくまなくチェックしてい...</p><p><a href="http://b.hatena.ne.jp/entry/jinzai.pecori.jp/domain/2018/06/19/aota/"><img src="http://b.hatena.ne.jp/entry/image/http://jinzai.pecori.jp/domain/2018/06/19/aota/" alt="はてなブックマーク - LINE青田努さんがの考え方が勉強になりすぎる！神パワポまとめ | 転職キャンパス" title="はてなブックマーク - LINE青田努さんがの考え方が勉強になりすぎる！神パワポまとめ | 転職キャンパス" border="0" style="border: none" /></a> <a href="http://b.hatena.ne.jp/entry/jinzai.pecori.jp/domain/2018/06/19/aota/"><img src="http://b.hatena.ne.jp/images/append.gif" border="0" alt="はてなブックマークに追加" title="はてなブックマークに追加" /></a></p></blockquote><img src="http://feeds.feedburner.com/~r/hatena/b/hotentry/~4/nXCFBpiPHIc" height="1" width="1" alt=""/>]]></content:encoded>
+    </item>
+    <item rdf:about="https://togetter.com/li/1238478">
+        <title>『教え方が上手い人は何をしているか？』を具体的にまとめた表がとても参考になると話題に - Togetter</title>
+        <link>https://togetter.com/li/1238478</link>
+        <description>青田努さんがまとめたもので、私自身が後輩指導の際に意識したいとともに上司からもこのように指示をあおぎたいなという思いでツイートしました。まわしもんでもなんでもないんですが、こんなに拡散されているのは同じ思いの方がそれなりにいる証拠だなと思いました
+            リンク
+            www.wantedly.com
+            76
+            6 users
+            【図表】教え方...</description>
+        <dc:date>2018-06-18T08:46:21Z</dc:date>
+        <dc:subject>暮らし</dc:subject>
+        <dc:subject>あとで読む</dc:subject>
+        <dc:subject>コミュニケーション</dc:subject>
+        <dc:subject>仕事</dc:subject>
+        <dc:subject>考え方</dc:subject>
+        <dc:subject>教育</dc:subject>
+        <dc:subject>togetter</dc:subject>
+        <dc:subject>教え方</dc:subject>
+        <dc:subject>スキル</dc:subject>
+        <dc:subject>人</dc:subject>
+        <dc:subject>参考</dc:subject>
+        <taxo:topics>
+            <rdf:Bag>
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%81%82%E3%81%A8%E3%81%A7%E8%AA%AD%E3%82%80" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%82%B3%E3%83%9F%E3%83%A5%E3%83%8B%E3%82%B1%E3%83%BC%E3%82%B7%E3%83%A7%E3%83%B3" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E4%BB%95%E4%BA%8B" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E8%80%83%E3%81%88%E6%96%B9" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E6%95%99%E8%82%B2" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=togetter" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E6%95%99%E3%81%88%E6%96%B9" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%82%B9%E3%82%AD%E3%83%AB" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E4%BA%BA" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E5%8F%82%E8%80%83" />
+            </rdf:Bag>
+        </taxo:topics>
+        <hatena:bookmarkcount>2018</hatena:bookmarkcount>
+        <content:encoded><![CDATA[
+<blockquote cite="https://togetter.com/li/1238478" title="『教え方が上手い人は何をしているか？』を具体的にまとめた表がとても参考になると話題に - Togetter"><cite><img src="https://cdn-ak2.favicon.st-hatena.com/?url=https%3A%2F%2Ftogetter.com%2F" alt="" /> <a href="https://togetter.com/li/1238478">『教え方が上手い人は何をしているか？』を具体的にまとめた表がとても参考になると話題に - Togetter</a></cite><p><a href="https://togetter.com/li/1238478"><img src="https://cdn-ak-scissors.b.st-hatena.com/image/square/7d11a647cf0dba960e4eb65ae3a2b6c51029241c/height=90;version=1;width=120/http%3A%2F%2Fpimg.togetter.com%2F24c068fddabd4ae5e4da65613a802a53dc9840bb%2F68747470733a2f2f7062732e7477696d672e636f6d2f6d656469612f4466326d57673055384155337033752e6a70673a6c61726765%3Fw%3D1200%26h%3D630%26t%3Dc" alt="『教え方が上手い人は何をしているか？』を具体的にまとめた表がとても参考になると話題に - Togetter" title="『教え方が上手い人は何をしているか？』を具体的にまとめた表がとても参考になると話題に - Togetter" class="entry-image" /></a></p><p>青田努さんがまとめたもので、私自身が後輩指導の際に意識したいとともに上司からもこのように指示をあおぎたいなという思いでツイートしました。まわしもんでもなんでもないんですが、こんなに拡散されているのは同じ思いの方がそれなりにいる証拠だなと思いました
+リンク
+www.wantedly.com
+76
+6 users
+【図表】教え方...</p><p><a href="http://b.hatena.ne.jp/entry/s/togetter.com/li/1238478"><img src="http://b.hatena.ne.jp/entry/image/https://togetter.com/li/1238478" alt="はてなブックマーク - 『教え方が上手い人は何をしているか？』を具体的にまとめた表がとても参考になると話題に - Togetter" title="はてなブックマーク - 『教え方が上手い人は何をしているか？』を具体的にまとめた表がとても参考になると話題に - Togetter" border="0" style="border: none" /></a> <a href="http://b.hatena.ne.jp/entry/s/togetter.com/li/1238478"><img src="http://b.hatena.ne.jp/images/append.gif" border="0" alt="はてなブックマークに追加" title="はてなブックマークに追加" /></a></p></blockquote><img src="http://feeds.feedburner.com/~r/hatena/b/hotentry/~4/OMNM20yPuKo" height="1" width="1" alt=""/>]]></content:encoded>
+    </item>
+    <item rdf:about="https://headlines.yahoo.co.jp/hl?a=20180619-00000007-goal-socc">
+        <title>【独白】ハリル、日本代表への祈り「選手を信じている。心から応援するよ」／インタビュー（GOAL） - Yahoo!ニュース</title>
+        <link>https://headlines.yahoo.co.jp/hl?a=20180619-00000007-goal-socc</link>
+        <description>騒動から約2カ月。
+            日本代表は19日、ロシア・ワールドカップの初戦でコロンビア代表と対戦する。この試合を、ヴァイッド・ハリルホジッチ"前”監督はどんな思いで迎えるのか。今、どのような感情を抱きながら日本代表に視線を送っているのか。
+            長友、長谷部、原口の奥さん知ってる？サッカー選手の美人すぎる彼女・妻たち...</description>
+        <dc:date>2018-06-19T04:13:55Z</dc:date>
+        <dc:subject>エンタメ</dc:subject>
+        <dc:subject>あとで読む</dc:subject>
+        <dc:subject>サッカー</dc:subject>
+        <dc:subject>スポーツ</dc:subject>
+        <dc:subject>Sports</dc:subject>
+        <dc:subject>Soccer</dc:subject>
+        <dc:subject>interview</dc:subject>
+        <dc:subject>foot</dc:subject>
+        <dc:subject>ブコメに対して</dc:subject>
+        <taxo:topics>
+            <rdf:Bag>
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%81%82%E3%81%A8%E3%81%A7%E8%AA%AD%E3%82%80" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%82%B5%E3%83%83%E3%82%AB%E3%83%BC" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%82%B9%E3%83%9D%E3%83%BC%E3%83%84" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=Sports" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=Soccer" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=interview" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=foot" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%83%96%E3%82%B3%E3%83%A1%E3%81%AB%E5%AF%BE%E3%81%97%E3%81%A6" />
+            </rdf:Bag>
+        </taxo:topics>
+        <hatena:bookmarkcount>124</hatena:bookmarkcount>
+        <content:encoded><![CDATA[
+<blockquote cite="https://headlines.yahoo.co.jp/hl?a=20180619-00000007-goal-socc" title="【独白】ハリル、日本代表への祈り「選手を信じている。心から応援するよ」／インタビュー（GOAL） - Yahoo!ニュース"><cite><img src="https://cdn-ak2.favicon.st-hatena.com/?url=https%3A%2F%2Fheadlines.yahoo.co.jp%2F" alt="" /> <a href="https://headlines.yahoo.co.jp/hl?a=20180619-00000007-goal-socc">【独白】ハリル、日本代表への祈り「選手を信じている。心から応援するよ」／インタビュー（GOAL） - Yahoo!ニュース</a></cite><p><a href="https://headlines.yahoo.co.jp/hl?a=20180619-00000007-goal-socc"><img src="https://cdn-ak-scissors.b.st-hatena.com/image/square/415b800e9c4738758630646c43b11daefd8e7240/height=90;version=1;width=120/https%3A%2F%2Flpt.c.yimg.jp%2Famd%2F20180619-00000007-goal-000-view.jpg" alt="【独白】ハリル、日本代表への祈り「選手を信じている。心から応援するよ」／インタビュー（GOAL） - Yahoo!ニュース" title="【独白】ハリル、日本代表への祈り「選手を信じている。心から応援するよ」／インタビュー（GOAL） - Yahoo!ニュース" class="entry-image" /></a></p><p>騒動から約2カ月。
+日本代表は19日、ロシア・ワールドカップの初戦でコロンビア代表と対戦する。この試合を、ヴァイッド・ハリルホジッチ&quot;前”監督はどんな思いで迎えるのか。今、どのような感情を抱きながら日本代表に視線を送っているのか。
+長友、長谷部、原口の奥さん知ってる？サッカー選手の美人すぎる彼女・妻たち...</p><p><a href="http://b.hatena.ne.jp/entry/s/headlines.yahoo.co.jp/hl?a=20180619-00000007-goal-socc"><img src="http://b.hatena.ne.jp/entry/image/https://headlines.yahoo.co.jp/hl?a=20180619-00000007-goal-socc" alt="はてなブックマーク - 【独白】ハリル、日本代表への祈り「選手を信じている。心から応援するよ」／インタビュー（GOAL） - Yahoo!ニュース" title="はてなブックマーク - 【独白】ハリル、日本代表への祈り「選手を信じている。心から応援するよ」／インタビュー（GOAL） - Yahoo!ニュース" border="0" style="border: none" /></a> <a href="http://b.hatena.ne.jp/entry/s/headlines.yahoo.co.jp/hl?a=20180619-00000007-goal-socc"><img src="http://b.hatena.ne.jp/images/append.gif" border="0" alt="はてなブックマークに追加" title="はてなブックマークに追加" /></a></p></blockquote><img src="http://feeds.feedburner.com/~r/hatena/b/hotentry/~4/pT2LsQQ5ZRA" height="1" width="1" alt=""/>]]></content:encoded>
+    </item>
+    <item rdf:about="http://www.itmedia.co.jp/news/articles/1806/19/news055.html">
+        <title>「いらすとや」、地震直後に防災イラスト大量追加　1日で11点、「素早い」と賞賛 - ITmedia NEWS</title>
+        <link>http://www.itmedia.co.jp/news/articles/1806/19/news055.html</link>
+        <description>6月18日午前8時前、大阪府北部で最大震度6弱の地震が発生し、各地で被害が報告されている。そんな中、人気の無料イラスト素材サイト「いらすとや」で防災関連イラストが相次いで公開され、「素早い対応」と賞賛を集めている。
+            いらすとやは18日午前10時ごろから、防災関連イラストを相次いで公開。18日中に「避難所を確...</description>
+        <dc:date>2018-06-19T00:01:17Z</dc:date>
+        <dc:subject>テクノロジー</dc:subject>
+        <dc:subject>あとで読む</dc:subject>
+        <dc:subject>イラスト</dc:subject>
+        <dc:subject>地震</dc:subject>
+        <dc:subject>いらすとや</dc:subject>
+        <dc:subject>ネタ</dc:subject>
+        <dc:subject>画像</dc:subject>
+        <dc:subject>社会</dc:subject>
+        <dc:subject>Web</dc:subject>
+        <dc:subject>news</dc:subject>
+        <dc:subject>災害</dc:subject>
+        <taxo:topics>
+            <rdf:Bag>
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%81%82%E3%81%A8%E3%81%A7%E8%AA%AD%E3%82%80" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%82%A4%E3%83%A9%E3%82%B9%E3%83%88" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E5%9C%B0%E9%9C%87" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%81%84%E3%82%89%E3%81%99%E3%81%A8%E3%82%84" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%83%8D%E3%82%BF" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E7%94%BB%E5%83%8F" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E7%A4%BE%E4%BC%9A" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=Web" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=news" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E7%81%BD%E5%AE%B3" />
+            </rdf:Bag>
+        </taxo:topics>
+        <hatena:bookmarkcount>193</hatena:bookmarkcount>
+        <content:encoded><![CDATA[
+<blockquote cite="http://www.itmedia.co.jp/news/articles/1806/19/news055.html" title="「いらすとや」、地震直後に防災イラスト大量追加　1日で11点、「素早い」と賞賛 - ITmedia NEWS"><cite><img src="https://cdn-ak2.favicon.st-hatena.com/?url=http%3A%2F%2Fwww.itmedia.co.jp%2F" alt="" /> <a href="http://www.itmedia.co.jp/news/articles/1806/19/news055.html">「いらすとや」、地震直後に防災イラスト大量追加　1日で11点、「素早い」と賞賛 - ITmedia NEWS</a></cite><p><a href="http://www.itmedia.co.jp/news/articles/1806/19/news055.html"><img src="https://cdn-ak-scissors.b.st-hatena.com/image/square/7adc2fbfb45cb719d7f62188f9a8194e40f1747d/height=90;version=1;width=120/http%3A%2F%2Fimage.itmedia.co.jp%2Fnews%2Farticles%2F1806%2F19%2Fcover_news055.jpg" alt="「いらすとや」、地震直後に防災イラスト大量追加　1日で11点、「素早い」と賞賛 - ITmedia NEWS" title="「いらすとや」、地震直後に防災イラスト大量追加　1日で11点、「素早い」と賞賛 - ITmedia NEWS" class="entry-image" /></a></p><p>6月18日午前8時前、大阪府北部で最大震度6弱の地震が発生し、各地で被害が報告されている。そんな中、人気の無料イラスト素材サイト「いらすとや」で防災関連イラストが相次いで公開され、「素早い対応」と賞賛を集めている。
+いらすとやは18日午前10時ごろから、防災関連イラストを相次いで公開。18日中に「避難所を確...</p><p><a href="http://b.hatena.ne.jp/entry/www.itmedia.co.jp/news/articles/1806/19/news055.html"><img src="http://b.hatena.ne.jp/entry/image/http://www.itmedia.co.jp/news/articles/1806/19/news055.html" alt="はてなブックマーク - 「いらすとや」、地震直後に防災イラスト大量追加　1日で11点、「素早い」と賞賛 - ITmedia NEWS" title="はてなブックマーク - 「いらすとや」、地震直後に防災イラスト大量追加　1日で11点、「素早い」と賞賛 - ITmedia NEWS" border="0" style="border: none" /></a> <a href="http://b.hatena.ne.jp/entry/www.itmedia.co.jp/news/articles/1806/19/news055.html"><img src="http://b.hatena.ne.jp/images/append.gif" border="0" alt="はてなブックマークに追加" title="はてなブックマークに追加" /></a></p></blockquote><img src="http://feeds.feedburner.com/~r/hatena/b/hotentry/~4/uh5w5zbA-fo" height="1" width="1" alt=""/>]]></content:encoded>
+    </item>
+    <item rdf:about="http://kabumatome.doorblog.jp/archives/65920793.html">
+        <title>システム移行中のみずほ、一部ATMでトラブル発生するもリスク分散で回避か : 市況かぶ全力２階建</title>
+        <link>http://kabumatome.doorblog.jp/archives/65920793.html</link>
+        <description>みずほの勘定系システム、かけた時間とか投下した人員、亡くなった人の数とかを考えると、現代の黒部ダム建設や東海道新幹線工事みたいなものだったのかもしれん
+            — 高本康成 (@hobbitbit) 2018年6月13日
+            みずほのシステム建造物「MINORI」(通称 桜田ファミリア)ついに稼働、 全9回中1回目の移行作業に成功 https://t.co/...</description>
+        <dc:date>2018-06-18T16:26:35Z</dc:date>
+        <dc:subject>世の中</dc:subject>
+        <dc:subject>あとで読む</dc:subject>
+        <dc:subject>システム</dc:subject>
+        <dc:subject>銀行</dc:subject>
+        <dc:subject>みずほ銀行</dc:subject>
+        <dc:subject>it</dc:subject>
+        <dc:subject>大阪</dc:subject>
+        <dc:subject>ATM</dc:subject>
+        <dc:subject>障害</dc:subject>
+        <dc:subject>トラブル</dc:subject>
+        <dc:subject>組織</dc:subject>
+        <taxo:topics>
+            <rdf:Bag>
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%81%82%E3%81%A8%E3%81%A7%E8%AA%AD%E3%82%80" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%82%B7%E3%82%B9%E3%83%86%E3%83%A0" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E9%8A%80%E8%A1%8C" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%81%BF%E3%81%9A%E3%81%BB%E9%8A%80%E8%A1%8C" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=it" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E5%A4%A7%E9%98%AA" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=ATM" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E9%9A%9C%E5%AE%B3" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%83%88%E3%83%A9%E3%83%96%E3%83%AB" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E7%B5%84%E7%B9%94" />
+            </rdf:Bag>
+        </taxo:topics>
+        <hatena:bookmarkcount>290</hatena:bookmarkcount>
+        <content:encoded><![CDATA[
+<blockquote cite="http://kabumatome.doorblog.jp/archives/65920793.html" title="システム移行中のみずほ、一部ATMでトラブル発生するもリスク分散で回避か : 市況かぶ全力２階建"><cite><img src="https://cdn-ak2.favicon.st-hatena.com/?url=http%3A%2F%2Fkabumatome.doorblog.jp%2F" alt="" /> <a href="http://kabumatome.doorblog.jp/archives/65920793.html">システム移行中のみずほ、一部ATMでトラブル発生するもリスク分散で回避か : 市況かぶ全力２階建</a></cite><p><a href="http://kabumatome.doorblog.jp/archives/65920793.html"><img src="https://cdn-ak-scissors.b.st-hatena.com/image/square/46e18d86c4d513c7ef98554132f1b9f8210572b3/height=90;version=1;width=120/http%3A%2F%2Flivedoor.blogimg.jp%2Fmasorira-kabu%2Fimgs%2F7%2F6%2F761a27e3.jpg" alt="システム移行中のみずほ、一部ATMでトラブル発生するもリスク分散で回避か : 市況かぶ全力２階建" title="システム移行中のみずほ、一部ATMでトラブル発生するもリスク分散で回避か : 市況かぶ全力２階建" class="entry-image" /></a></p><p>みずほの勘定系システム、かけた時間とか投下した人員、亡くなった人の数とかを考えると、現代の黒部ダム建設や東海道新幹線工事みたいなものだったのかもしれん
+— 高本康成 (@hobbitbit) 2018年6月13日
+みずほのシステム建造物「MINORI」(通称 桜田ファミリア)ついに稼働、 全9回中1回目の移行作業に成功 https://t.co/...</p><p><a href="http://b.hatena.ne.jp/entry/kabumatome.doorblog.jp/archives/65920793.html"><img src="http://b.hatena.ne.jp/entry/image/http://kabumatome.doorblog.jp/archives/65920793.html" alt="はてなブックマーク - システム移行中のみずほ、一部ATMでトラブル発生するもリスク分散で回避か : 市況かぶ全力２階建" title="はてなブックマーク - システム移行中のみずほ、一部ATMでトラブル発生するもリスク分散で回避か : 市況かぶ全力２階建" border="0" style="border: none" /></a> <a href="http://b.hatena.ne.jp/entry/kabumatome.doorblog.jp/archives/65920793.html"><img src="http://b.hatena.ne.jp/images/append.gif" border="0" alt="はてなブックマークに追加" title="はてなブックマークに追加" /></a></p></blockquote><img src="http://feeds.feedburner.com/~r/hatena/b/hotentry/~4/lfllmhKVs0I" height="1" width="1" alt=""/>]]></content:encoded>
+    </item>
+    <item rdf:about="http://blogos.com/article/305370/">
+        <title>カルビー松本会長、ZOZO田端氏「高プロ（残業代ゼロ）が残業なくす」という #呪いの言葉の解き方</title>
+        <link>http://blogos.com/article/305370/</link>
+        <description>記事
+            国家公務員一般労働組合
+            2018年06月19日 13:18
+            カルビー松本会長、ZOZO田端氏「高プロ（残業代ゼロ）が残業なくす」という #呪いの言葉の解き方
+            Tweet
+            上西充子法政大学教授が「逃げ恥」百合さんに学ぼう！「呪いの言葉」に「思考の枠組み」を支配されないための切り返し方（ #呪いの言葉の解き方 ）を拡散する必要...</description>
+        <dc:date>2018-06-19T04:19:20Z</dc:date>
+        <dc:subject>政治と経済</dc:subject>
+        <dc:subject>あとで読む</dc:subject>
+        <dc:subject>労働</dc:subject>
+        <dc:subject>企業</dc:subject>
+        <dc:subject>社会</dc:subject>
+        <dc:subject>*ビス系bz</dc:subject>
+        <dc:subject>考え方</dc:subject>
+        <dc:subject>bz&gt;労働時間</dc:subject>
+        <dc:subject>bz&gt;働き方改革</dc:subject>
+        <dc:subject>bz&gt;残業問題</dc:subject>
+        <dc:subject>高プロ</dc:subject>
+        <taxo:topics>
+            <rdf:Bag>
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%81%82%E3%81%A8%E3%81%A7%E8%AA%AD%E3%82%80" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E5%8A%B4%E5%83%8D" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E4%BC%81%E6%A5%AD" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E7%A4%BE%E4%BC%9A" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%2A%E3%83%93%E3%82%B9%E7%B3%BBbz" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E8%80%83%E3%81%88%E6%96%B9" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=bz%3E%E5%8A%B4%E5%83%8D%E6%99%82%E9%96%93" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=bz%3E%E5%83%8D%E3%81%8D%E6%96%B9%E6%94%B9%E9%9D%A9" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=bz%3E%E6%AE%8B%E6%A5%AD%E5%95%8F%E9%A1%8C" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E9%AB%98%E3%83%97%E3%83%AD" />
+            </rdf:Bag>
+        </taxo:topics>
+        <hatena:bookmarkcount>120</hatena:bookmarkcount>
+        <content:encoded><![CDATA[
+<blockquote cite="http://blogos.com/article/305370/" title="カルビー松本会長、ZOZO田端氏「高プロ（残業代ゼロ）が残業なくす」という #呪いの言葉の解き方"><cite><img src="https://cdn-ak2.favicon.st-hatena.com/?url=http%3A%2F%2Fblogos.com%2F" alt="" /> <a href="http://blogos.com/article/305370/">カルビー松本会長、ZOZO田端氏「高プロ（残業代ゼロ）が残業なくす」という #呪いの言葉の解き方</a></cite><p><a href="http://blogos.com/article/305370/"><img src="https://cdn-ak-scissors.b.st-hatena.com/image/square/89c070a01b388c4782e1be29ae1a923d959755bc/height=90;version=1;width=120/http%3A%2F%2Fstatic.blogos.com%2Fmedia%2Fimg%2F76019%2Fref_l.jpg" alt="カルビー松本会長、ZOZO田端氏「高プロ（残業代ゼロ）が残業なくす」という #呪いの言葉の解き方" title="カルビー松本会長、ZOZO田端氏「高プロ（残業代ゼロ）が残業なくす」という #呪いの言葉の解き方" class="entry-image" /></a></p><p>記事
+国家公務員一般労働組合
+2018年06月19日 13:18
+カルビー松本会長、ZOZO田端氏「高プロ（残業代ゼロ）が残業なくす」という #呪いの言葉の解き方
+Tweet
+上西充子法政大学教授が「逃げ恥」百合さんに学ぼう！「呪いの言葉」に「思考の枠組み」を支配されないための切り返し方（ #呪いの言葉の解き方 ）を拡散する必要...</p><p><a href="http://b.hatena.ne.jp/entry/blogos.com/article/305370/"><img src="http://b.hatena.ne.jp/entry/image/http://blogos.com/article/305370/" alt="はてなブックマーク - カルビー松本会長、ZOZO田端氏「高プロ（残業代ゼロ）が残業なくす」という #呪いの言葉の解き方" title="はてなブックマーク - カルビー松本会長、ZOZO田端氏「高プロ（残業代ゼロ）が残業なくす」という #呪いの言葉の解き方" border="0" style="border: none" /></a> <a href="http://b.hatena.ne.jp/entry/blogos.com/article/305370/"><img src="http://b.hatena.ne.jp/images/append.gif" border="0" alt="はてなブックマークに追加" title="はてなブックマークに追加" /></a></p></blockquote><img src="http://feeds.feedburner.com/~r/hatena/b/hotentry/~4/DOVzFRJZMKI" height="1" width="1" alt=""/>]]></content:encoded>
+    </item>
+    <item rdf:about="https://anond.hatelabo.jp/20180619120705">
+        <title>国って小さい方がいいんでないか？</title>
+        <link>https://anond.hatelabo.jp/20180619120705</link>
+        <description>アイスランドが人口数十万人で平和にやってるしワールドカップにも出てくる
+            日本も都道府県毎に分かれて、それぞれが自治でいいだろ。そうすれば国政が最も身近になって政治的な関心も高まる
+            愛国心は単なる愛郷心になる
+            軍事と経済だけは連合国を作って共同管理
+            そこにそれぞれの国から選抜で送り込んだ人材に頑張って...</description>
+        <dc:date>2018-06-19T04:31:38Z</dc:date>
+        <dc:subject>おもしろ</dc:subject>
+        <dc:subject>増田</dc:subject>
+        <dc:subject>行政</dc:subject>
+        <dc:subject>政治</dc:subject>
+        <dc:subject>あとで読む</dc:subject>
+        <dc:subject>愛国心</dc:subject>
+        <dc:subject>anonymous</dc:subject>
+        <taxo:topics>
+            <rdf:Bag>
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E5%A2%97%E7%94%B0" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E8%A1%8C%E6%94%BF" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E6%94%BF%E6%B2%BB" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%81%82%E3%81%A8%E3%81%A7%E8%AA%AD%E3%82%80" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E6%84%9B%E5%9B%BD%E5%BF%83" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=anonymous" />
+            </rdf:Bag>
+        </taxo:topics>
+        <hatena:bookmarkcount>64</hatena:bookmarkcount>
+        <content:encoded><![CDATA[
+<blockquote cite="https://anond.hatelabo.jp/20180619120705" title="国って小さい方がいいんでないか？"><cite><img src="https://cdn-ak2.favicon.st-hatena.com/?url=https%3A%2F%2Fanond.hatelabo.jp%2F" alt="" /> <a href="https://anond.hatelabo.jp/20180619120705">国って小さい方がいいんでないか？</a></cite><p><a href="https://anond.hatelabo.jp/20180619120705"><img src="https://cdn-ak-scissors.b.st-hatena.com/image/square/7d1d01079eff061d6fd2ac87dfa690bdb4d2fe9d/height=90;version=1;width=120/https%3A%2F%2Fanond.hatelabo.jp%2Fimages%2Fog-image-1500.gif" alt="国って小さい方がいいんでないか？" title="国って小さい方がいいんでないか？" class="entry-image" /></a></p><p>アイスランドが人口数十万人で平和にやってるしワールドカップにも出てくる
+日本も都道府県毎に分かれて、それぞれが自治でいいだろ。そうすれば国政が最も身近になって政治的な関心も高まる
+愛国心は単なる愛郷心になる
+軍事と経済だけは連合国を作って共同管理
+そこにそれぞれの国から選抜で送り込んだ人材に頑張って...</p><p><a href="http://b.hatena.ne.jp/entry/s/anond.hatelabo.jp/20180619120705"><img src="http://b.hatena.ne.jp/entry/image/https://anond.hatelabo.jp/20180619120705" alt="はてなブックマーク - 国って小さい方がいいんでないか？" title="はてなブックマーク - 国って小さい方がいいんでないか？" border="0" style="border: none" /></a> <a href="http://b.hatena.ne.jp/entry/s/anond.hatelabo.jp/20180619120705"><img src="http://b.hatena.ne.jp/images/append.gif" border="0" alt="はてなブックマークに追加" title="はてなブックマークに追加" /></a></p></blockquote><img src="http://feeds.feedburner.com/~r/hatena/b/hotentry/~4/FXPVIZrbloc" height="1" width="1" alt=""/>]]></content:encoded>
+    </item>
+    <item rdf:about="https://www3.nhk.or.jp/news/html/20180619/k10011485081000.html">
+        <title>加計理事長「獣医学部 話したことはない」 | NHKニュース</title>
+        <link>https://www3.nhk.or.jp/news/html/20180619/k10011485081000.html</link>
+        <description>加計理事長は、安倍総理大臣と獣医学部新設について話をしたかどうかについて質問されると、「総理とは何十年来の友人だが、お会いしたときにこちらから仕事の話をすることはない。獣医学部についても話したことはない」と述べました。</description>
+        <dc:date>2018-06-19T02:47:24Z</dc:date>
+        <dc:subject>世の中</dc:subject>
+        <dc:subject>あとで読む</dc:subject>
+        <dc:subject>政治</dc:subject>
+        <dc:subject>加計学園</dc:subject>
+        <dc:subject>buzz</dc:subject>
+        <dc:subject>hatena-bookmark</dc:subject>
+        <dc:subject>教育</dc:subject>
+        <dc:subject>安倍政権</dc:subject>
+        <dc:subject>よいしょっと</dc:subject>
+        <dc:subject>美しい下痢</dc:subject>
+        <dc:subject>行政</dc:subject>
+        <taxo:topics>
+            <rdf:Bag>
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%81%82%E3%81%A8%E3%81%A7%E8%AA%AD%E3%82%80" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E6%94%BF%E6%B2%BB" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E5%8A%A0%E8%A8%88%E5%AD%A6%E5%9C%92" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=buzz" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=hatena-bookmark" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E6%95%99%E8%82%B2" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E5%AE%89%E5%80%8D%E6%94%BF%E6%A8%A9" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E3%82%88%E3%81%84%E3%81%97%E3%82%87%E3%81%A3%E3%81%A8" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E7%BE%8E%E3%81%97%E3%81%84%E4%B8%8B%E7%97%A2" />
+                <rdf:li resource="http://b.hatena.ne.jp/search/tag?q=%E8%A1%8C%E6%94%BF" />
+            </rdf:Bag>
+        </taxo:topics>
+        <hatena:bookmarkcount>126</hatena:bookmarkcount>
+        <content:encoded><![CDATA[
+<blockquote cite="https://www3.nhk.or.jp/news/html/20180619/k10011485081000.html" title="加計理事長「獣医学部 話したことはない」 | NHKニュース"><cite><img src="https://cdn-ak2.favicon.st-hatena.com/?url=https%3A%2F%2Fwww3.nhk.or.jp%2F" alt="" /> <a href="https://www3.nhk.or.jp/news/html/20180619/k10011485081000.html">加計理事長「獣医学部 話したことはない」 | NHKニュース</a></cite><p><a href="https://www3.nhk.or.jp/news/html/20180619/k10011485081000.html"><img src="https://cdn-ak-scissors.b.st-hatena.com/image/square/752d34a604015b2aab0385345ca775df334fa14f/height=90;version=1;width=120/https%3A%2F%2Fwww3.nhk.or.jp%2Fnews%2Fhtml%2F20180619%2FK10011485081_1806191136_1806191139_01_02.jpg" alt="加計理事長「獣医学部 話したことはない」 | NHKニュース" title="加計理事長「獣医学部 話したことはない」 | NHKニュース" class="entry-image" /></a></p><p>加計理事長は、安倍総理大臣と獣医学部新設について話をしたかどうかについて質問されると、「総理とは何十年来の友人だが、お会いしたときにこちらから仕事の話をすることはない。獣医学部についても話したことはない」と述べました。</p><p><a href="http://b.hatena.ne.jp/entry/s/www3.nhk.or.jp/news/html/20180619/k10011485081000.html"><img src="http://b.hatena.ne.jp/entry/image/https://www3.nhk.or.jp/news/html/20180619/k10011485081000.html" alt="はてなブックマーク - 加計理事長「獣医学部 話したことはない」 | NHKニュース" title="はてなブックマーク - 加計理事長「獣医学部 話したことはない」 | NHKニュース" border="0" style="border: none" /></a> <a href="http://b.hatena.ne.jp/entry/s/www3.nhk.or.jp/news/html/20180619/k10011485081000.html"><img src="http://b.hatena.ne.jp/images/append.gif" border="0" alt="はてなブックマークに追加" title="はてなブックマークに追加" /></a></p></blockquote><img src="http://feeds.feedburner.com/~r/hatena/b/hotentry/~4/AqW4vQJnwrc" height="1" width="1" alt=""/>]]></content:encoded>
+    </item>
+</rdf:RDF>
