@@ -106,7 +106,7 @@ public class HatebuFeedDetailPresenter implements HatebuFeedDetailContract.Prese
                     }
                 })
                 .observeOn(AndroidSchedulers.mainThread())
-                .defaultIfEmpty(HatebuBookmark.EMPTY)
+                .defaultIfEmpty(HatebuBookmark.Companion.getEMPTY())
                 .doOnUnsubscribe(new Action0() {
                     @Override
                     public void call() {
@@ -116,7 +116,7 @@ public class HatebuFeedDetailPresenter implements HatebuFeedDetailContract.Prese
                 .subscribe(new Action1<HatebuBookmark>() {
                     @Override
                     public void call(HatebuBookmark hatebuBookmark) {
-                        if (hatebuBookmark.equals(HatebuBookmark.EMPTY)) {
+                        if (hatebuBookmark.equals(HatebuBookmark.Companion.getEMPTY())) {
                             showNoComments();
                         } else {
                             comments.add(hatebuBookmark);

@@ -140,8 +140,9 @@ dependencies {
     implementation "com.github.gfx.android.orma:orma:$orma_version"
 
     // json
-    implementation 'com.squareup.moshi:moshi:1.2.0'
-    implementation 'com.google.code.gson:gson:2.7:'
+    def moshi_version = "1.6.0"
+    implementation "com.squareup.moshi:moshi:$moshi_version"
+    kapt "com.squareup.moshi:moshi-kotlin-codegen:$moshi_version"
 
     // network
     def okhttp_ver = "3.4.1"
@@ -159,7 +160,6 @@ dependencies {
     def retrofit_ver = "2.1.0"
     implementation "com.squareup.retrofit2:retrofit:$retrofit_ver"
     implementation "com.squareup.retrofit2:converter-moshi:$retrofit_ver"
-    implementation "com.squareup.retrofit2:converter-gson:$retrofit_ver"
     implementation "com.squareup.retrofit2:adapter-rxjava:$retrofit_ver"
     implementation("com.squareup.retrofit2:converter-simplexml:$retrofit_ver") {
         exclude module: 'stax'
