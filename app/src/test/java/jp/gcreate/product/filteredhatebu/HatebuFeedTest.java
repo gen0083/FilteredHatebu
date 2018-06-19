@@ -14,7 +14,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.moshi.MoshiConverterFactory;
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory;
 import rx.functions.Action1;
 import rx.observers.TestSubscriber;
@@ -53,7 +53,7 @@ public class HatebuFeedTest {
         Retrofit forJson = new Retrofit.Builder()
                  .baseUrl(BASE_URL)
                 .client(client)
-                .addConverterFactory(GsonConverterFactory.create())
+                .addConverterFactory(MoshiConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
         jsonService = forJson.create(HatenaClient.JsonService.class);
