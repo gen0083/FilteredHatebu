@@ -10,7 +10,7 @@ import com.squareup.moshi.JsonClass
 data class HatebuRelatedEntry(
     var title: String,
     var count: Int,
-    var url: String,
+    var url: String?,
     @field:Json(name = "entry_url")
     var entryUrl: String,
     @field:Json(name = "eid")
