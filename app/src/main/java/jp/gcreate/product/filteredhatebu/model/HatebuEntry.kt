@@ -16,20 +16,7 @@ data class HatebuEntry(
     @field:Json(name = "screenshot")
     var screenshotUrl: String,
     @field:Json(name = "eid")
-    var entryId: Int,
+    var entryId: String,
     var bookmarks: List<HatebuBookmark>,
     var related: List<HatebuRelatedEntry>
-) {
-    
-    override fun toString(): String {
-        return ("(" + javaClass.simpleName + ":" + hashCode() + "){"
-                + "title:" + title + ","
-                + "count:" + count + ","
-                + "url:" + url + ","
-                + "entryUrl:" + entryUrl + ","
-                + "screenshot:" + screenshotUrl + ","
-                + "id:" + entryId + ","
-                + "bookmarks:" + bookmarks + ","
-                + "related:" + related + "}")
-    }
-}
+)

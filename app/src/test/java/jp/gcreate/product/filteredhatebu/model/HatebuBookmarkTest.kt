@@ -44,4 +44,15 @@ class HatebuBookmarkTest {
         } ?: fail("bookmarks null")
         source.close()
     }
+    
+    @Test fun `get comments cannot parse case?`() {
+        val file = File(javaClass.classLoader.getResource("hatebu_comments_cannot_parse.json").file)
+        val source = Okio.buffer(Okio.source(file))
+        val adapter = moshi.adapter(HatebuEntry::class.java)
+        val entry = adapter.fromJson(source)
+        entry?.bookmarks?.let { bookmarks ->
+            bookmarks.forEach(::println)
+        }
+        source.close()
+    }
 }

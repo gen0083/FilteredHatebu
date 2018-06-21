@@ -12,15 +12,6 @@ data class HatebuBookmark(
     var timestamp: String,
     var comment: String
 ) {
-
-    override fun toString(): String {
-        return ("(" + javaClass.simpleName + ":" + hashCode() + "){"
-                + "user:" + user + ","
-                + "tags:" + tags + ","
-                + "timestamp:" + timestamp + ","
-                + "comment:" + comment + "}")
-    }
-
     companion object {
         val EMPTY = HatebuBookmark("", arrayOf(""), "", "")
     }
