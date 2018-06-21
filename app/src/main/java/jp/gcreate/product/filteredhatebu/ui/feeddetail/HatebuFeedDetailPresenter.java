@@ -126,6 +126,7 @@ public class HatebuFeedDetailPresenter implements HatebuFeedDetailContract.Prese
                 }, new Action1<Throwable>() {
                     @Override
                     public void call(Throwable throwable) {
+                        Timber.e(throwable);
                         if (throwable instanceof NullPointerException) {
                             Timber.d("This url has no hatena bookmarks. Probably the site owner disallow hatebu comments.");
                             showNoComments();

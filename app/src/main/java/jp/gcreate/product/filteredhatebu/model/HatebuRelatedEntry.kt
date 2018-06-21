@@ -14,15 +14,5 @@ data class HatebuRelatedEntry(
     @field:Json(name = "entry_url")
     var entryUrl: String,
     @field:Json(name = "eid")
-    var entryId: Int
-) {
-    
-    override fun toString(): String {
-        return ("(" + javaClass.simpleName + ":" + hashCode() + "){"
-                + "title:" + title + ","
-                + "count:" + count + ","
-                + "url:" + url + ","
-                + "entryUrl" + entryUrl + ","
-                + "id:" + entryId + "}")
-    }
-}
+    var entryId: String
+)
