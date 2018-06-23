@@ -7,7 +7,9 @@ import org.simpleframework.xml.Attribute;
 import org.simpleframework.xml.Element;
 import org.simpleframework.xml.Namespace;
 import org.simpleframework.xml.NamespaceList;
+import org.simpleframework.xml.Path;
 import org.simpleframework.xml.Root;
+import org.simpleframework.xml.Text;
 
 /**
  * Copyright 2016 G-CREATE
@@ -40,7 +42,8 @@ public class HatebuFeedItem implements Parcelable {
     @Element
     private String date;
 
-    @Element(required = false)
+    @Path("subject")
+    @Text(required = false)
     private String subject;
 
     @Element(name = "bookmarkcount")

@@ -71,3 +71,14 @@
 # Crashlytics
 -keepattributes SourceFile,LineNumberTable
 -keep public class * extends java.lang.Exception
+
+# moshi
+-dontwarn okio.**
+-dontwarn javax.annotation.**
+-keepclasseswithmembers class * {
+    @com.squareup.moshi.* <methods>;
+}
+-keep @com.squareup.moshi.JsonQualifier interface *
+# moshi-codegen
+-keepnames class **JsonAdapter
+-keepnames @com.squareup.moshi.JsonClass class *
