@@ -121,6 +121,10 @@ dependencies {
     implementation "com.android.support:cardview-v7:$support_ver"
     implementation "com.android.support:customtabs:$support_ver"
 
+    implementation 'com.android.support.constraint:constraint-layout:1.1.2'
+
+    implementation 'androidx.core:core-ktx:0.3'
+
     def play_services_version = "10.0.1"
     implementation "com.google.firebase:firebase-core:$play_services_version"
     implementation "com.google.firebase:firebase-crash:$play_services_version"
