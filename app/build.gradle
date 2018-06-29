@@ -4,6 +4,7 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'com.github.gfx.ribbonizer'
 apply plugin: 'com.cookpad.android.licensetools'
 apply plugin: 'com.github.triplet.play'
+apply plugin: 'io.fabric'
 
 ext {
     ciBuild = System.getenv("CI") == "true"
@@ -67,12 +68,14 @@ android {
             minifyEnabled false
             applicationIdSuffix ".debug"
             signingConfig signingConfigs.debug
+            ext.enableCrashlytics = false
         }
         release {
             minifyEnabled true
             useProguard true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
+            ext.enableCrashlytics = true
         }
     }
     dataBinding {
@@ -129,8 +132,7 @@ dependencies {
     implementation "android.arch.lifecycle:extensions:$lifecycle_version"
 
     def play_services_version = "10.0.1"
-    implementation "com.google.firebase:firebase-core:$play_services_version"
-    implementation "com.google.firebase:firebase-crash:$play_services_version"
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.9.4'
 
     implementation 'com.google.dagger:dagger:2.7'
     kapt 'com.google.dagger:dagger-compiler:2.7'
