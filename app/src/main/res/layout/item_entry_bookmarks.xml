@@ -31,7 +31,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@{bookmark.comment}"
-                android:autoLink="web"
                 tools:text="hatebu comments"
                 android:textAppearance="@style/TextAppearance.AppCompat.Body2"
                 app:layout_constraintLeft_toLeftOf="parent"
