@@ -42,7 +42,7 @@
         <atom10:link xmlns:atom10="http://www.w3.org/2005/Atom" rel="self" type="application/rdf+xml" href="http://feeds.feedburner.com/hatena/b/hotentry" /><feedburner:info xmlns:feedburner="http://rssnamespace.org/feedburner/ext/1.0" uri="hatena/b/hotentry" /><atom10:link xmlns:atom10="http://www.w3.org/2005/Atom" rel="hub" href="http://pubsubhubbub.appspot.com/" /></channel>
     <item rdf:about="http://test.com/hoge">
         <title>test0-1</title>
-        <link>http://test.com/hoge</link>
+        <link>https://twitter.com/gen0083</link>
         <description>test1's description</description>
         <content:encoded><![CDATA[test1's description]]></content:encoded>
         <dc:date>2016-10-24T04:55:05+09:00</dc:date>
@@ -51,7 +51,7 @@
     </item>
     <item rdf:about="http://test2.com/abc/def">
         <title>test2</title>
-        <link>http://test2.com/abc/def</link>
+        <link>https://gcreate.jp/</link>
         <description>あいうえおかきくけこ</description>
         <content:encoded><![CDATA[あいうえおかきくけこ]]></content:encoded>
         <dc:date>2016-10-24T12:03:54+09:00</dc:date>
