@@ -17,6 +17,7 @@ import jp.gcreate.product.filteredhatebu.di.AppComponent;
 import jp.gcreate.product.filteredhatebu.di.AppModule;
 import jp.gcreate.product.filteredhatebu.di.DaggerAppComponent;
 import jp.gcreate.product.filteredhatebu.di.qualifier.ApplicationContext;
+import jp.gcreate.product.filteredhatebu.util.CrashlyticsWrapper;
 import jp.gcreate.product.filteredhatebu.util.StethoWrapper;
 import timber.log.Timber;
 
@@ -36,6 +37,8 @@ public class CustomApplication extends Application {
     Timber.Tree tree;
     @Inject
     Picasso.Builder picassoBuilder;
+    @Inject
+    CrashlyticsWrapper crashlyticsWrapper;
 
     public static AppComponent getAppComponent(Context context) {
         CustomApplication application = (CustomApplication) context.getApplicationContext();
@@ -70,6 +73,7 @@ public class CustomApplication extends Application {
 
         Timber.plant(tree);
         stetho.install();
+        crashlyticsWrapper.init(this);
         AndroidThreeTen.init(this);
         Picasso.setSingletonInstance(picassoBuilder.build());
 
