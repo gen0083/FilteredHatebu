@@ -86,6 +86,7 @@ public class HatebuFeedDetailActivity extends AppCompatActivity
                 openFilterDialog();
             }
         });
+        customTabHelper.preFetch(item.getLink());
     }
 
     private void setupRecyclerView() {
