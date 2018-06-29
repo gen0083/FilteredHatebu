@@ -14,10 +14,7 @@
         android:theme="@style/AppTheme"
         android:name=".CustomApplication"
         >
-        <meta-data
-            android:name="io.fabric.ApiKey"
-            android:value="76ab1dc0e514cde7dcadf75f1060be889e25ee39"
-            />
+        <meta-data android:name="firebase_crashlytics_collection_enabled" android:value="false" />
         <activity
             android:name=".ui.feedlist.HatebuFeedActivity"
             android:theme="@style/AppTheme.NoActionBar"

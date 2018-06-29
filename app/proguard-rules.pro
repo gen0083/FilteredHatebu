@@ -69,8 +69,11 @@
 -keep class jp.gcreate.product.filteredhatebu.model.HatebuFeed { *; }
 
 # Crashlytics
+-keepattributes *Annotation*
 -keepattributes SourceFile,LineNumberTable
 -keep public class * extends java.lang.Exception
+-keep class com.crashlytics.** { *; }
+-dontwarn com.crashlytics.**
 
 # moshi
 -dontwarn okio.**
@@ -80,5 +83,8 @@
 }
 -keep @com.squareup.moshi.JsonQualifier interface *
 # moshi-codegen
--keepnames class **JsonAdapter
+-keep class **JsonAdapter {
+    <init>(...);
+    <fields>;
+}
 -keepnames @com.squareup.moshi.JsonClass class *
