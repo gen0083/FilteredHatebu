@@ -1,0 +1,78 @@
+import java.time.ZoneId
+import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
+
+rootProject.ext {
+    versionFile = rootProject.file("scripts/VERSION")
+    versionCode = getVersionCode()
+    versionName = getVersionName()
+}
+
+task testVersion {
+    doLast {
+        def props = loadVersionProperties()
+        println versionFile
+        writeVersionProperties(props)
+        getVersionName()
+        getVersionCode()
+    }
+}
+
+task bumpVersion {
+    doLast {
+        def props = loadVersionProperties()
+        def date = ZonedDateTime.now(ZoneId.of("Asia/Tokyo"))
+        def year = date.format(DateTimeFormatter.ofPattern("yy"))
+        def month = String.valueOf(date.monthValue)
+        println("year=${year} month=${month} / $date")
+        if (props.build_year != year || props.build_month != month) {
+            props.build_times = "0"
+            props.build_year = year
+            props.build_month = month
+        }
+        def buildTimes = props.build_times.toInteger()
+        def versionCode = props.version_code.toInteger()
+        buildTimes++
+        println("bumpVersion: version_code=${props.version_code} (before)")
+        versionCode++
+        println("bumpVersion: version_code=${props.version_code} (after)")
+        props.build_times = String.valueOf(buildTimes)
+        props.version_code = String.valueOf(versionCode)
+        writeVersionProperties(props)
+    }
+}
+
+Properties loadVersionProperties() {
+    def file = file(versionFile)
+    def props = new Properties()
+    if (file.exists()) {
+        file.withInputStream { props.load(it) }
+    } else {
+        props.build_times = "1"
+        props.version_code = "1"
+    }
+    return props
+}
+
+void writeVersionProperties(Properties props) {
+    println "props size=${props.size()}"
+    props.forEach { key, value -> println "$key=$value" }
+    file(versionFile).withOutputStream {
+        println "props $props"
+        props.store(it, "versions")
+    }
+}
+
+String getVersionName() {
+    def props = loadVersionProperties()
+    def versionName = "v${props.build_year}.${props.build_month}.${props.build_times}"
+    println "getVersionName(): versionName=$versionName"
+    return versionName
+}
+
+int getVersionCode() {
+    def props = loadVersionProperties()
+    def versionCode = props.version_code.toInteger()
+    println "getVersionCode(): versionCode=$versionCode"
+    return versionCode
+}

@@ -17,8 +17,8 @@ android {
         applicationId "jp.gcreate.product.filteredhatebu"
         minSdkVersion 15
         targetSdkVersion 27
-        versionCode 9
-        versionName "v17.1.1"
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
     }
