@@ -1,5 +1,6 @@
 package jp.gcreate.product.filteredhatebu;
 
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.threeten.bp.LocalDateTime;
 import org.threeten.bp.ZoneId;
@@ -69,5 +70,14 @@ public class ThreeTenAbpTest {
         long diff = ChronoUnit.HOURS.between(time, now);
         assertThat(diff, is(4L));
         // この場合、5時間には10分足りないので4時間が返ってくる(端数は切り捨てられる)
+    }
+
+    @Test
+    public void yearの下2桁を取得する() {
+        ZonedDateTime time = ZonedDateTime.of(2018, 4, 5, 10, 11, 12, 0, ZoneId.of("Asia/Tokyo"));
+        String year = time.format(DateTimeFormatter.ofPattern("yy"));
+        int month = time.getMonthValue();
+        Assertions.assertThat(year).isEqualTo("18");
+        Assertions.assertThat(month).isEqualTo(4);
     }
 }
