@@ -39,6 +39,7 @@ task bumpVersion {
         props.build_times = String.valueOf(buildTimes)
         props.version_code = String.valueOf(versionCode)
         writeVersionProperties(props)
+        println(getVersionName())
     }
 }
 
