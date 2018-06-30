@@ -151,7 +151,7 @@ class HatebuFeedItemTest {
         val feed = serializer.read(HatebuFeed::class.java, file)
         val actual = feed.itemList[0]
         assertThat(actual.title, `is`("test0-1"))
-        assertThat(actual.link, `is`("http://test.com/hoge"))
+        assertThat(actual.link, `is`("https://twitter.com/gen0083"))
     }
     
     @Test fun `new condition decode xml`() {

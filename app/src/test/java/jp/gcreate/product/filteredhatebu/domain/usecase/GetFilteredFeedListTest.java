@@ -69,7 +69,7 @@ public class GetFilteredFeedListTest {
         assertThat(test.getValueCount(), is(1));
         List<HatebuFeedItem> actual = test.getOnNextEvents().get(0);
         assertThat(actual.size(), is(30));
-        assertThat(actual.get(0).getLink(), is("http://test.com/hoge"));
+        assertThat(actual.get(0).getLink(), is("https://twitter.com/gen0083"));
         assertThat(actual.get(2).getLink(), is("http://test.com/test/is/difficult"));
         assertThat(actual.get(6).getLink(), is("http://www.test.com/test/manager"));
     }
@@ -85,7 +85,7 @@ public class GetFilteredFeedListTest {
         test.assertNoErrors();
         assertThat(test.getValueCount(), is(1));
         List<HatebuFeedItem> actual = test.getOnNextEvents().get(0);
-        assertThat(actual.size(), is(27));
+        assertThat(actual.size(), is(28));
         assertThat(actual.get(0).getTitle(), not("http://test.com/hoge"));
     }
 
@@ -101,7 +101,7 @@ public class GetFilteredFeedListTest {
         assertThat(test.getValueCount(), is(1));
         List<HatebuFeedItem> actual = test.getOnNextEvents().get(0);
         assertThat(actual.size(), is(28));
-        assertThat(actual.get(0).getLink(), is("http://test.com/hoge"));
+        assertThat(actual.get(0).getLink(), is("https://twitter.com/gen0083"));
         assertThat(actual.get(2).getLink(), not("http://test.com/test/is/difficult"));
     }
 
