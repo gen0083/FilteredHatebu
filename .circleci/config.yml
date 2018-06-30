@@ -20,6 +20,8 @@ jobs:
       - run:
          name: Unit Test
          command: ./gradlew testMockDebugUnitTest
+      - store_test_results:
+         path: app/build/reports/tests
       - store_artifacts:
          path: app/build/reports
          destination: reports
