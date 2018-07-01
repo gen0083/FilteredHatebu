@@ -9,6 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.google.android.gms.oss.licenses.OssLicensesMenuActivity;
+
 import javax.inject.Inject;
 
 import jp.gcreate.product.filteredhatebu.CustomApplication;
@@ -16,7 +18,6 @@ import jp.gcreate.product.filteredhatebu.R;
 import jp.gcreate.product.filteredhatebu.databinding.ActivityFeedBinding;
 import jp.gcreate.product.filteredhatebu.di.ActivityComponent;
 import jp.gcreate.product.filteredhatebu.ui.editfilter.FilterEditActivity;
-import jp.gcreate.product.filteredhatebu.ui.option.LicensesDialogFragment;
 import timber.log.Timber;
 
 /**
@@ -76,7 +77,7 @@ public class HatebuFeedActivity extends AppCompatActivity implements HatebuFeedC
                 startActivity(intent);
                 return true;
             case R.id.licenses:
-                new LicensesDialogFragment().show(getSupportFragmentManager(), TAG_LICENSE);
+                startActivity(new Intent(this, OssLicensesMenuActivity.class));
                 return true;
             default:
                 break;
