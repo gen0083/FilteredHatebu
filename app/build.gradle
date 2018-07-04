@@ -5,6 +5,7 @@ apply plugin: 'com.github.gfx.ribbonizer'
 apply plugin: 'com.google.gms.oss.licenses.plugin'
 apply plugin: 'com.github.triplet.play'
 apply plugin: 'io.fabric'
+apply plugin: "androidx.navigation.safeargs"
 
 ext {
     ciBuild = System.getenv("CI") == "true"
@@ -117,7 +118,7 @@ dependencies {
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
-    def support_ver = "27.1.0"
+    def support_ver = "27.1.1"
     implementation "com.android.support:appcompat-v7:$support_ver"
     implementation "com.android.support:design:$support_ver"
     implementation "com.android.support:recyclerview-v7:$support_ver"
@@ -130,6 +131,9 @@ dependencies {
 
     def lifecycle_version = "1.1.1"
     implementation "android.arch.lifecycle:extensions:$lifecycle_version"
+    def nav_version = "1.0.0-alpha02"
+    implementation "android.arch.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "android.arch.navigation:navigation-ui-ktx:$nav_version"
 
     def play_services_version = "10.0.1"
     implementation 'com.crashlytics.sdk.android:crashlytics:2.9.4'
@@ -191,6 +195,7 @@ dependencies {
     androidTestImplementation "io.mockk:mockk-android:1.8.4"
     androidTestImplementation "org.assertj:assertj-core:2.9.1"
     androidTestImplementation junit4
+    androidTestImplementation "android.arch.navigation:navigation-testing-ktx:$nav_version"
 
     testImplementation junit4
     testImplementation "org.robolectric:robolectric:3.1.2"
