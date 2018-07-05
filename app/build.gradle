@@ -21,7 +21,7 @@ android {
         versionCode rootProject.ext.versionCode
         versionName rootProject.ext.versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
+        vectorDrawables.useSupportLibrary = true
     }
 
     // flavorDimensionsはproductFlavorsをどの次元で切り分けているかを定義するもの

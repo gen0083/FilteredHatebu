@@ -1,0 +1,18 @@
+<navigation
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/navigation_feed_list"
+    >
+
+    <fragment
+        android:id="@+id/navigation_feed_list"
+        android:name="jp.gcreate.product.filteredhatebu.presentation.feedlist.FeedListFragment"
+        android:label="FeedListFragment"
+        />
+    <fragment
+        android:id="@+id/navigation_settings"
+        android:name="jp.gcreate.product.filteredhatebu.ui.option.OptionsFragment"
+        android:label="OptionsFragment"
+        />
+</navigation>
