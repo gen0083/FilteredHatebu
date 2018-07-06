@@ -4,6 +4,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.threeten.bp.LocalDateTime;
 import org.threeten.bp.ZoneId;
+import org.threeten.bp.ZoneOffset;
 import org.threeten.bp.ZonedDateTime;
 import org.threeten.bp.format.DateTimeFormatter;
 import org.threeten.bp.format.DateTimeParseException;
@@ -79,5 +80,16 @@ public class ThreeTenAbpTest {
         int month = time.getMonthValue();
         Assertions.assertThat(year).isEqualTo("18");
         Assertions.assertThat(month).isEqualTo(4);
+    }
+
+    @Test
+    public void zonedDateTime_to_long() {
+        ZonedDateTime time = ZonedDateTime.of(2018, 4, 5, 10, 11, 12, 0, ZoneId.of("Asia/Tokyo"));
+        ZonedDateTime zone = time.truncatedTo(ChronoUnit.SECONDS);
+        long longFromZone = zone.toInstant().toEpochMilli();
+
+        LocalDateTime local = LocalDateTime.of(2018, 4, 5, 10, 11, 12);
+        long longFromLocal = local.toInstant(ZoneOffset.ofHours(9)).toEpochMilli();
+        Assertions.assertThat(longFromZone).isEqualTo(longFromLocal);
     }
 }

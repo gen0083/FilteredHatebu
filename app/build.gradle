@@ -16,12 +16,13 @@ android {
     compileSdkVersion 27
     defaultConfig {
         applicationId "jp.gcreate.product.filteredhatebu"
-        minSdkVersion 15
+        minSdkVersion 21
         targetSdkVersion 27
         versionCode rootProject.ext.versionCode
         versionName rootProject.ext.versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
+        multiDexEnabled true
     }
 
     // flavorDimensionsはproductFlavorsをどの次元で切り分けているかを定義するもの
@@ -131,9 +132,15 @@ dependencies {
 
     def lifecycle_version = "1.1.1"
     implementation "android.arch.lifecycle:extensions:$lifecycle_version"
+    implementation "android.arch.lifecycle:reactivestreams:$lifecycle_version"
+    kapt "android.arch.lifecycle:compiler:$lifecycle_version"
     def nav_version = "1.0.0-alpha02"
     implementation "android.arch.navigation:navigation-fragment-ktx:$nav_version"
     implementation "android.arch.navigation:navigation-ui-ktx:$nav_version"
+    def room_version = "1.1.1"
+    implementation "android.arch.persistence.room:runtime:$room_version"
+    kapt "android.arch.persistence.room:compiler:$room_version"
+    implementation "android.arch.persistence.room:rxjava2:$room_version"
 
     def play_services_version = "10.0.1"
     implementation 'com.crashlytics.sdk.android:crashlytics:2.9.4'
@@ -145,9 +152,11 @@ dependencies {
     implementation 'com.jakewharton.timber:timber:4.3.1'
     implementation 'io.reactivex:rxjava:1.2.2'
     implementation 'io.reactivex:rxandroid:1.2.1'
+    implementation "io.reactivex.rxjava2:rxjava:2.1.16"
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
     implementation 'com.squareup.picasso:picasso:2.5.2'
     implementation 'com.jakewharton.picasso:picasso2-okhttp3-downloader:1.1.0'
-    implementation 'com.jakewharton.threetenabp:threetenabp:1.0.4'
+    implementation 'com.jakewharton.threetenabp:threetenabp:1.0.5'
 
     def orma_version = '3.0.0'
     kapt "com.github.gfx.android.orma:orma-processor:$orma_version"
@@ -195,14 +204,16 @@ dependencies {
     androidTestImplementation "io.mockk:mockk-android:1.8.4"
     androidTestImplementation "org.assertj:assertj-core:2.9.1"
     androidTestImplementation junit4
+    androidTestImplementation "android.arch.core:core-testing:$lifecycle_version"
     androidTestImplementation "android.arch.navigation:navigation-testing-ktx:$nav_version"
 
     testImplementation junit4
     testImplementation "org.robolectric:robolectric:3.1.2"
     testImplementation 'org.mockito:mockito-core:1.10.19'
-    testImplementation 'org.threeten:threetenbp:1.3.3'
+    testImplementation 'org.threeten:threetenbp:1.3.6'
     testImplementation "io.mockk:mockk:1.8.4"
     testImplementation "org.assertj:assertj-core:2.9.1"
+    testImplementation "android.arch.persistence.room:testing:$room_version"
 }
 
 /*
