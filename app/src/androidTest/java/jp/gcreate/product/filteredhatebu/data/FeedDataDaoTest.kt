@@ -36,7 +36,7 @@ class FeedDataDaoTest {
         db.close()
     }
     
-    @Test fun insert_test() {
+    @Test fun insert_then_return_row_id_inserted_rowId() {
         val before = sut.getAllFeeds()
         assertThat(before.size).isEqualTo(0)
         
@@ -45,14 +45,16 @@ class FeedDataDaoTest {
             title = "test",
             summary = "test node",
             pubDate = ZonedDateTime.now().truncatedTo(ChronoUnit.SECONDS))
-        sut.insertFeed(data)
+        val result = sut.insertFeed(data)
+        assertThat(result.size).isEqualTo(1)
+        assertThat(result[0]).isEqualTo(1)
         
         val after = sut.getAllFeeds()
         assertThat(after.size).isEqualTo(1)
         assertThat(after[0]).isEqualTo(data)
     }
     
-    @Test fun insert_same_url_feed() {
+    @Test fun insert_same_url_feed_then_return_row_id_minus1() {
         val before = sut.getAllFeeds()
         assertThat(before.size).isEqualTo(0)
     
@@ -69,7 +71,9 @@ class FeedDataDaoTest {
         val same = FeedData(
             url = "https://gcreate.jp/", title = "hoge", summary = "hoge",
             pubDate = ZonedDateTime.now())
-        sut.insertFeed(same)
+        val result = sut.insertFeed(same)
+        assertThat(result.size).isEqualTo(1)
+        assertThat(result[0]).isEqualTo(-1)
         val second = sut.getAllFeeds()
         assertThat(second.size).isEqualTo(1)
         assertThat(second[0].title).isEqualTo("test")

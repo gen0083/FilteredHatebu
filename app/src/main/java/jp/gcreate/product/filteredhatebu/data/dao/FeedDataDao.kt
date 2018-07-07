@@ -45,7 +45,7 @@ interface FeedDataDao {
     fun subscribeFavoriteFeeds(): LiveData<List<FeedData>>
     
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insertFeed(vararg feed: FeedData)
+    fun insertFeed(vararg feed: FeedData): Array<Long>
     
     @Query("update feed_data set isRead=1 where url = :url")
     fun updateStatusRead(url: String)
