@@ -1,4 +1,4 @@
-package jp.gcreate.product.filteredhatebu.data
+package jp.gcreate.product.filteredhatebu.data.entities
 
 import android.arch.persistence.room.Entity
 import android.arch.persistence.room.PrimaryKey

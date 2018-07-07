@@ -8,6 +8,8 @@ import com.jakewharton.threetenabp.AndroidThreeTen
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
+import jp.gcreate.product.filteredhatebu.data.dao.FeedDataDao
+import jp.gcreate.product.filteredhatebu.data.entities.FeedData
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.After
 import org.junit.Before
@@ -38,10 +40,11 @@ class FeedDataDaoTest {
         val before = sut.getAllFeeds()
         assertThat(before.size).isEqualTo(0)
         
-        val data = FeedData(url = "https://gcreate.jp/",
-                                title = "test",
-                                summary = "test node",
-                                pubDate = ZonedDateTime.now().truncatedTo(ChronoUnit.SECONDS))
+        val data = FeedData(
+            url = "https://gcreate.jp/",
+            title = "test",
+            summary = "test node",
+            pubDate = ZonedDateTime.now().truncatedTo(ChronoUnit.SECONDS))
         sut.insertFeed(data)
         
         val after = sut.getAllFeeds()
@@ -53,17 +56,19 @@ class FeedDataDaoTest {
         val before = sut.getAllFeeds()
         assertThat(before.size).isEqualTo(0)
     
-        val data = FeedData(url = "https://gcreate.jp/",
-                            title = "test",
-                            summary = "test node",
-                            pubDate = ZonedDateTime.now().truncatedTo(ChronoUnit.SECONDS))
+        val data = FeedData(
+            url = "https://gcreate.jp/",
+            title = "test",
+            summary = "test node",
+            pubDate = ZonedDateTime.now().truncatedTo(ChronoUnit.SECONDS))
         sut.insertFeed(data)
         val first = sut.getAllFeeds()
         assertThat(first.size).isEqualTo(1)
         assertThat(first[0].title).isEqualTo("test")
         
-        val same = FeedData(url = "https://gcreate.jp/", title = "hoge", summary = "hoge",
-                            pubDate = ZonedDateTime.now())
+        val same = FeedData(
+            url = "https://gcreate.jp/", title = "hoge", summary = "hoge",
+            pubDate = ZonedDateTime.now())
         sut.insertFeed(same)
         val second = sut.getAllFeeds()
         assertThat(second.size).isEqualTo(1)
@@ -71,8 +76,9 @@ class FeedDataDaoTest {
     }
     
     @Test fun delete_test() {
-        val data = FeedData(url = "https://gcreate.jp/", title = "test", summary = "hoge",
-                            pubDate = ZonedDateTime.now())
+        val data = FeedData(
+            url = "https://gcreate.jp/", title = "test", summary = "hoge",
+            pubDate = ZonedDateTime.now())
         sut.insertFeed(data)
         val before = sut.getAllFeeds()
         assertThat(before.size).isEqualTo(1)
@@ -84,22 +90,26 @@ class FeedDataDaoTest {
     }
     
     @Test fun delete_when_id_not_exist() {
-        val data = FeedData(url = "https://gcreate.jp/", title = "test", summary = "hoge",
-                            pubDate = ZonedDateTime.now())
+        val data = FeedData(
+            url = "https://gcreate.jp/", title = "test", summary = "hoge",
+            pubDate = ZonedDateTime.now())
         sut.insertFeed(data)
         val before = sut.getAllFeeds()
         assertThat(before.size).isEqualTo(1)
         
-        sut.deleteFeed(FeedData(url = "hoge", title = "hoge", summary = "hoge",
-                                pubDate = ZonedDateTime.now()))
+        sut.deleteFeed(
+            FeedData(url = "hoge", title = "hoge",
+                                                                     summary = "hoge",
+                                                                     pubDate = ZonedDateTime.now()))
         
         val after = sut.getAllFeeds()
         assertThat(after.size).isEqualTo(1)
     }
     
     @Test fun get_new_feeds_list() {
-        val data = FeedData(url = "https://gcreate.jp/", title = "test", summary = "hoge",
-                            pubDate = ZonedDateTime.now())
+        val data = FeedData(
+            url = "https://gcreate.jp/", title = "test", summary = "hoge",
+            pubDate = ZonedDateTime.now())
         sut.insertFeed(data)
         val before = sut.getAllFeeds()
         assertThat(before.size).isEqualTo(1)
@@ -109,8 +119,9 @@ class FeedDataDaoTest {
     }
     
     @Test fun get_new_feeds_if_already_read() {
-        val data = FeedData(url = "https://gcreate.jp/", title = "test", summary = "hoge",
-                            pubDate = ZonedDateTime.now(), isRead = true)
+        val data = FeedData(
+            url = "https://gcreate.jp/", title = "test", summary = "hoge",
+            pubDate = ZonedDateTime.now(), isRead = true)
         sut.insertFeed(data)
         
         val all = sut.getAllFeeds()
@@ -121,8 +132,9 @@ class FeedDataDaoTest {
     }
     
     @Test fun update_is_read_flag() {
-        val data = FeedData(url = "https://gcreate.jp/", title = "test", summary = "hoge",
-                            pubDate = ZonedDateTime.now())
+        val data = FeedData(
+            url = "https://gcreate.jp/", title = "test", summary = "hoge",
+            pubDate = ZonedDateTime.now())
         sut.insertFeed(data)
         
         val beforeNew = sut.getNewFeeds()
@@ -143,13 +155,19 @@ class FeedDataDaoTest {
         sut.subscribeNewFeeds().observeForever(mockObserver)
         verify(exactly = 1) { mockObserver.onChanged(any()) }
         
-        sut.insertFeed(FeedData(url = "https://gcreate.jp/", title = "test", summary = "hoge",
-                                pubDate = ZonedDateTime.now()))
+        sut.insertFeed(
+            FeedData(url = "https://gcreate.jp/",
+                                                                     title = "test",
+                                                                     summary = "hoge",
+                                                                     pubDate = ZonedDateTime.now()))
         verify(exactly = 2) { mockObserver.onChanged(any()) }
         
         // insert conflicted id feed
-        sut.insertFeed(FeedData(url = "https://gcreate.jp/", title = "hoge", summary = "hoge",
-                                pubDate = ZonedDateTime.now()))
+        sut.insertFeed(
+            FeedData(url = "https://gcreate.jp/",
+                                                                     title = "hoge",
+                                                                     summary = "hoge",
+                                                                     pubDate = ZonedDateTime.now()))
         // idがコンフリクトしたときは無視するのでデータに変更はない→LiveDataは更新されない
         verify(exactly = 2) { mockObserver.onChanged(any()) }
     }

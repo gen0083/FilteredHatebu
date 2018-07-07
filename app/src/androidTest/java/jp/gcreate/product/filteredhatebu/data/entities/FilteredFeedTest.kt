@@ -5,7 +5,6 @@ import android.arch.persistence.room.Room
 import android.support.test.InstrumentationRegistry
 import com.jakewharton.threetenabp.AndroidThreeTen
 import jp.gcreate.product.filteredhatebu.data.AppRoomDatabase
-import jp.gcreate.product.filteredhatebu.data.FeedData
 import jp.gcreate.product.filteredhatebu.data.dao.FilteredFeedDao
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.After
@@ -28,12 +27,16 @@ class FilteredFeedTest {
         sut = db.filteredFeedDao()
         
         db.feedDataDao().insertFeed(
-            FeedData(url = "https://gcreate.jp/", title = "test1", summary = "hoge",
-                     pubDate = ZonedDateTime.now()),
-            FeedData(url = "https://wantit.gcreate.jp/", title = "test2", summary = "fuga",
-                     pubDate = ZonedDateTime.now()),
-            FeedData(url = "https://github.com/gen0083/", title = "test3", summary = "foo",
-                     pubDate = ZonedDateTime.now())
+            FeedData(url = "https://gcreate.jp/",
+                                                                     title = "test1",
+                                                                     summary = "hoge",
+                                                                     pubDate = ZonedDateTime.now()),
+            FeedData(
+                url = "https://wantit.gcreate.jp/", title = "test2", summary = "fuga",
+                pubDate = ZonedDateTime.now()),
+            FeedData(
+                url = "https://github.com/gen0083/", title = "test3", summary = "foo",
+                pubDate = ZonedDateTime.now())
         )
         db.feedFilterDao().insertFilter(
             FeedFilter(id = 1, filter = "wantit.gcreate.jp", createdAt = ZonedDateTime.now())
