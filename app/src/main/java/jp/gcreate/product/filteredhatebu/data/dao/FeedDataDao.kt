@@ -14,6 +14,16 @@ interface FeedDataDao {
     @Query("select * from feed_data order by pubDate desc")
     fun getAllFeeds(): List<FeedData>
     
+    @Query("select * from feed_data left join" +
+           " (select distinct filteredUrl from filtered_feed) on url=filteredUrl" +
+           " where filteredUrl is null and isArchived=0")
+    fun getFilteredNewFeeds(): List<FeedData>
+    
+    @Query("select * from feed_data left join" +
+           " (select distinct filteredUrl from filtered_feed) on url=filteredUrl" +
+           " where filteredUrl is null and isArchived=0")
+    fun subscribeFilteredNewFeeds(): LiveData<List<FeedData>>
+    
     @Query("select * from feed_data where (isRead=0 AND isArchived=0 AND isFavorite=0)" +
            " order by pubDate Desc")
     fun getNewFeeds(): List<FeedData>

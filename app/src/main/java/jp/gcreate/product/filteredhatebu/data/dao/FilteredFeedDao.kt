@@ -8,6 +8,10 @@ import jp.gcreate.product.filteredhatebu.data.entities.FilteredFeedInfo
 
 @Dao
 interface FilteredFeedDao {
+    
+    /**
+     * フィルタとそのフィルタに引っかかっている記事の件数を取得する
+     */
     @Query("select feed_filter.filter, count(filteredUrl) as feedCount from filtered_feed" +
            " inner join feed_filter on filtered_feed.filteredId=feed_filter.id group by filteredId")
     fun getFilteredInformation(): List<FilteredFeedInfo>

@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 2,
-    "identityHash": "784c8f8012eae1f685696148fa70a15f",
+    "identityHash": "ba25d100177d75e4d0c91eb7e870d082",
     "entities": [
       {
         "tableName": "feed_data",
@@ -139,13 +139,22 @@
           ],
           "autoGenerate": true
         },
-        "indices": [],
+        "indices": [
+          {
+            "name": "index_feed_filter_filter",
+            "unique": true,
+            "columnNames": [
+              "filter"
+            ],
+            "createSql": "CREATE UNIQUE INDEX `index_feed_filter_filter` ON `${TABLE_NAME}` (`filter`)"
+          }
+        ],
         "foreignKeys": []
       }
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"784c8f8012eae1f685696148fa70a15f\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"ba25d100177d75e4d0c91eb7e870d082\")"
     ]
   }
 }
