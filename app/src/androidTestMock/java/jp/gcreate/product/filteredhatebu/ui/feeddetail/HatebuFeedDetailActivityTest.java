@@ -23,6 +23,8 @@ import static org.hamcrest.CoreMatchers.allOf;
 
 /**
  * Copyright 2016 G-CREATE
+ * TODO: テストに失敗するので直す
+ *       しかしテストしている意味が見いだせないのでいっそのこと消したほうがいいんじゃないかな
  */
 @LargeTest
 @RunWith(AndroidJUnit4.class)
