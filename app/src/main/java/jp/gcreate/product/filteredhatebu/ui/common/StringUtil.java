@@ -5,6 +5,7 @@ import android.support.annotation.VisibleForTesting;
 
 import org.threeten.bp.Clock;
 import org.threeten.bp.LocalDateTime;
+import org.threeten.bp.ZonedDateTime;
 import org.threeten.bp.format.DateTimeFormatter;
 import org.threeten.bp.format.DateTimeParseException;
 import org.threeten.bp.temporal.ChronoUnit;
@@ -56,6 +57,10 @@ public class StringUtil {
 
     public static String whenPublished(String time, Context context) {
         return whenPublished(time, context, Clock.systemDefaultZone());
+    }
+
+    public static String whenPublished(ZonedDateTime time, Context context) {
+        return whenPublished(time.toLocalDateTime().toString(), context);
     }
 
     @VisibleForTesting

@@ -1,6 +1,9 @@
 package jp.gcreate.product.filteredhatebu.di;
 
+import android.arch.lifecycle.ViewModel;
+import android.arch.lifecycle.ViewModelProviders;
 import android.content.Context;
+import android.support.v4.app.FragmentActivity;
 
 import dagger.Module;
 import dagger.Provides;
@@ -38,5 +41,11 @@ public class ActivityModule {
     @Provides
     public long provideTime() {
         return System.currentTimeMillis();
+    }
+
+    @Provides
+    public ViewModel provideViewModel(FragmentActivity activity, Class<ViewModel> clazz,
+                                      ViewModelProviderFactory factory) {
+        return ViewModelProviders.of(activity, factory).get(clazz);
     }
 }

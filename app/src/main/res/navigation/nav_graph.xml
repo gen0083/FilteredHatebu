@@ -9,10 +9,26 @@
         android:id="@+id/navigation_feed_list"
         android:name="jp.gcreate.product.filteredhatebu.presentation.feedlist.FeedListFragment"
         android:label="FeedListFragment"
-        />
+        >
+        <action
+            android:id="@+id/action_navigation_feed_list_to_feedDetailFragment"
+            app:destination="@+id/feed_detail"
+            />
+    </fragment>
     <fragment
         android:id="@+id/navigation_settings"
         android:name="jp.gcreate.product.filteredhatebu.ui.option.OptionsFragment"
         android:label="OptionsFragment"
-        />
+        >
+    </fragment>
+    <fragment
+        android:id="@+id/feed_detail"
+        android:name="jp.gcreate.product.filteredhatebu.presentation.feeddetail.FeedDetailFragment"
+        android:label="FeedDetailFragment"
+        >
+        <argument
+            android:name="feedUrl"
+            app:type="string"
+            />
+    </fragment>
 </navigation>

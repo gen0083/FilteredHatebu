@@ -4,20 +4,25 @@ import android.arch.lifecycle.Observer
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
+import android.support.v7.widget.DividerItemDecoration
+import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isEmpty
 import androidx.core.view.isVisible
 import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.State
 import androidx.work.WorkManager
+import jp.gcreate.product.filteredhatebu.CustomApplication
 import jp.gcreate.product.filteredhatebu.databinding.FragmentFeedListBinding
 import jp.gcreate.product.filteredhatebu.domain.CrawlFeedsWork
 import timber.log.Timber
+import javax.inject.Inject
 
 class FeedListFragment : Fragment() {
+    @Inject lateinit var vm: FeedListViewModel
+    @Inject lateinit var feedListAdapter: FeedListAdapter
     private lateinit var binding: FragmentFeedListBinding
     
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -28,7 +33,9 @@ class FeedListFragment : Fragment() {
     
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        binding.noContentGroup.isVisible = binding.recyclerView.isEmpty()
+        CustomApplication.getActivityComponent(activity)
+            .inject(this)
+        setUpRecyclerView()
         binding.swipeRefresh.setOnRefreshListener {
             Timber.d("swipe refresh")
             fetchFeeds()
@@ -36,6 +43,22 @@ class FeedListFragment : Fragment() {
         binding.noContentReloadButton.setOnClickListener {
             binding.swipeRefresh.isRefreshing = true
             fetchFeeds()
+        }
+        vm.newFeeds.observe(this, Observer { list ->
+            Timber.d("update list size=${list?.size}")
+            list?.let {
+                feedListAdapter.submitList(it)
+                binding.noContentGroup.isVisible = it.isEmpty()
+            }
+        })
+        Snackbar.make(binding.recyclerView, vm.test, Snackbar.LENGTH_LONG).show()
+    }
+    
+    private fun setUpRecyclerView() {
+        binding.recyclerView.apply {
+            addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
+            adapter = feedListAdapter
+            layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         }
     }
     

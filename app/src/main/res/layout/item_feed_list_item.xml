@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <data>
+
+        <import type="jp.gcreate.product.filteredhatebu.ui.common.StringUtil" />
+        <variable
+            name="item"
+            type="jp.gcreate.product.filteredhatebu.data.entities.FeedData"
+            />
+
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        >
+
+        <TextView
+            android:id="@+id/count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="@dimen/item_padding_with_item"
+            android:text="---"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            android:textColor="@color/red_600"
+            app:layout_constraintBottom_toBottomOf="@+id/title"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/favicon"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            tools:text="253"
+            />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@{item.title}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            android:layout_gravity="fill_horizontal"
+            app:layout_constraintBottom_toTopOf="@+id/favicon"
+            app:layout_constraintLeft_toRightOf="@+id/count"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Title"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            />
+
+
+        <ImageView
+            android:id="@+id/favicon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/item_padding_with_item"
+            tools:src="@drawable/favicon_placeholder"
+            app:layout_constraintTop_toBottomOf="@+id/count"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@+id/url"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/url"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:paddingRight="@dimen/item_padding_with_item"
+            android:singleLine="true"
+            android:ellipsize="marquee"
+            android:text="@{StringUtil.cutProtocolFromUrl(item.url)}"
+            tools:text="www.google.com/hoge/abc/def/123/456/789/"
+            app:layout_constraintLeft_toRightOf="@+id/favicon"
+            app:layout_constraintTop_toTopOf="@+id/favicon"
+            app:layout_constraintRight_toLeftOf="@+id/date"
+            app:layout_constraintBottom_toBottomOf="@+id/favicon"
+            app:layout_constraintTop_toBottomOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{StringUtil.whenPublished(item.pubDate, context)}"
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+            tools:text="2011/1/1"
+            app:layout_constraintLeft_toRightOf="@+id/url"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/favicon"
+            app:layout_constraintBottom_toBottomOf="@+id/favicon"
+            app:layout_constraintTop_toBottomOf="parent"
+            />
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

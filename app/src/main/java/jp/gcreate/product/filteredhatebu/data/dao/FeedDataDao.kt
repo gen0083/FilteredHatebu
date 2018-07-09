@@ -58,4 +58,7 @@ interface FeedDataDao {
     
     @Delete
     fun deleteFeed(feed: FeedData)
+    
+    @Query("select * from feed_data where url=:url limit 1")
+    fun getFeed(url: String): FeedData?
 }
