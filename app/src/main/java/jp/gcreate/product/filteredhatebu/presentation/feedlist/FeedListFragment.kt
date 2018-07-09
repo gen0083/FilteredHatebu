@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.navigation.fragment.findNavController
 import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.State
@@ -51,7 +52,12 @@ class FeedListFragment : Fragment() {
                 binding.noContentGroup.isVisible = it.isEmpty()
             }
         })
-        Snackbar.make(binding.recyclerView, vm.test, Snackbar.LENGTH_LONG).show()
+        feedListAdapter.clickEvent.observe(this, Observer {
+            it?.handleEvent()?.let {
+                val direction = FeedListFragmentDirections.Action_navigation_feed_list_to_feedDetailFragment(it.url)
+                findNavController().navigate(direction)
+            }
+        })
     }
     
     private fun setUpRecyclerView() {

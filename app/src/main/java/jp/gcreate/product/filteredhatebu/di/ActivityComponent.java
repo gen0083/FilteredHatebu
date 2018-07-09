@@ -1,6 +1,7 @@
 package jp.gcreate.product.filteredhatebu.di;
 
 import dagger.Subcomponent;
+import jp.gcreate.product.filteredhatebu.presentation.feeddetail.FeedDetailFragment;
 import jp.gcreate.product.filteredhatebu.presentation.feedlist.FeedListFragment;
 import jp.gcreate.product.filteredhatebu.ui.editfilter.FilterEditActivity;
 import jp.gcreate.product.filteredhatebu.ui.feedlist.HatebuFeedActivity;
@@ -22,4 +23,5 @@ public interface ActivityComponent {
     void inject(HatebuFeedFragment fragment);
 
     void inject(FeedListFragment fragment);
+    void inject(FeedDetailFragment fragment);
 }

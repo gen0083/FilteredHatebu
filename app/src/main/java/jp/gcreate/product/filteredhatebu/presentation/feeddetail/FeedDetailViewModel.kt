@@ -6,6 +6,8 @@ import android.arch.lifecycle.ViewModel
 import jp.gcreate.product.filteredhatebu.data.AppRoomDatabase
 import jp.gcreate.product.filteredhatebu.data.entities.FeedData
 import jp.gcreate.product.filteredhatebu.di.Scope.ActivityScope
+import kotlinx.coroutines.experimental.CommonPool
+import kotlinx.coroutines.experimental.launch
 import javax.inject.Inject
 
 @ActivityScope
@@ -17,5 +19,8 @@ class FeedDetailViewModel @Inject constructor(
     val feedDetail: LiveData<FeedData> = mutableFeedLiveData
     
     fun fetchFeed(url: String) {
+        launch(CommonPool) {
+            mutableFeedLiveData.postValue(feedDataDao.getFeed(url))
+        }
     }
 }

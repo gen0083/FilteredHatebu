@@ -1,5 +1,7 @@
 package jp.gcreate.product.filteredhatebu.presentation.feedlist
 
+import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.MutableLiveData
 import android.support.v7.recyclerview.extensions.ListAdapter
 import android.support.v7.util.DiffUtil
 import android.support.v7.widget.RecyclerView
@@ -11,6 +13,7 @@ import jp.gcreate.product.filteredhatebu.api.HatenaClient
 import jp.gcreate.product.filteredhatebu.data.entities.FeedData
 import jp.gcreate.product.filteredhatebu.databinding.ItemFeedListItemBinding
 import jp.gcreate.product.filteredhatebu.di.Scope.ActivityScope
+import jp.gcreate.product.filteredhatebu.ui.common.HandleOnceEvent
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 import rx.subscriptions.SerialSubscription
@@ -31,6 +34,8 @@ class FeedListAdapter @Inject constructor(
         }
     }
 ) {
+    private val clickEventSender: MutableLiveData<HandleOnceEvent<FeedData>> = MutableLiveData()
+    val clickEvent: LiveData<HandleOnceEvent<FeedData>> = clickEventSender
     
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedListViewHolder {
         return FeedListViewHolder(
@@ -42,6 +47,9 @@ class FeedListAdapter @Inject constructor(
     override fun onBindViewHolder(holder: FeedListViewHolder, position: Int) {
         val item = getItem(position)
         holder.bind(item)
+        holder.itemView.rootView.setOnClickListener {
+            clickEventSender.value = HandleOnceEvent(item)
+        }
     }
 }
 
