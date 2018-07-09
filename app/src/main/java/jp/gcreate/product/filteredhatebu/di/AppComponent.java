@@ -3,6 +3,7 @@ package jp.gcreate.product.filteredhatebu.di;
 import dagger.Component;
 import jp.gcreate.product.filteredhatebu.CustomApplication;
 import jp.gcreate.product.filteredhatebu.di.Scope.AppScope;
+import jp.gcreate.product.filteredhatebu.domain.CrawlFeedsWork;
 import jp.gcreate.product.filteredhatebu.ui.common.CustomTabHelper;
 
 /**
@@ -15,6 +16,7 @@ import jp.gcreate.product.filteredhatebu.ui.common.CustomTabHelper;
 public interface AppComponent {
 
     void inject(CustomApplication application);
+    void inject(CrawlFeedsWork work);
 
     CustomTabHelper customTabHelper();
 

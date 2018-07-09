@@ -1,11 +1,13 @@
 package jp.gcreate.product.filteredhatebu.di;
 
+import android.arch.persistence.room.Room;
 import android.content.Context;
 
 import com.github.gfx.android.orma.AccessThreadConstraint;
 
 import dagger.Module;
 import dagger.Provides;
+import jp.gcreate.product.filteredhatebu.data.AppRoomDatabase;
 import jp.gcreate.product.filteredhatebu.data.FilterDataSource;
 import jp.gcreate.product.filteredhatebu.data.FilterDataSourceOrma;
 import jp.gcreate.product.filteredhatebu.data.FilterRepository;
@@ -42,5 +44,11 @@ public class AppDataModule {
     @AppScope
     public FilterDataSource provideFilterDataSource(OrmaDatabase orma) {
         return new FilterDataSourceOrma(orma);
+    }
+
+    @Provides @AppScope
+    public AppRoomDatabase provideAppRoomDatabase(@ApplicationContext Context context) {
+        return Room.databaseBuilder(context, AppRoomDatabase.class, "hatebu.room")
+            .build();
     }
 }
