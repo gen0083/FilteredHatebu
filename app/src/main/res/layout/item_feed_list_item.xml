@@ -28,7 +28,7 @@
             android:id="@+id/count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="---"
+            android:text="@{String.valueOf(item.count)}"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             android:textColor="@color/red_600"
             app:layout_constraintBottom_toBottomOf="@+id/title"
