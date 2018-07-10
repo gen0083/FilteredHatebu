@@ -12,7 +12,7 @@ import jp.gcreate.product.filteredhatebu.data.entities.FilteredFeed
 
 @Database(
     entities = [FeedData::class, FilteredFeed::class, FeedFilter::class],
-    version = 2,
+    version = 3,
     exportSchema = true
 )
 @TypeConverters(LocalDateTimeConverter::class, ZonedDateTimeConverter::class)

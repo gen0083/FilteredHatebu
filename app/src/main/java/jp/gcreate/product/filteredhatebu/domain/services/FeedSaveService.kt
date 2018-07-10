@@ -17,12 +17,16 @@ class FeedSaveService @Inject constructor(appRoomDatabase: AppRoomDatabase) {
     
     fun saveFeed(feed: HatebuFeedItem): Boolean {
         val feedData = FeedData(url = feed.link, title = feed.title,
+                                count = feed.count ?: 0,
                                 summary = feed.description ?: "",
                                 pubDate = ZonedDateTime.parse(feed.date))
         
         val result = feedDataDao.insertFeed(feedData)
-        // Feedの登録が行われなかった場合以下の処理は必要ないので早期リターン
-        if (result[0] == -1L) return false
+        // Feedの登録が行われなかった場合ははてブ数の更新を行うだけ
+        if (result[0] == -1L) {
+            feedDataDao.updateHatebuCount(feed.link, feed.count)
+            return false
+        }
         
         // filterのマッチング処理
         saveAsFilteredFeedIfUrlMatchesAnyFilter(feedData.url)

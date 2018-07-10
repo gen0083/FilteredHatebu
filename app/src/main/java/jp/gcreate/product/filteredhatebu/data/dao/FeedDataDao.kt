@@ -16,23 +16,15 @@ interface FeedDataDao {
     
     @Query("select * from feed_data left join" +
            " (select distinct filteredUrl from filtered_feed) on url=filteredUrl" +
-           " where filteredUrl is null and isArchived=0")
+           " where filteredUrl is null and isArchived=0 order by pubDate desc")
     fun getFilteredNewFeeds(): List<FeedData>
     
     @Query("select * from feed_data left join" +
            " (select distinct filteredUrl from filtered_feed) on url=filteredUrl" +
-           " where filteredUrl is null and isArchived=0")
+           " where filteredUrl is null and isArchived=0 order by pubDate desc")
     fun subscribeFilteredNewFeeds(): LiveData<List<FeedData>>
     
-    @Query("select * from feed_data where (isRead=0 AND isArchived=0 AND isFavorite=0)" +
-           " order by pubDate Desc")
-    fun getNewFeeds(): List<FeedData>
-    
-    @Query("select * from feed_data where (isRead=0 and isArchived=0 and isFavorite=0)" +
-           " order by pubDate desc")
-    fun subscribeNewFeeds(): LiveData<List<FeedData>>
-    
-    @Query("select * from feed_data where (isArchived=1) order by pubDate DESC")
+    @Query("select * from feed_data where isArchived=1 order by pubDate DESC")
     fun getArchivedFeeds(): List<FeedData>
     
     @Query("select * from feed_data where isArchived=1 order by pubDate desc")
@@ -47,14 +39,14 @@ interface FeedDataDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertFeed(vararg feed: FeedData): Array<Long>
     
-    @Query("update feed_data set isRead=1 where url = :url")
-    fun updateStatusRead(url: String)
+    @Query("update feed_data set count=:count where url=:url")
+    fun updateHatebuCount(url: String, count: Int)
     
-    @Query("update feed_data set isArchived=1 where url = :url")
-    fun updateStatusArchived(url: String)
+    @Query("update feed_data set isArchived=:isArchived where url = :url")
+    fun updateStatusArchived(url: String, isArchived: Boolean)
     
-    @Query("update feed_data set isFavorite=1 where url=:url")
-    fun updateStatusFavorite(url: String)
+    @Query("update feed_data set isFavorite=:isFavorite where url=:url")
+    fun updateStatusFavorite(url: String, isFavorite: Boolean)
     
     @Delete
     fun deleteFeed(feed: FeedData)
