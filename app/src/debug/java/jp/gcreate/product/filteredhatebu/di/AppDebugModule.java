@@ -40,7 +40,7 @@ public class AppDebugModule {
             public void log(String message) {
                 Timber.tag("OkHttp").v(message);
             }
-        }).setLevel(HttpLoggingInterceptor.Level.BODY);
+        }).setLevel(HttpLoggingInterceptor.Level.HEADERS);
     }
 
     @Provides
