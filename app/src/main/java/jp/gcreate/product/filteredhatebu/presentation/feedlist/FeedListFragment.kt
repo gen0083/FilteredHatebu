@@ -56,6 +56,13 @@ class FeedListFragment : Fragment() {
                 binding.noContentGroup.isVisible = it.isEmpty()
             }
         })
+        vm.archiveMessage.observe(this, Observer {
+            it?.handleEvent()?.let {
+                Snackbar.make(binding.root, "archived $it", Snackbar.LENGTH_SHORT)
+                    .setAction("cancel", { vm.undoArchive() })
+                    .show()
+            }
+        })
         feedListAdapter.clickEvent.observe(this, Observer {
             it?.handleEvent()?.let {
                 val direction = FeedListFragmentDirections.Action_navigation_feed_list_to_feedDetailFragment(it.url)
@@ -72,7 +79,7 @@ class FeedListFragment : Fragment() {
         }
         ItemTouchHelper(SwipeDismissCallback(activity!!) { adapterPosition ->
             Timber.d("swiped $adapterPosition")
-            // TODO: implement delete feature
+            vm.archiveFeedAtPosition(adapterPosition)
         }).attachToRecyclerView(binding.recyclerView)
     }
     

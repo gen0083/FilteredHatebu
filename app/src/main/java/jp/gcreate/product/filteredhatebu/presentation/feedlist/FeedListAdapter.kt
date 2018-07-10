@@ -36,6 +36,10 @@ class FeedListAdapter @Inject constructor(private val faviconUtil: FaviconUtil)
     private val clickEventSender: MutableLiveData<HandleOnceEvent<FeedData>> = MutableLiveData()
     val clickEvent: LiveData<HandleOnceEvent<FeedData>> = clickEventSender
     
+    override fun getItem(position: Int): FeedData {
+        return super.getItem(position)
+    }
+    
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedListViewHolder {
         return FeedListViewHolder(LayoutInflater.from(parent.context)
                                       .inflate(R.layout.item_feed_list_item, parent, false),
