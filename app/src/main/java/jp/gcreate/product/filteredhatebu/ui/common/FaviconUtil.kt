@@ -10,6 +10,8 @@ import android.support.v4.content.ContextCompat
 import jp.gcreate.product.filteredhatebu.R
 import jp.gcreate.product.filteredhatebu.di.Scope.AppScope
 import jp.gcreate.product.filteredhatebu.di.qualifier.ApplicationContext
+import kotlinx.coroutines.experimental.CommonPool
+import kotlinx.coroutines.experimental.withContext
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.OkHttpClient
@@ -40,13 +42,10 @@ class FaviconUtil @Inject constructor(
     private val width: Int = placeHolder.intrinsicWidth
     private val height: Int = placeHolder.intrinsicHeight
     
-    fun fetchFaviconAsSingle(url: String): io.reactivex.Single<Drawable> {
+    suspend fun fetchFaviconWithCoroutine(url: String): Drawable {
         val domain = substringUntilDomain(url)
-        return io.reactivex.Single.fromCallable {
-            memoryCache[domain]?.let {
-                return@fromCallable it
-            }
-            
+        val drawable = withContext(CommonPool) {
+            memoryCache[domain]?.let { return@withContext it }
             try {
                 val response = client.newCall(Request.Builder().url(FAVICON_URL + domain).build())
                     .execute()
@@ -54,14 +53,13 @@ class FaviconUtil @Inject constructor(
                 val scaled = Bitmap.createScaledBitmap(bitmap, width, height, false)
                 val drawable = BitmapDrawable(resources, scaled)
                 memoryCache[domain] = drawable
-                return@fromCallable drawable
+                return@withContext drawable
             } catch (e: Exception) {
                 Timber.e(e)
-                return@fromCallable placeHolder
+                return@withContext placeHolder
             }
         }
-            .subscribeOn(io.reactivex.schedulers.Schedulers.io())
-            .observeOn(io.reactivex.android.schedulers.AndroidSchedulers.mainThread())
+        return drawable
     }
     
     fun fetchFavicon(url: String): Observable<Drawable> {

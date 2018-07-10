@@ -8,14 +8,15 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import io.reactivex.disposables.SerialDisposable
 import jp.gcreate.product.filteredhatebu.R
 import jp.gcreate.product.filteredhatebu.data.entities.FeedData
 import jp.gcreate.product.filteredhatebu.databinding.ItemFeedListItemBinding
 import jp.gcreate.product.filteredhatebu.di.Scope.ActivityScope
 import jp.gcreate.product.filteredhatebu.ui.common.FaviconUtil
 import jp.gcreate.product.filteredhatebu.ui.common.HandleOnceEvent
-import timber.log.Timber
+import kotlinx.coroutines.experimental.Job
+import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.experimental.launch
 import javax.inject.Inject
 
 @ActivityScope
@@ -53,18 +54,15 @@ class FeedListAdapter @Inject constructor(private val faviconUtil: FaviconUtil)
 class FeedListViewHolder(itemView: View, private val faviconUtil: FaviconUtil)
     : RecyclerView.ViewHolder(itemView) {
     
-    private val disposable = SerialDisposable()
+    private var job: Job? = null
     private val binding: ItemFeedListItemBinding = ItemFeedListItemBinding.bind(itemView)
     
     fun bind(feedData: FeedData) {
+        job?.cancel()
         binding.item = feedData
         binding.executePendingBindings()
-        disposable.set(
-            faviconUtil.fetchFaviconAsSingle(feedData.url)
-                .subscribe(
-                    { binding.favicon.setImageDrawable(it) },
-                    { Timber.e(it) }
-                )
-        )
+        job = launch(UI) {
+            binding.favicon.setImageDrawable(faviconUtil.fetchFaviconWithCoroutine(feedData.url))
+        }
     }
 }
