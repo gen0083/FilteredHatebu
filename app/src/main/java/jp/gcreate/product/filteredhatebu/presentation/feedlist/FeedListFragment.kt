@@ -4,6 +4,7 @@ import android.arch.lifecycle.Observer
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
+import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.helper.ItemTouchHelper
@@ -17,6 +18,7 @@ import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.State
 import androidx.work.WorkManager
 import jp.gcreate.product.filteredhatebu.CustomApplication
+import jp.gcreate.product.filteredhatebu.R
 import jp.gcreate.product.filteredhatebu.databinding.FragmentFeedListBinding
 import jp.gcreate.product.filteredhatebu.domain.CrawlFeedsWork
 import jp.gcreate.product.filteredhatebu.ui.common.SwipeDismissCallback
@@ -39,9 +41,9 @@ class FeedListFragment : Fragment() {
         CustomApplication.getActivityComponent(activity)
             .inject(this)
         setUpRecyclerView()
-        binding.swipeRefresh.setOnRefreshListener {
-            Timber.d("swipe refresh")
-            fetchFeeds()
+        binding.swipeRefresh.apply {
+            setOnRefreshListener { fetchFeeds() }
+            setColorSchemeColors(ResourcesCompat.getColor(resources, R.color.colorAccent, null))
         }
         binding.noContentReloadButton.setOnClickListener {
             binding.swipeRefresh.isRefreshing = true
