@@ -6,6 +6,7 @@ import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.helper.ItemTouchHelper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,6 +19,7 @@ import androidx.work.WorkManager
 import jp.gcreate.product.filteredhatebu.CustomApplication
 import jp.gcreate.product.filteredhatebu.databinding.FragmentFeedListBinding
 import jp.gcreate.product.filteredhatebu.domain.CrawlFeedsWork
+import jp.gcreate.product.filteredhatebu.ui.common.SwipeDismissCallback
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -66,6 +68,10 @@ class FeedListFragment : Fragment() {
             adapter = feedListAdapter
             layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         }
+        ItemTouchHelper(SwipeDismissCallback(activity!!) { adapterPosition ->
+            Timber.d("swiped $adapterPosition")
+            // TODO: implement delete feature
+        }).attachToRecyclerView(binding.recyclerView)
     }
     
     private fun fetchFeeds() {
