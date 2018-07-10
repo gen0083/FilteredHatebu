@@ -50,5 +50,6 @@ class FeedListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     
     fun bind(feedData: FeedData) {
         binding.item = feedData
+        binding.executePendingBindings()
     }
 }
