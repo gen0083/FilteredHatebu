@@ -15,6 +15,26 @@ data class HatebuBookmark(
     companion object {
         val EMPTY = HatebuBookmark("", arrayOf(""), "", "")
     }
+    
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (javaClass != other?.javaClass) return false
+        
+        other as HatebuBookmark
+        
+        if (user != other.user) return false
+        if (timestamp != other.timestamp) return false
+        if (comment != other.comment) return false
+        
+        return true
+    }
+    
+    override fun hashCode(): Int {
+        var result = user.hashCode()
+        result = 31 * result + timestamp.hashCode()
+        result = 31 * result + comment.hashCode()
+        return result
+    }
 }
 
 sealed class HatebuComments {

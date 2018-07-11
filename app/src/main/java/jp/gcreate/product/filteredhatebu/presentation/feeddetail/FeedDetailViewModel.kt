@@ -18,13 +18,18 @@ class FeedDetailViewModel @Inject constructor(
     private val appRoomDatabase: AppRoomDatabase,
     private val commentsService: BookmarkCommentsService
 ) : ViewModel() {
+    
     private val feedDataDao = appRoomDatabase.feedDataDao()
     private val feedDataEmitter: MutableLiveData<FeedData> = MutableLiveData()
     val feedDetail: LiveData<FeedData> = feedDataEmitter
     private val commentsEmitter: MutableLiveData<HatebuComments> = MutableLiveData()
     val hatebuComments: LiveData<HatebuComments> = commentsEmitter
+    var currentUrl: String = ""
+        private set
     
     fun fetchFeed(url: String) {
+        if (currentUrl == url) return
+        currentUrl = url
         launch(CommonPool) {
             val feedData = async { feedDataDao.getFeed(url) }
             val comments = async { commentsService.fetchComments(url) }
