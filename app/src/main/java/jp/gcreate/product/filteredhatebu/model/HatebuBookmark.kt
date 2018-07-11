@@ -16,3 +16,13 @@ data class HatebuBookmark(
         val EMPTY = HatebuBookmark("", arrayOf(""), "", "")
     }
 }
+
+sealed class HatebuComments {
+    object Disallow: HatebuComments()
+    
+    data class Comments(val comments: List<HatebuBookmark>): HatebuComments()
+    
+    object Empty : HatebuComments()
+    
+    data class Error(val cause: Exception): HatebuComments()
+}

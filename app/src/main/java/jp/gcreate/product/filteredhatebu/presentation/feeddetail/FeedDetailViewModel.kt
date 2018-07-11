@@ -6,21 +6,30 @@ import android.arch.lifecycle.ViewModel
 import jp.gcreate.product.filteredhatebu.data.AppRoomDatabase
 import jp.gcreate.product.filteredhatebu.data.entities.FeedData
 import jp.gcreate.product.filteredhatebu.di.Scope.ActivityScope
+import jp.gcreate.product.filteredhatebu.domain.services.BookmarkCommentsService
+import jp.gcreate.product.filteredhatebu.model.HatebuComments
 import kotlinx.coroutines.experimental.CommonPool
+import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.launch
 import javax.inject.Inject
 
 @ActivityScope
 class FeedDetailViewModel @Inject constructor(
-    private val appRoomDatabase: AppRoomDatabase
+    private val appRoomDatabase: AppRoomDatabase,
+    private val commentsService: BookmarkCommentsService
 ) : ViewModel() {
     private val feedDataDao = appRoomDatabase.feedDataDao()
-    private val mutableFeedLiveData: MutableLiveData<FeedData> = MutableLiveData()
-    val feedDetail: LiveData<FeedData> = mutableFeedLiveData
+    private val feedDataEmitter: MutableLiveData<FeedData> = MutableLiveData()
+    val feedDetail: LiveData<FeedData> = feedDataEmitter
+    private val commentsEmitter: MutableLiveData<HatebuComments> = MutableLiveData()
+    val hatebuComments: LiveData<HatebuComments> = commentsEmitter
     
     fun fetchFeed(url: String) {
         launch(CommonPool) {
-            mutableFeedLiveData.postValue(feedDataDao.getFeed(url))
+            val feedData = async { feedDataDao.getFeed(url) }
+            val comments = async { commentsService.fetchComments(url) }
+            feedDataEmitter.postValue(feedData.await())
+            commentsEmitter.postValue(comments.await())
         }
     }
 }

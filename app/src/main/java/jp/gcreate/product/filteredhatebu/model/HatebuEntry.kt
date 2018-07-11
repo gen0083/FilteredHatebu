@@ -18,5 +18,5 @@ data class HatebuEntry(
     @field:Json(name = "eid")
     var entryId: String,
     var bookmarks: List<HatebuBookmark>,
-    var related: List<HatebuRelatedEntry>
+    var related: List<HatebuRelatedEntry>?
 )
