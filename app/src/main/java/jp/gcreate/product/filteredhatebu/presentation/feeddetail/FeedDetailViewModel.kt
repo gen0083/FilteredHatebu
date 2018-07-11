@@ -37,4 +37,8 @@ class FeedDetailViewModel @Inject constructor(
             commentsEmitter.postValue(comments.await())
         }
     }
+    
+    fun addFilter(filter: String) {
+    
+    }
 }
