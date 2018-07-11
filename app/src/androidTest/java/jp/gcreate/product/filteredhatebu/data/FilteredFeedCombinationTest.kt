@@ -46,7 +46,7 @@ class FilteredFeedCombinationTest {
             FeedData(url = "https://github.com/gen0083", title = "test3", summary = "test3 summary",
                      pubDate = ZonedDateTime.now())
         )
-        db.feedFilterDao().insertFilter(FeedFilter(1, "google.com", ZonedDateTime.now()))
+        db.feedFilterDao().insertFilter(FeedFilter(1, "google.com/", ZonedDateTime.now()))
         db.filteredFeedDao().insertFilteredFeed(FilteredFeed(1, "https://www.google.com/"))
     }
     
@@ -101,5 +101,19 @@ class FilteredFeedCombinationTest {
         assertThat(feedCapture.captured[0].title).isEqualToIgnoringCase("test3")
         
         observer.removeObserver(testObserver)
+    }
+    
+    @Test fun delete_filter_and_filtered_feed_delete_too() {
+        val before = db.feedDataDao().getFilteredNewFeeds()
+        val beforeFiltered = db.filteredFeedDao().getFilteredInformation()
+        assertThat(before.size).isEqualTo(2)
+        assertThat(beforeFiltered.size).isEqualTo(1)
+        
+        db.feedFilterDao().deleteFilter("google.com/")
+        
+        val after = db.feedDataDao().getFilteredNewFeeds()
+        val afterFiltered = db.filteredFeedDao().getFilteredInformation()
+        assertThat(after.size).isEqualTo(3)
+        assertThat(afterFiltered.size).isEqualTo(0)
     }
 }

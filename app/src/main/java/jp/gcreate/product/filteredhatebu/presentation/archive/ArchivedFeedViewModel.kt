@@ -10,4 +10,7 @@ class ArchivedFeedViewModel @Inject constructor(
     private val appRoomDatabase: AppRoomDatabase
 ) : ViewModel() {
     val archivedFeeds = appRoomDatabase.feedDataDao().subscribeArchivedFeeds()
+    //TODO: アーカイブしたやつもフィルタした方がいいんじゃないか
+    // フィルタの管理（削除とか）できるようにする
+    //
 }

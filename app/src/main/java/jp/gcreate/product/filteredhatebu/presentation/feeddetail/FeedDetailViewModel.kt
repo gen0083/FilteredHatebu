@@ -7,6 +7,7 @@ import jp.gcreate.product.filteredhatebu.data.AppRoomDatabase
 import jp.gcreate.product.filteredhatebu.data.entities.FeedData
 import jp.gcreate.product.filteredhatebu.di.Scope.ActivityScope
 import jp.gcreate.product.filteredhatebu.domain.services.BookmarkCommentsService
+import jp.gcreate.product.filteredhatebu.domain.services.FilterService
 import jp.gcreate.product.filteredhatebu.model.HatebuComments
 import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.async
@@ -16,7 +17,8 @@ import javax.inject.Inject
 @ActivityScope
 class FeedDetailViewModel @Inject constructor(
     private val appRoomDatabase: AppRoomDatabase,
-    private val commentsService: BookmarkCommentsService
+    private val commentsService: BookmarkCommentsService,
+    private val filterService: FilterService
 ) : ViewModel() {
     
     private val feedDataDao = appRoomDatabase.feedDataDao()
@@ -39,6 +41,6 @@ class FeedDetailViewModel @Inject constructor(
     }
     
     fun addFilter(filter: String) {
-    
+        filterService.addFilter(filter)
     }
 }

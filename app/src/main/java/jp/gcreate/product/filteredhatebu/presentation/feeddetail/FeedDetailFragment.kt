@@ -65,6 +65,7 @@ class FeedDetailFragment : Fragment() {
                     val filter = it.getStringExtra(Intent.EXTRA_TEXT)
                     Timber.d("got $filter from dialog fragment through intent:$it")
                     vm.addFilter(filter)
+                    showSnackbar(R.string.add_filter_done)
                 }
             }
         }
@@ -110,7 +111,7 @@ class FeedDetailFragment : Fragment() {
     
     private fun handleComments(comments: HatebuComments) {
         when(comments) {
-            is HatebuComments.Error -> showSnackbar("error")
+            is HatebuComments.Error -> showSnackbar(R.string.fetch_comment_error)
             is HatebuComments.Disallow -> showStatusMessage(R.string.disallow_comments)
             is HatebuComments.Empty -> showStatusMessage(R.string.no_comments)
             is HatebuComments.Comments -> showComments(comments.comments)
@@ -140,7 +141,7 @@ class FeedDetailFragment : Fragment() {
         feedCommentsAdapter.submitList(emptyList())
     }
     
-    private fun showSnackbar(message: String) {
-        Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT).show()
+    private fun showSnackbar(@StringRes stringRes: Int) {
+        Snackbar.make(binding.root, stringRes, Snackbar.LENGTH_SHORT).show()
     }
 }

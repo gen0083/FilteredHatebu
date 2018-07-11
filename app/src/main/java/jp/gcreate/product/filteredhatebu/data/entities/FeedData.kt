@@ -14,4 +14,9 @@ data class FeedData(
     val count: Int = 0,
     val isArchived: Boolean = false,
     val isFavorite: Boolean = false
-)
+) {
+    fun isMatchFilter(filter: String): Boolean {
+        val regex = "https?://[^/]*$filter".toRegex()
+        return url.contains(regex)
+    }
+}

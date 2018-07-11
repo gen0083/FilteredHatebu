@@ -2,7 +2,7 @@
     <string name="app_name">Filtered Hatebu</string>
     <string name="cancel">キャンセル</string>
     <string name="filter_candidate">フィルタを選択してください</string>
-    <string name="add_filter_done">%sを追加しました</string>
+    <string name="add_filter_done">フィルタを追加しました</string>
     <string name="edit_filter">フィルタを編集</string>
     <string name="before_hours">%d時間前</string>
     <string name="share_url">URLを共有</string>
@@ -23,4 +23,6 @@
     <string name="inbox_is_empty">未読の記事はありません</string>
     <string name="check_new_feed">新着記事をチェックする</string>
     <string name="archived_feed_is_empty">アーカイブ済みの記事はありません</string>
+    <string name="fetch_comment_error">コメント取得に失敗しました</string>
+    <string name="retry">リトライ</string>
 </resources>

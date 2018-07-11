@@ -84,4 +84,14 @@ class RegexTest {
         assertThat("https://hoge.jp".matches(regex)).isTrue()
         assertThat("https://www.hoge.jp/".matches(regex)).isFalse()
     }
+    
+    @Test fun `ハイフンを含む文字列を含めてregexを作成する`() {
+        val data = "tech-blog.rakus.co.jp/"
+        val pattern = Pattern.compile("https?://[^/]*$data")
+        val regex = "https?://[^/]*$data".toRegex()
+        
+        val target = "http://tech-blog.rakus.co.jp/entry/20180711/google-apps-script/beginner"
+        assertThat(pattern.matcher(target).find()).isTrue()
+        assertThat(target.contains(regex)).isTrue()
+    }
 }
