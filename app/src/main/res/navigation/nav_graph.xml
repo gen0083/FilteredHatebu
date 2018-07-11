@@ -16,6 +16,16 @@
             />
     </fragment>
     <fragment
+        android:id="@+id/navigation_archive"
+        android:name="jp.gcreate.product.filteredhatebu.presentation.archive.ArchivedFeedFragment"
+        android:label="ArchivedFeedFragment"
+        >
+        <action
+            android:id="@+id/action_navigation_feed_list_to_archiveFeedFragment"
+            app:destination="@+id/feed_detail"
+            />
+    </fragment>
+    <fragment
         android:id="@+id/navigation_settings"
         android:name="jp.gcreate.product.filteredhatebu.ui.option.OptionsFragment"
         android:label="OptionsFragment"
