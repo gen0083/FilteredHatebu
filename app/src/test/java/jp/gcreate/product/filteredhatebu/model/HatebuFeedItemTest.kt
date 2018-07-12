@@ -3,9 +3,8 @@ package jp.gcreate.product.filteredhatebu.model
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.simpleframework.xml.core.Persister
-import org.threeten.bp.ZoneOffset
+import org.threeten.bp.LocalDateTime
 import org.threeten.bp.ZonedDateTime
-import org.threeten.bp.temporal.ChronoUnit
 import java.io.File
 
 /**
@@ -170,10 +169,9 @@ class HatebuFeedItemTest {
         val file = File(javaClass.classLoader.getResource("feedburner_hotentry.xml").file)
         val feed = serializer.read(HatebuFeed::class.java, file)
         val item = feed.itemList[2]
-        println(item)
         val date = ZonedDateTime.parse(item.date)
-        println(date)
-        assertThat(date).isEqualTo(ZonedDateTime.of(2018, 6,19, 7, 8, 23, 0, ZoneOffset.UTC))
+        assertThat(date.toLocalDateTime())
+            .isEqualTo(LocalDateTime.of(2018, 6, 19, 7, 8, 23))
         
         val fromRss = serializer.read(
             HatebuFeed::class.java,
@@ -181,8 +179,7 @@ class HatebuFeedItemTest {
         )
         val itemFromRss = fromRss.itemList[2]
         val dateFromRss = ZonedDateTime.parse(itemFromRss.date)
-        assertThat(date.truncatedTo(ChronoUnit.SECONDS)
-                       .compareTo(ZonedDateTime.of(2016, 10, 23, 19, 6, 5, 0, ZoneOffset.of("+09:00"))))
-            .isEqualTo(0)
+        assertThat(dateFromRss.toLocalDateTime())
+            .isEqualTo(LocalDateTime.of(2016, 10, 24, 4, 6, 5))
     }
 }
