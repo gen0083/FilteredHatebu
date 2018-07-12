@@ -21,6 +21,7 @@ import jp.gcreate.product.filteredhatebu.databinding.FragmentFeedDetailBinding
 import jp.gcreate.product.filteredhatebu.model.HatebuBookmark
 import jp.gcreate.product.filteredhatebu.model.HatebuComments
 import jp.gcreate.product.filteredhatebu.ui.common.CustomTabHelper
+import jp.gcreate.product.filteredhatebu.ui.common.LoadingState
 import jp.gcreate.product.filteredhatebu.ui.common.PickFilterDialogFragment
 import timber.log.Timber
 import javax.inject.Inject
@@ -55,7 +56,7 @@ class FeedDetailFragment : Fragment() {
         setupActionsFromView()
         subscribeViewModel()
         
-        loadComments(url)
+        vm.fetchFeed(url)
     }
     
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -90,6 +91,14 @@ class FeedDetailFragment : Fragment() {
             if (it == null) return@Observer
             handleComments(it)
         })
+        vm.loadingState.observe(this, Observer {
+            Timber.d("loading state $it")
+            if (it == LoadingState.LOADING) {
+                binding.progressBar.isVisible = true
+                binding.commentStatus.isGone = true
+                binding.recyclerView.isGone = true
+            }
+        })
     }
     
     private fun setupActionsFromView() {
@@ -118,14 +127,8 @@ class FeedDetailFragment : Fragment() {
         }
     }
     
-    private fun loadComments(url: String) {
-        vm.fetchFeed(url)
-        binding.progressBar.isVisible = true
-        binding.commentStatus.isGone = true
-        binding.recyclerView.isGone = true
-    }
-    
     private fun showComments(comments: List<HatebuBookmark>) {
+        Timber.d("show comments ${comments.size}")
         binding.progressBar.isGone = true
         binding.commentStatus.isGone = true
         binding.recyclerView.isVisible = true
@@ -134,6 +137,7 @@ class FeedDetailFragment : Fragment() {
     }
     
     private fun showStatusMessage(@StringRes messageStringRes: Int) {
+        Timber.d("show message why no comments")
         binding.progressBar.isGone = true
         binding.recyclerView.isGone = true
         binding.commentStatus.isVisible = true
