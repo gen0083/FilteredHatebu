@@ -3,7 +3,6 @@ package jp.gcreate.product.filteredhatebu.presentation.feedlist
 import android.arch.lifecycle.Observer
 import android.os.Bundle
 import android.support.design.widget.Snackbar
-import android.support.v4.app.Fragment
 import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
@@ -17,7 +16,7 @@ import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.State
 import androidx.work.WorkManager
-import jp.gcreate.product.filteredhatebu.CustomApplication
+import dagger.android.support.DaggerFragment
 import jp.gcreate.product.filteredhatebu.R
 import jp.gcreate.product.filteredhatebu.databinding.FragmentFeedListBinding
 import jp.gcreate.product.filteredhatebu.domain.CrawlFeedsWork
@@ -25,7 +24,7 @@ import jp.gcreate.product.filteredhatebu.ui.common.SwipeDismissCallback
 import timber.log.Timber
 import javax.inject.Inject
 
-class FeedListFragment : Fragment() {
+class FeedListFragment : DaggerFragment() {
     @Inject lateinit var vm: FeedListViewModel
     @Inject lateinit var feedListAdapter: FeedListAdapter
     private lateinit var binding: FragmentFeedListBinding
@@ -38,8 +37,6 @@ class FeedListFragment : Fragment() {
     
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        CustomApplication.getActivityComponent(activity)
-            .inject(this)
         setUpRecyclerView()
         binding.swipeRefresh.apply {
             setOnRefreshListener { fetchFeeds() }

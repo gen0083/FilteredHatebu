@@ -16,9 +16,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import javax.inject.Inject;
-
-import jp.gcreate.product.filteredhatebu.CustomApplication;
 import jp.gcreate.product.filteredhatebu.R;
 import jp.gcreate.product.filteredhatebu.databinding.FragmentHatebuFeedBinding;
 import jp.gcreate.product.filteredhatebu.model.HatebuFeedItem;
@@ -38,9 +35,9 @@ public class HatebuFeedFragment extends Fragment implements HatebuFeedContract.F
     private FeedAdapter               adapter;
     private LinearLayoutManager       layoutManager;
     private int                       scrolledPosition;
-    @Inject
+//    @Inject
     HatebuFeedActivityPresenter parentPresenter;
-    @Inject
+//    @Inject
     OkHttpClient client;
     private HatebuFeedContract.ChildPresenter presenter;
 
@@ -64,7 +61,7 @@ public class HatebuFeedFragment extends Fragment implements HatebuFeedContract.F
         }
         Timber.d("%s[category:%s] onAttach to %s", this, categoryKey, context.toString());
         if (context instanceof Activity) {
-            CustomApplication.getActivityComponent((Activity) context).inject(this);
+//            CustomApplication.Companion.getActivityComponent((Activity) context).inject(this);
             presenter = parentPresenter.getOrCreateFragmentPresenter(categoryKey);
         }
     }

@@ -2,10 +2,10 @@ package jp.gcreate.product.filteredhatebu.presentation
 
 import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
+import dagger.android.support.DaggerAppCompatActivity
 import jp.gcreate.product.filteredhatebu.R
 import jp.gcreate.product.filteredhatebu.databinding.ActivityMainBinding
 import timber.log.Timber
@@ -13,7 +13,7 @@ import timber.log.Timber
 /**
  * Copyright 2018 G-CREATE
  */
-class MainActivity : AppCompatActivity() {
+class MainActivity : DaggerAppCompatActivity() {
     
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController

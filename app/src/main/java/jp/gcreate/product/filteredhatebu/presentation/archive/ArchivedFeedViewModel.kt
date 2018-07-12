@@ -2,10 +2,10 @@ package jp.gcreate.product.filteredhatebu.presentation.archive
 
 import android.arch.lifecycle.ViewModel
 import jp.gcreate.product.filteredhatebu.data.AppRoomDatabase
-import jp.gcreate.product.filteredhatebu.di.Scope.ActivityScope
+import jp.gcreate.product.filteredhatebu.di.Scope.FragmentScope
 import javax.inject.Inject
 
-@ActivityScope
+@FragmentScope
 class ArchivedFeedViewModel @Inject constructor(
     private val appRoomDatabase: AppRoomDatabase
 ) : ViewModel() {

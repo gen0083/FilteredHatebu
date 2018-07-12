@@ -2,20 +2,17 @@ package jp.gcreate.product.filteredhatebu.presentation.feeddetail
 
 import android.app.Activity
 import android.arch.lifecycle.Observer
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.support.annotation.StringRes
 import android.support.design.widget.Snackbar
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
-import jp.gcreate.product.filteredhatebu.CustomApplication
+import dagger.android.support.DaggerFragment
 import jp.gcreate.product.filteredhatebu.R
 import jp.gcreate.product.filteredhatebu.databinding.FragmentFeedDetailBinding
 import jp.gcreate.product.filteredhatebu.model.HatebuBookmark
@@ -26,21 +23,13 @@ import jp.gcreate.product.filteredhatebu.ui.common.PickFilterDialogFragment
 import timber.log.Timber
 import javax.inject.Inject
 
-class FeedDetailFragment : Fragment() {
+class FeedDetailFragment : DaggerFragment() {
     private lateinit var binding: FragmentFeedDetailBinding
     @Inject lateinit var vm: FeedDetailViewModel
     @Inject lateinit var feedCommentsAdapter: FeedCommentsAdapter
     @Inject lateinit var customTabHelper: CustomTabHelper
     private val linearLayoutManager: LinearLayoutManager by lazy {
         LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-    }
-    
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        if (context is FragmentActivity) {
-            CustomApplication.getActivityComponent(context)
-                .inject(this)
-        }
     }
     
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,

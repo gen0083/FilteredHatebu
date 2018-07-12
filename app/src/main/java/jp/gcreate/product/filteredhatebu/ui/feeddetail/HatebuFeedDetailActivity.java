@@ -38,11 +38,11 @@ public class HatebuFeedDetailActivity extends AppCompatActivity
     private ActivityComponent component;
     private LinearLayoutManager layoutManager;
     private BottomSheetBehavior<FrameLayout> bottomSheetBehavior;
-    @Inject
+//    @Inject
     HatebuFeedDetailPresenter presenter;
-    @Inject
+//    @Inject
     BookmarkCommentsAdapter commentsAdapter;
-    @Inject
+//    @Inject
     CustomTabHelper customTabHelper;
 
     public static Intent createIntent(Context context, HatebuFeedItem item) {
@@ -56,8 +56,8 @@ public class HatebuFeedDetailActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_hatebu_feed_detail);
 
-        component = CustomApplication.getActivityComponent(this);
-        component.inject(this);
+//        component = CustomApplication.Companion.getActivityComponent(this);
+//        component.inject(this);
 
         Intent intent = getIntent();
         if (intent != null && intent.hasExtra(EXTRA_ITEM_KEY)) {

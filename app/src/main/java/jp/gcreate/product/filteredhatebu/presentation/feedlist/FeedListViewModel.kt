@@ -8,14 +8,14 @@ import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import jp.gcreate.product.filteredhatebu.data.AppRoomDatabase
 import jp.gcreate.product.filteredhatebu.data.entities.FeedData
-import jp.gcreate.product.filteredhatebu.di.Scope.ActivityScope
+import jp.gcreate.product.filteredhatebu.di.Scope.FragmentScope
 import jp.gcreate.product.filteredhatebu.domain.CrawlFeedsWork
 import jp.gcreate.product.filteredhatebu.ui.common.HandleOnceEvent
 import kotlinx.coroutines.experimental.launch
 import timber.log.Timber
 import javax.inject.Inject
 
-@ActivityScope
+@FragmentScope
 class FeedListViewModel @Inject constructor(
     private val appRoomDatabase: AppRoomDatabase
 ) : ViewModel() {
