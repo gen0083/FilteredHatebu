@@ -13,7 +13,6 @@ import com.google.android.gms.oss.licenses.OssLicensesMenuActivity;
 
 import jp.gcreate.product.filteredhatebu.R;
 import jp.gcreate.product.filteredhatebu.databinding.ActivityFeedBinding;
-import jp.gcreate.product.filteredhatebu.di.ActivityComponent;
 import jp.gcreate.product.filteredhatebu.ui.editfilter.FilterEditActivity;
 import timber.log.Timber;
 
@@ -24,7 +23,6 @@ import timber.log.Timber;
 public class HatebuFeedActivity extends AppCompatActivity implements HatebuFeedContract.ActivityView {
     private static final String TAG_LICENSE = "license";
     private ActivityFeedBinding binding;
-    private ActivityComponent component;
     private HatebuFeedFragmentsAdapter adapter;
 //    @Inject
     HatebuFeedActivityPresenter presenter;

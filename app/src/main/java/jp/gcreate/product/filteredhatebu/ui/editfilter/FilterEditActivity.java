@@ -9,7 +9,6 @@ import android.support.v7.widget.LinearLayoutManager;
 
 import jp.gcreate.product.filteredhatebu.R;
 import jp.gcreate.product.filteredhatebu.databinding.ActivityFilterEditBinding;
-import jp.gcreate.product.filteredhatebu.di.ActivityComponent;
 
 /**
  * Copyright 2016 G-CREATE
@@ -17,7 +16,6 @@ import jp.gcreate.product.filteredhatebu.di.ActivityComponent;
 
 public class FilterEditActivity extends AppCompatActivity implements FilterEditContract.View {
     private ActivityFilterEditBinding binding;
-    private ActivityComponent component;
 //    @Inject
     FilterEditPresenter presenter;
     private FilterAdapter filterAdapter;
