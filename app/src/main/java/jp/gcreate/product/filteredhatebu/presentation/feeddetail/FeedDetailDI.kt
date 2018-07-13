@@ -12,7 +12,7 @@ import jp.gcreate.product.filteredhatebu.di.qualifier.ViewModelKey
 @Module
 interface FeedDetailContributor {
     @FragmentScope
-    @ContributesAndroidInjector(modules = [])
+    @ContributesAndroidInjector(modules = [FeedDetailModule::class])
     fun contributeFeedDetailFragment(): FeedDetailFragment
 }
 

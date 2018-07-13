@@ -13,6 +13,7 @@ import jp.gcreate.product.filteredhatebu.ui.common.LoadingState
 import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @FragmentScope
@@ -33,6 +34,7 @@ class FeedDetailViewModel @Inject constructor(
         private set
     
     fun fetchFeed(url: String) {
+        Timber.d("test: $this")
         if (currentUrl == url) return
         currentUrl = url
         loadingStateEmitter.value = LoadingState.LOADING

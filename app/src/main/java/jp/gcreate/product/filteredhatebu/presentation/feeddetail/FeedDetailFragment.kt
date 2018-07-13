@@ -2,6 +2,7 @@ package jp.gcreate.product.filteredhatebu.presentation.feeddetail
 
 import android.app.Activity
 import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
 import android.support.annotation.StringRes
@@ -15,6 +16,7 @@ import androidx.core.view.isVisible
 import dagger.android.support.DaggerFragment
 import jp.gcreate.product.filteredhatebu.R
 import jp.gcreate.product.filteredhatebu.databinding.FragmentFeedDetailBinding
+import jp.gcreate.product.filteredhatebu.di.ViewModelProviderFactory
 import jp.gcreate.product.filteredhatebu.model.HatebuBookmark
 import jp.gcreate.product.filteredhatebu.model.HatebuComments
 import jp.gcreate.product.filteredhatebu.ui.common.CustomTabHelper
@@ -25,7 +27,8 @@ import javax.inject.Inject
 
 class FeedDetailFragment : DaggerFragment() {
     private lateinit var binding: FragmentFeedDetailBinding
-    @Inject lateinit var vm: FeedDetailViewModel
+    lateinit var vm: FeedDetailViewModel
+    @Inject lateinit var viewModelFactory: ViewModelProviderFactory
     @Inject lateinit var feedCommentsAdapter: FeedCommentsAdapter
     @Inject lateinit var customTabHelper: CustomTabHelper
     private val linearLayoutManager: LinearLayoutManager by lazy {
@@ -40,6 +43,7 @@ class FeedDetailFragment : DaggerFragment() {
     
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        vm = ViewModelProviders.of(activity!!, viewModelFactory)[FeedDetailViewModel::class.java]
         val url = FeedDetailFragmentArgs.fromBundle(arguments).feedUrl
         setupRecyclerView()
         setupActionsFromView()
