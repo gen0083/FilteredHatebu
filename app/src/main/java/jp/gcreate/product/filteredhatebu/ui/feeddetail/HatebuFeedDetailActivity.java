@@ -14,12 +14,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import javax.inject.Inject;
-
-import jp.gcreate.product.filteredhatebu.CustomApplication;
 import jp.gcreate.product.filteredhatebu.R;
 import jp.gcreate.product.filteredhatebu.databinding.ActivityHatebuFeedDetailBinding;
-import jp.gcreate.product.filteredhatebu.di.ActivityComponent;
 import jp.gcreate.product.filteredhatebu.model.HatebuFeedItem;
 import jp.gcreate.product.filteredhatebu.ui.common.CustomTabHelper;
 import timber.log.Timber;
@@ -35,14 +31,13 @@ public class HatebuFeedDetailActivity extends AppCompatActivity
     private static final String EXTRA_COMMENT_POSITION_KEY = "comments_position";
     private ActivityHatebuFeedDetailBinding binding;
     private HatebuFeedItem item;
-    private ActivityComponent component;
     private LinearLayoutManager layoutManager;
     private BottomSheetBehavior<FrameLayout> bottomSheetBehavior;
-    @Inject
+//    @Inject
     HatebuFeedDetailPresenter presenter;
-    @Inject
+//    @Inject
     BookmarkCommentsAdapter commentsAdapter;
-    @Inject
+//    @Inject
     CustomTabHelper customTabHelper;
 
     public static Intent createIntent(Context context, HatebuFeedItem item) {
@@ -56,8 +51,8 @@ public class HatebuFeedDetailActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_hatebu_feed_detail);
 
-        component = CustomApplication.getActivityComponent(this);
-        component.inject(this);
+//        component = CustomApplication.Companion.getActivityComponent(this);
+//        component.inject(this);
 
         Intent intent = getIntent();
         if (intent != null && intent.hasExtra(EXTRA_ITEM_KEY)) {

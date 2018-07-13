@@ -11,12 +11,8 @@ import android.view.MenuItem;
 
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity;
 
-import javax.inject.Inject;
-
-import jp.gcreate.product.filteredhatebu.CustomApplication;
 import jp.gcreate.product.filteredhatebu.R;
 import jp.gcreate.product.filteredhatebu.databinding.ActivityFeedBinding;
-import jp.gcreate.product.filteredhatebu.di.ActivityComponent;
 import jp.gcreate.product.filteredhatebu.ui.editfilter.FilterEditActivity;
 import timber.log.Timber;
 
@@ -27,9 +23,8 @@ import timber.log.Timber;
 public class HatebuFeedActivity extends AppCompatActivity implements HatebuFeedContract.ActivityView {
     private static final String TAG_LICENSE = "license";
     private ActivityFeedBinding binding;
-    private ActivityComponent component;
     private HatebuFeedFragmentsAdapter adapter;
-    @Inject
+//    @Inject
     HatebuFeedActivityPresenter presenter;
 
     @Override
@@ -37,8 +32,8 @@ public class HatebuFeedActivity extends AppCompatActivity implements HatebuFeedC
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_feed);
 
-        component = CustomApplication.getActivityComponent(this);
-        component.inject(this);
+//        component = CustomApplication.Companion.getActivityComponent(this);
+//        component.inject(this);
 
         setSupportActionBar(binding.toolbar);
 

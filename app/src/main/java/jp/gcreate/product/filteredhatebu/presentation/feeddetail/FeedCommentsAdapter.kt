@@ -8,13 +8,13 @@ import android.view.ViewGroup
 import android.widget.TextView
 import jp.gcreate.product.filteredhatebu.R
 import jp.gcreate.product.filteredhatebu.databinding.ItemEntryBookmarksBinding
-import jp.gcreate.product.filteredhatebu.di.Scope.ActivityScope
+import jp.gcreate.product.filteredhatebu.di.Scope.FragmentScope
 import jp.gcreate.product.filteredhatebu.model.HatebuBookmark
 import jp.gcreate.product.filteredhatebu.ui.common.DataBindingViewHolder
 import jp.gcreate.product.filteredhatebu.ui.common.UrlSpanFactory
 import javax.inject.Inject
 
-@ActivityScope
+@FragmentScope
 class FeedCommentsAdapter @Inject constructor(
     private val urlSpanFactory: UrlSpanFactory
 ) : ListAdapter<HatebuBookmark, DataBindingViewHolder<ItemEntryBookmarksBinding>>(

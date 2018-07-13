@@ -2,10 +2,10 @@ package jp.gcreate.product.filteredhatebu.domain
 
 import androidx.work.Worker
 import androidx.work.toWorkData
-import jp.gcreate.product.filteredhatebu.CustomApplication
 import jp.gcreate.product.filteredhatebu.api.FeedsBurnerClienet
 import jp.gcreate.product.filteredhatebu.api.HatenaClient
 import jp.gcreate.product.filteredhatebu.domain.services.FeedSaveService
+import jp.gcreate.product.filteredhatebu.ext.getAppComponent
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -16,8 +16,7 @@ class CrawlFeedsWork : Worker() {
     
     override fun doWork(): Result {
         // do-crawling
-        CustomApplication.getAppComponent(applicationContext)
-            .inject(this)
+        applicationContext.getAppComponent().inject(this)
         Timber.d("do-work on thread: ${Thread.currentThread()}")
         
         // 処理フロー

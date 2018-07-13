@@ -11,7 +11,7 @@ import android.view.ViewGroup
 import jp.gcreate.product.filteredhatebu.R
 import jp.gcreate.product.filteredhatebu.data.entities.FeedData
 import jp.gcreate.product.filteredhatebu.databinding.ItemFeedListItemBinding
-import jp.gcreate.product.filteredhatebu.di.Scope.ActivityScope
+import jp.gcreate.product.filteredhatebu.di.Scope.FragmentScope
 import jp.gcreate.product.filteredhatebu.ui.common.FaviconUtil
 import jp.gcreate.product.filteredhatebu.ui.common.HandleOnceEvent
 import kotlinx.coroutines.experimental.Job
@@ -19,7 +19,7 @@ import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.launch
 import javax.inject.Inject
 
-@ActivityScope
+@FragmentScope
 class FeedListAdapter @Inject constructor(private val faviconUtil: FaviconUtil)
     : ListAdapter<FeedData, FeedListViewHolder>(
     object : DiffUtil.ItemCallback<FeedData>() {

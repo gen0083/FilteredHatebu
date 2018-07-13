@@ -1,10 +1,7 @@
 package jp.gcreate.product.filteredhatebu.presentation.archive
 
 import android.arch.lifecycle.Observer
-import android.content.Context
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentActivity
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.helper.ItemTouchHelper
@@ -13,7 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
-import jp.gcreate.product.filteredhatebu.CustomApplication
+import dagger.android.support.DaggerFragment
 import jp.gcreate.product.filteredhatebu.R
 import jp.gcreate.product.filteredhatebu.databinding.FragmentArchivedFeedBinding
 import jp.gcreate.product.filteredhatebu.presentation.feedlist.FeedListAdapter
@@ -21,18 +18,10 @@ import jp.gcreate.product.filteredhatebu.ui.common.SwipeDismissCallback
 import timber.log.Timber
 import javax.inject.Inject
 
-class ArchivedFeedFragment : Fragment() {
+class ArchivedFeedFragment : DaggerFragment() {
     private lateinit var binding: FragmentArchivedFeedBinding
     @Inject lateinit var vm: ArchivedFeedViewModel
     @Inject lateinit var feedListAdapter: FeedListAdapter
-    
-    override fun onAttach(context: Context?) {
-        super.onAttach(context)
-        if (context is FragmentActivity) {
-            CustomApplication.getActivityComponent(context)
-                .inject(this)
-        }
-    }
     
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {

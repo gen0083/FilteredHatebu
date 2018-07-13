@@ -7,12 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 
-import javax.inject.Inject;
-
-import jp.gcreate.product.filteredhatebu.CustomApplication;
 import jp.gcreate.product.filteredhatebu.R;
 import jp.gcreate.product.filteredhatebu.databinding.ActivityFilterEditBinding;
-import jp.gcreate.product.filteredhatebu.di.ActivityComponent;
 
 /**
  * Copyright 2016 G-CREATE
@@ -20,8 +16,7 @@ import jp.gcreate.product.filteredhatebu.di.ActivityComponent;
 
 public class FilterEditActivity extends AppCompatActivity implements FilterEditContract.View {
     private ActivityFilterEditBinding binding;
-    private ActivityComponent component;
-    @Inject
+//    @Inject
     FilterEditPresenter presenter;
     private FilterAdapter filterAdapter;
 
@@ -30,8 +25,8 @@ public class FilterEditActivity extends AppCompatActivity implements FilterEditC
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_filter_edit);
 
-        component = CustomApplication.getActivityComponent(this);
-        component.inject(this);
+//        component = CustomApplication.Companion.getActivityComponent(this);
+//        component.inject(this);
 
         setupRecyclerView();
     }

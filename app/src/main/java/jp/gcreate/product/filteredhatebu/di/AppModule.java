@@ -9,6 +9,7 @@ import jp.gcreate.product.filteredhatebu.di.Scope.AppScope;
 import jp.gcreate.product.filteredhatebu.di.qualifier.ApplicationContext;
 import jp.gcreate.product.filteredhatebu.di.qualifier.ObserveOn;
 import jp.gcreate.product.filteredhatebu.di.qualifier.SubscribeOn;
+import jp.gcreate.product.filteredhatebu.presentation.MainActivityContributor;
 import rx.Scheduler;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -17,7 +18,7 @@ import rx.schedulers.Schedulers;
  * Copyright 2016 G-CREATE
  */
 
-@Module
+@Module(includes = {MainActivityContributor.class})
 public class AppModule {
     private final Context context;
 
