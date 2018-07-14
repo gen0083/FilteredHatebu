@@ -6,5 +6,5 @@ import jp.gcreate.product.filteredhatebu.di.AppComponent
 
 fun Context.getAppComponent(): AppComponent {
     val app = this.applicationContext as CustomApplication
-    return app.getAppComponent()
+    return app.appComponent
 }

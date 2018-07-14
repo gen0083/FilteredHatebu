@@ -9,6 +9,9 @@ import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.helper.ItemTouchHelper
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
@@ -35,6 +38,7 @@ class FeedListFragment : DaggerFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         binding = FragmentFeedListBinding.inflate(inflater, container, false)
+        setHasOptionsMenu(true)
         return binding.root
     }
     
@@ -71,6 +75,20 @@ class FeedListFragment : DaggerFragment() {
                 findNavController().navigate(direction)
             }
         })
+    }
+    
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.feed_list_menu, menu)
+//        super.onCreateOptionsMenu(menu, inflater)
+    }
+    
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (item?.itemId == R.id.action_list_filter) {
+            createFilterDialog(true, false, false).show(fragmentManager, "filter_dialog")
+            return true
+        } else {
+            return super.onOptionsItemSelected(item)
+        }
     }
     
     private fun setUpRecyclerView() {
