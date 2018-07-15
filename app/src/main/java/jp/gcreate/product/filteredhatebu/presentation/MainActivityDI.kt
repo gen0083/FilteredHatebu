@@ -8,6 +8,7 @@ import jp.gcreate.product.filteredhatebu.di.Scope.ActivityScope
 import jp.gcreate.product.filteredhatebu.presentation.archive.ArchiveFeedContributor
 import jp.gcreate.product.filteredhatebu.presentation.feeddetail.FeedDetailContributor
 import jp.gcreate.product.filteredhatebu.presentation.feedlist.FeedListContributor
+import jp.gcreate.product.filteredhatebu.presentation.filterlist.FilterListFragmentBuilder
 
 @Module
 interface MainActivityContributor {
@@ -17,7 +18,8 @@ interface MainActivityContributor {
         MainActivityModule::class,
         FeedDetailContributor::class,
         FeedListContributor::class,
-        ArchiveFeedContributor::class
+        ArchiveFeedContributor::class,
+        FilterListFragmentBuilder::class
     ])
     fun contributeMainActivity(): MainActivity
 }

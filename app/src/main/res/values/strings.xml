@@ -29,4 +29,5 @@
     <string name="checkbox_show_archive_feed">アーカイブした記事を表示する</string>
     <string name="checkbox_show_favorite_feed">お気に入り記事を表示する</string>
     <string name="menu_feed_list_filter">表示する記事</string>
+    <string name="filter_is_empty">フィルタは登録されていません</string>
 </resources>
