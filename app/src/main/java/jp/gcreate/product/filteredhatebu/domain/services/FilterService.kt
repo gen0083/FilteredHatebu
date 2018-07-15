@@ -26,6 +26,8 @@ class FilterService @Inject constructor(
     private var addedFilter: String? = null
     private val addFilterEventEmitter = MutableLiveData<HandleOnceEvent<FeedFilter>>()
     val addFilterEvent: LiveData<HandleOnceEvent<FeedFilter>> = addFilterEventEmitter
+    private val deleteFilterEventEmitter = MutableLiveData<HandleOnceEvent<FeedFilter>>()
+    val deleteFilterEvent: LiveData<HandleOnceEvent<FeedFilter>> = deleteFilterEventEmitter
     
     fun addFilter(filter: String) = launch(CommonPool) {
         addedFilter = filter
@@ -53,20 +55,19 @@ class FilterService @Inject constructor(
         }
     }
     
-    fun deleteFilter(filter: String) {
-        launch {
-            val target = feedFilterDao.getFilter(filter)
-            if (target == null) {
-                Timber.e("$filter is not exist")
-                return@launch
-            }
-            val feeds = filteredFeedDao.getFilteredFeed(target.id)
-            deleteCommand = DeleteCommand(target, feeds)
-            feedFilterDao.deleteFilter(filter)
+    fun deleteFilter(filter: String) = launch(CommonPool) {
+        val target = feedFilterDao.getFilter(filter)
+        if (target == null) {
+            Timber.e("$filter is not exist")
+            return@launch
         }
+        val feeds = filteredFeedDao.getFilteredFeed(target.id)
+        deleteCommand = DeleteCommand(target, feeds)
+        feedFilterDao.deleteFilter(filter)
+        deleteFilterEventEmitter.postValue(HandleOnceEvent(target))
     }
     
-    fun undoDelete() {
+    fun undoDelete() = launch(CommonPool) {
         deleteCommand?.let {
             feedFilterDao.insertFilter(it.filter)
             if (it.filteredFeeds.isNotEmpty()) {
