@@ -1,6 +1,7 @@
 package jp.gcreate.product.filteredhatebu.presentation.feedlist
 
 import android.arch.lifecycle.Observer
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.content.res.ResourcesCompat
@@ -8,6 +9,9 @@ import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.helper.ItemTouchHelper
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
@@ -19,24 +23,29 @@ import androidx.work.WorkManager
 import dagger.android.support.DaggerFragment
 import jp.gcreate.product.filteredhatebu.R
 import jp.gcreate.product.filteredhatebu.databinding.FragmentFeedListBinding
+import jp.gcreate.product.filteredhatebu.di.ViewModelProviderFactory
 import jp.gcreate.product.filteredhatebu.domain.CrawlFeedsWork
 import jp.gcreate.product.filteredhatebu.ui.common.SwipeDismissCallback
 import timber.log.Timber
 import javax.inject.Inject
 
 class FeedListFragment : DaggerFragment() {
-    @Inject lateinit var vm: FeedListViewModel
+    lateinit var vm: FeedListViewModel
+    @Inject lateinit var factory: ViewModelProviderFactory
     @Inject lateinit var feedListAdapter: FeedListAdapter
     private lateinit var binding: FragmentFeedListBinding
     
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         binding = FragmentFeedListBinding.inflate(inflater, container, false)
+        setHasOptionsMenu(true)
         return binding.root
     }
     
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        vm = ViewModelProviders.of(activity!!, factory)[FeedListViewModel::class.java]
+        
         setUpRecyclerView()
         binding.swipeRefresh.apply {
             setOnRefreshListener { fetchFeeds() }
@@ -66,6 +75,20 @@ class FeedListFragment : DaggerFragment() {
                 findNavController().navigate(direction)
             }
         })
+    }
+    
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.feed_list_menu, menu)
+//        super.onCreateOptionsMenu(menu, inflater)
+    }
+    
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        if (item?.itemId == R.id.action_list_filter) {
+            createFilterDialog(true, false, false).show(fragmentManager, "filter_dialog")
+            return true
+        } else {
+            return super.onOptionsItemSelected(item)
+        }
     }
     
     private fun setUpRecyclerView() {

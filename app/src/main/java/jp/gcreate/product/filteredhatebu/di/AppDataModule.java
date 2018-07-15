@@ -49,6 +49,8 @@ public class AppDataModule {
     @Provides @AppScope
     public AppRoomDatabase provideAppRoomDatabase(@ApplicationContext Context context) {
         return Room.databaseBuilder(context, AppRoomDatabase.class, "hatebu.room")
-            .build();
+                   // TODO: for developing
+                   .fallbackToDestructiveMigration()
+                   .build();
     }
 }
