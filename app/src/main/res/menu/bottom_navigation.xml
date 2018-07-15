@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/navigation_feed_list"
           android:title="@string/bottom_navigation_feed_list"
-          android:icon="@drawable/ic_inbox"
+          android:icon="@drawable/ic_feed"
           />
 
     <item
