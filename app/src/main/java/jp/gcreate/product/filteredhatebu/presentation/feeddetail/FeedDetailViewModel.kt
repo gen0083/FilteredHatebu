@@ -9,6 +9,7 @@ import jp.gcreate.product.filteredhatebu.di.Scope.FragmentScope
 import jp.gcreate.product.filteredhatebu.domain.services.BookmarkCommentsService
 import jp.gcreate.product.filteredhatebu.domain.services.FilterService
 import jp.gcreate.product.filteredhatebu.model.HatebuComments
+import jp.gcreate.product.filteredhatebu.ui.common.HandleOnceEvent
 import jp.gcreate.product.filteredhatebu.ui.common.LoadingState
 import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.async
@@ -30,6 +31,8 @@ class FeedDetailViewModel @Inject constructor(
     val hatebuComments: LiveData<HatebuComments> = commentsEmitter
     private val loadingStateEmitter: MutableLiveData<LoadingState> = MutableLiveData()
     val loadingState: LiveData<LoadingState> = loadingStateEmitter
+    private val addFilterActionEmitter: MutableLiveData<HandleOnceEvent<String>> = MutableLiveData()
+    val addFilterAction: LiveData<HandleOnceEvent<String>> = addFilterActionEmitter
     var currentUrl: String = ""
         private set
     
@@ -49,5 +52,6 @@ class FeedDetailViewModel @Inject constructor(
     
     fun addFilter(filter: String) {
         filterService.addFilter(filter)
+        addFilterActionEmitter.value = HandleOnceEvent(filter)
     }
 }

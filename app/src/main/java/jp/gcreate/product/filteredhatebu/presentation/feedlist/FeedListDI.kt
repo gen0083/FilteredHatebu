@@ -14,12 +14,12 @@ interface FeedListContributor {
     @FragmentScope
     @ContributesAndroidInjector(modules = [FeedListFragmentModule::class])
     fun contributeFeedListFragment(): FeedListFragment
+    
+    @Binds @IntoMap @ViewModelKey(FeedListViewModel::class)
+    fun bindFeedListViewModel(viewModel: FeedListViewModel): ViewModel
 }
 
 @Module
 interface FeedListFragmentModule {
     @Binds fun bindFragment(fragment: FeedListFragment): Fragment
-    
-    @Binds @IntoMap @ViewModelKey(FeedListViewModel::class)
-    fun bindFeedListViewModel(viewModel: FeedListViewModel): ViewModel
 }

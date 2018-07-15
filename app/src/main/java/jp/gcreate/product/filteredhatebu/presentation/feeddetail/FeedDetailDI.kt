@@ -14,12 +14,15 @@ interface FeedDetailContributor {
     @FragmentScope
     @ContributesAndroidInjector(modules = [FeedDetailModule::class])
     fun contributeFeedDetailFragment(): FeedDetailFragment
+    
+    @FragmentScope @ContributesAndroidInjector
+    fun contributePickFilterDialogFragment(): PickFilterDialogFragment
+    
+    @Binds @IntoMap @ViewModelKey(FeedDetailViewModel::class)
+    fun bindFeedDetailViewModel(viewModel: FeedDetailViewModel): ViewModel
 }
 
 @Module
 interface FeedDetailModule {
     @Binds fun bindFragment(fragment: FeedDetailFragment): Fragment
-    
-    @Binds @IntoMap @ViewModelKey(FeedDetailViewModel::class)
-    fun bindFeedDetailViewModel(viewModel: FeedDetailViewModel): ViewModel
 }

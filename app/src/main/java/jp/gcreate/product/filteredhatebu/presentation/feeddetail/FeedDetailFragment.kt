@@ -1,6 +1,5 @@
 package jp.gcreate.product.filteredhatebu.presentation.feeddetail
 
-import android.app.Activity
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
@@ -13,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
+import androidx.navigation.fragment.findNavController
 import dagger.android.support.DaggerFragment
 import jp.gcreate.product.filteredhatebu.R
 import jp.gcreate.product.filteredhatebu.databinding.FragmentFeedDetailBinding
@@ -21,7 +21,6 @@ import jp.gcreate.product.filteredhatebu.model.HatebuBookmark
 import jp.gcreate.product.filteredhatebu.model.HatebuComments
 import jp.gcreate.product.filteredhatebu.ui.common.CustomTabHelper
 import jp.gcreate.product.filteredhatebu.ui.common.LoadingState
-import jp.gcreate.product.filteredhatebu.ui.common.PickFilterDialogFragment
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -52,20 +51,6 @@ class FeedDetailFragment : DaggerFragment() {
         vm.fetchFeed(url)
     }
     
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode == PickFilterDialogFragment.REQUEST_CODE) {
-            if (resultCode == Activity.RESULT_OK) {
-                data?.let {
-                    val filter = it.getStringExtra(Intent.EXTRA_TEXT)
-                    Timber.d("got $filter from dialog fragment through intent:$it")
-                    vm.addFilter(filter)
-                    showSnackbar(R.string.add_filter_done)
-                }
-            }
-        }
-        super.onActivityResult(requestCode, resultCode, data)
-    }
-    
     private fun setupRecyclerView() {
         binding.recyclerView.apply {
             layoutManager = linearLayoutManager
@@ -92,6 +77,13 @@ class FeedDetailFragment : DaggerFragment() {
                 binding.recyclerView.isGone = true
             }
         })
+        vm.addFilterAction.observe(this, Observer {
+            it?.handleEvent()?.let {
+                Timber.d("add filter $it")
+                showSnackbar(R.string.add_filter_done)
+                findNavController().popBackStack()
+            }
+        })
     }
     
     private fun setupActionsFromView() {
@@ -106,8 +98,7 @@ class FeedDetailFragment : DaggerFragment() {
             customTabHelper.openCustomTab(vm.currentUrl)
         }
         binding.addFilterButton.setOnClickListener {
-            PickFilterDialogFragment.createDialog(this, vm.currentUrl)
-                .show(fragmentManager, vm.currentUrl)
+            PickFilterDialogFragment().show(fragmentManager, vm.currentUrl)
         }
     }
     

@@ -14,12 +14,12 @@ interface ArchiveFeedContributor {
     @FragmentScope
     @ContributesAndroidInjector(modules = [ArchiveFeedModule::class])
     fun contributeArchiveFeedFragment(): ArchivedFeedFragment
+    
+    @Binds @IntoMap @ViewModelKey(ArchivedFeedViewModel::class)
+    fun bindArchiveFeedViewModel(viewModel: ArchivedFeedViewModel): ViewModel
 }
 
 @Module
 interface ArchiveFeedModule {
     @Binds fun bindFragment(fragment: ArchivedFeedFragment): Fragment
-    
-    @Binds @IntoMap @ViewModelKey(ArchivedFeedViewModel::class)
-    fun bindArchiveFeedViewModel(viewModel: ArchivedFeedViewModel): ViewModel
 }
