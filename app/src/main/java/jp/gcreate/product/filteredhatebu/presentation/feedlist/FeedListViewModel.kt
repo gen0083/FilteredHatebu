@@ -10,6 +10,7 @@ import jp.gcreate.product.filteredhatebu.data.AppRoomDatabase
 import jp.gcreate.product.filteredhatebu.data.entities.FeedData
 import jp.gcreate.product.filteredhatebu.di.Scope.FragmentScope
 import jp.gcreate.product.filteredhatebu.domain.CrawlFeedsWork
+import jp.gcreate.product.filteredhatebu.domain.services.FilterService
 import jp.gcreate.product.filteredhatebu.ui.common.HandleOnceEvent
 import kotlinx.coroutines.experimental.launch
 import timber.log.Timber
@@ -17,13 +18,15 @@ import javax.inject.Inject
 
 @FragmentScope
 class FeedListViewModel @Inject constructor(
-    private val appRoomDatabase: AppRoomDatabase
+    private val appRoomDatabase: AppRoomDatabase,
+    private val filterService: FilterService
 ) : ViewModel() {
 
     val newFeeds = appRoomDatabase.feedDataDao().subscribeFilteredNewFeeds()
     val test get() = "from ViewModel@${this.hashCode()} feeds:${newFeeds.value?.size}"
     private val archiveEmitter: MutableLiveData<HandleOnceEvent<String>> = MutableLiveData()
     val archiveMessage: LiveData<HandleOnceEvent<String>> = archiveEmitter
+    val addFilterEvent = filterService.addFilterEvent
     private var archived: FeedData? = null
     
     fun fetchFeeds() {
@@ -51,6 +54,10 @@ class FeedListViewModel @Inject constructor(
                 archived = null
             }
         }
+    }
+    
+    fun cancelAddFilter() {
+        filterService.undoAdd()
     }
     
     override fun onCleared() {

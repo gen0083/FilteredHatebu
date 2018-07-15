@@ -18,4 +18,7 @@ interface FilteredFeedDao {
     
     @Insert
     fun insertFilteredFeed(vararg filtered: FilteredFeed)
+    
+    @Query("select * from filtered_feed where filteredId=:filterId")
+    fun getFilteredFeed(filterId: Long): List<FilteredFeed>
 }

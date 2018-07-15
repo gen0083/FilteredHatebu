@@ -47,39 +47,12 @@ class FeedListFragment : DaggerFragment() {
         vm = ViewModelProviders.of(activity!!, factory)[FeedListViewModel::class.java]
         
         setUpRecyclerView()
-        binding.swipeRefresh.apply {
-            setOnRefreshListener { fetchFeeds() }
-            setColorSchemeColors(ResourcesCompat.getColor(resources, R.color.colorAccent, null))
-        }
-        binding.noContentReloadButton.setOnClickListener {
-            binding.swipeRefresh.isRefreshing = true
-            fetchFeeds()
-        }
-        vm.newFeeds.observe(this, Observer { list ->
-            Timber.d("update list size=${list?.size}")
-            list?.let {
-                feedListAdapter.submitList(it)
-                binding.noContentGroup.isVisible = it.isEmpty()
-            }
-        })
-        vm.archiveMessage.observe(this, Observer {
-            it?.handleEvent()?.let {
-                Snackbar.make(binding.root, "archived $it", Snackbar.LENGTH_SHORT)
-                    .setAction("cancel", { vm.undoArchive() })
-                    .show()
-            }
-        })
-        feedListAdapter.clickEvent.observe(this, Observer {
-            it?.handleEvent()?.let {
-                val direction = FeedListFragmentDirections.Action_navigation_feed_list_to_feedDetailFragment(it.url)
-                findNavController().navigate(direction)
-            }
-        })
+        setupActionFromView()
+        subscribeViewModel()
     }
     
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.feed_list_menu, menu)
-//        super.onCreateOptionsMenu(menu, inflater)
     }
     
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
@@ -101,6 +74,48 @@ class FeedListFragment : DaggerFragment() {
             Timber.d("swiped $adapterPosition")
             vm.archiveFeedAtPosition(adapterPosition)
         }).attachToRecyclerView(binding.recyclerView)
+        feedListAdapter.clickEvent.observe(this, Observer {
+            it?.handleEvent()?.let {
+                val direction = FeedListFragmentDirections.Action_navigation_feed_list_to_feedDetailFragment(
+                    it.url)
+                findNavController().navigate(direction)
+            }
+        })
+    }
+    
+    private fun subscribeViewModel() {
+        vm.newFeeds.observe(this, Observer { list ->
+            Timber.d("update list size=${list?.size}")
+            list?.let {
+                feedListAdapter.submitList(it)
+                binding.noContentGroup.isVisible = it.isEmpty()
+            }
+        })
+        vm.archiveMessage.observe(this, Observer {
+            it?.handleEvent()?.let {
+                Snackbar.make(binding.root, "archived $it", Snackbar.LENGTH_SHORT)
+                    .setAction("cancel", { vm.undoArchive() })
+                    .show()
+            }
+        })
+        vm.addFilterEvent.observe(this, Observer {
+            it?.handleEvent()?.let {
+                Snackbar.make(binding.root, "add filter ${it.filter}", Snackbar.LENGTH_SHORT)
+                    .setAction(R.string.cancel, { vm.cancelAddFilter() })
+                    .show()
+            }
+        })
+    }
+    
+    private fun setupActionFromView() {
+        binding.swipeRefresh.apply {
+            setOnRefreshListener { fetchFeeds() }
+            setColorSchemeColors(ResourcesCompat.getColor(resources, R.color.colorAccent, null))
+        }
+        binding.noContentReloadButton.setOnClickListener {
+            binding.swipeRefresh.isRefreshing = true
+            fetchFeeds()
+        }
     }
     
     private fun fetchFeeds() {
