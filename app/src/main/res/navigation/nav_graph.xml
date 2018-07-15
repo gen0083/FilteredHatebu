@@ -1,7 +1,6 @@
 <navigation
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     app:startDestination="@id/navigation_feed_list"
     >
 
@@ -16,14 +15,10 @@
             />
     </fragment>
     <fragment
-        android:id="@+id/navigation_archive"
-        android:name="jp.gcreate.product.filteredhatebu.presentation.archive.ArchivedFeedFragment"
-        android:label="ArchivedFeedFragment"
+        android:id="@+id/navigation_filter"
+        android:name="jp.gcreate.product.filteredhatebu.presentation.filterlist.FilterListFragment"
+        android:label="FilterListFragment"
         >
-        <action
-            android:id="@+id/action_navigation_feed_list_to_archiveFeedFragment"
-            app:destination="@+id/feed_detail"
-            />
     </fragment>
     <fragment
         android:id="@+id/navigation_settings"

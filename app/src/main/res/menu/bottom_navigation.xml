@@ -5,9 +5,10 @@
           android:icon="@drawable/ic_inbox"
           />
 
-    <item android:id="@+id/navigation_archive"
-          android:title="@string/bottom_navigation_archive"
-          android:icon="@drawable/ic_archive"
+    <item
+        android:id="@+id/navigation_filter"
+        android:title="@string/bottom_navigation_filter"
+        android:icon="@drawable/ic_filter"
           />
 
     <item android:id="@+id/navigation_favorite"

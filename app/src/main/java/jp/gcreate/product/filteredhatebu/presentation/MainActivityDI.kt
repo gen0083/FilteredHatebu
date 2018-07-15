@@ -5,7 +5,6 @@ import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import jp.gcreate.product.filteredhatebu.di.Scope.ActivityScope
-import jp.gcreate.product.filteredhatebu.presentation.archive.ArchiveFeedContributor
 import jp.gcreate.product.filteredhatebu.presentation.feeddetail.FeedDetailContributor
 import jp.gcreate.product.filteredhatebu.presentation.feedlist.FeedListContributor
 import jp.gcreate.product.filteredhatebu.presentation.filterlist.FilterListFragmentBuilder
@@ -18,7 +17,6 @@ interface MainActivityContributor {
         MainActivityModule::class,
         FeedDetailContributor::class,
         FeedListContributor::class,
-        ArchiveFeedContributor::class,
         FilterListFragmentBuilder::class
     ])
     fun contributeMainActivity(): MainActivity

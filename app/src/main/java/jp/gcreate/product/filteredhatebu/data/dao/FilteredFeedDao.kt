@@ -1,5 +1,6 @@
 package jp.gcreate.product.filteredhatebu.data.dao
 
+import android.arch.lifecycle.LiveData
 import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Insert
 import android.arch.persistence.room.Query
@@ -15,6 +16,10 @@ interface FilteredFeedDao {
     @Query("select feed_filter.filter, count(filteredUrl) as feedCount from filtered_feed" +
            " inner join feed_filter on filtered_feed.filteredId=feed_filter.id group by filteredId")
     fun getFilteredInformation(): List<FilteredFeedInfo>
+    
+    @Query("select feed_filter.filter, count(filteredUrl) as feedCount from filtered_feed" +
+           " inner join feed_filter on filtered_feed.filteredId=feed_filter.id group by filteredId")
+    fun subscribeFilteredInformation(): LiveData<List<FilteredFeedInfo>>
     
     @Insert
     fun insertFilteredFeed(vararg filtered: FilteredFeed)

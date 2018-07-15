@@ -20,6 +20,7 @@
     <string name="bottom_navigation_archive">アーカイブ</string>
     <string name="bottom_navigation_favorite">お気に入り</string>
     <string name="bottom_navigation_settings">設定</string>
+    <string name="bottom_navigation_filter">フィルタ管理</string>
     <string name="inbox_is_empty">未読の記事はありません</string>
     <string name="check_new_feed">新着記事をチェックする</string>
     <string name="archived_feed_is_empty">アーカイブ済みの記事はありません</string>

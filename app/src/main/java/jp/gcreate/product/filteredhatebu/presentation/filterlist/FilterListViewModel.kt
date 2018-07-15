@@ -11,4 +11,5 @@ class FilterListViewModel @Inject constructor(
 ) : ViewModel() {
     
     private val filteredFeedDao = db.filteredFeedDao()
+    val filterInfo = filteredFeedDao.subscribeFilteredInformation()
 }
