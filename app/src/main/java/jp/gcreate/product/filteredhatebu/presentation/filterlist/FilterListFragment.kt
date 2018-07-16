@@ -1,7 +1,6 @@
 package jp.gcreate.product.filteredhatebu.presentation.filterlist
 
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
@@ -11,6 +10,7 @@ import androidx.core.view.isVisible
 import dagger.android.support.DaggerFragment
 import jp.gcreate.product.filteredhatebu.databinding.FragmentFilterListBinding
 import jp.gcreate.product.filteredhatebu.di.ViewModelProviderFactory
+import jp.gcreate.product.filteredhatebu.ext.injectViewModel
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -31,7 +31,7 @@ class FilterListFragment : DaggerFragment() {
     
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        vm = ViewModelProviders.of(activity!!, factory)[FilterListViewModel::class.java]
+        vm = injectViewModel(factory)
         
         setupRecyclerView()
         setupActionFromView()

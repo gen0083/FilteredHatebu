@@ -1,7 +1,6 @@
 package jp.gcreate.product.filteredhatebu.presentation.feedlist
 
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.content.res.ResourcesCompat
@@ -25,12 +24,13 @@ import jp.gcreate.product.filteredhatebu.R
 import jp.gcreate.product.filteredhatebu.databinding.FragmentFeedListBinding
 import jp.gcreate.product.filteredhatebu.di.ViewModelProviderFactory
 import jp.gcreate.product.filteredhatebu.domain.CrawlFeedsWork
+import jp.gcreate.product.filteredhatebu.ext.injectViewModel
 import jp.gcreate.product.filteredhatebu.ui.common.SwipeDismissCallback
 import timber.log.Timber
 import javax.inject.Inject
 
 class FeedListFragment : DaggerFragment() {
-    lateinit var vm: FeedListViewModel
+    private lateinit var vm: FeedListViewModel
     @Inject lateinit var factory: ViewModelProviderFactory
     @Inject lateinit var feedListAdapter: FeedListAdapter
     private lateinit var binding: FragmentFeedListBinding
@@ -44,7 +44,7 @@ class FeedListFragment : DaggerFragment() {
     
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        vm = ViewModelProviders.of(activity!!, factory)[FeedListViewModel::class.java]
+        vm = injectViewModel(factory)
         
         setUpRecyclerView()
         setupActionFromView()
