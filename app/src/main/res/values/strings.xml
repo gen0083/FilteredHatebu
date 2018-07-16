@@ -10,6 +10,7 @@
     <string name="close">閉じる</string>
     <string name="move_to_the_site">サイトへ移動</string>
     <string name="add_filter">フィルタを追加</string>
+    <string name="delete">削除</string>
     <string name="delete_done">%sを削除しました</string>
     <string name="reload_feeds">更新</string>
     <string name="new_contents_dose_not_exist">新しい記事はありませんでした。</string>
