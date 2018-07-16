@@ -10,7 +10,7 @@ import jp.gcreate.product.filteredhatebu.di.Scope.FragmentScope
 import jp.gcreate.product.filteredhatebu.di.qualifier.ViewModelKey
 
 @Module
-interface FeedListContributor {
+interface FeedListDiModule {
     @FragmentScope
     @ContributesAndroidInjector(modules = [FeedListFragmentModule::class])
     fun contributeFeedListFragment(): FeedListFragment

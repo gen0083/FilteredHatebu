@@ -9,7 +9,7 @@ import jp.gcreate.product.filteredhatebu.di.Scope.FragmentScope
 import jp.gcreate.product.filteredhatebu.di.qualifier.ViewModelKey
 
 @Module
-interface FilterListFragmentBuilder {
+interface FilterListDiModule {
     
     @FragmentScope @ContributesAndroidInjector
     fun buildFilterListFragment(): FilterListFragment

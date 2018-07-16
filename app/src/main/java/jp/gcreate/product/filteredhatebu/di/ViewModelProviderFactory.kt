@@ -6,6 +6,11 @@ import timber.log.Timber
 import javax.inject.Inject
 import javax.inject.Provider
 
+// ViewModelKeyをSubcomponentで定義している関係上、このクラスにスコープを付けることができない
+// （FragmentScopeにすることは可能）
+// 本当ならAppScopeでシングルトンで保持してもらって問題ないのだが、
+// そのためにはViewModelKeyを例えばAppModuleですべて定義する必要がある
+// しかしそのためには、Fragmentを追加するたびにAppModuleにも手を加えなければいけなくなる
 class ViewModelProviderFactory @Inject constructor(
     private val viewModels: Map<Class<out ViewModel>, @JvmSuppressWildcards Provider<ViewModel>>
 ): ViewModelProvider.Factory {

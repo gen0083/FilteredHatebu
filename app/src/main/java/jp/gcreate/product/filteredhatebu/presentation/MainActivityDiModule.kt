@@ -5,20 +5,20 @@ import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import jp.gcreate.product.filteredhatebu.di.Scope.ActivityScope
-import jp.gcreate.product.filteredhatebu.presentation.feeddetail.FeedDetailContributor
-import jp.gcreate.product.filteredhatebu.presentation.feedlist.FeedListContributor
+import jp.gcreate.product.filteredhatebu.presentation.feeddetail.FeedDetailDiModule
+import jp.gcreate.product.filteredhatebu.presentation.feedlist.FeedListDiModule
 import jp.gcreate.product.filteredhatebu.presentation.filterdetail.FilterDetailDiModule
-import jp.gcreate.product.filteredhatebu.presentation.filterlist.FilterListFragmentBuilder
+import jp.gcreate.product.filteredhatebu.presentation.filterlist.FilterListDiModule
 
 @Module
-interface MainActivityContributor {
+interface MainActivityDiModule {
     
     @ActivityScope
     @ContributesAndroidInjector(modules = [
         MainActivityModule::class,
-        FeedDetailContributor::class,
-        FeedListContributor::class,
-        FilterListFragmentBuilder::class,
+        FeedDetailDiModule::class,
+        FeedListDiModule::class,
+        FilterListDiModule::class,
         FilterDetailDiModule::class
     ])
     fun contributeMainActivity(): MainActivity
