@@ -2,6 +2,7 @@ package jp.gcreate.product.filteredhatebu.presentation.filterlist
 
 import android.arch.lifecycle.Observer
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import dagger.android.support.DaggerFragment
+import jp.gcreate.product.filteredhatebu.R
 import jp.gcreate.product.filteredhatebu.databinding.FragmentFilterListBinding
 import jp.gcreate.product.filteredhatebu.di.ViewModelProviderFactory
 import jp.gcreate.product.filteredhatebu.ext.injectViewModel
@@ -61,6 +63,13 @@ class FilterListFragment : DaggerFragment() {
             list?.let {
                 filterListAdapter.submitList(it)
                 binding.noContentGroup.isVisible = it.isEmpty()
+            }
+        })
+        vm.deleteFilterEvent.observe(this, Observer {
+            it?.handleEvent()?.let {
+                Snackbar.make(binding.root, R.string.delete_filter, Snackbar.LENGTH_SHORT)
+                    .setAction(R.string.cancel, { vm.undoDeleteFilter() })
+                    .show()
             }
         })
     }

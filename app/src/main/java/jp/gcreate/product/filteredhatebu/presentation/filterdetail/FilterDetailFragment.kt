@@ -63,6 +63,8 @@ class FilterDetailFragment : DaggerFragment() {
     private fun setupActionFromView() {
         binding.filterDelete.setOnClickListener {
             Timber.d("delete clicked")
+            vm.deleteFilter()
+            findNavController().popBackStack()
         }
     }
     
