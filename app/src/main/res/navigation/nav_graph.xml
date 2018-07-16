@@ -19,6 +19,10 @@
         android:name="jp.gcreate.product.filteredhatebu.presentation.filterlist.FilterListFragment"
         android:label="FilterListFragment"
         >
+        <action
+            android:id="@+id/action_navigation_filter_to_filterDetailFragment"
+            app:destination="@id/filter_detail"
+            />
     </fragment>
     <fragment
         android:id="@+id/navigation_settings"
@@ -34,6 +38,24 @@
         <argument
             android:name="feedUrl"
             app:type="string"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/filter_detail"
+        android:name="jp.gcreate.product.filteredhatebu.presentation.filterdetail.FilterDetailFragment"
+        android:label="FilterDetailFragment"
+        >
+        <argument
+            android:name="filter"
+            app:type="string"
+            />
+        <argument
+            android:name="feedCount"
+            app:type="integer"
+            />
+        <action
+            android:id="@+id/action_filter_detail_to_feed_detail"
+            app:destination="@id/feed_detail"
             />
     </fragment>
 </navigation>

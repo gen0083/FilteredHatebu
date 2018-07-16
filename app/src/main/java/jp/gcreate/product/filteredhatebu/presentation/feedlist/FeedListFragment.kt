@@ -76,8 +76,8 @@ class FeedListFragment : DaggerFragment() {
         }).attachToRecyclerView(binding.recyclerView)
         feedListAdapter.clickEvent.observe(this, Observer {
             it?.handleEvent()?.let {
-                val direction = FeedListFragmentDirections.Action_navigation_feed_list_to_feedDetailFragment(
-                    it.url)
+                val direction = FeedListFragmentDirections
+                    .ActionNavigationFeedListToFeedDetailFragment(it.url)
                 findNavController().navigate(direction)
             }
         })
