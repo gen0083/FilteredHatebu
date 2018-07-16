@@ -9,7 +9,7 @@ import jp.gcreate.product.filteredhatebu.di.Scope.AppScope;
 import jp.gcreate.product.filteredhatebu.di.qualifier.ApplicationContext;
 import jp.gcreate.product.filteredhatebu.di.qualifier.ObserveOn;
 import jp.gcreate.product.filteredhatebu.di.qualifier.SubscribeOn;
-import jp.gcreate.product.filteredhatebu.presentation.MainActivityDiModule;
+import jp.gcreate.product.filteredhatebu.ui.MainActivityDiModule;
 import rx.Scheduler;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;

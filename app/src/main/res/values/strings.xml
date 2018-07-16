@@ -11,7 +11,6 @@
     <string name="move_to_the_site">サイトへ移動</string>
     <string name="add_filter">フィルタを追加</string>
     <string name="delete">削除</string>
-    <string name="delete_done">%sを削除しました</string>
     <string name="delete_filter">フィルタを解除しました</string>
     <string name="reload_feeds">更新</string>
     <string name="new_contents_dose_not_exist">新しい記事はありませんでした。</string>
@@ -19,7 +18,6 @@
     <string name="no_comments">コメントはありません</string>
     <string name="disallow_comments">コメント非表示設定の記事です</string>
     <string name="bottom_navigation_feed_list">記事一覧</string>
-    <string name="bottom_navigation_archive">アーカイブ</string>
     <string name="bottom_navigation_favorite">お気に入り</string>
     <string name="bottom_navigation_settings">設定</string>
     <string name="bottom_navigation_filter">フィルタ管理</string>

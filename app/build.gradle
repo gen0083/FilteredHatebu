@@ -174,10 +174,6 @@ dependencies {
     implementation 'com.jakewharton.picasso:picasso2-okhttp3-downloader:1.1.0'
     implementation 'com.jakewharton.threetenabp:threetenabp:1.0.5'
 
-    def orma_version = '3.0.0'
-    kapt "com.github.gfx.android.orma:orma-processor:$orma_version"
-    implementation "com.github.gfx.android.orma:orma:$orma_version"
-
     // json
     def moshi_version = "1.6.0"
     implementation "com.squareup.moshi:moshi:$moshi_version"
