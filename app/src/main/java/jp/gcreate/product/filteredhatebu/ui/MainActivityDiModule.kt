@@ -1,14 +1,14 @@
-package jp.gcreate.product.filteredhatebu.presentation
+package jp.gcreate.product.filteredhatebu.ui
 
 import android.support.v7.app.AppCompatActivity
 import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import jp.gcreate.product.filteredhatebu.di.Scope.ActivityScope
-import jp.gcreate.product.filteredhatebu.presentation.feeddetail.FeedDetailDiModule
-import jp.gcreate.product.filteredhatebu.presentation.feedlist.FeedListDiModule
-import jp.gcreate.product.filteredhatebu.presentation.filterdetail.FilterDetailDiModule
-import jp.gcreate.product.filteredhatebu.presentation.filterlist.FilterListDiModule
+import jp.gcreate.product.filteredhatebu.ui.feeddetail.FeedDetailDiModule
+import jp.gcreate.product.filteredhatebu.ui.feedlist.FeedListDiModule
+import jp.gcreate.product.filteredhatebu.ui.filterdetail.FilterDetailDiModule
+import jp.gcreate.product.filteredhatebu.ui.filterlist.FilterListDiModule
 
 @Module
 interface MainActivityDiModule {

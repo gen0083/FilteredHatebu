@@ -1,4 +1,4 @@
-package jp.gcreate.product.filteredhatebu.presentation.filterlist
+package jp.gcreate.product.filteredhatebu.ui.filterlist
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
@@ -36,8 +36,9 @@ class FilterListAdapter @Inject constructor() : ListAdapter<FilteredFeedInfo, VH
     val clickEvent: LiveData<HandleOnceEvent<FilteredFeedInfo>> = clickEventEmitter
     
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
-        return VH(LayoutInflater.from(parent.context)
-                      .inflate(R.layout.item_filtered_feed_info, parent, false))
+        return VH(
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.item_filtered_feed_info, parent, false))
     }
     
     override fun onBindViewHolder(holder: VH, position: Int) {

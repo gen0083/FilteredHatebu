@@ -1,4 +1,4 @@
-package jp.gcreate.product.filteredhatebu.presentation.feedlist
+package jp.gcreate.product.filteredhatebu.ui.feedlist
 
 import android.os.Bundle
 import android.support.design.widget.BottomSheetDialogFragment
@@ -20,8 +20,9 @@ class ListFilterStateDialog : BottomSheetDialogFragment() {
     
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        
-        parseResult(arguments).run {
+    
+        parseResult(
+            arguments).run {
             binding.checkShowNewFeed.isChecked = first
             binding.checkShowArchiveFeed.isChecked = second
             binding.checkShowFavoriteFeed.isChecked = third
@@ -49,9 +50,12 @@ class ListFilterStateDialog : BottomSheetDialogFragment() {
         const val KEY_NEW_FEED = "new_feed"
         
         fun parseResult(args: Bundle?): Triple<Boolean, Boolean, Boolean> {
-            val isShowNewFeed = args?.getBoolean(KEY_NEW_FEED) ?: true
-            val isShowArchive = args?.getBoolean(KEY_ARCHIVED_FEED) ?: false
-            val isShowFavorite = args?.getBoolean(KEY_FAVORITE_FEED) ?: false
+            val isShowNewFeed = args?.getBoolean(
+                KEY_NEW_FEED) ?: true
+            val isShowArchive = args?.getBoolean(
+                KEY_ARCHIVED_FEED) ?: false
+            val isShowFavorite = args?.getBoolean(
+                KEY_FAVORITE_FEED) ?: false
             return Triple(isShowNewFeed, isShowArchive, isShowFavorite)
         }
     }
@@ -61,10 +65,14 @@ fun Fragment.createFilterDialog(showNewFeed: Boolean = true, showArchivedFeed: B
                                 showFavoriteFeed: Boolean = false): ListFilterStateDialog {
     return ListFilterStateDialog().apply {
         arguments = Bundle().apply {
-            putBoolean(ListFilterStateDialog.KEY_NEW_FEED, showNewFeed)
-            putBoolean(ListFilterStateDialog.KEY_ARCHIVED_FEED, showArchivedFeed)
-            putBoolean(ListFilterStateDialog.KEY_FAVORITE_FEED, showFavoriteFeed)
+            putBoolean(
+                ListFilterStateDialog.KEY_NEW_FEED, showNewFeed)
+            putBoolean(
+                ListFilterStateDialog.KEY_ARCHIVED_FEED, showArchivedFeed)
+            putBoolean(
+                ListFilterStateDialog.KEY_FAVORITE_FEED, showFavoriteFeed)
         }
-        setTargetFragment(this@createFilterDialog, ListFilterStateDialog.REQUEST_CODE)
+        setTargetFragment(this@createFilterDialog,
+                          ListFilterStateDialog.REQUEST_CODE)
     }
 }

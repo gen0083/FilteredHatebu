@@ -1,4 +1,4 @@
-package jp.gcreate.product.filteredhatebu.presentation.filterlist
+package jp.gcreate.product.filteredhatebu.ui.filterlist
 
 import android.arch.lifecycle.ViewModel
 import jp.gcreate.product.filteredhatebu.data.AppRoomDatabase

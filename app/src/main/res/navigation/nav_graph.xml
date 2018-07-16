@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/navigation_feed_list"
-        android:name="jp.gcreate.product.filteredhatebu.presentation.feedlist.FeedListFragment"
+        android:name="jp.gcreate.product.filteredhatebu.ui.feedlist.FeedListFragment"
         android:label="FeedListFragment"
         >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/navigation_filter"
-        android:name="jp.gcreate.product.filteredhatebu.presentation.filterlist.FilterListFragment"
+        android:name="jp.gcreate.product.filteredhatebu.ui.filterlist.FilterListFragment"
         android:label="FilterListFragment"
         >
         <action
@@ -32,7 +32,7 @@
     </fragment>
     <fragment
         android:id="@+id/feed_detail"
-        android:name="jp.gcreate.product.filteredhatebu.presentation.feeddetail.FeedDetailFragment"
+        android:name="jp.gcreate.product.filteredhatebu.ui.feeddetail.FeedDetailFragment"
         android:label="FeedDetailFragment"
         >
         <argument
@@ -42,7 +42,7 @@
     </fragment>
     <fragment
         android:id="@+id/filter_detail"
-        android:name="jp.gcreate.product.filteredhatebu.presentation.filterdetail.FilterDetailFragment"
+        android:name="jp.gcreate.product.filteredhatebu.ui.filterdetail.FilterDetailFragment"
         android:label="FilterDetailFragment"
         >
         <argument

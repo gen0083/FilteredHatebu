@@ -1,4 +1,4 @@
-package jp.gcreate.product.filteredhatebu.presentation.feedlist
+package jp.gcreate.product.filteredhatebu.ui.feedlist
 
 import android.arch.lifecycle.ViewModel
 import android.support.v4.app.Fragment

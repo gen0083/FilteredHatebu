@@ -1,4 +1,4 @@
-package jp.gcreate.product.filteredhatebu.presentation.feedlist
+package jp.gcreate.product.filteredhatebu.ui.feedlist
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
@@ -41,9 +41,10 @@ class FeedListAdapter @Inject constructor(private val faviconUtil: FaviconUtil)
     }
     
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FeedListViewHolder {
-        return FeedListViewHolder(LayoutInflater.from(parent.context)
-                                      .inflate(R.layout.item_feed_list_item, parent, false),
-                                  faviconUtil)
+        return FeedListViewHolder(
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.item_feed_list_item, parent, false),
+            faviconUtil)
     }
     
     override fun onBindViewHolder(holder: FeedListViewHolder, position: Int) {

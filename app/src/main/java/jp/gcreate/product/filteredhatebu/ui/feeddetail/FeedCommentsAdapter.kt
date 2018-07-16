@@ -1,4 +1,4 @@
-package jp.gcreate.product.filteredhatebu.presentation.feeddetail
+package jp.gcreate.product.filteredhatebu.ui.feeddetail
 
 import android.support.v7.recyclerview.extensions.ListAdapter
 import android.support.v7.util.DiffUtil

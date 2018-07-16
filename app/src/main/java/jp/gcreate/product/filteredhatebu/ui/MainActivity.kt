@@ -1,4 +1,4 @@
-package jp.gcreate.product.filteredhatebu.presentation
+package jp.gcreate.product.filteredhatebu.ui
 
 import android.databinding.DataBindingUtil
 import android.os.Bundle

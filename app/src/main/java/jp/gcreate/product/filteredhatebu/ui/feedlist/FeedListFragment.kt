@@ -1,4 +1,4 @@
-package jp.gcreate.product.filteredhatebu.presentation.feedlist
+package jp.gcreate.product.filteredhatebu.ui.feedlist
 
 import android.arch.lifecycle.Observer
 import android.os.Bundle
@@ -128,7 +128,8 @@ class FeedListFragment : DaggerFragment() {
                     Timber.d("status updated $it")
                     if (it?.state in arrayOf(State.SUCCEEDED, State.FAILED)) {
                         val count = it?.outputData?.getInt(CrawlFeedsWork.KEY_NEW_FEEDS_COUNT, 0)
-                        Snackbar.make(binding.root, "$count feeds new comes!", Snackbar.LENGTH_SHORT)
+                        Snackbar.make(binding.root, "$count feeds new comes!",
+                                      Snackbar.LENGTH_SHORT)
                             .show()
                         binding.swipeRefresh.isRefreshing = false
                     }

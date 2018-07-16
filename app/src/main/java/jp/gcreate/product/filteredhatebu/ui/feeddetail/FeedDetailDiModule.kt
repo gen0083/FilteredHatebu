@@ -1,4 +1,4 @@
-package jp.gcreate.product.filteredhatebu.presentation.feeddetail
+package jp.gcreate.product.filteredhatebu.ui.feeddetail
 
 import android.arch.lifecycle.ViewModel
 import android.support.v4.app.Fragment
@@ -18,7 +18,8 @@ interface FeedDetailDiModule {
     @FragmentScope @ContributesAndroidInjector
     fun contributePickFilterDialogFragment(): PickFilterDialogFragment
     
-    @Binds @IntoMap @ViewModelKey(FeedDetailViewModel::class)
+    @Binds @IntoMap @ViewModelKey(
+        FeedDetailViewModel::class)
     fun bindFeedDetailViewModel(viewModel: FeedDetailViewModel): ViewModel
 }
 

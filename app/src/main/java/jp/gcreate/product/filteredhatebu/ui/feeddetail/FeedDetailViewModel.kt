@@ -1,4 +1,4 @@
-package jp.gcreate.product.filteredhatebu.presentation.feeddetail
+package jp.gcreate.product.filteredhatebu.ui.feeddetail
 
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData

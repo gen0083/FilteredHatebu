@@ -1,4 +1,4 @@
-package jp.gcreate.product.filteredhatebu.presentation.feeddetail
+package jp.gcreate.product.filteredhatebu.ui.feeddetail
 
 import android.arch.lifecycle.Observer
 import android.content.Intent
@@ -99,7 +99,8 @@ class FeedDetailFragment : DaggerFragment() {
             customTabHelper.openCustomTab(vm.currentUrl)
         }
         binding.addFilterButton.setOnClickListener {
-            PickFilterDialogFragment().show(fragmentManager, vm.currentUrl)
+            PickFilterDialogFragment()
+                .show(fragmentManager, vm.currentUrl)
         }
     }
     

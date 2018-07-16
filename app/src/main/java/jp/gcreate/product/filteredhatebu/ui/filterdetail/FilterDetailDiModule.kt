@@ -1,4 +1,4 @@
-package jp.gcreate.product.filteredhatebu.presentation.filterlist
+package jp.gcreate.product.filteredhatebu.ui.filterdetail
 
 import android.arch.lifecycle.ViewModel
 import dagger.Binds
@@ -9,11 +9,12 @@ import jp.gcreate.product.filteredhatebu.di.Scope.FragmentScope
 import jp.gcreate.product.filteredhatebu.di.qualifier.ViewModelKey
 
 @Module
-interface FilterListDiModule {
+interface FilterDetailDiModule {
     
     @FragmentScope @ContributesAndroidInjector
-    fun buildFilterListFragment(): FilterListFragment
+    fun buildFilterDetailFragment(): FilterDetailFragment
     
-    @Binds @IntoMap @ViewModelKey(FilterListViewModel::class)
-    fun bindFilterListViewModel(viewModel: FilterListViewModel): ViewModel
+    @Binds @IntoMap @ViewModelKey(
+        FilterDetailViewModel::class)
+    fun bindFilterDetailViewModel(vm: FilterDetailViewModel): ViewModel
 }
