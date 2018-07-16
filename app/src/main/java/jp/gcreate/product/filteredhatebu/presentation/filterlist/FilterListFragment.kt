@@ -2,11 +2,13 @@ package jp.gcreate.product.filteredhatebu.presentation.filterlist
 
 import android.arch.lifecycle.Observer
 import android.os.Bundle
+import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.navigation.fragment.findNavController
 import dagger.android.support.DaggerFragment
 import jp.gcreate.product.filteredhatebu.databinding.FragmentFilterListBinding
 import jp.gcreate.product.filteredhatebu.di.ViewModelProviderFactory
@@ -17,9 +19,6 @@ import javax.inject.Inject
 class FilterListFragment : DaggerFragment() {
     private lateinit var binding: FragmentFilterListBinding
     private lateinit var vm: FilterListViewModel
-    private val linearLayoutManager by lazy {
-        LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-    }
     @Inject lateinit var factory: ViewModelProviderFactory
     @Inject lateinit var filterListAdapter: FilterListAdapter
     
@@ -41,10 +40,16 @@ class FilterListFragment : DaggerFragment() {
     private fun setupRecyclerView() {
         binding.recyclerView.apply {
             adapter = filterListAdapter
-            layoutManager = linearLayoutManager
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
         }
         filterListAdapter.clickEvent.observe(this, Observer {
             Timber.d("filter list clicked: $it")
+            it?.handleEvent()?.let {
+                val dest = FilterListFragmentDirections
+                    .ActionNavigationFilterToFilterDetailFragment(it.filter, it.feedCount)
+                findNavController().navigate(dest)
+            }
         })
     }
     

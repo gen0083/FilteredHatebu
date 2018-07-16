@@ -61,7 +61,7 @@ class FilterService @Inject constructor(
             Timber.e("$filter is not exist")
             return@launch
         }
-        val feeds = filteredFeedDao.getFilteredFeed(target.id)
+        val feeds = filteredFeedDao.getFilteredFeed(target.filter)
         deleteCommand = DeleteCommand(target, feeds)
         feedFilterDao.deleteFilter(filter)
         deleteFilterEventEmitter.postValue(HandleOnceEvent(target))
