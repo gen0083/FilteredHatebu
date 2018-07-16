@@ -24,15 +24,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ui.feedlist.HatebuFeedActivity"
-            android:theme="@style/AppTheme.NoActionBar"
-            >
-        </activity>
-        <activity android:name=".ui.feeddetail.HatebuFeedDetailActivity">
-        </activity>
-        <activity android:name=".ui.editfilter.FilterEditActivity">
-        </activity>
     </application>
 
 </manifest>
