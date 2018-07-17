@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isGone
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
+import jp.gcreate.product.filteredhatebu.BuildConfig
 import jp.gcreate.product.filteredhatebu.databinding.FragmentOptionBinding
 
 /**
@@ -28,7 +29,13 @@ class OptionsFragment : Fragment() {
         return binding.root
     }
     
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        
+        showAppVersion()
+    }
+    
+    private fun showAppVersion() {
+        binding.versionName.text = "${BuildConfig.VERSION_NAME}(${BuildConfig.VERSION_CODE})"
     }
 }
