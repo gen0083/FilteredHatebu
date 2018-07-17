@@ -136,11 +136,12 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintVertical_bias="1.0"
                 android:padding="@dimen/item_padding"
-                android:elevation="2dp"
-                app:elevation="2dp"
+                android:elevation="4dp"
+                app:elevation="4dp"
                 android:clickable="true"
                 android:focusable="true"
-                android:background="?attr/selectableItemBackground"
+                android:background="@color/colorPrimaryLight"
+                android:foreground="?attr/selectableItemBackground"
                 />
 
 

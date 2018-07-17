@@ -15,16 +15,18 @@
             android:id="@+id/close_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:tint="@color/colorAccent"
             android:clickable="true"
             android:focusable="true"
-            android:background="?attr/selectableItemBackground"
+            android:background="@color/colorPrimaryLight"
+            android:foreground="?attr/selectableItemBackground"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             android:padding="8dp"
             android:text="@string/comments_title"
             android:drawableEnd="@drawable/ic_close"
             android:gravity="center_vertical"
+            android:elevation="4dp"
+            app:elevation="4dp"
             />
 
         <android.support.v7.widget.RecyclerView
