@@ -72,5 +72,10 @@ class FilterListFragment : DaggerFragment() {
                     .show()
             }
         })
+        vm.archiveEvent.observe(this, Observer {
+            // フィルタにひっかかった記事でも、記事詳細からアーカイブすることができる
+            // しかし、記事一覧に移動したときにアーカイブしたメッセージが表示されてしまうので、ここで処理する
+            Timber.d("archive feed from filtered detail: ${it?.handleEvent()}")
+        })
     }
 }
