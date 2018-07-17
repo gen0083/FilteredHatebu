@@ -83,7 +83,7 @@ class FeedDetailFragment : DaggerFragment() {
             PickFilterDialogFragment()
                 .show(fragmentManager, vm.currentUrl)
         }
-        binding.openCommentDialog.setOnClickListener {
+        binding.commentStatusMessage.setOnClickListener {
             CommentBottomSheetDialog().show(fragmentManager, "comments")
         }
     }

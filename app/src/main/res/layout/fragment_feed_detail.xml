@@ -41,7 +41,6 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0"
                 app:layout_constraintVertical_chainStyle="packed"
-
                 tools:text="Here is the title sometimes very very long characters in this line."
                 />
 
@@ -122,26 +121,28 @@
                 app:layout_constraintLeft_toRightOf="@+id/add_filter_button"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/summary"
-                app:layout_constraintBottom_toTopOf="@+id/barrier_for_footer"
+                app:layout_constraintBottom_toTopOf="@+id/comment_status_message"
                 />
 
-            <android.support.constraint.Barrier
-                android:id="@+id/barrier_for_footer"
-                android:layout_width="match_parent"
+            <TextView
+                android:id="@+id/comment_status_message"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:barrierDirection="top"
-                app:constraint_referenced_ids="open_comment_dialog,proggress_bar,comment_status_message"
-                />
-
-            <ImageView
-                android:id="@+id/open_comment_dialog"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:srcCompat="@drawable/ic_arrow_up"
+                android:text="@string/no_comments"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                android:drawableEnd="@drawable/ic_arrow_up"
+                app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintVertical_bias="1.0"
                 android:padding="@dimen/item_padding"
+                android:elevation="2dp"
+                app:elevation="2dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?attr/selectableItemBackground"
                 />
+
 
             <ProgressBar
                 android:id="@+id/progress_bar"
@@ -150,24 +151,12 @@
                 android:layout_height="wrap_content"
                 android:indeterminate="true"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/open_comment_dialog"
-                app:layout_constraintBottom_toBottomOf="@+id/open_comment_dialog"
-                app:layout_constraintRight_toLeftOf="@+id/open_comment_dialog"
+                app:layout_constraintTop_toTopOf="@+id/comment_status_message"
+                app:layout_constraintBottom_toBottomOf="@+id/comment_status_message"
+                app:layout_constraintRight_toRightOf="parent"
                 android:padding="@dimen/item_padding"
                 />
 
-            <TextView
-                android:id="@+id/comment_status_message"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:text="@string/no_comments"
-                android:padding="@dimen/item_padding"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="@+id/open_comment_dialog"
-                app:layout_constraintTop_toTopOf="@+id/open_comment_dialog"
-                app:layout_constraintBottom_toBottomOf="@+id/open_comment_dialog"
-                />
 
         </android.support.constraint.ConstraintLayout>
 

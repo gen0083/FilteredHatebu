@@ -18,6 +18,7 @@
     <string name="got_comments">%d件のコメント</string>
     <string name="no_comments">コメントはありません</string>
     <string name="disallow_comments">コメント非表示設定の記事です</string>
+    <string name="comments_title">はてなブックマークコメント</string>
     <string name="bottom_navigation_feed_list">記事一覧</string>
     <string name="bottom_navigation_favorite">お気に入り</string>
     <string name="bottom_navigation_settings">設定</string>

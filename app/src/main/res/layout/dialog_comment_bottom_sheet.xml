@@ -11,11 +11,10 @@
         android:orientation="vertical"
         >
 
-        <ImageView
+        <TextView
             android:id="@+id/close_button"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_close"
             android:tint="@color/colorAccent"
             android:clickable="true"
             android:focusable="true"
@@ -23,7 +22,9 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             android:padding="8dp"
-            android:layout_gravity="end|right"
+            android:text="@string/comments_title"
+            android:drawableEnd="@drawable/ic_close"
+            android:gravity="center_vertical"
             />
 
         <android.support.v7.widget.RecyclerView
