@@ -39,6 +39,9 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                app:layout_constraintVertical_chainStyle="packed"
+
                 tools:text="Here is the title sometimes very very long characters in this line."
                 />
 
@@ -71,7 +74,8 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/url"
-                tools:text="Content summary, hogehoge."
+                app:layout_constraintBottom_toTopOf="@+id/share_button"
+                tools:text="@tools:sample/lorem/"
                 />
 
 
@@ -118,58 +122,54 @@
                 app:layout_constraintLeft_toRightOf="@+id/add_filter_button"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/summary"
+                app:layout_constraintBottom_toTopOf="@+id/barrier_for_footer"
                 />
 
-        </android.support.constraint.ConstraintLayout>
-
-        <FrameLayout
-            android:id="@+id/bottom_sheet_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            app:behavior_peekHeight="100dp"
-            app:layout_behavior="@string/bottom_sheet_behavior"
-            >
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recycler_view"
+            <android.support.constraint.Barrier
+                android:id="@+id/barrier_for_footer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#88fafafa"
-                android:scrollbars="vertical"
-                android:fadeScrollbars="false"
-                tools:listitem="@layout/item_entry_bookmarks"
+                app:barrierDirection="top"
+                app:constraint_referenced_ids="open_comment_dialog,proggress_bar,comment_status_message"
                 />
 
-            <android.support.v7.widget.CardView
-                android:id="@+id/comment_status"
-                android:layout_width="match_parent"
+            <ImageView
+                android:id="@+id/open_comment_dialog"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
-                app:cardElevation="2dp"
-                app:cardUseCompatPadding="true"
-                >
-
-                <TextView
-                    android:id="@+id/comment_status_message"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/no_comments"
-                    android:padding="@dimen/item_padding"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-                    />
-
-            </android.support.v7.widget.CardView>
+                app:srcCompat="@drawable/ic_arrow_up"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:padding="@dimen/item_padding"
+                />
 
             <ProgressBar
                 android:id="@+id/progress_bar"
                 style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:indeterminate="true"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/open_comment_dialog"
+                app:layout_constraintBottom_toBottomOf="@+id/open_comment_dialog"
+                app:layout_constraintRight_toLeftOf="@+id/open_comment_dialog"
+                android:padding="@dimen/item_padding"
                 />
 
-        </FrameLayout>
+            <TextView
+                android:id="@+id/comment_status_message"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/no_comments"
+                android:padding="@dimen/item_padding"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/open_comment_dialog"
+                app:layout_constraintTop_toTopOf="@+id/open_comment_dialog"
+                app:layout_constraintBottom_toBottomOf="@+id/open_comment_dialog"
+                />
+
+        </android.support.constraint.ConstraintLayout>
+
     </android.support.design.widget.CoordinatorLayout>
 </layout>

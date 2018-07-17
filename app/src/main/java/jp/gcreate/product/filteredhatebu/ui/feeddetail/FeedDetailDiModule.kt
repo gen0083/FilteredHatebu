@@ -18,6 +18,10 @@ interface FeedDetailDiModule {
     @FragmentScope @ContributesAndroidInjector
     fun contributePickFilterDialogFragment(): PickFilterDialogFragment
     
+    @FragmentScope @ContributesAndroidInjector
+    fun contributeCommentBottomSheetDialog(): CommentBottomSheetDialog
+    
+    
     @Binds @IntoMap @ViewModelKey(
         FeedDetailViewModel::class)
     fun bindFeedDetailViewModel(viewModel: FeedDetailViewModel): ViewModel
