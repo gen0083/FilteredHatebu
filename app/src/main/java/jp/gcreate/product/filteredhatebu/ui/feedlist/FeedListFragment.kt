@@ -94,13 +94,13 @@ class FeedListFragment : DaggerFragment() {
         vm.archiveMessage.observe(this, Observer {
             it?.handleEvent()?.let {
                 Snackbar.make(binding.root, R.string.archive_done, Snackbar.LENGTH_SHORT)
-                    .setAction("cancel", { vm.undoArchive() })
+                    .setAction(R.string.cancel, { vm.undoArchive() })
                     .show()
             }
         })
         vm.addFilterEvent.observe(this, Observer {
             it?.handleEvent()?.let {
-                Snackbar.make(binding.root, "add filter ${it.filter}", Snackbar.LENGTH_SHORT)
+                Snackbar.make(binding.root, R.string.add_filter_done, Snackbar.LENGTH_SHORT)
                     .setAction(R.string.cancel, { vm.cancelAddFilter() })
                     .show()
             }

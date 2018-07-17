@@ -6,7 +6,6 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isGone
 import com.google.android.gms.oss.licenses.OssLicensesMenuActivity
 import jp.gcreate.product.filteredhatebu.BuildConfig
 import jp.gcreate.product.filteredhatebu.databinding.FragmentOptionBinding
@@ -22,9 +21,6 @@ class OptionsFragment : Fragment() {
         binding = FragmentOptionBinding.inflate(inflater, container, false)
         binding.ossLicense.setOnClickListener {
             startActivity(Intent(activity, OssLicensesMenuActivity::class.java))
-        }
-        binding.testButton.setOnClickListener {
-            binding.groupAppInformation.isGone = !binding.groupAppInformation.isGone
         }
         return binding.root
     }
