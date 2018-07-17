@@ -83,9 +83,6 @@ class FeedDetailFragment : DaggerFragment() {
             PickFilterDialogFragment()
                 .show(fragmentManager, vm.currentUrl)
         }
-        binding.commentStatusMessage.setOnClickListener {
-            CommentBottomSheetDialog().show(fragmentManager, "comments")
-        }
     }
     
     private fun handleComments(comments: HatebuComments) {
@@ -96,6 +93,20 @@ class FeedDetailFragment : DaggerFragment() {
             is HatebuComments.Disallow -> getString(R.string.disallow_comments)
             is HatebuComments.Empty    -> getString(R.string.no_comments)
             is HatebuComments.Comments -> getString(R.string.got_comments, comments.comments.size)
+        }
+    
+        if (comments is HatebuComments.Comments) {
+            binding.commentStatusMessage.apply {
+                setOnClickListener {
+                    CommentBottomSheetDialog().show(fragmentManager, "comments")
+                }
+                isClickable = true
+            }
+        } else {
+            binding.commentStatusMessage.apply {
+                setOnClickListener(null)
+                isClickable = false
+            }
         }
     }
 }
