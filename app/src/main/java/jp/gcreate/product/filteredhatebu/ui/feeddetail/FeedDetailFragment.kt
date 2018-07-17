@@ -83,6 +83,10 @@ class FeedDetailFragment : DaggerFragment() {
             PickFilterDialogFragment()
                 .show(fragmentManager, vm.currentUrl)
         }
+        binding.archiveButton.setOnClickListener {
+            vm.archiveFeed()
+            findNavController().popBackStack()
+        }
     }
     
     private fun handleComments(comments: HatebuComments) {

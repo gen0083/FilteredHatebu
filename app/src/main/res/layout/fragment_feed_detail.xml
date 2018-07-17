@@ -27,22 +27,40 @@
 
             <TextView
                 android:id="@+id/title"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:paddingBottom="0dp"
-                android:paddingLeft="16dp"
-                android:paddingRight="16dp"
-                android:paddingTop="24dp"
+                android:padding="16dp"
                 android:text="@{item.title}"
                 android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                 app:layout_constraintBottom_toTopOf="@+id/url"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/archive_button"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.0"
                 app:layout_constraintVertical_chainStyle="packed"
                 tools:text="Here is the title sometimes very very long characters in this line."
                 />
+
+            <ImageView
+                android:id="@+id/archive_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="8dp"
+                android:src="@drawable/ic_archive"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:contentDescription="@string/archive"
+                android:tint="@color/colorAccent"
+                android:focusable="true"
+                app:layout_constraintLeft_toRightOf="@+id/title"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/title"
+                app:layout_constraintBottom_toBottomOf="@+id/title"
+                />
+
 
             <TextView
                 android:id="@+id/url"
@@ -52,7 +70,7 @@
                 android:paddingBottom="0dp"
                 android:paddingLeft="16dp"
                 android:paddingRight="16dp"
-                android:paddingTop="12dp"
+                android:paddingTop="0dp"
                 android:text="@{item.url}"
                 android:textAppearance="@style/TextAppearance.AppCompat.Caption"
                 android:singleLine="true"
@@ -76,7 +94,6 @@
                 app:layout_constraintBottom_toTopOf="@+id/share_button"
                 tools:text="@tools:sample/lorem/random"
                 />
-
 
             <Button
                 android:id="@+id/read_more_button"

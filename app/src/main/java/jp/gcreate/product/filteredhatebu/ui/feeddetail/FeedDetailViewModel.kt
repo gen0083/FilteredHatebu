@@ -6,6 +6,7 @@ import android.arch.lifecycle.ViewModel
 import jp.gcreate.product.filteredhatebu.data.AppRoomDatabase
 import jp.gcreate.product.filteredhatebu.data.entities.FeedData
 import jp.gcreate.product.filteredhatebu.di.Scope.FragmentScope
+import jp.gcreate.product.filteredhatebu.domain.services.ArchiveFeedService
 import jp.gcreate.product.filteredhatebu.domain.services.BookmarkCommentsService
 import jp.gcreate.product.filteredhatebu.domain.services.FilterService
 import jp.gcreate.product.filteredhatebu.model.HatebuComments
@@ -21,7 +22,8 @@ import javax.inject.Inject
 class FeedDetailViewModel @Inject constructor(
     private val appRoomDatabase: AppRoomDatabase,
     private val commentsService: BookmarkCommentsService,
-    private val filterService: FilterService
+    private val filterService: FilterService,
+    private val archiveService: ArchiveFeedService
 ) : ViewModel() {
     
     private val feedDataDao = appRoomDatabase.feedDataDao()
@@ -53,5 +55,9 @@ class FeedDetailViewModel @Inject constructor(
     fun addFilter(filter: String) {
         filterService.addFilter(filter)
         addFilterActionEmitter.value = HandleOnceEvent(filter)
+    }
+    
+    fun archiveFeed() {
+        archiveService.archiveFeed(currentUrl)
     }
 }

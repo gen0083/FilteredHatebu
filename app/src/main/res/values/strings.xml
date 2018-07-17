@@ -25,6 +25,8 @@
     <string name="bottom_navigation_filter">フィルタ管理</string>
     <string name="inbox_is_empty">未読の記事はありません</string>
     <string name="check_new_feed">新着記事をチェックする</string>
+    <string name="archive">アーカイブ</string>
+    <string name="archive_done">アーカイブしました</string>
     <string name="archived_feed_is_empty">アーカイブ済みの記事はありません</string>
     <string name="fetch_comment_error">コメント取得に失敗しました</string>
     <string name="retry">リトライ</string>

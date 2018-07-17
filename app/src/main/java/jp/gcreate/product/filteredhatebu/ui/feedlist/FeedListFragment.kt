@@ -93,7 +93,7 @@ class FeedListFragment : DaggerFragment() {
         })
         vm.archiveMessage.observe(this, Observer {
             it?.handleEvent()?.let {
-                Snackbar.make(binding.root, "archived $it", Snackbar.LENGTH_SHORT)
+                Snackbar.make(binding.root, R.string.archive_done, Snackbar.LENGTH_SHORT)
                     .setAction("cancel", { vm.undoArchive() })
                     .show()
             }
