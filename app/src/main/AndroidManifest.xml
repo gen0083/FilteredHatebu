@@ -16,19 +16,14 @@
         >
         <meta-data android:name="firebase_crashlytics_collection_enabled" android:value="false" />
         <activity
-            android:name=".ui.feedlist.HatebuFeedActivity"
+            android:name=".ui.MainActivity"
             android:theme="@style/AppTheme.NoActionBar"
-            >
+                  >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
-        </activity>
-        <activity android:name=".ui.feeddetail.HatebuFeedDetailActivity">
-        </activity>
-        <activity android:name=".ui.editfilter.FilterEditActivity">
         </activity>
     </application>
 

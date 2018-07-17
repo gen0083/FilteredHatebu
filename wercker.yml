@@ -11,6 +11,12 @@ build:
         name: run unit test
         code: |
           ./gradlew --project-cache-dir=$WERCKER_CACHE_DIR testProdDebugUnitTest -PdisablePreDex
+  steps:
+    - script:
+        name: run ui test
+        code: |
+          start-emulator
+          ./gradlew --project-cache-dir=$WERCKER_CACHE_DIR connectedProdDebugAndroidTest
   after-steps:
     - script:
         name: copy test reports

@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <data>
+
+        <variable
+            name="item"
+            type="jp.gcreate.product.filteredhatebu.data.entities.FeedData"
+            />
+
+    </data>
+
+    <android.support.design.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/main_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="@{item.title}"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                app:layout_constraintBottom_toTopOf="@+id/url"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/archive_button"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                app:layout_constraintVertical_chainStyle="packed"
+                tools:text="Here is the title sometimes very very long characters in this line."
+                />
+
+            <ImageView
+                android:id="@+id/archive_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="8dp"
+                android:src="@drawable/ic_archive"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:contentDescription="@string/archive"
+                android:tint="@color/colorAccent"
+                android:focusable="true"
+                app:layout_constraintLeft_toRightOf="@+id/title"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/title"
+                app:layout_constraintBottom_toBottomOf="@+id/title"
+                />
+
+
+            <TextView
+                android:id="@+id/url"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:paddingBottom="0dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="0dp"
+                android:text="@{item.url}"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                android:singleLine="true"
+                app:layout_constraintBottom_toTopOf="@+id/summary"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/title"
+                tools:text="http://hoge.test.com/hoge/very_long_long_url_the_difficult_fuga_fuga.html"
+                />
+
+            <TextView
+                android:id="@+id/summary"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:padding="16dp"
+                android:text="@{item.summary}"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/url"
+                app:layout_constraintBottom_toTopOf="@+id/share_button"
+                tools:text="@tools:sample/lorem/random"
+                />
+
+            <Button
+                android:id="@+id/read_more_button"
+                style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/move_to_the_site"
+                app:layout_constraintBottom_toBottomOf="@+id/share_button"
+                app:layout_constraintHorizontal_bias="1"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/add_filter_button"
+                app:layout_constraintTop_toTopOf="@+id/share_button"
+                />
+
+            <Button
+                android:id="@+id/add_filter_button"
+                style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/add_filter"
+                app:layout_constraintBottom_toBottomOf="@+id/share_button"
+                app:layout_constraintLeft_toRightOf="@+id/read_more_button"
+                app:layout_constraintRight_toLeftOf="@+id/share_button"
+                app:layout_constraintTop_toTopOf="@+id/share_button"
+                />
+
+            <ImageView
+                android:id="@+id/share_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="8dp"
+                android:src="@drawable/ic_share"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:contentDescription="@string/share_url"
+                android:tint="@color/colorAccent"
+                android:focusable="true"
+                app:layout_constraintLeft_toRightOf="@+id/add_filter_button"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/summary"
+                app:layout_constraintBottom_toTopOf="@+id/comment_status_message"
+                />
+
+            <TextView
+                android:id="@+id/comment_status_message"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/no_comments"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+                android:drawableEnd="@drawable/ic_arrow_up"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintVertical_bias="1.0"
+                android:padding="@dimen/item_padding"
+                android:elevation="4dp"
+                app:elevation="4dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="@color/colorPrimaryLight"
+                android:foreground="?attr/selectableItemBackground"
+                />
+
+
+            <ProgressBar
+                android:id="@+id/progress_bar"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:indeterminate="true"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/comment_status_message"
+                app:layout_constraintBottom_toBottomOf="@+id/comment_status_message"
+                app:layout_constraintRight_toRightOf="parent"
+                android:padding="@dimen/item_padding"
+                />
+
+
+        </android.support.constraint.ConstraintLayout>
+
+    </android.support.design.widget.CoordinatorLayout>
+</layout>

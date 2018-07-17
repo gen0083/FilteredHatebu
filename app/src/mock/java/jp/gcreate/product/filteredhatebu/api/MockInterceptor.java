@@ -15,7 +15,7 @@ import javax.inject.Inject;
 
 import jp.gcreate.product.filteredhatebu.BuildConfig;
 import jp.gcreate.product.filteredhatebu.di.qualifier.ApplicationContext;
-import jp.gcreate.product.filteredhatebu.ui.feedlist.FeedAdapter;
+import jp.gcreate.product.filteredhatebu.ui.common.FaviconUtil;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
@@ -81,7 +81,7 @@ public class MockInterceptor implements Interceptor {
         }
 
         // favicon
-        if (FeedAdapter.FAVICON_URL.contains(url.host())) {
+        if (FaviconUtil.FAVICON_URL.contains(url.host())) {
             return mockedFaviconWithParameter(chain.request(), url.queryParameter("url"));
         }
         return mockedNotFound(chain.request());
