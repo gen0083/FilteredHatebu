@@ -47,8 +47,8 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment() {
     private fun setupRecyclerView() {
         binding.recyclerView.apply {
             adapter = commentsAdapter
-            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-            addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+            layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+            addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
         }
     }
     

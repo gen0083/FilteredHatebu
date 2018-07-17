@@ -47,8 +47,8 @@ class FilterDetailFragment : DaggerFragment() {
     private fun setupRecyclerView() {
         binding.recyclerView.apply {
             adapter = feedListAdapter
-            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-            addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
+            layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+            addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
         }
         feedListAdapter.clickEvent.observe(this, Observer {
             Timber.d("$it")
