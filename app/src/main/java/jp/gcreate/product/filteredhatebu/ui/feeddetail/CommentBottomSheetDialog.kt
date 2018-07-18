@@ -4,12 +4,14 @@ import android.arch.lifecycle.Observer
 import android.content.Context
 import android.os.Bundle
 import android.support.design.widget.BottomSheetDialogFragment
+import android.support.v7.view.ContextThemeWrapper
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import dagger.android.support.AndroidSupportInjection
+import jp.gcreate.product.filteredhatebu.R
 import jp.gcreate.product.filteredhatebu.databinding.DialogCommentBottomSheetBinding
 import jp.gcreate.product.filteredhatebu.di.ViewModelProviderFactory
 import jp.gcreate.product.filteredhatebu.ext.injectViewModel
@@ -30,7 +32,9 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment() {
     
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        binding = DialogCommentBottomSheetBinding.inflate(inflater, container, false)
+        val contextWrapper = ContextThemeWrapper(activity, R.style.AppTheme)
+        binding = DialogCommentBottomSheetBinding.inflate(inflater.cloneInContext(contextWrapper),
+                                                          container, false)
         binding.closeButton.setOnClickListener { dismiss() }
         return binding.root
     }
