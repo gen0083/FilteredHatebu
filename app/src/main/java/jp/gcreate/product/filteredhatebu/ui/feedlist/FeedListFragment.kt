@@ -33,7 +33,7 @@ import javax.inject.Inject
 class FeedListFragment : DaggerFragment() {
     private lateinit var vm: FeedListViewModel
     @Inject lateinit var factory: ViewModelProviderFactory
-    @Inject lateinit var feedListAdapter: FeedListAdapter
+    @Inject lateinit var feedListAdapter: PagingFeedListAdapter
     private lateinit var binding: FragmentFeedListBinding
     
     override fun onCreate(savedInstanceState: Bundle?) {
