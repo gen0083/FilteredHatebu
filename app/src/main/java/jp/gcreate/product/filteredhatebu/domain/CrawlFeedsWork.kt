@@ -4,7 +4,7 @@ import androidx.work.Worker
 import androidx.work.toWorkData
 import jp.gcreate.product.filteredhatebu.api.FeedsBurnerClienet
 import jp.gcreate.product.filteredhatebu.api.HatenaClient
-import jp.gcreate.product.filteredhatebu.domain.services.FeedSaveService
+import jp.gcreate.product.filteredhatebu.domain.services.FeedFetchService
 import jp.gcreate.product.filteredhatebu.ext.getAppComponent
 import timber.log.Timber
 import javax.inject.Inject
@@ -12,7 +12,7 @@ import javax.inject.Inject
 class CrawlFeedsWork : Worker() {
     @Inject lateinit var feedsBurnerClienet: FeedsBurnerClienet
     @Inject lateinit var xmlService: HatenaClient.XmlService
-    @Inject lateinit var feedSaveService: FeedSaveService
+    @Inject lateinit var feedFetchService: FeedFetchService
     
     override fun doWork(): Result {
         // do-crawling
@@ -33,14 +33,14 @@ class CrawlFeedsWork : Worker() {
             val hatebuSougou = feedsBurnerClienet.hotentryFeed.toBlocking().first()
             hatebuSougou.itemList.forEach {
                 Timber.v("save $it")
-                if (feedSaveService.saveFeed(it)) count++
+                if (feedFetchService.saveFeed(it)) count++
             }
     
             arrayOf("general", "it", "life", "game").forEach { category ->
                 val hatebuCategory = xmlService.getCategoryFeed(category).toBlocking().first()
                 hatebuCategory.itemList.forEach {
                     Timber.v("save $it")
-                    feedSaveService.saveFeed(it)
+                    feedFetchService.saveFeed(it)
                 }
             }
         } catch (e: Exception) {
