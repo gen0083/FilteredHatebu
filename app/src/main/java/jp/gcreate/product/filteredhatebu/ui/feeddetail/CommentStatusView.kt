@@ -1,9 +1,12 @@
 package jp.gcreate.product.filteredhatebu.ui.feeddetail
 
 import android.content.Context
+import android.graphics.Rect
 import android.support.constraint.ConstraintLayout
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.TouchDelegate
+import androidx.core.view.doOnPreDraw
 import androidx.core.view.isGone
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
@@ -22,6 +25,11 @@ class CommentStatusView @JvmOverloads constructor(
             LayoutInflater.from(context).inflate(R.layout.view_comment_status, this, true)
         } else {
             binding = ViewCommentStatusBinding.inflate(LayoutInflater.from(context), this, true)
+            doOnPreDraw {
+                val drawingRect = Rect()
+                binding.container.getFocusedRect(drawingRect)
+                binding.container.touchDelegate = TouchDelegate(drawingRect, binding.icon)
+            }
         }
     }
     
@@ -36,29 +44,38 @@ class CommentStatusView @JvmOverloads constructor(
     }
     
     override fun setOnClickListener(l: OnClickListener?) {
-        super.setOnClickListener(l)
+        binding.icon.setOnClickListener(l)
     }
     
     private fun showLoading() {
+        canBeClickable(false)
         binding.progressBar.isVisible = true
         binding.commentGroup.isInvisible = true
     }
     
     private fun showError() {
+        canBeClickable(true)
         binding.statusMessage.setText(R.string.fetch_comment_error)
         binding.progressBar.isGone = true
         binding.commentGroup.isVisible = true
     }
     
     private fun showDisallow() {
+        canBeClickable(false)
         binding.statusMessage.setText(R.string.disallow_comments)
         binding.progressBar.isGone = true
         binding.commentGroup.isVisible = true
     }
     
     private fun showCommentCount(count: Int) {
+        canBeClickable(count != 0)
         binding.statusMessage.text = count.toString()
         binding.progressBar.isGone = true
         binding.commentGroup.isVisible = true
+    }
+    
+    private fun canBeClickable(isClickable: Boolean) {
+        binding.container.isClickable = isClickable
+        binding.icon.isClickable = isClickable
     }
 }
