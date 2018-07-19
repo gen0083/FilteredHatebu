@@ -92,6 +92,9 @@ class FeedDetailFragment : DaggerFragment() {
         binding.readMoreButton.setOnClickListener {
             customTabHelper.openCustomTab(vm.currentUrl)
         }
+        binding.favoriteButton.setOnClickListener {
+            vm.favoriteFeed()
+        }
         binding.addFilterButton.setOnClickListener {
             showFilterCandidate()
         }

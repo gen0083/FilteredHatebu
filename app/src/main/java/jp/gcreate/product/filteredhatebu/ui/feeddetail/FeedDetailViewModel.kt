@@ -56,4 +56,14 @@ class FeedDetailViewModel @Inject constructor(
     fun archiveFeed() {
         archiveService.archiveFeed(currentUrl)
     }
+    
+    fun favoriteFeed() {
+        val isFavorite = feedDetail.value?.isFavorite ?: false
+        val current = feedDetail.value ?: throw IllegalStateException("current feed is null")
+        launch(CommonPool) {
+            val updated = current.copy(isFavorite = !current.isFavorite)
+            feedDataDao.updateStatusFavorite(updated.url, updated.isFavorite)
+            feedDataEmitter.postValue(updated)
+        }
+    }
 }
