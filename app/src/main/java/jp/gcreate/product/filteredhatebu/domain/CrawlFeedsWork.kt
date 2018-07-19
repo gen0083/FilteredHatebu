@@ -4,8 +4,11 @@ import androidx.work.Worker
 import androidx.work.toWorkData
 import jp.gcreate.product.filteredhatebu.api.FeedsBurnerClienet
 import jp.gcreate.product.filteredhatebu.api.HatenaClient
+import jp.gcreate.product.filteredhatebu.data.AppRoomDatabase
+import jp.gcreate.product.filteredhatebu.data.entities.debug.WorkLog
 import jp.gcreate.product.filteredhatebu.domain.services.FeedFetchService
 import jp.gcreate.product.filteredhatebu.ext.getAppComponent
+import org.threeten.bp.ZonedDateTime
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -13,6 +16,7 @@ class CrawlFeedsWork : Worker() {
     @Inject lateinit var feedsBurnerClienet: FeedsBurnerClienet
     @Inject lateinit var xmlService: HatenaClient.XmlService
     @Inject lateinit var feedFetchService: FeedFetchService
+    @Inject lateinit var appRoomDatabase: AppRoomDatabase
     
     override fun doWork(): Result {
         // do-crawling
@@ -46,13 +50,23 @@ class CrawlFeedsWork : Worker() {
         } catch (e: Exception) {
             Timber.e(e)
             outputData = mapOf(KEY_NEW_FEEDS_COUNT to count).toWorkData()
+            logWorkResult(count)
             return Result.FAILURE
         }
         outputData = mapOf(KEY_NEW_FEEDS_COUNT to count).toWorkData()
+        logWorkResult(count)
         return Result.SUCCESS
+    }
+    
+    private fun logWorkResult(count: Int) {
+        val type = inputData.getString(KEY_TYPE, "one_time")
+        val tag = tags.joinToString()
+        appRoomDatabase.workLogDao()
+            .insert(WorkLog(0, ZonedDateTime.now(), "tag<$tag> type:$type, new feeds=$count"))
     }
     
     companion object {
         const val KEY_NEW_FEEDS_COUNT = "new_feeds_count"
+        const val KEY_TYPE = "key_type"
     }
 }
