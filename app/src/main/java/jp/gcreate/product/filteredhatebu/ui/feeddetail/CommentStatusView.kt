@@ -26,9 +26,9 @@ class CommentStatusView @JvmOverloads constructor(
         } else {
             binding = ViewCommentStatusBinding.inflate(LayoutInflater.from(context), this, true)
             doOnPreDraw {
-                val drawingRect = Rect()
-                binding.container.getFocusedRect(drawingRect)
-                binding.container.touchDelegate = TouchDelegate(drawingRect, binding.icon)
+                val rect = Rect()
+                binding.container.getDrawingRect(rect)
+                binding.container.touchDelegate = TouchDelegate(rect, binding.icon)
             }
         }
     }
