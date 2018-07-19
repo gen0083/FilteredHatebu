@@ -58,4 +58,14 @@
             app:destination="@id/feed_detail"
             />
     </fragment>
+    <fragment
+        android:id="@+id/navigation_favorite"
+        android:name="jp.gcreate.product.filteredhatebu.ui.favorite.FavoriteFragment"
+        android:label="FavoriteFragment"
+        >
+        <action
+            android:id="@+id/action_navigation_favorite_to_feed_detail"
+            app:destination="@id/feed_detail"
+            />
+    </fragment>
 </navigation>
