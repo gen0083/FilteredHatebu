@@ -45,4 +45,6 @@ sealed class HatebuComments {
     object Empty : HatebuComments()
     
     data class Error(val cause: Exception): HatebuComments()
+    
+    object Loading : HatebuComments()
 }

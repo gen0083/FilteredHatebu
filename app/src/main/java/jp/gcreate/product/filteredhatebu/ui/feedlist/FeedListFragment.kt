@@ -35,10 +35,14 @@ class FeedListFragment : DaggerFragment() {
     @Inject lateinit var feedListAdapter: FeedListAdapter
     private lateinit var binding: FragmentFeedListBinding
     
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+    
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         binding = FragmentFeedListBinding.inflate(inflater, container, false)
-        setHasOptionsMenu(true)
         return binding.root
     }
     

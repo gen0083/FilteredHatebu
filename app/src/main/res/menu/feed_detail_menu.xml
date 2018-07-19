@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/add_filter"
+        android:title="@string/add_filter"
+        android:icon="@drawable/ic_filter_white"
+        />
+
+    <item
+        android:id="@+id/share_url"
+        android:title="@string/share_url"
+        android:icon="@drawable/ic_share"
+        />
+
+</menu>
