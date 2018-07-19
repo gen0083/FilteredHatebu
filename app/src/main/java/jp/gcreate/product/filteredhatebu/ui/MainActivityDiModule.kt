@@ -5,6 +5,7 @@ import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 import jp.gcreate.product.filteredhatebu.di.Scope.ActivityScope
+import jp.gcreate.product.filteredhatebu.ui.favorite.FavoriteDiModule
 import jp.gcreate.product.filteredhatebu.ui.feeddetail.FeedDetailDiModule
 import jp.gcreate.product.filteredhatebu.ui.feedlist.FeedListDiModule
 import jp.gcreate.product.filteredhatebu.ui.filterdetail.FilterDetailDiModule
@@ -19,7 +20,8 @@ interface MainActivityDiModule {
         FeedDetailDiModule::class,
         FeedListDiModule::class,
         FilterListDiModule::class,
-        FilterDetailDiModule::class
+        FilterDetailDiModule::class,
+        FavoriteDiModule::class
     ])
     fun contributeMainActivity(): MainActivity
 }
