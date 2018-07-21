@@ -1,16 +1,28 @@
 package jp.gcreate.product.filteredhatebu.ui.feedlist
 
+import android.content.Context
 import android.os.Bundle
 import android.support.design.widget.BottomSheetDialogFragment
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import dagger.android.support.AndroidSupportInjection
+import jp.gcreate.product.filteredhatebu.R
 import jp.gcreate.product.filteredhatebu.databinding.DialogListFilterStateBinding
+import jp.gcreate.product.filteredhatebu.di.ViewModelProviderFactory
+import jp.gcreate.product.filteredhatebu.ext.injectViewModel
 import timber.log.Timber
+import javax.inject.Inject
 
 class ListFilterStateDialog : BottomSheetDialogFragment() {
     private lateinit var binding: DialogListFilterStateBinding
+    private lateinit var vm: FeedListViewModel
+    @Inject lateinit var factory: ViewModelProviderFactory
+    
+    override fun onAttach(context: Context?) {
+        AndroidSupportInjection.inject(this)
+        super.onAttach(context)
+    }
     
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -20,59 +32,24 @@ class ListFilterStateDialog : BottomSheetDialogFragment() {
     
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-    
-        parseResult(
-            arguments).run {
-            binding.checkShowNewFeed.isChecked = first
-            binding.checkShowArchiveFeed.isChecked = second
-            binding.checkShowFavoriteFeed.isChecked = third
+        vm = injectViewModel(factory)
+        val checkedId = when (vm.filterState) {
+            FeedListViewModel.FilterState.NEW_FEEDS     -> R.id.filter_new_feed
+            FeedListViewModel.FilterState.ARCHIVE_FEEDS -> R.id.filter_archive
         }
+        binding.filterGroup.check(checkedId)
         
         binding.closeButton.setOnClickListener {
             Timber.d("close button clicked")
             dismiss()
         }
-        binding.checkShowNewFeed.setOnCheckedChangeListener { _, isChecked ->
-            Timber.d("new box: $isChecked")
+        binding.filterGroup.setOnCheckedChangeListener { group, id ->
+            Timber.d("checked change group:$group id:$id")
+            when (id) {
+                R.id.filter_new_feed -> vm.showNewFeeds()
+                R.id.filter_archive  -> vm.showArchiveFeeds()
+                else                 -> Timber.d("unknown id")
+            }
         }
-        binding.checkShowArchiveFeed.setOnCheckedChangeListener { _, isChecked ->
-            Timber.d("archive box: $isChecked")
-        }
-        binding.checkShowFavoriteFeed.setOnCheckedChangeListener { _, isChecked ->
-            Timber.d("favorite box: $isChecked")
-        }
-    }
-    
-    companion object {
-        const val REQUEST_CODE = 10
-        const val KEY_ARCHIVED_FEED = "archived_feed"
-        const val KEY_FAVORITE_FEED = "favorite_feed"
-        const val KEY_NEW_FEED = "new_feed"
-        
-        fun parseResult(args: Bundle?): Triple<Boolean, Boolean, Boolean> {
-            val isShowNewFeed = args?.getBoolean(
-                KEY_NEW_FEED) ?: true
-            val isShowArchive = args?.getBoolean(
-                KEY_ARCHIVED_FEED) ?: false
-            val isShowFavorite = args?.getBoolean(
-                KEY_FAVORITE_FEED) ?: false
-            return Triple(isShowNewFeed, isShowArchive, isShowFavorite)
-        }
-    }
-}
-
-fun Fragment.createFilterDialog(showNewFeed: Boolean = true, showArchivedFeed: Boolean = false,
-                                showFavoriteFeed: Boolean = false): ListFilterStateDialog {
-    return ListFilterStateDialog().apply {
-        arguments = Bundle().apply {
-            putBoolean(
-                ListFilterStateDialog.KEY_NEW_FEED, showNewFeed)
-            putBoolean(
-                ListFilterStateDialog.KEY_ARCHIVED_FEED, showArchivedFeed)
-            putBoolean(
-                ListFilterStateDialog.KEY_FAVORITE_FEED, showFavoriteFeed)
-        }
-        setTargetFragment(this@createFilterDialog,
-                          ListFilterStateDialog.REQUEST_CODE)
     }
 }

@@ -61,7 +61,7 @@ class FeedListFragment : DaggerFragment() {
     
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if (item?.itemId == R.id.action_list_filter) {
-            createFilterDialog(true, false, false).show(fragmentManager, "filter_dialog")
+            ListFilterStateDialog().show(fragmentManager, "filter_dialog")
             return true
         } else {
             return super.onOptionsItemSelected(item)

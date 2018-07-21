@@ -15,6 +15,9 @@ interface FeedListDiModule {
     @ContributesAndroidInjector(modules = [FeedListFragmentModule::class])
     fun contributeFeedListFragment(): FeedListFragment
     
+    @FragmentScope @ContributesAndroidInjector
+    fun buildListFilterStateDialog(): ListFilterStateDialog
+    
     @Binds @IntoMap @ViewModelKey(FeedListViewModel::class)
     fun bindFeedListViewModel(viewModel: FeedListViewModel): ViewModel
 }

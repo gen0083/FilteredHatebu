@@ -1,12 +1,12 @@
 package jp.gcreate.product.filteredhatebu.ui.feedlist
 
 import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import jp.gcreate.product.filteredhatebu.data.AppRoomDatabase
+import jp.gcreate.product.filteredhatebu.data.entities.FeedData
 import jp.gcreate.product.filteredhatebu.di.Scope.FragmentScope
 import jp.gcreate.product.filteredhatebu.domain.CrawlFeedsWork
 import jp.gcreate.product.filteredhatebu.domain.services.ArchiveFeedService
@@ -21,12 +21,15 @@ class FeedListViewModel @Inject constructor(
     private val filterService: FilterService,
     private val archiveService: ArchiveFeedService
 ) : ViewModel() {
-
-    val newFeeds = appRoomDatabase.feedDataDao().subscribeFilteredNewFeeds()
+    
+    var newFeeds: LiveData<List<FeedData>> = appRoomDatabase.feedDataDao()
+        .subscribeFilteredNewFeeds()
+        private set
     val test get() = "from ViewModel@${this.hashCode()} feeds:${newFeeds.value?.size}"
-    private val archiveEmitter: MutableLiveData<HandleOnceEvent<String>> = MutableLiveData()
     val archiveMessage: LiveData<HandleOnceEvent<String>> = archiveService.archiveEvent
     val addFilterEvent = filterService.addFilterEvent
+    var filterState = FilterState.NEW_FEEDS
+        private set
     
     fun fetchFeeds() {
         val work = OneTimeWorkRequestBuilder<CrawlFeedsWork>().build()
@@ -49,8 +52,20 @@ class FeedListViewModel @Inject constructor(
         filterService.undoAdd()
     }
     
+    fun showNewFeeds() {
+        newFeeds = appRoomDatabase.feedDataDao().subscribeFilteredNewFeeds()
+        filterState = FilterState.NEW_FEEDS
+    }
+    
+    fun showArchiveFeeds() {
+        newFeeds = appRoomDatabase.feedDataDao().subscribeArchivedFeeds()
+        filterState = FilterState.ARCHIVE_FEEDS
+    }
+    
     override fun onCleared() {
         super.onCleared()
         Timber.d("onCleared")
     }
+    
+    enum class FilterState { NEW_FEEDS, ARCHIVE_FEEDS }
 }
