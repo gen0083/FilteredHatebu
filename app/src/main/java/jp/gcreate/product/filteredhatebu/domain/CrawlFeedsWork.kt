@@ -8,6 +8,7 @@ import jp.gcreate.product.filteredhatebu.data.AppRoomDatabase
 import jp.gcreate.product.filteredhatebu.data.entities.debug.WorkLog
 import jp.gcreate.product.filteredhatebu.domain.services.FeedFetchService
 import jp.gcreate.product.filteredhatebu.ext.getAppComponent
+import jp.gcreate.product.filteredhatebu.ui.common.NotificationUtil
 import org.threeten.bp.ZonedDateTime
 import timber.log.Timber
 import javax.inject.Inject
@@ -17,6 +18,7 @@ class CrawlFeedsWork : Worker() {
     @Inject lateinit var xmlService: HatenaClient.XmlService
     @Inject lateinit var feedFetchService: FeedFetchService
     @Inject lateinit var appRoomDatabase: AppRoomDatabase
+    @Inject lateinit var notificationUtil: NotificationUtil
     
     override fun doWork(): Result {
         // do-crawling
@@ -63,6 +65,9 @@ class CrawlFeedsWork : Worker() {
         val tag = tags.joinToString()
         appRoomDatabase.workLogDao()
             .insert(WorkLog(0, ZonedDateTime.now(), "tag<$tag> type:$type, new feeds=$count"))
+        if (type == "period") {
+            notificationUtil.notifyNewFeedsCount(count)
+        }
     }
     
     companion object {

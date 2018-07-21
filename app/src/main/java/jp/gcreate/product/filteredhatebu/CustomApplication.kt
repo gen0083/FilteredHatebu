@@ -14,6 +14,7 @@ import jp.gcreate.product.filteredhatebu.di.AppComponent
 import jp.gcreate.product.filteredhatebu.di.AppModule
 import jp.gcreate.product.filteredhatebu.di.DaggerAppComponent
 import jp.gcreate.product.filteredhatebu.domain.CrawlFeedsWork
+import jp.gcreate.product.filteredhatebu.ui.common.NotificationUtil
 import jp.gcreate.product.filteredhatebu.util.CrashlyticsWrapper
 import jp.gcreate.product.filteredhatebu.util.StethoWrapper
 import timber.log.Timber
@@ -39,6 +40,7 @@ class CustomApplication : DaggerApplication() {
     lateinit var picassoBuilder: Picasso.Builder
     @Inject
     lateinit var crashlyticsWrapper: CrashlyticsWrapper
+    @Inject lateinit var notificationUtil: NotificationUtil
 
     override fun onCreate() {
         super.onCreate()
@@ -51,6 +53,7 @@ class CustomApplication : DaggerApplication() {
         AndroidThreeTen.init(this)
         Picasso.setSingletonInstance(picassoBuilder.build())
         scheduleCrawlFeedWork()
+        notificationUtil.installChannel()
     }
 
     override fun applicationInjector(): AndroidInjector<out DaggerApplication>? {
