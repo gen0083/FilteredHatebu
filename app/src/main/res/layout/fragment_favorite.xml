@@ -43,7 +43,7 @@
                 android:id="@+id/no_content_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/archived_feed_is_empty"
+                android:text="@string/favorite_feed_is_empty"
                 android:layout_marginTop="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"

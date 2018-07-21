@@ -27,7 +27,7 @@
     <string name="check_new_feed">新着記事をチェックする</string>
     <string name="archive">アーカイブ</string>
     <string name="archive_done">アーカイブしました</string>
-    <string name="archived_feed_is_empty">アーカイブ済みの記事はありません</string>
+    <string name="favorite_feed_is_empty">お気に入りの記事はまだありません</string>
     <string name="fetch_comment_error">コメント取得に失敗しました</string>
     <string name="retry">リトライ</string>
     <string name="checkbox_show_new_feed">新着記事を表示する</string>
