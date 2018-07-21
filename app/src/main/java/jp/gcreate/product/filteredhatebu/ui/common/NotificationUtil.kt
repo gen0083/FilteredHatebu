@@ -77,4 +77,21 @@ class NotificationUtil @Inject constructor(@ApplicationContext private val conte
             .build()
         manager.notify(NEW_CHANNEL_ID, notification)
     }
+    
+    fun notificationTest() {
+        notifyNewFeedsCount(10)
+        val intent = Intent(context, MainActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        }
+        val pendingIntent = PendingIntent.getActivity(context, 0, intent, 0)
+        val notification = NotificationCompat.Builder(context, DEFAULT_CHANNEL)
+            .setSmallIcon(R.drawable.ic_feed)
+            .setContentTitle(context.getString(R.string.new_contents_fetched))
+            .setContentText("test")
+            .setPriority(NotificationManagerCompat.IMPORTANCE_DEFAULT)
+            .setContentIntent(pendingIntent)
+            .setAutoCancel(true)
+            .build()
+        manager.notify(NEW_CHANNEL_ID, notification)
+    }
 }
