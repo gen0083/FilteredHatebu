@@ -1,5 +1,11 @@
 package jp.gcreate.product.filteredhatebu
 
+import androidx.work.Constraints
+import androidx.work.ExistingPeriodicWorkPolicy
+import androidx.work.NetworkType
+import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.WorkManager
+import androidx.work.toWorkData
 import com.jakewharton.threetenabp.AndroidThreeTen
 import com.squareup.picasso.Picasso
 import dagger.android.AndroidInjector
@@ -7,9 +13,11 @@ import dagger.android.support.DaggerApplication
 import jp.gcreate.product.filteredhatebu.di.AppComponent
 import jp.gcreate.product.filteredhatebu.di.AppModule
 import jp.gcreate.product.filteredhatebu.di.DaggerAppComponent
+import jp.gcreate.product.filteredhatebu.domain.CrawlFeedsWork
 import jp.gcreate.product.filteredhatebu.util.CrashlyticsWrapper
 import jp.gcreate.product.filteredhatebu.util.StethoWrapper
 import timber.log.Timber
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 /**
@@ -42,9 +50,26 @@ class CustomApplication : DaggerApplication() {
         crashlyticsWrapper.init(this)
         AndroidThreeTen.init(this)
         Picasso.setSingletonInstance(picassoBuilder.build())
+        scheduleCrawlFeedWork()
     }
 
     override fun applicationInjector(): AndroidInjector<out DaggerApplication>? {
         return appComponent
+    }
+    
+    private fun scheduleCrawlFeedWork() {
+        val constraints = Constraints.Builder()
+            .setRequiredNetworkType(NetworkType.UNMETERED)
+//            .setRequiresDeviceIdle(true)
+            .setRequiresBatteryNotLow(true)
+            .build()
+        val request = PeriodicWorkRequestBuilder<CrawlFeedsWork>(1, TimeUnit.HOURS)
+            .setConstraints(constraints)
+            .addTag("repeat_crawling")
+            .setInputData(mapOf(CrawlFeedsWork.KEY_TYPE to "period").toWorkData())
+            .build()
+        WorkManager.getInstance()
+            ?.enqueueUniquePeriodicWork("repeat_crawling",
+                                        ExistingPeriodicWorkPolicy.KEEP, request)
     }
 }
