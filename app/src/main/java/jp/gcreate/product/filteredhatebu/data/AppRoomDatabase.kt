@@ -17,7 +17,7 @@ import jp.gcreate.product.filteredhatebu.data.entities.debug.WorkLog
 @Database(
     entities = [FeedData::class, FilteredFeed::class, FeedFilter::class, DeletedFeed::class,
         WorkLog::class],
-    version = 5,
+    version = 6,
     exportSchema = true
 )
 @TypeConverters(LocalDateTimeConverter::class, ZonedDateTimeConverter::class)
