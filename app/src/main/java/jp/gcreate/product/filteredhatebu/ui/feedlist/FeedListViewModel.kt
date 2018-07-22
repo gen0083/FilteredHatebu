@@ -1,7 +1,9 @@
 package jp.gcreate.product.filteredhatebu.ui.feedlist
 
+import android.arch.core.util.Function
 import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MediatorLiveData
+import android.arch.lifecycle.MutableLiveData
+import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModel
 import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequestBuilder
@@ -23,10 +25,17 @@ class FeedListViewModel @Inject constructor(
     private val archiveService: ArchiveFeedService
 ) : ViewModel() {
     
-    private val feedDataEmitter: MediatorLiveData<List<FeedData>> = MediatorLiveData()
     private val newFeedLiveData = appRoomDatabase.feedDataDao().subscribeFilteredNewFeeds()
     private val archiveFeedLiveData = appRoomDatabase.feedDataDao().subscribeArchivedFeeds()
-    val newFeeds: LiveData<List<FeedData>> = feedDataEmitter
+    val filterStateLiveData: LiveData<FilterState> = MutableLiveData()
+    val newFeeds: LiveData<List<FeedData>> = Transformations
+        .switchMap(filterStateLiveData, Function {
+            return@Function if (it == FilterState.ARCHIVE_FEEDS) {
+                archiveFeedLiveData
+            } else {
+                newFeedLiveData
+            }
+        })
     val test get() = "from ViewModel@${this.hashCode()} feeds:${newFeeds.value?.size}"
     val archiveMessage: LiveData<HandleOnceEvent<String>> = archiveService.archiveEvent
     val addFilterEvent = filterService.addFilterEvent
@@ -34,7 +43,7 @@ class FeedListViewModel @Inject constructor(
         private set
     
     init {
-        feedDataEmitter.addSource(newFeedLiveData) { feedDataEmitter.value = it }
+        (filterStateLiveData as MutableLiveData).value = filterState
     }
     
     fun fetchFeeds() {
@@ -60,16 +69,12 @@ class FeedListViewModel @Inject constructor(
     
     fun showNewFeeds() {
         filterState = FilterState.NEW_FEEDS
-        feedDataEmitter.removeSource(archiveFeedLiveData)
-        feedDataEmitter.addSource(newFeedLiveData) { feedDataEmitter.value = it }
+        (filterStateLiveData as MutableLiveData).value = filterState
     }
     
     fun showArchiveFeeds() {
         filterState = FilterState.ARCHIVE_FEEDS
-        feedDataEmitter.apply {
-            removeSource(newFeedLiveData)
-            addSource(archiveFeedLiveData) { feedDataEmitter.value = it }
-        }
+        (filterStateLiveData as MutableLiveData).value = filterState
     }
     
     override fun onCleared() {
