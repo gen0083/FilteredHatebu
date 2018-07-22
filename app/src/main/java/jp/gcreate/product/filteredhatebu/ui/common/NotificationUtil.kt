@@ -27,7 +27,7 @@ class NotificationUtil @Inject constructor(@ApplicationContext private val conte
     private val manager = NotificationManagerCompat.from(context)
     
     fun installChannel() {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.O) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val defaultTitle = context.getString(R.string.notification_channel_title_default)
             val channelDefault = NotificationChannel(DEFAULT_CHANNEL,
                                                      defaultTitle,
@@ -92,6 +92,6 @@ class NotificationUtil @Inject constructor(@ApplicationContext private val conte
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)
             .build()
-        manager.notify(NEW_CHANNEL_ID, notification)
+        manager.notify(DEFAULT_CHANNEL_ID, notification)
     }
 }

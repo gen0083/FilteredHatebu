@@ -63,7 +63,7 @@ class CustomApplication : DaggerApplication() {
     private fun scheduleCrawlFeedWork() {
         val constraints = Constraints.Builder()
             .setRequiredNetworkType(NetworkType.UNMETERED)
-//            .setRequiresDeviceIdle(true)
+            .setRequiresDeviceIdle(true)
             .setRequiresBatteryNotLow(true)
             .build()
         val request = PeriodicWorkRequestBuilder<CrawlFeedsWork>(1, TimeUnit.HOURS)
