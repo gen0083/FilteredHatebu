@@ -1,6 +1,7 @@
 package jp.gcreate.product.filteredhatebu.ui.feedlist
 
 import android.arch.lifecycle.LiveData
+import android.arch.lifecycle.MediatorLiveData
 import android.arch.lifecycle.ViewModel
 import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequestBuilder
@@ -22,14 +23,19 @@ class FeedListViewModel @Inject constructor(
     private val archiveService: ArchiveFeedService
 ) : ViewModel() {
     
-    var newFeeds: LiveData<List<FeedData>> = appRoomDatabase.feedDataDao()
-        .subscribeFilteredNewFeeds()
-        private set
+    private val feedDataEmitter: MediatorLiveData<List<FeedData>> = MediatorLiveData()
+    private val newFeedLiveData = appRoomDatabase.feedDataDao().subscribeFilteredNewFeeds()
+    private val archiveFeedLiveData = appRoomDatabase.feedDataDao().subscribeArchivedFeeds()
+    val newFeeds: LiveData<List<FeedData>> = feedDataEmitter
     val test get() = "from ViewModel@${this.hashCode()} feeds:${newFeeds.value?.size}"
     val archiveMessage: LiveData<HandleOnceEvent<String>> = archiveService.archiveEvent
     val addFilterEvent = filterService.addFilterEvent
     var filterState = FilterState.NEW_FEEDS
         private set
+    
+    init {
+        feedDataEmitter.addSource(newFeedLiveData) { feedDataEmitter.value = it }
+    }
     
     fun fetchFeeds() {
         val work = OneTimeWorkRequestBuilder<CrawlFeedsWork>().build()
@@ -53,13 +59,17 @@ class FeedListViewModel @Inject constructor(
     }
     
     fun showNewFeeds() {
-        newFeeds = appRoomDatabase.feedDataDao().subscribeFilteredNewFeeds()
         filterState = FilterState.NEW_FEEDS
+        feedDataEmitter.removeSource(archiveFeedLiveData)
+        feedDataEmitter.addSource(newFeedLiveData) { feedDataEmitter.value = it }
     }
     
     fun showArchiveFeeds() {
-        newFeeds = appRoomDatabase.feedDataDao().subscribeArchivedFeeds()
         filterState = FilterState.ARCHIVE_FEEDS
+        feedDataEmitter.apply {
+            removeSource(newFeedLiveData)
+            addSource(archiveFeedLiveData) { feedDataEmitter.value = it }
+        }
     }
     
     override fun onCleared() {
