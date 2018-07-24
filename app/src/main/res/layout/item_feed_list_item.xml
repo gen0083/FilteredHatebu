@@ -22,7 +22,7 @@
         android:clickable="true"
         android:focusable="true"
         android:foreground="?attr/selectableItemBackground"
-        android:background="@{item.archived ? @color/colorPrimaryLight : @android:color/transparent}"
+        android:background="@{item.archived ? @color/item_background_archive : @color/item_background_new}"
         >
 
         <TextView
