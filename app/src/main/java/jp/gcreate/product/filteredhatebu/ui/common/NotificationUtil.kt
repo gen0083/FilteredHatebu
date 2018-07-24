@@ -20,6 +20,7 @@ const val DEFAULT_CHANNEL = "default"
 const val DEFAULT_CHANNEL_ID = 1
 const val NEW_CHANNEL = "new_channel"
 const val NEW_CHANNEL_ID = 10
+const val NOTIFICATION_GROUP_NEW = "new_feed_notification_group"
 
 @AppScope
 class NotificationUtil @Inject constructor(@ApplicationContext private val context: Context) {
@@ -74,6 +75,7 @@ class NotificationUtil @Inject constructor(@ApplicationContext private val conte
             .setPriority(NotificationManagerCompat.IMPORTANCE_DEFAULT)
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)
+            .setGroup(NOTIFICATION_GROUP_NEW)
             .build()
         manager.notify(NEW_CHANNEL_ID, notification)
     }
