@@ -1,5 +1,6 @@
 package jp.gcreate.product.filteredhatebu
 
+import android.os.Build
 import androidx.work.Constraints
 import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.NetworkType
@@ -25,7 +26,7 @@ import javax.inject.Inject
  * Copyright 2016 G-CREATE
  */
 class CustomApplication : DaggerApplication() {
-
+    
     val appComponent: AppComponent by lazy {
         DaggerAppComponent.builder()
             .application(this)
@@ -41,12 +42,12 @@ class CustomApplication : DaggerApplication() {
     @Inject
     lateinit var crashlyticsWrapper: CrashlyticsWrapper
     @Inject lateinit var notificationUtil: NotificationUtil
-
+    
     override fun onCreate() {
         super.onCreate()
-
+        
         appComponent.inject(this)
-
+        
         Timber.plant(tree)
         stetho.install()
         crashlyticsWrapper.init(this)
@@ -55,16 +56,19 @@ class CustomApplication : DaggerApplication() {
         scheduleCrawlFeedWork()
         notificationUtil.installChannel()
     }
-
+    
     override fun applicationInjector(): AndroidInjector<out DaggerApplication>? {
         return appComponent
     }
     
     private fun scheduleCrawlFeedWork() {
-        val constraints = Constraints.Builder()
-            .setRequiredNetworkType(NetworkType.UNMETERED)
-            .setRequiresDeviceIdle(true)
-            .setRequiresBatteryNotLow(true)
+        val constraints = Constraints.Builder().apply {
+            setRequiredNetworkType(NetworkType.UNMETERED)
+            setRequiresBatteryNotLow(true)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                setRequiresDeviceIdle(true)
+            }
+        }
             .build()
         val request = PeriodicWorkRequestBuilder<CrawlFeedsWork>(1, TimeUnit.HOURS)
             .setConstraints(constraints)
