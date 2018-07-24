@@ -70,7 +70,7 @@ class CustomApplication : DaggerApplication() {
             }
         }
             .build()
-        val request = PeriodicWorkRequestBuilder<CrawlFeedsWork>(1, TimeUnit.HOURS)
+        val request = PeriodicWorkRequestBuilder<CrawlFeedsWork>(6, TimeUnit.HOURS)
             .setConstraints(constraints)
             .addTag("repeat_crawling")
             .setInputData(mapOf(CrawlFeedsWork.KEY_TYPE to "period").toWorkData())
