@@ -7,4 +7,8 @@
     <dimen name="item_padding">16dp</dimen>
     <dimen name="item_padding_with_item">8dp</dimen>
 
+    <dimen name="sticky_header_text_size">18sp</dimen>
+    <dimen name="sticky_header_margin">8dp</dimen>
+    <dimen name="sticky_header_padding">8dp</dimen>
+
 </resources>

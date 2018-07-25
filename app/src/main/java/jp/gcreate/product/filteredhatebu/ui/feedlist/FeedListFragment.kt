@@ -25,6 +25,7 @@ import jp.gcreate.product.filteredhatebu.databinding.FragmentFeedListBinding
 import jp.gcreate.product.filteredhatebu.di.ViewModelProviderFactory
 import jp.gcreate.product.filteredhatebu.domain.CrawlFeedsWork
 import jp.gcreate.product.filteredhatebu.ext.injectViewModel
+import jp.gcreate.product.filteredhatebu.ui.common.StickyHeaderDecoration
 import jp.gcreate.product.filteredhatebu.ui.common.SwipeDismissCallback
 import timber.log.Timber
 import javax.inject.Inject
@@ -71,6 +72,7 @@ class FeedListFragment : DaggerFragment() {
     private fun setUpRecyclerView() {
         binding.recyclerView.apply {
             addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
+            addItemDecoration(StickyHeaderDecoration(activity!!, vm))
             adapter = feedListAdapter
             layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         }
