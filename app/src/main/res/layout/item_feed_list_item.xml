@@ -18,7 +18,7 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="8dp"
+        android:padding="16dp"
         android:clickable="true"
         android:focusable="true"
         android:foreground="?attr/selectableItemBackground"
@@ -74,7 +74,7 @@
             app:layout_constraintRight_toLeftOf="@+id/url"
             app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="8dp"
             />
 
         <TextView
@@ -92,7 +92,7 @@
             app:layout_constraintTop_toBottomOf="@+id/sub_item_barrier"
             android:layout_marginStart="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="8dp"
             />
 
         <TextView
@@ -106,7 +106,7 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/sub_item_barrier"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             />
 
