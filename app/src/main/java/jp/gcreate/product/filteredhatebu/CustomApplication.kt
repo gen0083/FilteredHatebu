@@ -76,7 +76,6 @@ class CustomApplication : DaggerApplication() {
             .setInputData(mapOf(CrawlFeedsWork.KEY_TYPE to "period").toWorkData())
             .build()
         WorkManager.getInstance()
-            ?.enqueueUniquePeriodicWork("repeat_crawling",
-                                        ExistingPeriodicWorkPolicy.KEEP, request)
+            .enqueueUniquePeriodicWork("repeat_crawling", ExistingPeriodicWorkPolicy.KEEP, request)
     }
 }

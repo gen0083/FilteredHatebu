@@ -124,11 +124,11 @@ class FeedListFragment : DaggerFragment() {
     
     private fun fetchFeeds() {
         val work = OneTimeWorkRequestBuilder<CrawlFeedsWork>().build()
-        WorkManager.getInstance()?.let {
-            it.beginUniqueWork("fetch_new_feeds", ExistingWorkPolicy.REPLACE, work)
+        WorkManager.getInstance().run {
+            beginUniqueWork("fetch_new_feeds", ExistingWorkPolicy.REPLACE, work)
                 .enqueue()
-            it.getStatusById(work.id)
-                .observe(this, Observer {
+            getStatusById(work.id)
+                .observe(this@FeedListFragment, Observer {
                     Timber.d("status updated $it")
                     if (it?.state in arrayOf(State.SUCCEEDED, State.FAILED)) {
                         val count = it?.outputData?.getInt(CrawlFeedsWork.KEY_NEW_FEEDS_COUNT, 0)
