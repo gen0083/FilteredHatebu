@@ -24,7 +24,7 @@ class FeedListViewModel @Inject constructor(
     private val appRoomDatabase: AppRoomDatabase,
     private val filterService: FilterService,
     private val archiveService: ArchiveFeedService
-) : ViewModel(), StickyHeaderDecoration.Callback {
+) : ViewModel(), StickyHeaderDecoration.GroupCallback {
     
     private val newFeedLiveData = appRoomDatabase.feedDataDao().subscribeFilteredNewFeeds()
     private val archiveFeedLiveData = appRoomDatabase.feedDataDao().subscribeArchivedFeeds()
@@ -99,16 +99,20 @@ class FeedListViewModel @Inject constructor(
         } ?: -1L
     }
     
-    override fun getGroupHeaderText(position: Int): String? {
+    override fun getGroupHeaderText(position: Int): String {
         Timber.v("getGroupHeaderText at position: $position")
         return newFeeds.value?.let {
-            val text = it[position].fetchedAt.toLocalDate().toString()
-            if (position == 0) return@let text
-            val gid = getGroupId(position)
+            return@let it[position].fetchedAt.toLocalDate().toString()
+        } ?: ""
+    }
+    
+    override fun isBoundary(position: Int): Boolean {
+        if (position == 0) return true
+        return newFeeds.value?.let {
+            val current = getGroupId(position)
             val prev = getGroupId(position - 1)
-            if (gid == prev) return@let null
-            return@let text
-        }
+            return@let current != prev
+        } ?: false
     }
     
     enum class FilterState { NEW_FEEDS, ARCHIVE_FEEDS }
