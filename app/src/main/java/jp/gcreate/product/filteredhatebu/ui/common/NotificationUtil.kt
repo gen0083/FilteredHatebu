@@ -20,7 +20,6 @@ const val DEFAULT_CHANNEL = "default"
 const val DEFAULT_CHANNEL_ID = 1
 const val NEW_CHANNEL = "new_channel"
 const val NEW_CHANNEL_ID = 10
-const val NOTIFICATION_GROUP_NEW = "new_feed_notification_group"
 
 @AppScope
 class NotificationUtil @Inject constructor(@ApplicationContext private val context: Context) {
@@ -66,7 +65,6 @@ class NotificationUtil @Inject constructor(@ApplicationContext private val conte
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
         val pendingIntent = PendingIntent.getActivity(context, 0, intent, 0)
-        
         val notification = NotificationCompat.Builder(context, NEW_CHANNEL)
             .setSmallIcon(R.drawable.ic_feed)
             .setContentTitle(context.getString(R.string.new_contents_fetched))
@@ -75,7 +73,6 @@ class NotificationUtil @Inject constructor(@ApplicationContext private val conte
             .setPriority(NotificationManagerCompat.IMPORTANCE_DEFAULT)
             .setContentIntent(pendingIntent)
             .setAutoCancel(true)
-            .setGroup(NOTIFICATION_GROUP_NEW)
             .build()
         manager.notify(NEW_CHANNEL_ID, notification)
     }
