@@ -84,7 +84,6 @@ class FeedListViewModel @Inject constructor(
     }
     
     override fun getGroupId(position: Int): Long {
-        Timber.v("getGroupId at $position")
         return newFeeds.value?.let {
             try {
                 val date = it[position].fetchedAt.toLocalDate()

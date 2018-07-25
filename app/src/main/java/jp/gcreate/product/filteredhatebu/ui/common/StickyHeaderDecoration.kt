@@ -56,31 +56,25 @@ class StickyHeaderDecoration(context: Context, private val groupCallback: GroupC
     
     override fun onDraw(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
         super.onDraw(c, parent, state)
-        val totalItemCount = state.itemCount
-        val childCount = parent.childCount
         // yLimitはRecyclerViewの一番上の位置にHeaderを固定するときの位置
         val yLimit = headerHeight - headerPadding - headerMargin
         val lineHeight = fontMetrics.run { leading - ascent }
-        var previousHeader: String = ""
-        var groupId: Long = -1
+        var previousHeader = ""
         val layoutManager = parent.layoutManager as LinearLayoutManager
         val firstPosition = layoutManager.findFirstVisibleItemPosition()
         val lastPosition = layoutManager.findLastVisibleItemPosition()
         Timber.v("onDraw firstVisible position: $firstPosition/$lastPosition")
         val textX = (parent.width / 2).toFloat()
-        
-        for (i in 0 until childCount) {
-            val view = parent.getChildAt(i)
-            val position = parent.getChildAdapterPosition(view)
     
-            if (groupCallback.isBoundary(position)) {
-                view.top - headerMargin - headerPadding
-            }
-            val headerText = groupCallback.getGroupHeaderText(position)
+        if (firstPosition < 0 || lastPosition < 0) return
+        for (i in firstPosition..lastPosition) {
+            val view = parent.findViewHolderForAdapterPosition(i).itemView
+            Timber.v("i($i) from $firstPosition/$lastPosition view=$view")
+            val headerText = groupCallback.getGroupHeaderText(i)
             if (previousHeader != headerText) {
                 // draw header text
                 val viewTop = view.top + headerMargin + headerPadding
-                val textY = if (groupCallback.isBoundary(position)) {
+                val textY = if (groupCallback.isBoundary(i)) {
                     Math.max(yLimit, viewTop - headerPadding - headerMargin).toFloat()
                 } else {
                     yLimit.toFloat()
