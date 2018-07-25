@@ -92,6 +92,9 @@ class FeedListViewModel @Inject constructor(
             } catch (e: ArrayIndexOutOfBoundsException) {
                 Timber.w("position $position has ArrayIndexOutOfBoundsException")
                 return@let -1L
+            } catch (e: IndexOutOfBoundsException) {
+                Timber.w("position: $position get IndexOutOfBoundsException")
+                return@let -1L
             }
         } ?: -1L
     }
