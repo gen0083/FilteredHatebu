@@ -18,7 +18,7 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="16dp"
+        android:padding="@dimen/item_padding"
         android:clickable="true"
         android:focusable="true"
         android:foreground="?attr/selectableItemBackground"
@@ -50,7 +50,7 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="@tools:sample/lorem/random"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="@dimen/item_padding"
             />
 
         <android.support.constraint.Barrier
