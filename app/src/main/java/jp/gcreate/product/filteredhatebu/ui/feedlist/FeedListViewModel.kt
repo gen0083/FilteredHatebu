@@ -15,7 +15,6 @@ import jp.gcreate.product.filteredhatebu.domain.CrawlFeedsWork
 import jp.gcreate.product.filteredhatebu.domain.services.ArchiveFeedService
 import jp.gcreate.product.filteredhatebu.domain.services.FilterService
 import jp.gcreate.product.filteredhatebu.ui.common.HandleOnceEvent
-import jp.gcreate.product.filteredhatebu.ui.common.StickyHeaderDecoration
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -24,7 +23,7 @@ class FeedListViewModel @Inject constructor(
     private val appRoomDatabase: AppRoomDatabase,
     private val filterService: FilterService,
     private val archiveService: ArchiveFeedService
-) : ViewModel(), StickyHeaderDecoration.GroupCallback {
+) : ViewModel() {
     
     private val newFeedLiveData = appRoomDatabase.feedDataDao().subscribeFilteredNewFeeds()
     private val archiveFeedLiveData = appRoomDatabase.feedDataDao().subscribeArchivedFeeds()
@@ -81,37 +80,6 @@ class FeedListViewModel @Inject constructor(
     override fun onCleared() {
         super.onCleared()
         Timber.d("onCleared")
-    }
-    
-    override fun getGroupId(position: Int): Long {
-        return newFeeds.value?.let {
-            try {
-                val date = it[position].fetchedAt.toLocalDate()
-                return@let date.run { year * 10000 + monthValue * 100 + dayOfMonth }.toLong()
-            } catch (e: ArrayIndexOutOfBoundsException) {
-                Timber.w("position $position has ArrayIndexOutOfBoundsException")
-                return@let -1L
-            } catch (e: IndexOutOfBoundsException) {
-                Timber.w("position: $position get IndexOutOfBoundsException")
-                return@let -1L
-            }
-        } ?: -1L
-    }
-    
-    override fun getGroupHeaderText(position: Int): String {
-        Timber.v("getGroupHeaderText at position: $position")
-        return newFeeds.value?.let {
-            return@let it[position].fetchedAt.toLocalDate().toString()
-        } ?: ""
-    }
-    
-    override fun isBoundary(position: Int): Boolean {
-        if (position == 0) return true
-        return newFeeds.value?.let {
-            val current = getGroupId(position)
-            val prev = getGroupId(position - 1)
-            return@let current != prev
-        } ?: false
     }
     
     enum class FilterState { NEW_FEEDS, ARCHIVE_FEEDS }

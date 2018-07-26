@@ -72,7 +72,7 @@ class FeedListFragment : DaggerFragment() {
     private fun setUpRecyclerView() {
         binding.recyclerView.apply {
             addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
-            addItemDecoration(StickyHeaderDecoration(activity!!, vm))
+            addItemDecoration(StickyHeaderDecoration(activity!!))
             adapter = feedListAdapter
             layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         }

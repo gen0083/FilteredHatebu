@@ -14,10 +14,9 @@ import jp.gcreate.product.filteredhatebu.R
 import timber.log.Timber
 
 /**
- * Note: This class supports LinearLayoutManager only.
+ * Note: This class depends on FeedListAdapter and LinearLayoutManager
  */
-class StickyHeaderDecoration(context: Context, private val groupCallback: GroupCallback)
-    : RecyclerView.ItemDecoration() {
+class StickyHeaderDecoration(context: Context) : RecyclerView.ItemDecoration() {
     
     private val textPaint = TextPaint()
     private val backgroundPaint = Paint()
@@ -58,31 +57,34 @@ class StickyHeaderDecoration(context: Context, private val groupCallback: GroupC
     override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView,
                                 state: RecyclerView.State) {
         val position = parent.getChildAdapterPosition(view)
-        if (groupCallback.isBoundary(position)) {
+        val adapter = parent.adapter as StickyHeaderInterface
+        val isBoundary = adapter.isBoundary(position)
+        if (isBoundary) {
             outRect.top = headerAreaOffset
         }
     }
     
-    override fun onDraw(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
-        super.onDraw(c, parent, state)
+    override fun onDrawOver(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
         // yLimitはRecyclerViewの一番上の位置にHeaderを固定するときの位置
         val yLimit = headerMargin + textHeight
         var previousHeader = ""
         val layoutManager = parent.layoutManager as LinearLayoutManager
         val firstPosition = layoutManager.findFirstVisibleItemPosition()
         val lastPosition = layoutManager.findLastVisibleItemPosition()
-        Timber.v("onDraw firstVisible position: $firstPosition/$lastPosition")
+        val adapter = parent.adapter as StickyHeaderInterface
+        Timber.d("onDraw firstVisible position: $firstPosition/$lastPosition $state")
+        Timber.d("loop start")
         val textX = (parent.width / 2).toFloat()
         
         if (firstPosition < 0 || lastPosition < 0) return
         for (i in firstPosition..lastPosition) {
             val view = parent.findViewHolderForAdapterPosition(i).itemView
             Timber.v("i($i) from $firstPosition/$lastPosition view=$view")
-            val headerText = groupCallback.getGroupHeaderText(i)
+            val headerText = adapter.getGroupHeaderText(i)
             if (previousHeader != headerText) {
                 // draw header text
                 val viewTop = view.top - headerPadding
-                val textY = if (groupCallback.isBoundary(i)) {
+                val textY = if (adapter.isBoundary(i)) {
                     Math.max(yLimit, viewTop).toFloat()
                 } else {
                     yLimit.toFloat()
@@ -93,18 +95,14 @@ class StickyHeaderDecoration(context: Context, private val groupCallback: GroupC
                                   textX + textLength + headerPadding, textY + headerPadding)
                 c.drawRoundRect(rectF, 15f, 15f, backgroundPaint)
                 c.drawText(headerText, textX, textY, textPaint)
-                
+    
                 previousHeader = headerText
             }
         }
+        Timber.d("loop end")
     }
     
-    interface GroupCallback {
-        /**
-         * 所属するグループのIDを返す
-         */
-        fun getGroupId(position: Int): Long
-        
+    interface StickyHeaderInterface {
         /**
          * 所属するグループとして表示するヘッダーの文字列を返す
          */
