@@ -95,6 +95,10 @@ class ThreeTenAbpTest {
         assertThat(utc.isEqual(base)).isTrue()
         assertThat(base.toLocalDate().toString()).isEqualTo("2018-07-29")
         assertThat(utc.toLocalDate().toString()).isEqualTo("2018-07-28")
+        // utcから2018-07-29の文字列が得られれば解決する
+        val str = utc.format(DateTimeFormatter.ofPattern("YYYY-MM-dd")
+                                 .withZone(ZoneId.systemDefault()))
+        assertThat(str).isEqualTo("2018-07-29")
     }
 
     companion object {

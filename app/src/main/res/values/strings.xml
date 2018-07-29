@@ -5,6 +5,7 @@
     <string name="add_filter_done">フィルタを追加しました</string>
     <string name="edit_filter">フィルタを編集</string>
     <string name="before_hours">%d時間前</string>
+    <string name="before_minutes">%d分前</string>
     <string name="share_url">URLを共有</string>
     <string name="licenses">オープンソースライセンス表記</string>
     <string name="close">閉じる</string>

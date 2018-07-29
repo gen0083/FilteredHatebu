@@ -18,6 +18,8 @@ import jp.gcreate.product.filteredhatebu.ui.common.StickyHeaderDecoration
 import kotlinx.coroutines.experimental.Job
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.launch
+import org.threeten.bp.ZoneId
+import org.threeten.bp.format.DateTimeFormatter
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -56,7 +58,9 @@ class FeedListAdapter @Inject constructor(private val faviconUtil: FaviconUtil)
         return when {
             position < 0         -> ""
             position > itemCount -> ""
-            else                 -> getItem(position).fetchedAt.toLocalDate().toString()
+            else                 -> getItem(position).fetchedAt.format(
+                DateTimeFormatter.ofPattern("YYYY-MM-dd").withZone(ZoneId.systemDefault())
+            )
         }
     }
     
@@ -66,11 +70,7 @@ class FeedListAdapter @Inject constructor(private val faviconUtil: FaviconUtil)
         if (position < 0) return false
         if (position == 0) return true
         if (position > itemCount) return false
-        return getItem(position).let {
-            val current = it.fetchedAt.toLocalDate()
-            val prev = getItem(position - 1).fetchedAt.toLocalDate()
-            return@let current != prev
-        } ?: false
+        return getGroupHeaderText(position) != getGroupHeaderText(position - 1)
     }
     
 }
