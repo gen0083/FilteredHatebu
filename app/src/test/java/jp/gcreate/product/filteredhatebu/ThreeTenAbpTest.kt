@@ -15,7 +15,7 @@ import java.util.*
  * Copyright 2016 G-CREATE
  */
 class ThreeTenAbpTest {
-    
+
     @Test fun convert_zoned_date_time() {
         val time = ZonedDateTime.parse(TIME_STRINGS)
         println(time)
@@ -89,6 +89,14 @@ class ThreeTenAbpTest {
         println(fmt.format(jst) + " / " + fmt.format(utcInstant) + " / " + fmt.format(utcLocale))
     }
     
+    @Test fun `jstで取得した日付をutcに変換し単純に日付部分を文字列表示すると時差の関係でずれる`() {
+        val base = ZonedDateTime.of(2018, 7, 29, 1, 23, 45, 0, ZoneId.of("Asia/Tokyo"))
+        val utc = base.withZoneSameInstant(ZoneOffset.UTC)
+        assertThat(utc.isEqual(base)).isTrue()
+        assertThat(base.toLocalDate().toString()).isEqualTo("2018-07-29")
+        assertThat(utc.toLocalDate().toString()).isEqualTo("2018-07-28")
+    }
+
     companion object {
         private const val TIME_STRINGS = "2016-10-19T09:19:23+09:00"
     }
