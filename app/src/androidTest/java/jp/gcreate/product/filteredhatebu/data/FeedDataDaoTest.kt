@@ -5,7 +5,9 @@ import android.arch.lifecycle.Observer
 import android.arch.persistence.room.Room
 import android.support.test.InstrumentationRegistry
 import com.jakewharton.threetenabp.AndroidThreeTen
+import io.mockk.Runs
 import io.mockk.every
+import io.mockk.just
 import io.mockk.mockk
 import io.mockk.verify
 import jp.gcreate.product.filteredhatebu.data.dao.FeedDataDao
@@ -136,7 +138,7 @@ class FeedDataDaoTest {
     
     @Test fun subscribe_called_every_insert() {
         val mockObserver = mockk<Observer<List<FeedData>>>()
-        every { mockObserver.onChanged(any()) }.answers { Unit }
+        every { mockObserver.onChanged(any()) } just Runs
         sut.subscribeFilteredNewFeeds().observeForever(mockObserver)
         verify(exactly = 1) { mockObserver.onChanged(any()) }
         
@@ -156,5 +158,7 @@ class FeedDataDaoTest {
                      pubDate = ZonedDateTime.now()))
         // idがコンフリクトしたときは無視するのでデータに変更はない→LiveDataは更新されない
         verify(exactly = 2) { mockObserver.onChanged(any()) }
+    
+        sut.subscribeFilteredNewFeeds().removeObserver(mockObserver)
     }
 }

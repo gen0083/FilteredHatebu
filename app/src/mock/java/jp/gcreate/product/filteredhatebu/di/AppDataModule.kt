@@ -19,6 +19,7 @@ class AppDataModule {
     fun provideAppRoomDatabase(@ApplicationContext context: Context): AppRoomDatabase {
         val db = Room.inMemoryDatabaseBuilder(context, AppRoomDatabase::class.java)
             .fallbackToDestructiveMigration()
+            .allowMainThreadQueries()
             .build()
         prepareDebugData(db)
         return db
