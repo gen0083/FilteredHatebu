@@ -7,6 +7,7 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:padding="@dimen/item_padding"
         >
 
         <ImageView
@@ -19,45 +20,35 @@
             android:background="?attr/selectableItemBackground"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
             android:padding="8dp"
             />
 
-        <CheckBox
-            android:id="@+id/check_show_new_feed"
+        <RadioGroup
+            android:id="@+id/filter_group"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/checkbox_show_new_feed"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/close_button"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/check_show_archive_feed"
-            app:layout_constraintVertical_chainStyle="packed"
-            />
-
-        <CheckBox
-            android:id="@+id/check_show_archive_feed"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/checkbox_show_archive_feed"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/check_show_new_feed"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/check_show_favorite_feed"
-            />
-
-        <CheckBox
-            android:id="@+id/check_show_favorite_feed"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/checkbox_show_favorite_feed"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/check_show_archive_feed"
+            app:layout_constraintTop_toBottomOf="@+id/close_button"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="16dp"
-            />
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            >
 
+            <RadioButton
+                android:id="@+id/filter_new_feed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/checkbox_show_new_feed"
+                />
+
+            <RadioButton
+                android:id="@+id/filter_archive"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/checkbox_show_archive_feed"
+                />
+
+        </RadioGroup>
     </android.support.constraint.ConstraintLayout>
 </layout>

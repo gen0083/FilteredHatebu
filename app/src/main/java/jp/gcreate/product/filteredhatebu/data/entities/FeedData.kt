@@ -11,6 +11,7 @@ data class FeedData(
     val title: String,
     val summary: String,
     val pubDate: ZonedDateTime,
+    val fetchedAt: ZonedDateTime,
     val count: Int = 0,
     val isArchived: Boolean = false,
     val isFavorite: Boolean = false

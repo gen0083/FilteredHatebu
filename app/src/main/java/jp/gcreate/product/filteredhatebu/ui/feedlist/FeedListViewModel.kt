@@ -1,12 +1,15 @@
 package jp.gcreate.product.filteredhatebu.ui.feedlist
 
+import android.arch.core.util.Function
 import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
+import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModel
 import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import jp.gcreate.product.filteredhatebu.data.AppRoomDatabase
+import jp.gcreate.product.filteredhatebu.data.entities.FeedData
 import jp.gcreate.product.filteredhatebu.di.Scope.FragmentScope
 import jp.gcreate.product.filteredhatebu.domain.CrawlFeedsWork
 import jp.gcreate.product.filteredhatebu.domain.services.ArchiveFeedService
@@ -21,12 +24,27 @@ class FeedListViewModel @Inject constructor(
     private val filterService: FilterService,
     private val archiveService: ArchiveFeedService
 ) : ViewModel() {
-
-    val newFeeds = appRoomDatabase.feedDataDao().subscribeFilteredNewFeeds()
+    
+    private val newFeedLiveData = appRoomDatabase.feedDataDao().subscribeFilteredNewFeeds()
+    private val archiveFeedLiveData = appRoomDatabase.feedDataDao().subscribeArchivedFeeds()
+    val filterStateLiveData: LiveData<FilterState> = MutableLiveData()
+    val newFeeds: LiveData<List<FeedData>> = Transformations
+        .switchMap(filterStateLiveData, Function {
+            return@Function if (it == FilterState.ARCHIVE_FEEDS) {
+                archiveFeedLiveData
+            } else {
+                newFeedLiveData
+            }
+        })
     val test get() = "from ViewModel@${this.hashCode()} feeds:${newFeeds.value?.size}"
-    private val archiveEmitter: MutableLiveData<HandleOnceEvent<String>> = MutableLiveData()
     val archiveMessage: LiveData<HandleOnceEvent<String>> = archiveService.archiveEvent
     val addFilterEvent = filterService.addFilterEvent
+    var filterState = FilterState.NEW_FEEDS
+        private set
+    
+    init {
+        (filterStateLiveData as MutableLiveData).value = filterState
+    }
     
     fun fetchFeeds() {
         val work = OneTimeWorkRequestBuilder<CrawlFeedsWork>().build()
@@ -49,8 +67,20 @@ class FeedListViewModel @Inject constructor(
         filterService.undoAdd()
     }
     
+    fun showNewFeeds() {
+        filterState = FilterState.NEW_FEEDS
+        (filterStateLiveData as MutableLiveData).value = filterState
+    }
+    
+    fun showArchiveFeeds() {
+        filterState = FilterState.ARCHIVE_FEEDS
+        (filterStateLiveData as MutableLiveData).value = filterState
+    }
+    
     override fun onCleared() {
         super.onCleared()
         Timber.d("onCleared")
     }
+    
+    enum class FilterState { NEW_FEEDS, ARCHIVE_FEEDS }
 }
