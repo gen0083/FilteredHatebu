@@ -45,5 +45,6 @@ class FeedDataIsMatchFilterTest {
     }
     
     private fun makeDummyData(url: String) = FeedData(url = url, title = "", summary = "",
-                                                      pubDate = ZonedDateTime.now())
+                                                      pubDate = ZonedDateTime.now(),
+                                                      fetchedAt = ZonedDateTime.now())
 }
