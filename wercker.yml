@@ -16,7 +16,7 @@ build:
         name: run ui test
         code: |
           start-emulator
-          ./gradlew --project-cache-dir=$WERCKER_CACHE_DIR connectedProdDebugAndroidTest
+          ./gradlew --project-cache-dir=$WERCKER_CACHE_DIR connectedMockDebugAndroidTest
   after-steps:
     - script:
         name: copy test reports
