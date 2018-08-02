@@ -73,8 +73,7 @@ class StickyHeaderDecoration(context: Context) : RecyclerView.ItemDecoration() {
         val firstPosition = layoutManager.findFirstVisibleItemPosition()
         val lastPosition = layoutManager.findLastVisibleItemPosition()
         val adapter = parent.adapter as PagingFeedListAdapter
-        Timber.d("onDraw firstVisible position: $firstPosition/$lastPosition $state")
-        Timber.d("loop start")
+        Timber.v("onDraw firstVisible position: $firstPosition/$lastPosition $state")
         val textX = (parent.width / 2).toFloat()
         
         if (firstPosition < 0 || lastPosition < 0) return
@@ -100,7 +99,6 @@ class StickyHeaderDecoration(context: Context) : RecyclerView.ItemDecoration() {
                 previousHeader = headerText
             }
         }
-        Timber.d("loop end")
     }
     
     interface StickyHeaderInterface {

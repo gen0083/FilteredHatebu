@@ -51,6 +51,7 @@ class PagingFeedListAdapter @Inject constructor(
             }
         } else {
             Timber.d("item = null on PagingFeedListAdapter position:$position (holder:$holder)")
+            holder.clear()
         }
     }
     
@@ -65,7 +66,6 @@ class PagingFeedListAdapter @Inject constructor(
     }
     
     override fun isBoundary(position: Int): Boolean {
-        Timber.d("isBoundary position $position")
         // swipeしたアイテムのpositionが-1でここに来る場合がある
         if (position < 0) return false
         if (position == 0) return true

@@ -36,6 +36,7 @@ class FeedListViewModel @Inject constructor(
                 .setPageSize(20)
                 .setPrefetchDistance(20)
                 .setInitialLoadSizeHint(20)
+                .setEnablePlaceholders(true)
                 .build()
             return@Function if (it == FilterState.ARCHIVE_FEEDS) {
                 LivePagedListBuilder(archiveFeedLiveData, config).build()

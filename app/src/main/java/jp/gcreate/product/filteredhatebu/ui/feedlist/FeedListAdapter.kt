@@ -19,6 +19,7 @@ import kotlinx.coroutines.experimental.Job
 import kotlinx.coroutines.experimental.android.UI
 import kotlinx.coroutines.experimental.launch
 import org.threeten.bp.ZoneId
+import org.threeten.bp.ZonedDateTime
 import org.threeten.bp.format.DateTimeFormatter
 import timber.log.Timber
 import javax.inject.Inject
@@ -75,6 +76,8 @@ class FeedListAdapter @Inject constructor(private val faviconUtil: FaviconUtil)
     
 }
 
+private val DUMMY_DATA = FeedData("", "", "", ZonedDateTime.now())
+
 class FeedListViewHolder(itemView: View, private val faviconUtil: FaviconUtil)
     : RecyclerView.ViewHolder(itemView) {
     
@@ -88,5 +91,10 @@ class FeedListViewHolder(itemView: View, private val faviconUtil: FaviconUtil)
         job = launch(UI) {
             binding.favicon.setImageDrawable(faviconUtil.fetchFaviconWithCoroutine(feedData.url))
         }
+    }
+    
+    fun clear() {
+        job?.cancel()
+        binding.item = DUMMY_DATA
     }
 }
