@@ -11,6 +11,9 @@ import jp.gcreate.product.filteredhatebu.data.entities.FeedData
 import jp.gcreate.product.filteredhatebu.di.Scope.FragmentScope
 import jp.gcreate.product.filteredhatebu.ui.common.FaviconUtil
 import jp.gcreate.product.filteredhatebu.ui.common.HandleOnceEvent
+import jp.gcreate.product.filteredhatebu.ui.common.StickyHeaderDecoration
+import org.threeten.bp.ZoneId
+import org.threeten.bp.format.DateTimeFormatter
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -27,7 +30,7 @@ class PagingFeedListAdapter @Inject constructor(
             return oldItem == newItem
         }
     }
-) {
+), StickyHeaderDecoration.StickyHeaderInterface {
     
     private val clickEventSender: MutableLiveData<HandleOnceEvent<FeedData>> = MutableLiveData()
     val clickEvent: LiveData<HandleOnceEvent<FeedData>> = clickEventSender
@@ -49,5 +52,24 @@ class PagingFeedListAdapter @Inject constructor(
         } else {
             Timber.d("item = null on PagingFeedListAdapter position:$position (holder:$holder)")
         }
+    }
+    
+    override fun getGroupHeaderText(position: Int): String {
+        return when {
+            position < 0         -> ""
+            position > itemCount -> ""
+            else                 -> getItem(position)?.fetchedAt?.format(
+                DateTimeFormatter.ofPattern("YYYY-MM-dd").withZone(ZoneId.systemDefault())
+            ) ?: ""
+        }
+    }
+    
+    override fun isBoundary(position: Int): Boolean {
+        Timber.d("isBoundary position $position")
+        // swipeしたアイテムのpositionが-1でここに来る場合がある
+        if (position < 0) return false
+        if (position == 0) return true
+        if (position > itemCount) return false
+        return getGroupHeaderText(position) != getGroupHeaderText(position - 1)
     }
 }

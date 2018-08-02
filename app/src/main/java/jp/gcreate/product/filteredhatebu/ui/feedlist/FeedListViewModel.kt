@@ -5,6 +5,8 @@ import android.arch.lifecycle.LiveData
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.Transformations
 import android.arch.lifecycle.ViewModel
+import android.arch.paging.LivePagedListBuilder
+import android.arch.paging.PagedList
 import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
@@ -25,15 +27,20 @@ class FeedListViewModel @Inject constructor(
     private val archiveService: ArchiveFeedService
 ) : ViewModel() {
     
-    private val newFeedLiveData = appRoomDatabase.feedDataDao().subscribeFilteredNewFeeds()
-    private val archiveFeedLiveData = appRoomDatabase.feedDataDao().subscribeArchivedFeeds()
+    private val newFeedLiveData = appRoomDatabase.feedDataDao().subscribePagedFilteredNewFeeds()
+    private val archiveFeedLiveData = appRoomDatabase.feedDataDao().subscribePagedArchiveFeeds()
     val filterStateLiveData: LiveData<FilterState> = MutableLiveData()
-    val newFeeds: LiveData<List<FeedData>> = Transformations
+    val newFeeds: LiveData<PagedList<FeedData>> = Transformations
         .switchMap(filterStateLiveData, Function {
+            val config = PagedList.Config.Builder()
+                .setPageSize(20)
+                .setPrefetchDistance(20)
+                .setInitialLoadSizeHint(20)
+                .build()
             return@Function if (it == FilterState.ARCHIVE_FEEDS) {
-                archiveFeedLiveData
+                LivePagedListBuilder(archiveFeedLiveData, config).build()
             } else {
-                newFeedLiveData
+                LivePagedListBuilder(newFeedLiveData, config).build()
             }
         })
     val test get() = "from ViewModel@${this.hashCode()} feeds:${newFeeds.value?.size}"

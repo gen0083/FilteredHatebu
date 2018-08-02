@@ -1,6 +1,7 @@
 package jp.gcreate.product.filteredhatebu.data.dao
 
 import android.arch.lifecycle.LiveData
+import android.arch.paging.DataSource
 import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Delete
 import android.arch.persistence.room.Insert
@@ -38,11 +39,17 @@ interface FeedDataDao {
     @Query(QUERY_FILTERED_NEW_FEEDS)
     fun subscribeFilteredNewFeeds(): LiveData<List<FeedData>>
     
+    @Query(QUERY_FILTERED_NEW_FEEDS)
+    fun subscribePagedFilteredNewFeeds(): DataSource.Factory<Int, FeedData>
+    
     @Query(QUERY_ARCHIVED_FEEDS)
     fun getArchivedFeeds(): List<FeedData>
     
     @Query(QUERY_ARCHIVED_FEEDS)
     fun subscribeArchivedFeeds(): LiveData<List<FeedData>>
+    
+    @Query(QUERY_ARCHIVED_FEEDS)
+    fun subscribePagedArchiveFeeds(): DataSource.Factory<Int, FeedData>
     
     @Query(QUERY_FAVORITE_FEEDS)
     fun getFavoriteFeeds(): List<FeedData>
