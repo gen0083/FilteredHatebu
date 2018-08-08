@@ -11,6 +11,7 @@ import android.support.v7.widget.RecyclerView
 import android.text.TextPaint
 import android.view.View
 import jp.gcreate.product.filteredhatebu.R
+import jp.gcreate.product.filteredhatebu.ui.feedlist.PagingFeedListAdapter
 import timber.log.Timber
 
 /**
@@ -71,9 +72,8 @@ class StickyHeaderDecoration(context: Context) : RecyclerView.ItemDecoration() {
         val layoutManager = parent.layoutManager as LinearLayoutManager
         val firstPosition = layoutManager.findFirstVisibleItemPosition()
         val lastPosition = layoutManager.findLastVisibleItemPosition()
-        val adapter = parent.adapter as StickyHeaderInterface
-        Timber.d("onDraw firstVisible position: $firstPosition/$lastPosition $state")
-        Timber.d("loop start")
+        val adapter = parent.adapter as PagingFeedListAdapter
+        Timber.v("onDraw firstVisible position: $firstPosition/$lastPosition $state")
         val textX = (parent.width / 2).toFloat()
         
         if (firstPosition < 0 || lastPosition < 0) return
@@ -99,7 +99,6 @@ class StickyHeaderDecoration(context: Context) : RecyclerView.ItemDecoration() {
                 previousHeader = headerText
             }
         }
-        Timber.d("loop end")
     }
     
     interface StickyHeaderInterface {
