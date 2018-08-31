@@ -4,6 +4,7 @@ import io.mockk.every
 import io.mockk.mockk
 import io.mockk.spyk
 import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.Test
 
 class MockkTest {
@@ -31,6 +32,7 @@ class MockkTest {
         assertThat(mock.getInt(0)).isEqualTo(1)
         assertThat(mock.getInt(1)).isEqualTo(2)
         assertThat(mock.getInt(3)).isEqualTo(10)
-        assertThat(mock.getInt(2)).isEqualTo(0)
+        assertThatThrownBy { mock.getInt(2) }
+            .isInstanceOf(ArrayIndexOutOfBoundsException::class.java)
     }
 }
