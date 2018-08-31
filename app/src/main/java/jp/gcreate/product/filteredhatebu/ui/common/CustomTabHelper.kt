@@ -14,16 +14,12 @@ import android.support.customtabs.CustomTabsSession
 import android.support.v4.content.ContextCompat
 import androidx.core.net.toUri
 import jp.gcreate.product.filteredhatebu.R
-import jp.gcreate.product.filteredhatebu.di.Scope.AppScope
-import jp.gcreate.product.filteredhatebu.di.qualifier.ApplicationContext
 import timber.log.Timber
-import javax.inject.Inject
 
 /**
  * Copyright 2018 G-CREATE
  */
-@AppScope
-class CustomTabHelper @Inject constructor(@ApplicationContext private val context: Context):
+class CustomTabHelper(private val context: Context) :
     CustomTabsServiceConnection() {
     
     private val requestCode = 1

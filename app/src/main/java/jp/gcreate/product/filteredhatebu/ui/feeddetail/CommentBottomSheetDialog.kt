@@ -1,7 +1,6 @@
 package jp.gcreate.product.filteredhatebu.ui.feeddetail
 
 import android.arch.lifecycle.Observer
-import android.content.Context
 import android.os.Bundle
 import android.support.design.widget.BottomSheetDialogFragment
 import android.support.v7.view.ContextThemeWrapper
@@ -10,25 +9,17 @@ import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import dagger.android.support.AndroidSupportInjection
 import jp.gcreate.product.filteredhatebu.R
 import jp.gcreate.product.filteredhatebu.databinding.DialogCommentBottomSheetBinding
-import jp.gcreate.product.filteredhatebu.di.ViewModelProviderFactory
-import jp.gcreate.product.filteredhatebu.ext.injectViewModel
 import jp.gcreate.product.filteredhatebu.model.HatebuComments
+import org.koin.android.architecture.ext.sharedViewModel
+import org.koin.android.ext.android.inject
 import timber.log.Timber
-import javax.inject.Inject
 
 class CommentBottomSheetDialog : BottomSheetDialogFragment() {
     private lateinit var binding: DialogCommentBottomSheetBinding
-    private lateinit var vm: FeedDetailViewModel
-    @Inject lateinit var factory: ViewModelProviderFactory
-    @Inject lateinit var commentsAdapter: FeedCommentsAdapter
-    
-    override fun onAttach(context: Context?) {
-        AndroidSupportInjection.inject(this)
-        super.onAttach(context)
-    }
+    private val vm: FeedDetailViewModel by sharedViewModel()
+    private val commentsAdapter: FeedCommentsAdapter by inject()
     
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -41,7 +32,6 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment() {
     
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        vm = injectViewModel(factory)
         Timber.d("vm=$vm")
         
         setupRecyclerView()

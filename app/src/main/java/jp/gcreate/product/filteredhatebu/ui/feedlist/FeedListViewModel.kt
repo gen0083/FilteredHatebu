@@ -12,16 +12,13 @@ import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
 import jp.gcreate.product.filteredhatebu.data.AppRoomDatabase
 import jp.gcreate.product.filteredhatebu.data.entities.FeedData
-import jp.gcreate.product.filteredhatebu.di.Scope.FragmentScope
 import jp.gcreate.product.filteredhatebu.domain.CrawlFeedsWork
 import jp.gcreate.product.filteredhatebu.domain.services.ArchiveFeedService
 import jp.gcreate.product.filteredhatebu.domain.services.FilterService
 import jp.gcreate.product.filteredhatebu.ui.common.HandleOnceEvent
 import timber.log.Timber
-import javax.inject.Inject
 
-@FragmentScope
-class FeedListViewModel @Inject constructor(
+class FeedListViewModel(
     private val appRoomDatabase: AppRoomDatabase,
     private val filterService: FilterService,
     private val archiveService: ArchiveFeedService

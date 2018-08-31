@@ -9,15 +9,12 @@ import android.view.ViewGroup
 import dagger.android.support.AndroidSupportInjection
 import jp.gcreate.product.filteredhatebu.R
 import jp.gcreate.product.filteredhatebu.databinding.DialogListFilterStateBinding
-import jp.gcreate.product.filteredhatebu.di.ViewModelProviderFactory
-import jp.gcreate.product.filteredhatebu.ext.injectViewModel
+import org.koin.android.architecture.ext.viewModel
 import timber.log.Timber
-import javax.inject.Inject
 
 class ListFilterStateDialog : BottomSheetDialogFragment() {
     private lateinit var binding: DialogListFilterStateBinding
-    private lateinit var vm: FeedListViewModel
-    @Inject lateinit var factory: ViewModelProviderFactory
+    private val vm: FeedListViewModel by viewModel()
     
     override fun onAttach(context: Context?) {
         AndroidSupportInjection.inject(this)
@@ -32,7 +29,6 @@ class ListFilterStateDialog : BottomSheetDialogFragment() {
     
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        vm = injectViewModel(factory)
         val checkedId = when (vm.filterState) {
             FeedListViewModel.FilterState.NEW_FEEDS     -> R.id.filter_new_feed
             FeedListViewModel.FilterState.ARCHIVE_FEEDS -> R.id.filter_archive

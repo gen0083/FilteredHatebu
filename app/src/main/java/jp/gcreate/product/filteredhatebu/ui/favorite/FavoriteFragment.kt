@@ -2,6 +2,7 @@ package jp.gcreate.product.filteredhatebu.ui.favorite
 
 import android.arch.lifecycle.Observer
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
@@ -9,19 +10,16 @@ import android.view.ViewGroup
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
-import dagger.android.support.DaggerFragment
 import jp.gcreate.product.filteredhatebu.databinding.FragmentFavoriteBinding
-import jp.gcreate.product.filteredhatebu.di.ViewModelProviderFactory
-import jp.gcreate.product.filteredhatebu.ext.injectViewModel
 import jp.gcreate.product.filteredhatebu.ui.feedlist.FeedListAdapter
-import javax.inject.Inject
+import org.koin.android.architecture.ext.sharedViewModel
+import org.koin.android.ext.android.inject
 
-class FavoriteFragment : DaggerFragment() {
+class FavoriteFragment : Fragment() {
     
     private lateinit var binding: FragmentFavoriteBinding
-    private lateinit var vm: FavoriteViewModel
-    @Inject lateinit var factory: ViewModelProviderFactory
-    @Inject lateinit var feedAdapter: FeedListAdapter
+    private val vm: FavoriteViewModel by sharedViewModel()
+    private val feedAdapter: FeedListAdapter by inject()
     
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -31,7 +29,6 @@ class FavoriteFragment : DaggerFragment() {
     
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        vm = injectViewModel(factory)
         
         setupRecyclerView()
         subscribeViewModel()

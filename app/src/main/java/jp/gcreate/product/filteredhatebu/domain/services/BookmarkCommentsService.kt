@@ -1,17 +1,12 @@
 package jp.gcreate.product.filteredhatebu.domain.services
 
 import jp.gcreate.product.filteredhatebu.api.HatenaClient
-import jp.gcreate.product.filteredhatebu.di.Scope.AppScope
 import jp.gcreate.product.filteredhatebu.model.HatebuComments
 import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.withContext
 import timber.log.Timber
-import javax.inject.Inject
 
-@AppScope
-class BookmarkCommentsService @Inject constructor(
-    private val client: HatenaClient.JsonService
-) {
+class BookmarkCommentsService(private val client: HatenaClient.JsonService) {
     suspend fun fetchComments(url: String): HatebuComments {
         return withContext(CommonPool) {
             try {

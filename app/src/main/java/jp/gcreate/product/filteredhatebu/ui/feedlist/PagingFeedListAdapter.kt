@@ -8,17 +8,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import jp.gcreate.product.filteredhatebu.R
 import jp.gcreate.product.filteredhatebu.data.entities.FeedData
-import jp.gcreate.product.filteredhatebu.di.Scope.FragmentScope
 import jp.gcreate.product.filteredhatebu.ui.common.FaviconUtil
 import jp.gcreate.product.filteredhatebu.ui.common.HandleOnceEvent
 import jp.gcreate.product.filteredhatebu.ui.common.StickyHeaderDecoration
 import org.threeten.bp.ZoneId
 import org.threeten.bp.format.DateTimeFormatter
 import timber.log.Timber
-import javax.inject.Inject
 
-@FragmentScope
-class PagingFeedListAdapter @Inject constructor(
+class PagingFeedListAdapter(
     private val faviconUtil: FaviconUtil
 ) : PagedListAdapter<FeedData, FeedListViewHolder>(
     object : DiffUtil.ItemCallback<FeedData>() {

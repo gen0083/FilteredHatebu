@@ -11,7 +11,6 @@ import android.view.ViewGroup
 import jp.gcreate.product.filteredhatebu.R
 import jp.gcreate.product.filteredhatebu.data.entities.FeedData
 import jp.gcreate.product.filteredhatebu.databinding.ItemFeedListItemBinding
-import jp.gcreate.product.filteredhatebu.di.Scope.FragmentScope
 import jp.gcreate.product.filteredhatebu.ui.common.FaviconUtil
 import jp.gcreate.product.filteredhatebu.ui.common.HandleOnceEvent
 import jp.gcreate.product.filteredhatebu.ui.common.StickyHeaderDecoration
@@ -22,10 +21,8 @@ import org.threeten.bp.ZoneId
 import org.threeten.bp.ZonedDateTime
 import org.threeten.bp.format.DateTimeFormatter
 import timber.log.Timber
-import javax.inject.Inject
 
-@FragmentScope
-class FeedListAdapter @Inject constructor(private val faviconUtil: FaviconUtil)
+class FeedListAdapter(private val faviconUtil: FaviconUtil)
     : ListAdapter<FeedData, FeedListViewHolder>(
     object : DiffUtil.ItemCallback<FeedData>() {
         override fun areItemsTheSame(oldItem: FeedData, newItem: FeedData): Boolean {

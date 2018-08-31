@@ -8,22 +8,21 @@ import jp.gcreate.product.filteredhatebu.data.AppRoomDatabase
 import jp.gcreate.product.filteredhatebu.data.entities.FeedData
 import jp.gcreate.product.filteredhatebu.data.entities.FilteredFeed
 import jp.gcreate.product.filteredhatebu.data.entities.debug.WorkLog
-import jp.gcreate.product.filteredhatebu.ext.getAppComponent
 import jp.gcreate.product.filteredhatebu.model.HatebuFeedItem
 import jp.gcreate.product.filteredhatebu.ui.common.NotificationUtil
+import org.koin.standalone.KoinComponent
+import org.koin.standalone.inject
 import org.threeten.bp.ZonedDateTime
 import timber.log.Timber
-import javax.inject.Inject
 
-class CrawlFeedsWork : Worker() {
-    @Inject lateinit var feedsBurnerClienet: FeedsBurnerClienet
-    @Inject lateinit var xmlService: HatenaClient.XmlService
-    @Inject lateinit var appRoomDatabase: AppRoomDatabase
-    @Inject lateinit var notificationUtil: NotificationUtil
+class CrawlFeedsWork : Worker(), KoinComponent {
+    private val feedsBurnerClienet: FeedsBurnerClienet by inject()
+    private val xmlService: HatenaClient.XmlService by inject()
+    private val appRoomDatabase: AppRoomDatabase by inject()
+    private val notificationUtil: NotificationUtil by inject()
     
     override fun doWork(): Result {
         // do-crawling
-        applicationContext.getAppComponent().inject(this)
         Timber.d("do-work on thread: ${Thread.currentThread()}")
         
         var count = 0

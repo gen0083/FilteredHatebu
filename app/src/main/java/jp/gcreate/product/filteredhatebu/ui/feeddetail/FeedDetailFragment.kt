@@ -3,6 +3,7 @@ package jp.gcreate.product.filteredhatebu.ui.feeddetail
 import android.arch.lifecycle.Observer
 import android.content.Intent
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
@@ -10,20 +11,17 @@ import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import dagger.android.support.DaggerFragment
 import jp.gcreate.product.filteredhatebu.R
 import jp.gcreate.product.filteredhatebu.databinding.FragmentFeedDetailBinding
-import jp.gcreate.product.filteredhatebu.di.ViewModelProviderFactory
-import jp.gcreate.product.filteredhatebu.ext.injectViewModel
 import jp.gcreate.product.filteredhatebu.ui.common.CustomTabHelper
+import org.koin.android.architecture.ext.sharedViewModel
+import org.koin.android.ext.android.inject
 import timber.log.Timber
-import javax.inject.Inject
 
-class FeedDetailFragment : DaggerFragment() {
+class FeedDetailFragment : Fragment() {
     private lateinit var binding: FragmentFeedDetailBinding
-    lateinit var vm: FeedDetailViewModel
-    @Inject lateinit var viewModelFactory: ViewModelProviderFactory
-    @Inject lateinit var customTabHelper: CustomTabHelper
+    private val vm: FeedDetailViewModel by sharedViewModel()
+    private val customTabHelper: CustomTabHelper by inject()
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +36,6 @@ class FeedDetailFragment : DaggerFragment() {
     
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        vm = injectViewModel(viewModelFactory)
         val url = FeedDetailFragmentArgs.fromBundle(arguments).feedUrl
         setupActionsFromView()
         subscribeViewModel()

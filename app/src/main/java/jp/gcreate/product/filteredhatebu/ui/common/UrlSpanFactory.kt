@@ -3,15 +3,12 @@ package jp.gcreate.product.filteredhatebu.ui.common
 import android.text.Spannable
 import android.text.Spanned
 import androidx.core.text.toSpannable
-import jp.gcreate.product.filteredhatebu.di.Scope.AppScope
 import java.util.regex.Pattern
-import javax.inject.Inject
 
 /**
  * Copyright 2018 G-CREATE
  */
-@AppScope
-class UrlSpanFactory @Inject constructor(private val helper: CustomTabHelper) : Spannable.Factory() {
+class UrlSpanFactory(private val helper: CustomTabHelper) : Spannable.Factory() {
     private val regex = Pattern.compile("https?://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]")
     
     override fun newSpannable(source: CharSequence): Spannable {

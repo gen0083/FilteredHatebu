@@ -10,15 +10,12 @@ import android.view.ViewGroup
 import jp.gcreate.product.filteredhatebu.R
 import jp.gcreate.product.filteredhatebu.data.entities.FilteredFeedInfo
 import jp.gcreate.product.filteredhatebu.databinding.ItemFilteredFeedInfoBinding
-import jp.gcreate.product.filteredhatebu.di.Scope.FragmentScope
 import jp.gcreate.product.filteredhatebu.ui.common.DataBindingViewHolder
 import jp.gcreate.product.filteredhatebu.ui.common.HandleOnceEvent
-import javax.inject.Inject
 
 private typealias VH = DataBindingViewHolder<ItemFilteredFeedInfoBinding>
 
-@FragmentScope
-class FilterListAdapter @Inject constructor() : ListAdapter<FilteredFeedInfo, VH>(
+class FilterListAdapter : ListAdapter<FilteredFeedInfo, VH>(
     object : DiffUtil.ItemCallback<FilteredFeedInfo>() {
         override fun areItemsTheSame(oldItem: FilteredFeedInfo,
                                      newItem: FilteredFeedInfo): Boolean {

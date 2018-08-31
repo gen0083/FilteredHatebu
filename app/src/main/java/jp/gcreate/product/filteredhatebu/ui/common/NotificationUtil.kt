@@ -10,19 +10,15 @@ import android.support.v4.app.NotificationCompat
 import android.support.v4.app.NotificationManagerCompat
 import androidx.core.content.systemService
 import jp.gcreate.product.filteredhatebu.R
-import jp.gcreate.product.filteredhatebu.di.Scope.AppScope
-import jp.gcreate.product.filteredhatebu.di.qualifier.ApplicationContext
 import jp.gcreate.product.filteredhatebu.ui.MainActivity
 import timber.log.Timber
-import javax.inject.Inject
 
 const val DEFAULT_CHANNEL = "default"
 const val DEFAULT_CHANNEL_ID = 1
 const val NEW_CHANNEL = "new_channel"
 const val NEW_CHANNEL_ID = 10
 
-@AppScope
-class NotificationUtil @Inject constructor(@ApplicationContext private val context: Context) {
+class NotificationUtil(private val context: Context) {
     
     private val manager = NotificationManagerCompat.from(context)
     

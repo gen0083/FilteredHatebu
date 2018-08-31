@@ -3,6 +3,7 @@ package jp.gcreate.product.filteredhatebu.ui.feedlist
 import android.arch.lifecycle.Observer
 import android.os.Bundle
 import android.support.design.widget.Snackbar
+import android.support.v4.app.Fragment
 import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
@@ -19,21 +20,18 @@ import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.State
 import androidx.work.WorkManager
-import dagger.android.support.DaggerFragment
 import jp.gcreate.product.filteredhatebu.R
 import jp.gcreate.product.filteredhatebu.databinding.FragmentFeedListBinding
-import jp.gcreate.product.filteredhatebu.di.ViewModelProviderFactory
 import jp.gcreate.product.filteredhatebu.domain.CrawlFeedsWork
-import jp.gcreate.product.filteredhatebu.ext.injectViewModel
 import jp.gcreate.product.filteredhatebu.ui.common.StickyHeaderDecoration
 import jp.gcreate.product.filteredhatebu.ui.common.SwipeDismissCallback
+import org.koin.android.architecture.ext.sharedViewModel
+import org.koin.android.ext.android.inject
 import timber.log.Timber
-import javax.inject.Inject
 
-class FeedListFragment : DaggerFragment() {
-    private lateinit var vm: FeedListViewModel
-    @Inject lateinit var factory: ViewModelProviderFactory
-    @Inject lateinit var feedListAdapter: PagingFeedListAdapter
+class FeedListFragment : Fragment() {
+    private val vm: FeedListViewModel by sharedViewModel()
+    private val feedListAdapter: PagingFeedListAdapter by inject()
     private lateinit var binding: FragmentFeedListBinding
     
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -49,7 +47,6 @@ class FeedListFragment : DaggerFragment() {
     
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        vm = injectViewModel(factory)
         
         setUpRecyclerView()
         setupActionFromView()

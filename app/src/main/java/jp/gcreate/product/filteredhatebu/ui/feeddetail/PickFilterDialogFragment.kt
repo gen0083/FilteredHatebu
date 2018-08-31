@@ -1,23 +1,19 @@
 package jp.gcreate.product.filteredhatebu.ui.feeddetail
 
 import android.app.Dialog
-import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.v7.app.AlertDialog
 import android.widget.ArrayAdapter
 import dagger.android.support.DaggerAppCompatDialogFragment
 import jp.gcreate.product.filteredhatebu.R
-import jp.gcreate.product.filteredhatebu.di.ViewModelProviderFactory
 import jp.gcreate.product.filteredhatebu.ui.common.FilterGenerator
+import org.koin.android.architecture.ext.sharedViewModel
 import timber.log.Timber
-import javax.inject.Inject
 
 class PickFilterDialogFragment : DaggerAppCompatDialogFragment() {
-    @Inject lateinit var factory: ViewModelProviderFactory
-    private lateinit var vm: FeedDetailViewModel
+    private val vm: FeedDetailViewModel by sharedViewModel()
     
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        vm = ViewModelProviders.of(activity!!, factory)[FeedDetailViewModel::class.java]
         Timber.d("vm current url: ${vm.currentUrl}")
         val url = vm.currentUrl
         val adapter = ArrayAdapter<String>(context, android.R.layout.simple_list_item_1)
