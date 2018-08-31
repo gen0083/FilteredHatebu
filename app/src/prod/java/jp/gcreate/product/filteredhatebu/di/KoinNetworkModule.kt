@@ -22,7 +22,6 @@ val koinNetworkModule: Module = applicationContext {
         val cache = Cache(cacheDir, OKHTTP_CACHE_SIZE.toLong())
         OkHttpClient.Builder()
             .cache(cache)
-            .addInterceptor(get())
             .build()
     }
     bean {

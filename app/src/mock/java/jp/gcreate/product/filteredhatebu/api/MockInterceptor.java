@@ -11,10 +11,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.inject.Inject;
-
 import jp.gcreate.product.filteredhatebu.BuildConfig;
-import jp.gcreate.product.filteredhatebu.di.qualifier.ApplicationContext;
 import jp.gcreate.product.filteredhatebu.ui.common.FaviconUtil;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
@@ -34,8 +31,7 @@ public class MockInterceptor implements Interceptor {
     private Pattern categoryUrl;
     private int     count;
 
-    @Inject
-    public MockInterceptor(@ApplicationContext Context context) {
+    public MockInterceptor(Context context) {
         this.context = context;
         categoryUrl = Pattern.compile("hotentry/.+\\.rss");
     }
