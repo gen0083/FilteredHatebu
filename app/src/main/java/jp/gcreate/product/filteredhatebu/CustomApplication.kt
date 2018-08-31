@@ -1,5 +1,6 @@
 package jp.gcreate.product.filteredhatebu
 
+import android.app.Application
 import android.os.Build
 import androidx.work.Constraints
 import androidx.work.ExistingPeriodicWorkPolicy
@@ -9,44 +10,41 @@ import androidx.work.WorkManager
 import androidx.work.toWorkData
 import com.jakewharton.threetenabp.AndroidThreeTen
 import com.squareup.picasso.Picasso
-import dagger.android.AndroidInjector
-import dagger.android.support.DaggerApplication
-import jp.gcreate.product.filteredhatebu.di.AppComponent
-import jp.gcreate.product.filteredhatebu.di.AppModule
-import jp.gcreate.product.filteredhatebu.di.DaggerAppComponent
+import jp.gcreate.product.filteredhatebu.di.koinAppModule
+import jp.gcreate.product.filteredhatebu.di.koinDataModule
+import jp.gcreate.product.filteredhatebu.di.koinDebugModule
+import jp.gcreate.product.filteredhatebu.di.koinNetworkModule
+import jp.gcreate.product.filteredhatebu.di.koinViewModelModule
 import jp.gcreate.product.filteredhatebu.domain.CrawlFeedsWork
 import jp.gcreate.product.filteredhatebu.ui.common.NotificationUtil
 import jp.gcreate.product.filteredhatebu.util.CrashlyticsWrapper
 import jp.gcreate.product.filteredhatebu.util.StethoWrapper
+import org.koin.android.ext.android.inject
+import org.koin.android.ext.android.startKoin
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
-import javax.inject.Inject
 
 /**
  * Copyright 2016 G-CREATE
  */
-class CustomApplication : DaggerApplication() {
+class CustomApplication : Application() {
     
-    val appComponent: AppComponent by lazy {
-        DaggerAppComponent.builder()
-            .application(this)
-            .appModule(AppModule(this))
-            .build()
-    }
-    @Inject
-    lateinit var stetho: StethoWrapper
-    @Inject
-    lateinit var tree: Timber.Tree
-    @Inject
-    lateinit var picassoBuilder: Picasso.Builder
-    @Inject
-    lateinit var crashlyticsWrapper: CrashlyticsWrapper
-    @Inject lateinit var notificationUtil: NotificationUtil
+    val stetho: StethoWrapper by inject()
+    val tree: Timber.Tree by inject()
+    val picassoBuilder: Picasso.Builder by inject()
+    val crashlyticsWrapper: CrashlyticsWrapper by inject()
+    val notificationUtil: NotificationUtil by inject()
     
     override fun onCreate() {
         super.onCreate()
-        
-        appComponent.inject(this)
+    
+        startKoin(this, listOf(
+            koinAppModule,
+            koinDataModule,
+            koinDebugModule,
+            koinNetworkModule,
+            koinViewModelModule
+        ))
         
         Timber.plant(tree)
         stetho.install()
@@ -55,10 +53,6 @@ class CustomApplication : DaggerApplication() {
         Picasso.setSingletonInstance(picassoBuilder.build())
         scheduleCrawlFeedWork()
         notificationUtil.installChannel()
-    }
-    
-    override fun applicationInjector(): AndroidInjector<out DaggerApplication>? {
-        return appComponent
     }
     
     private fun scheduleCrawlFeedWork() {

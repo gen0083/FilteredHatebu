@@ -5,19 +5,14 @@ import android.arch.lifecycle.MutableLiveData
 import jp.gcreate.product.filteredhatebu.data.AppRoomDatabase
 import jp.gcreate.product.filteredhatebu.data.entities.FeedFilter
 import jp.gcreate.product.filteredhatebu.data.entities.FilteredFeed
-import jp.gcreate.product.filteredhatebu.di.Scope.AppScope
 import jp.gcreate.product.filteredhatebu.ui.common.HandleOnceEvent
 import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.launch
 import org.threeten.bp.ZonedDateTime
 import timber.log.Timber
-import javax.inject.Inject
 
-@AppScope
-class FilterService @Inject constructor(
-    private val appRoomDatabase: AppRoomDatabase
-) {
+class FilterService(private val appRoomDatabase: AppRoomDatabase) {
     
     private val feedFilterDao = appRoomDatabase.feedFilterDao()
     private val feedDataDao = appRoomDatabase.feedDataDao()

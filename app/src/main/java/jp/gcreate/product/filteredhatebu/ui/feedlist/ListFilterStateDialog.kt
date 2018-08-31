@@ -1,28 +1,18 @@
 package jp.gcreate.product.filteredhatebu.ui.feedlist
 
-import android.content.Context
 import android.os.Bundle
 import android.support.design.widget.BottomSheetDialogFragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import dagger.android.support.AndroidSupportInjection
 import jp.gcreate.product.filteredhatebu.R
 import jp.gcreate.product.filteredhatebu.databinding.DialogListFilterStateBinding
-import jp.gcreate.product.filteredhatebu.di.ViewModelProviderFactory
-import jp.gcreate.product.filteredhatebu.ext.injectViewModel
+import org.koin.android.architecture.ext.viewModel
 import timber.log.Timber
-import javax.inject.Inject
 
 class ListFilterStateDialog : BottomSheetDialogFragment() {
     private lateinit var binding: DialogListFilterStateBinding
-    private lateinit var vm: FeedListViewModel
-    @Inject lateinit var factory: ViewModelProviderFactory
-    
-    override fun onAttach(context: Context?) {
-        AndroidSupportInjection.inject(this)
-        super.onAttach(context)
-    }
+    private val vm: FeedListViewModel by viewModel()
     
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -32,7 +22,6 @@ class ListFilterStateDialog : BottomSheetDialogFragment() {
     
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        vm = injectViewModel(factory)
         val checkedId = when (vm.filterState) {
             FeedListViewModel.FilterState.NEW_FEEDS     -> R.id.filter_new_feed
             FeedListViewModel.FilterState.ARCHIVE_FEEDS -> R.id.filter_archive

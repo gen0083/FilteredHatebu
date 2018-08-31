@@ -2,26 +2,24 @@ package jp.gcreate.product.filteredhatebu.ui.filterdetail
 
 import android.arch.lifecycle.Observer
 import android.os.Bundle
+import android.support.v4.app.Fragment
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
-import dagger.android.support.DaggerFragment
 import jp.gcreate.product.filteredhatebu.data.entities.FilteredFeedInfo
 import jp.gcreate.product.filteredhatebu.databinding.FragmentFilterDetailBinding
-import jp.gcreate.product.filteredhatebu.di.ViewModelProviderFactory
-import jp.gcreate.product.filteredhatebu.ext.injectViewModel
 import jp.gcreate.product.filteredhatebu.ui.feedlist.FeedListAdapter
+import org.koin.android.architecture.ext.sharedViewModel
+import org.koin.android.ext.android.inject
 import timber.log.Timber
-import javax.inject.Inject
 
-class FilterDetailFragment : DaggerFragment() {
+class FilterDetailFragment : Fragment() {
     private lateinit var binding: FragmentFilterDetailBinding
-    private lateinit var vm: FilterDetailViewModel
-    @Inject lateinit var factory: ViewModelProviderFactory
-    @Inject lateinit var feedListAdapter: FeedListAdapter
+    private val vm: FilterDetailViewModel by sharedViewModel()
+    private val feedListAdapter: FeedListAdapter by inject()
     
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -31,7 +29,6 @@ class FilterDetailFragment : DaggerFragment() {
     
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        vm = injectViewModel(factory)
         val info = FilterDetailFragmentArgs.fromBundle(arguments).run {
             FilteredFeedInfo(filter, feedCount)
         }

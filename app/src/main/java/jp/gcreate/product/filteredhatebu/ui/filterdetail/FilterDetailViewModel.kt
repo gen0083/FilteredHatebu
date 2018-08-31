@@ -5,13 +5,10 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import jp.gcreate.product.filteredhatebu.data.AppRoomDatabase
 import jp.gcreate.product.filteredhatebu.data.entities.FeedData
-import jp.gcreate.product.filteredhatebu.di.Scope.FragmentScope
 import jp.gcreate.product.filteredhatebu.domain.services.FilterService
 import kotlinx.coroutines.experimental.launch
-import javax.inject.Inject
 
-@FragmentScope
-class FilterDetailViewModel @Inject constructor(
+class FilterDetailViewModel(
     private val db: AppRoomDatabase,
     private val filterService: FilterService
 ) : ViewModel() {

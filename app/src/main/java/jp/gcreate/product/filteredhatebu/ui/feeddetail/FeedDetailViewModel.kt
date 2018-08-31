@@ -5,7 +5,6 @@ import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import jp.gcreate.product.filteredhatebu.data.AppRoomDatabase
 import jp.gcreate.product.filteredhatebu.data.entities.FeedData
-import jp.gcreate.product.filteredhatebu.di.Scope.FragmentScope
 import jp.gcreate.product.filteredhatebu.domain.services.ArchiveFeedService
 import jp.gcreate.product.filteredhatebu.domain.services.BookmarkCommentsService
 import jp.gcreate.product.filteredhatebu.domain.services.FilterService
@@ -15,10 +14,8 @@ import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.async
 import kotlinx.coroutines.experimental.launch
 import timber.log.Timber
-import javax.inject.Inject
 
-@FragmentScope
-class FeedDetailViewModel @Inject constructor(
+class FeedDetailViewModel(
     private val appRoomDatabase: AppRoomDatabase,
     private val commentsService: BookmarkCommentsService,
     private val filterService: FilterService,

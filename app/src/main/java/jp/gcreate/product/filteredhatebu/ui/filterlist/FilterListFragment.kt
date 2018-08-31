@@ -3,6 +3,7 @@ package jp.gcreate.product.filteredhatebu.ui.filterlist
 import android.arch.lifecycle.Observer
 import android.os.Bundle
 import android.support.design.widget.Snackbar
+import android.support.v4.app.Fragment
 import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
@@ -10,19 +11,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
-import dagger.android.support.DaggerFragment
 import jp.gcreate.product.filteredhatebu.R
 import jp.gcreate.product.filteredhatebu.databinding.FragmentFilterListBinding
-import jp.gcreate.product.filteredhatebu.di.ViewModelProviderFactory
-import jp.gcreate.product.filteredhatebu.ext.injectViewModel
+import org.koin.android.architecture.ext.sharedViewModel
+import org.koin.android.ext.android.inject
 import timber.log.Timber
-import javax.inject.Inject
 
-class FilterListFragment : DaggerFragment() {
+class FilterListFragment : Fragment() {
     private lateinit var binding: FragmentFilterListBinding
-    private lateinit var vm: FilterListViewModel
-    @Inject lateinit var factory: ViewModelProviderFactory
-    @Inject lateinit var filterListAdapter: FilterListAdapter
+    private val vm: FilterListViewModel by sharedViewModel()
+    private val filterListAdapter: FilterListAdapter by inject()
     
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -32,7 +30,6 @@ class FilterListFragment : DaggerFragment() {
     
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        vm = injectViewModel(factory)
         
         setupRecyclerView()
         setupActionFromView()

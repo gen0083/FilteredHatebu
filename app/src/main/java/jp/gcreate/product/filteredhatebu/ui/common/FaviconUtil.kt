@@ -8,8 +8,6 @@ import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.support.v4.content.ContextCompat
 import jp.gcreate.product.filteredhatebu.R
-import jp.gcreate.product.filteredhatebu.di.Scope.AppScope
-import jp.gcreate.product.filteredhatebu.di.qualifier.ApplicationContext
 import kotlinx.coroutines.experimental.CommonPool
 import kotlinx.coroutines.experimental.withContext
 import okhttp3.Call
@@ -25,16 +23,11 @@ import rx.schedulers.Schedulers
 import timber.log.Timber
 import java.io.IOException
 import java.util.*
-import javax.inject.Inject
 
 /**
  * Copyright 2016 G-CREATE
  */
-@AppScope
-class FaviconUtil @Inject constructor(
-    private val client: OkHttpClient,
-    @ApplicationContext context: Context
-) {
+class FaviconUtil(private val client: OkHttpClient, context: Context) {
     
     private val resources: Resources = context.resources
     private val memoryCache = HashMap<String, Drawable>()

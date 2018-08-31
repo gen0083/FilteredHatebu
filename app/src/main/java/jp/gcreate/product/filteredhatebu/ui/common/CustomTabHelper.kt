@@ -14,16 +14,12 @@ import android.support.customtabs.CustomTabsSession
 import android.support.v4.content.ContextCompat
 import androidx.core.net.toUri
 import jp.gcreate.product.filteredhatebu.R
-import jp.gcreate.product.filteredhatebu.di.Scope.AppScope
-import jp.gcreate.product.filteredhatebu.di.qualifier.ApplicationContext
 import timber.log.Timber
-import javax.inject.Inject
 
 /**
  * Copyright 2018 G-CREATE
  */
-@AppScope
-class CustomTabHelper @Inject constructor(@ApplicationContext private val context: Context):
+class CustomTabHelper(private val context: Context) :
     CustomTabsServiceConnection() {
     
     private val requestCode = 1
@@ -69,16 +65,14 @@ class CustomTabHelper @Inject constructor(@ApplicationContext private val contex
         }
     }
     
-    init {
-        connectCustomTabsService()
-    }
-    
     fun preFetch(url: String) {
+        connectCustomTabsService()
         Timber.d("do prefetch $url")
         session?.mayLaunchUrl(url.toUri(), null, null)
     }
     
     fun openCustomTab(url: String) {
+        connectCustomTabsService()
         val shareIntent = Intent().apply {
             action = Intent.ACTION_SEND
             type = "text/plain"
