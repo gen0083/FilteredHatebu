@@ -69,16 +69,14 @@ class CustomTabHelper @Inject constructor(@ApplicationContext private val contex
         }
     }
     
-    init {
-        connectCustomTabsService()
-    }
-    
     fun preFetch(url: String) {
+        connectCustomTabsService()
         Timber.d("do prefetch $url")
         session?.mayLaunchUrl(url.toUri(), null, null)
     }
     
     fun openCustomTab(url: String) {
+        connectCustomTabsService()
         val shareIntent = Intent().apply {
             action = Intent.ACTION_SEND
             type = "text/plain"

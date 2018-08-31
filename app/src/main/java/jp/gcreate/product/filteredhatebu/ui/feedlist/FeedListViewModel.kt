@@ -51,7 +51,7 @@ class FeedListViewModel @Inject constructor(
         private set
     
     init {
-        (filterStateLiveData as MutableLiveData).value = filterState
+        (filterStateLiveData as MutableLiveData).postValue(filterState)
     }
     
     fun fetchFeeds() {
