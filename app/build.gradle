@@ -13,11 +13,11 @@ ext {
 }
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
     defaultConfig {
         applicationId "jp.gcreate.product.filteredhatebu"
         minSdkVersion 21
-        targetSdkVersion 27
+        targetSdkVersion 28
         versionCode rootProject.ext.versionCode
         versionName rootProject.ext.versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
