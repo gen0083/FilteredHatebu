@@ -1,8 +1,8 @@
 package jp.gcreate.product.filteredhatebu.data
 
-import android.arch.persistence.room.Database
-import android.arch.persistence.room.RoomDatabase
-import android.arch.persistence.room.TypeConverters
+import androidx.room.Database
+import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import jp.gcreate.product.filteredhatebu.data.dao.DeletedFeedDao
 import jp.gcreate.product.filteredhatebu.data.dao.FeedDataDao
 import jp.gcreate.product.filteredhatebu.data.dao.FeedFilterDao

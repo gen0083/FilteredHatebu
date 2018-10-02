@@ -5,11 +5,10 @@ import jp.gcreate.product.filteredhatebu.ui.feeddetail.FeedDetailViewModel
 import jp.gcreate.product.filteredhatebu.ui.feedlist.FeedListViewModel
 import jp.gcreate.product.filteredhatebu.ui.filterdetail.FilterDetailViewModel
 import jp.gcreate.product.filteredhatebu.ui.filterlist.FilterListViewModel
-import org.koin.android.architecture.ext.viewModel
-import org.koin.dsl.module.Module
-import org.koin.dsl.module.applicationContext
+import org.koin.androidx.viewmodel.ext.koin.viewModel
+import org.koin.dsl.module.module
 
-val koinViewModelModule: Module = applicationContext {
+val koinViewModelModule = module {
     viewModel { FavoriteViewModel(get()) }
     viewModel { FeedDetailViewModel(get(), get(), get(), get()) }
     viewModel { FeedListViewModel(get(), get(), get()) }

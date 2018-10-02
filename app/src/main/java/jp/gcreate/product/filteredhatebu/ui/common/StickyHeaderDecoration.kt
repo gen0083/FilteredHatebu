@@ -5,11 +5,9 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.Rect
 import android.graphics.RectF
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.text.TextPaint
 import android.view.View
+import androidx.core.content.ContextCompat
 import jp.gcreate.product.filteredhatebu.R
 import jp.gcreate.product.filteredhatebu.ui.feedlist.PagingFeedListAdapter
 import timber.log.Timber
@@ -17,7 +15,8 @@ import timber.log.Timber
 /**
  * Note: This class depends on FeedListAdapter and LinearLayoutManager
  */
-class StickyHeaderDecoration(context: Context) : RecyclerView.ItemDecoration() {
+class StickyHeaderDecoration(context: Context) :
+    androidx.recyclerview.widget.RecyclerView.ItemDecoration() {
     
     private val textPaint = TextPaint()
     private val backgroundPaint = Paint()
@@ -55,8 +54,10 @@ class StickyHeaderDecoration(context: Context) : RecyclerView.ItemDecoration() {
         headerAreaOffset = headerHeight + headerMargin
     }
     
-    override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView,
-                                state: RecyclerView.State) {
+    override fun getItemOffsets(
+        outRect: Rect, view: View, parent: androidx.recyclerview.widget.RecyclerView,
+        state: androidx.recyclerview.widget.RecyclerView.State
+    ) {
         val position = parent.getChildAdapterPosition(view)
         val adapter = parent.adapter as StickyHeaderInterface
         val isBoundary = adapter.isBoundary(position)
@@ -65,11 +66,15 @@ class StickyHeaderDecoration(context: Context) : RecyclerView.ItemDecoration() {
         }
     }
     
-    override fun onDrawOver(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
+    override fun onDrawOver(
+        c: Canvas,
+        parent: androidx.recyclerview.widget.RecyclerView,
+        state: androidx.recyclerview.widget.RecyclerView.State
+    ) {
         // yLimitはRecyclerViewの一番上の位置にHeaderを固定するときの位置
         val yLimit = headerMargin + textHeight
         var previousHeader = ""
-        val layoutManager = parent.layoutManager as LinearLayoutManager
+        val layoutManager = parent.layoutManager as androidx.recyclerview.widget.LinearLayoutManager
         val firstPosition = layoutManager.findFirstVisibleItemPosition()
         val lastPosition = layoutManager.findLastVisibleItemPosition()
         val adapter = parent.adapter as PagingFeedListAdapter
@@ -78,7 +83,7 @@ class StickyHeaderDecoration(context: Context) : RecyclerView.ItemDecoration() {
         
         if (firstPosition < 0 || lastPosition < 0) return
         for (i in firstPosition..lastPosition) {
-            val view = parent.findViewHolderForAdapterPosition(i).itemView
+            val view = parent.findViewHolderForAdapterPosition(i)?.itemView ?: continue
             Timber.v("i($i) from $firstPosition/$lastPosition view=$view")
             val headerText = adapter.getGroupHeaderText(i)
             if (previousHeader != headerText) {

@@ -2,7 +2,6 @@ package jp.gcreate.product.filteredhatebu.ui.option
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +12,7 @@ import jp.gcreate.product.filteredhatebu.databinding.FragmentOptionBinding
 /**
  * Copyright 2018 G-CREATE
  */
-class OptionsFragment : Fragment() {
+class OptionsFragment : androidx.fragment.app.Fragment() {
     private lateinit var binding: FragmentOptionBinding
     
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,

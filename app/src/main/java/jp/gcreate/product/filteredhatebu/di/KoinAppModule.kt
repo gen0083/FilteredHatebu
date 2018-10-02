@@ -12,24 +12,23 @@ import jp.gcreate.product.filteredhatebu.ui.feedlist.FeedListAdapter
 import jp.gcreate.product.filteredhatebu.ui.feedlist.PagingFeedListAdapter
 import jp.gcreate.product.filteredhatebu.ui.filterlist.FilterListAdapter
 import org.koin.android.ext.koin.androidApplication
-import org.koin.dsl.module.Module
-import org.koin.dsl.module.applicationContext
+import org.koin.dsl.module.module
 import rx.Scheduler
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 
-val koinAppModule: Module = applicationContext {
+val koinAppModule = module {
     factory("subscribeOn") { Schedulers.io() as Scheduler }
     factory("observeOn") { AndroidSchedulers.mainThread() as Scheduler }
     // domain
-    bean { BookmarkCommentsService(get()) }
-    bean { FilterService(get()) }
-    bean { ArchiveFeedService(get()) }
+    single { BookmarkCommentsService(get()) }
+    single { FilterService(get()) }
+    single { ArchiveFeedService(get()) }
     // ui.common
-    bean { UrlSpanFactory(get()) }
-    bean { CustomTabHelper(androidApplication()) }
-    bean { FaviconUtil(get(), androidApplication()) }
-    bean { NotificationUtil(androidApplication()) }
+    single { UrlSpanFactory(get()) }
+    single { CustomTabHelper(androidApplication()) }
+    single { FaviconUtil(get(), androidApplication()) }
+    single { NotificationUtil(androidApplication()) }
     // ui
     factory { FeedCommentsAdapter(get()) }
     factory { FeedListAdapter(get()) }

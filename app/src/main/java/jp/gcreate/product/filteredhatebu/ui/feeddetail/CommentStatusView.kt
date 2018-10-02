@@ -2,10 +2,10 @@ package jp.gcreate.product.filteredhatebu.ui.feeddetail
 
 import android.content.Context
 import android.graphics.Rect
-import android.support.constraint.ConstraintLayout
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.TouchDelegate
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.doOnPreDraw
 import androidx.core.view.isGone
 import androidx.core.view.isInvisible
