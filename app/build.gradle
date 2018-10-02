@@ -260,7 +260,6 @@ tasks.withType(com.android.build.gradle.internal.tasks.databinding.DataBindingEx
 }
 
 task openReportJvmTest(type: Exec) {
-    onlyIf { !ciBuild || travisBuild }
     workingDir "build/reports/tests/testProdDebugUnitTest"
     commandLine 'open'
     args "index.html"
@@ -275,14 +274,12 @@ openReportJvmTest.onlyIf { !ciBuild && !travisBuild }
 openReportInstrumentedTest.onlyIf { !ciBuild && !travisBuild }
 
 tasks.withType(AbstractTestTask) { task ->
-    println task
     if (task.name == "testProdDebugUnitTest") {
         task.finalizedBy openReportJvmTest
     }
 }
 
 tasks.withType(com.android.build.gradle.internal.tasks.AndroidTestTask) { task ->
-    println task
     if (task.name == "connectedMockDebugAndroidTest") {
         task.finalizedBy openReportInstrumentedTest
     }
