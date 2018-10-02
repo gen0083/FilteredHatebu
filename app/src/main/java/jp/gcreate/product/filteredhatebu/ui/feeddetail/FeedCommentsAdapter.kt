@@ -1,11 +1,11 @@
 package jp.gcreate.product.filteredhatebu.ui.feeddetail
 
-import android.support.v7.recyclerview.extensions.ListAdapter
-import android.support.v7.util.DiffUtil
 import android.text.method.LinkMovementMethod
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import jp.gcreate.product.filteredhatebu.R
 import jp.gcreate.product.filteredhatebu.databinding.ItemEntryBookmarksBinding
 import jp.gcreate.product.filteredhatebu.model.HatebuBookmark

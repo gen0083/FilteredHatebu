@@ -1,12 +1,12 @@
 package jp.gcreate.product.filteredhatebu.ui.filterlist
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
-import android.support.v7.recyclerview.extensions.ListAdapter
-import android.support.v7.util.DiffUtil
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import jp.gcreate.product.filteredhatebu.R
 import jp.gcreate.product.filteredhatebu.data.entities.FilteredFeedInfo
 import jp.gcreate.product.filteredhatebu.databinding.ItemFilteredFeedInfoBinding

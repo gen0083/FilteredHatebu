@@ -1,9 +1,9 @@
 package jp.gcreate.product.filteredhatebu.data
 
-import android.arch.core.executor.testing.InstantTaskExecutorRule
-import android.arch.lifecycle.Observer
-import android.arch.persistence.room.Room
-import android.support.test.InstrumentationRegistry
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.lifecycle.Observer
+import androidx.room.Room
+import androidx.test.InstrumentationRegistry
 import com.jakewharton.threetenabp.AndroidThreeTen
 import io.mockk.Runs
 import io.mockk.every

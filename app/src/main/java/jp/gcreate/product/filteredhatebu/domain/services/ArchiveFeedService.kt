@@ -1,7 +1,7 @@
 package jp.gcreate.product.filteredhatebu.domain.services
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import jp.gcreate.product.filteredhatebu.data.AppRoomDatabase
 import jp.gcreate.product.filteredhatebu.ui.common.HandleOnceEvent
 import kotlinx.coroutines.experimental.launch

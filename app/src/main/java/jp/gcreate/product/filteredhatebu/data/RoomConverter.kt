@@ -1,6 +1,6 @@
 package jp.gcreate.product.filteredhatebu.data
 
-import android.arch.persistence.room.TypeConverter
+import androidx.room.TypeConverter
 import org.threeten.bp.DateTimeUtils
 import org.threeten.bp.Instant
 import org.threeten.bp.LocalDateTime

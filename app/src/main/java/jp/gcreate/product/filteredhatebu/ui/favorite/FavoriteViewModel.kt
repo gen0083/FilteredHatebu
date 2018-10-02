@@ -1,7 +1,7 @@
 package jp.gcreate.product.filteredhatebu.ui.favorite
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.ViewModel
 import jp.gcreate.product.filteredhatebu.data.AppRoomDatabase
 import jp.gcreate.product.filteredhatebu.data.entities.FeedData
 

@@ -1,17 +1,16 @@
 package jp.gcreate.product.filteredhatebu.di
 
-import android.arch.persistence.room.Room
+import androidx.room.Room
 import jp.gcreate.product.filteredhatebu.data.AppRoomDatabase
 import jp.gcreate.product.filteredhatebu.data.entities.FeedData
 import kotlinx.coroutines.experimental.launch
 import org.koin.android.ext.koin.androidApplication
-import org.koin.dsl.module.Module
-import org.koin.dsl.module.applicationContext
+import org.koin.dsl.module.module
 import org.threeten.bp.ZoneId
 import org.threeten.bp.ZonedDateTime
 
-val koinDataModule: Module = applicationContext {
-    bean {
+val koinDataModule = module {
+    single {
         val db = Room.inMemoryDatabaseBuilder(androidApplication(),
                                               AppRoomDatabase::class.java)
             .fallbackToDestructiveMigration()

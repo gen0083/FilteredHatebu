@@ -1,13 +1,13 @@
 package jp.gcreate.product.filteredhatebu.ui.feedlist
 
 import android.os.Bundle
-import android.support.design.widget.BottomSheetDialogFragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import jp.gcreate.product.filteredhatebu.R
 import jp.gcreate.product.filteredhatebu.databinding.DialogListFilterStateBinding
-import org.koin.android.architecture.ext.viewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 import timber.log.Timber
 
 class ListFilterStateDialog : BottomSheetDialogFragment() {

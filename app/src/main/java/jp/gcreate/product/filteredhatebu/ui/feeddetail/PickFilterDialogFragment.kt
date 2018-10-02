@@ -2,12 +2,12 @@ package jp.gcreate.product.filteredhatebu.ui.feeddetail
 
 import android.app.Dialog
 import android.os.Bundle
-import android.support.v4.app.DialogFragment
-import android.support.v7.app.AlertDialog
 import android.widget.ArrayAdapter
+import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.DialogFragment
 import jp.gcreate.product.filteredhatebu.R
 import jp.gcreate.product.filteredhatebu.ui.common.FilterGenerator
-import org.koin.android.architecture.ext.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import timber.log.Timber
 
 class PickFilterDialogFragment : DialogFragment() {

@@ -1,13 +1,12 @@
 package jp.gcreate.product.filteredhatebu.ui.feedlist
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
-import android.support.v7.recyclerview.extensions.ListAdapter
-import android.support.v7.util.DiffUtil
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import jp.gcreate.product.filteredhatebu.R
 import jp.gcreate.product.filteredhatebu.data.entities.FeedData
 import jp.gcreate.product.filteredhatebu.databinding.ItemFeedListItemBinding
@@ -75,8 +74,8 @@ class FeedListAdapter(private val faviconUtil: FaviconUtil)
 
 private val DUMMY_DATA = FeedData("", "", "", ZonedDateTime.now())
 
-class FeedListViewHolder(itemView: View, private val faviconUtil: FaviconUtil)
-    : RecyclerView.ViewHolder(itemView) {
+class FeedListViewHolder(itemView: View, private val faviconUtil: FaviconUtil) :
+    androidx.recyclerview.widget.RecyclerView.ViewHolder(itemView) {
     
     private var job: Job? = null
     private val binding: ItemFeedListItemBinding = ItemFeedListItemBinding.bind(itemView)

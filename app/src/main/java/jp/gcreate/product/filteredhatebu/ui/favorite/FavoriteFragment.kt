@@ -1,19 +1,20 @@
 package jp.gcreate.product.filteredhatebu.ui.favorite
 
-import android.arch.lifecycle.Observer
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import jp.gcreate.product.filteredhatebu.databinding.FragmentFavoriteBinding
 import jp.gcreate.product.filteredhatebu.ui.feedlist.FeedListAdapter
-import org.koin.android.architecture.ext.sharedViewModel
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class FavoriteFragment : Fragment() {
     
@@ -21,8 +22,10 @@ class FavoriteFragment : Fragment() {
     private val vm: FavoriteViewModel by sharedViewModel()
     private val feedAdapter: FeedListAdapter by inject()
     
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding = FragmentFavoriteBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -37,7 +40,7 @@ class FavoriteFragment : Fragment() {
     private fun setupRecyclerView() {
         binding.recyclerView.apply {
             adapter = feedAdapter
-            layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+            layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
         }
         feedAdapter.clickEvent.observe(this, Observer {
             it?.handleEvent()?.let {

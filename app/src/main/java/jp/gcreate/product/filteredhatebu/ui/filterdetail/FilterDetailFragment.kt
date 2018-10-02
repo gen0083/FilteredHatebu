@@ -1,19 +1,20 @@
 package jp.gcreate.product.filteredhatebu.ui.filterdetail
 
-import android.arch.lifecycle.Observer
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import jp.gcreate.product.filteredhatebu.data.entities.FilteredFeedInfo
 import jp.gcreate.product.filteredhatebu.databinding.FragmentFilterDetailBinding
 import jp.gcreate.product.filteredhatebu.ui.feedlist.FeedListAdapter
-import org.koin.android.architecture.ext.sharedViewModel
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import timber.log.Timber
 
 class FilterDetailFragment : Fragment() {
@@ -44,7 +45,7 @@ class FilterDetailFragment : Fragment() {
     private fun setupRecyclerView() {
         binding.recyclerView.apply {
             adapter = feedListAdapter
-            layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+            layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
             addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
         }
         feedListAdapter.clickEvent.observe(this, Observer {

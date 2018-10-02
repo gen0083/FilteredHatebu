@@ -1,8 +1,8 @@
 package jp.gcreate.product.filteredhatebu.data.entities
 
-import android.arch.persistence.room.Entity
-import android.arch.persistence.room.Index
-import android.arch.persistence.room.PrimaryKey
+import androidx.room.Entity
+import androidx.room.Index
+import androidx.room.PrimaryKey
 import org.threeten.bp.ZonedDateTime
 
 @Entity(tableName = "feed_filter", indices = [Index(value = ["filter"], unique = true)])

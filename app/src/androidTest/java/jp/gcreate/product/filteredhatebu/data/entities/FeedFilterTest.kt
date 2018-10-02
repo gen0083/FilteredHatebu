@@ -1,8 +1,8 @@
 package jp.gcreate.product.filteredhatebu.data.entities
 
-import android.arch.core.executor.testing.InstantTaskExecutorRule
-import android.arch.persistence.room.Room
-import android.support.test.InstrumentationRegistry
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.room.Room
+import androidx.test.InstrumentationRegistry
 import com.jakewharton.threetenabp.AndroidThreeTen
 import jp.gcreate.product.filteredhatebu.data.AppRoomDatabase
 import jp.gcreate.product.filteredhatebu.data.dao.FeedFilterDao
