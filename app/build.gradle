@@ -99,7 +99,10 @@ android {
         }
     }
     testOptions {
-        unitTests.returnDefaultValues = true
+        unitTests {
+            returnDefaultValues = true
+            animationsDisabled = true
+        }
     }
 }
 
@@ -253,6 +256,34 @@ tasks.withType(com.android.build.gradle.internal.tasks.databinding.DataBindingEx
         task.finalizedBy(tasks.create("${task.name}Workaround") << {
             task.output.deleteDir()
         })
+    }
+}
+
+task openReportJvmTest(type: Exec) {
+    onlyIf { !ciBuild || travisBuild }
+    workingDir "build/reports/tests/testProdDebugUnitTest"
+    commandLine 'open'
+    args "index.html"
+}
+
+task openReportInstrumentedTest(type: Exec) {
+    onlyIf { !ciBuild || travisBuild }
+    workingDir "build/reports/androidTests/connected/flavors/MOCK"
+    commandLine 'open'
+    args "index.html"
+}
+
+tasks.withType(AbstractTestTask) { task ->
+    println task
+    if (task.name == "testProdDebugUnitTest") {
+        task.finalizedBy openReportJvmTest
+    }
+}
+
+tasks.withType(com.android.build.gradle.internal.tasks.AndroidTestTask) { task ->
+    println task
+    if (task.name == "connectedMockDebugAndroidTest") {
+        task.finalizedBy openReportInstrumentedTest
     }
 }
 
