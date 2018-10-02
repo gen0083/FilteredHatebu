@@ -267,11 +267,12 @@ task openReportJvmTest(type: Exec) {
 }
 
 task openReportInstrumentedTest(type: Exec) {
-    onlyIf { !ciBuild || travisBuild }
     workingDir "build/reports/androidTests/connected/flavors/MOCK"
     commandLine 'open'
     args "index.html"
 }
+openReportJvmTest.onlyIf { !ciBuild && !travisBuild }
+openReportInstrumentedTest.onlyIf { !ciBuild && !travisBuild }
 
 tasks.withType(AbstractTestTask) { task ->
     println task
