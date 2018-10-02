@@ -3,10 +3,10 @@ package jp.gcreate.product.filteredhatebu.ui.common
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.drawable.ColorDrawable
-import android.support.annotation.DrawableRes
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.RecyclerView
-import android.support.v7.widget.helper.ItemTouchHelper
+import androidx.annotation.DrawableRes
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import jp.gcreate.product.filteredhatebu.R
 import kotlin.math.abs
 
@@ -25,17 +25,23 @@ class SwipeDismissCallback(
     private val iconMarginSide = context.resources.getDimension(R.dimen.item_padding).toInt()
     private val background: ColorDrawable = ColorDrawable()
     private val backgroundColor = ContextCompat.getColor(context, R.color.colorPrimaryLight)
-
-    override fun onMove(recyclerView: RecyclerView?, viewHolder: RecyclerView.ViewHolder?,
-                        target: RecyclerView.ViewHolder?): Boolean = false
     
-    override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+    override fun onMove(
+        recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder,
+        target: RecyclerView.ViewHolder
+    ): Boolean = false
+    
+    override fun onSwiped(
+        viewHolder: androidx.recyclerview.widget.RecyclerView.ViewHolder,
+        direction: Int
+    ) {
         onSwiped(viewHolder.adapterPosition)
     }
     
-    override fun onChildDraw(c: Canvas, recyclerView: RecyclerView,
-                             viewHolder: RecyclerView.ViewHolder, dX: Float, dY: Float,
-                             actionState: Int, isCurrentlyActive: Boolean) {
+    override fun onChildDraw(
+        c: Canvas, recyclerView: androidx.recyclerview.widget.RecyclerView,
+        viewHolder: androidx.recyclerview.widget.RecyclerView.ViewHolder, dX: Float, dY: Float,
+        actionState: Int, isCurrentlyActive: Boolean) {
         val itemView = viewHolder.itemView
         val itemHeight = itemView.run { bottom - top }
         val absX = abs(dX).toInt()

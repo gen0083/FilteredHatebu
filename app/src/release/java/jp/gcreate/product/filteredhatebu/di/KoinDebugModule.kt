@@ -11,22 +11,23 @@ import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module.Module
 import org.koin.dsl.module.applicationContext
+import org.koin.dsl.module.module
 import timber.log.Timber
 
-val koinDebugModule: Module = applicationContext {
-    bean { StethoWrapper() }
-    bean { ReleaseLogTree() as Timber.Tree }
-    bean {
+val koinDebugModule = module {
+    single { StethoWrapper() }
+    single { ReleaseLogTree() as Timber.Tree }
+    single {
         HttpLoggingInterceptor(
             HttpLoggingInterceptor.Logger { Timber.tag("OkHttp").v(it) }
         )
             .setLevel(HttpLoggingInterceptor.Level.HEADERS) as Interceptor
     }
-    bean {
+    single {
         Picasso.Builder(androidApplication())
             .downloader(OkHttp3Downloader(get<OkHttpClient>()))
             .loggingEnabled(true)
             .indicatorsEnabled(true)
     }
-    bean { CrashlyticsWrapper() }
+    single { CrashlyticsWrapper() }
 }

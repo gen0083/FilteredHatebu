@@ -1,7 +1,6 @@
 package jp.gcreate.product.filteredhatebu.ui.common;
 
 import android.content.Context;
-import android.support.annotation.VisibleForTesting;
 
 import org.threeten.bp.Clock;
 import org.threeten.bp.LocalDateTime;
@@ -14,6 +13,7 @@ import org.threeten.bp.temporal.ChronoUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import androidx.annotation.VisibleForTesting;
 import jp.gcreate.product.filteredhatebu.R;
 
 /**

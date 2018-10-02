@@ -1,14 +1,14 @@
 package jp.gcreate.product.filteredhatebu.di
 
-import android.arch.persistence.room.Room
+import androidx.room.Room
 import jp.gcreate.product.filteredhatebu.data.AppRoomDatabase
 import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module.Module
-import org.koin.dsl.module.applicationContext
+import org.koin.dsl.module.module
 
 private const val ROOM_FILE = "hatebu.room"
-val koinDataModule: Module = applicationContext {
-    bean {
+val koinDataModule: Module = module {
+    single {
         Room.databaseBuilder(androidApplication(), AppRoomDatabase::class.java, ROOM_FILE)
             .build()
     }

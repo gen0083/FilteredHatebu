@@ -6,9 +6,9 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Build
-import android.support.v4.app.NotificationCompat
-import android.support.v4.app.NotificationManagerCompat
-import androidx.core.content.systemService
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.getSystemService
 import jp.gcreate.product.filteredhatebu.R
 import jp.gcreate.product.filteredhatebu.ui.MainActivity
 import timber.log.Timber
@@ -43,10 +43,9 @@ class NotificationUtil(private val context: Context) {
                 enableVibration(false)
                 enableLights(true)
             }
-            
-            context.systemService<NotificationManager>().let {
-                it.createNotificationChannels(listOf(channelDefault, newChannel))
-            }
+    
+            context.getSystemService<NotificationManager>()
+                ?.createNotificationChannels(listOf(channelDefault, newChannel))
         } else {
             Timber.d("this device dose not support notification channel")
         }

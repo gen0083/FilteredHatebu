@@ -1,11 +1,11 @@
 package jp.gcreate.product.filteredhatebu.ui.feedlist
 
-import android.arch.lifecycle.LiveData
-import android.arch.lifecycle.MutableLiveData
-import android.arch.paging.PagedListAdapter
-import android.support.v7.util.DiffUtil
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.paging.PagedListAdapter
+import androidx.recyclerview.widget.DiffUtil
 import jp.gcreate.product.filteredhatebu.R
 import jp.gcreate.product.filteredhatebu.data.entities.FeedData
 import jp.gcreate.product.filteredhatebu.ui.common.FaviconUtil

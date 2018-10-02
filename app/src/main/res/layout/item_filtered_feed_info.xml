@@ -15,7 +15,7 @@
             />
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/item_padding"
@@ -63,5 +63,5 @@
             android:visibility="@{(info.feedCount != 0) ? View.VISIBLE : View.GONE}"
             />
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

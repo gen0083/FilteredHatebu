@@ -15,7 +15,7 @@
 
     </data>
 
-    <android.support.constraint.ConstraintLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/item_padding"
@@ -53,7 +53,7 @@
             android:layout_marginStart="@dimen/item_padding"
             />
 
-        <android.support.constraint.Barrier
+        <androidx.constraintlayout.widget.Barrier
             android:id="@+id/sub_item_barrier"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -110,5 +110,5 @@
             android:layout_marginEnd="8dp"
             />
 
-    </android.support.constraint.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

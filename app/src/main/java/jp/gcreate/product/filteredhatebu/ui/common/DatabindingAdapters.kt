@@ -1,10 +1,10 @@
 package jp.gcreate.product.filteredhatebu.ui.common
 
-import android.databinding.BindingAdapter
-import android.databinding.BindingMethod
-import android.databinding.BindingMethods
 import android.graphics.drawable.Drawable
 import android.widget.ImageButton
+import androidx.databinding.BindingAdapter
+import androidx.databinding.BindingMethod
+import androidx.databinding.BindingMethods
 
 @BindingMethods(
     BindingMethod(

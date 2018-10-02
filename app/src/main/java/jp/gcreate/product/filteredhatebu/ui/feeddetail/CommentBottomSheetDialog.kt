@@ -1,19 +1,20 @@
 package jp.gcreate.product.filteredhatebu.ui.feeddetail
 
-import android.arch.lifecycle.Observer
 import android.os.Bundle
-import android.support.design.widget.BottomSheetDialogFragment
-import android.support.v7.view.ContextThemeWrapper
-import android.support.v7.widget.DividerItemDecoration
-import android.support.v7.widget.LinearLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.view.ContextThemeWrapper
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import jp.gcreate.product.filteredhatebu.R
 import jp.gcreate.product.filteredhatebu.databinding.DialogCommentBottomSheetBinding
 import jp.gcreate.product.filteredhatebu.model.HatebuComments
-import org.koin.android.architecture.ext.sharedViewModel
 import org.koin.android.ext.android.inject
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import timber.log.Timber
 
 class CommentBottomSheetDialog : BottomSheetDialogFragment() {
@@ -41,7 +42,7 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment() {
     private fun setupRecyclerView() {
         binding.recyclerView.apply {
             adapter = commentsAdapter
-            layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+            layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
             addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
         }
     }
