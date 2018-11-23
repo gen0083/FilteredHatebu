@@ -7,7 +7,7 @@ buildscript {
         maven { url 'https://maven.fabric.io/public' }
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:3.2.0"
+        classpath "com.android.tools.build:gradle:3.2.1"
         // https://github.com/maskarade/gradle-android-ribbonizer-plugin
         classpath 'com.github.gfx.ribbonizer:ribbonizer-plugin:2.1.0'
         // https://github.com/Triple-T/gradle-play-publisher
