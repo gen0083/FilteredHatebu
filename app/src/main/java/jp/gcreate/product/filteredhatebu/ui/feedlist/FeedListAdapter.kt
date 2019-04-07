@@ -13,9 +13,10 @@ import jp.gcreate.product.filteredhatebu.databinding.ItemFeedListItemBinding
 import jp.gcreate.product.filteredhatebu.ui.common.FaviconUtil
 import jp.gcreate.product.filteredhatebu.ui.common.HandleOnceEvent
 import jp.gcreate.product.filteredhatebu.ui.common.StickyHeaderDecoration
-import kotlinx.coroutines.experimental.Job
-import kotlinx.coroutines.experimental.android.UI
-import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import org.threeten.bp.ZoneId
 import org.threeten.bp.ZonedDateTime
 import org.threeten.bp.format.DateTimeFormatter
@@ -33,6 +34,7 @@ class FeedListAdapter(private val faviconUtil: FaviconUtil)
         }
     }
 ), StickyHeaderDecoration.StickyHeaderInterface {
+    
     private val clickEventSender: MutableLiveData<HandleOnceEvent<FeedData>> = MutableLiveData()
     val clickEvent: LiveData<HandleOnceEvent<FeedData>> = clickEventSender
     
@@ -69,7 +71,6 @@ class FeedListAdapter(private val faviconUtil: FaviconUtil)
         if (position > itemCount) return false
         return getGroupHeaderText(position) != getGroupHeaderText(position - 1)
     }
-    
 }
 
 private val DUMMY_DATA = FeedData("", "", "", ZonedDateTime.now())
@@ -84,7 +85,7 @@ class FeedListViewHolder(itemView: View, private val faviconUtil: FaviconUtil) :
         job?.cancel()
         binding.item = feedData
         binding.executePendingBindings()
-        job = launch(UI) {
+        job = GlobalScope.launch(Dispatchers.Main) {
             binding.favicon.setImageDrawable(faviconUtil.fetchFaviconWithCoroutine(feedData.url))
         }
     }

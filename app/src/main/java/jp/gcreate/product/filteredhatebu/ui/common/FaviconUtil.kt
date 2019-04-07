@@ -8,8 +8,8 @@ import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import androidx.core.content.ContextCompat
 import jp.gcreate.product.filteredhatebu.R
-import kotlinx.coroutines.experimental.CommonPool
-import kotlinx.coroutines.experimental.withContext
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.OkHttpClient
@@ -31,13 +31,14 @@ class FaviconUtil(private val client: OkHttpClient, context: Context) {
     
     private val resources: Resources = context.resources
     private val memoryCache = HashMap<String, Drawable>()
-    private val placeHolder: Drawable = ContextCompat.getDrawable(context, R.drawable.favicon_placeholder)!!
+    private val placeHolder: Drawable =
+        ContextCompat.getDrawable(context, R.drawable.favicon_placeholder)!!
     private val width: Int = placeHolder.intrinsicWidth
     private val height: Int = placeHolder.intrinsicHeight
     
     suspend fun fetchFaviconWithCoroutine(url: String): Drawable {
         val domain = substringUntilDomain(url)
-        val drawable = withContext(CommonPool) {
+        val drawable = withContext(Dispatchers.Default) {
             memoryCache[domain]?.let { return@withContext it }
             try {
                 val response = client.newCall(Request.Builder().url(FAVICON_URL + domain).build())

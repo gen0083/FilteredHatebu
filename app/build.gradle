@@ -104,6 +104,9 @@ android {
             animationsDisabled = true
         }
     }
+    packagingOptions {
+        pickFirst("META-INF/atomicfu.kotlin_module")
+    }
 }
 
 ribbonizer {
@@ -125,13 +128,11 @@ play {
     }
 }
 
-kotlin.experimental.coroutines "ENABLE"
-
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    def coroutine_version = "0.23.4"
+    def coroutine_version = "1.2.0-alpha-2"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine_version"
 

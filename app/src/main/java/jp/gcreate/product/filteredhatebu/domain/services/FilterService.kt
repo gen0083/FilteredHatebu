@@ -6,9 +6,10 @@ import jp.gcreate.product.filteredhatebu.data.AppRoomDatabase
 import jp.gcreate.product.filteredhatebu.data.entities.FeedFilter
 import jp.gcreate.product.filteredhatebu.data.entities.FilteredFeed
 import jp.gcreate.product.filteredhatebu.ui.common.HandleOnceEvent
-import kotlinx.coroutines.experimental.CommonPool
-import kotlinx.coroutines.experimental.async
-import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 import org.threeten.bp.ZonedDateTime
 import timber.log.Timber
 
@@ -24,7 +25,7 @@ class FilterService(private val appRoomDatabase: AppRoomDatabase) {
     private val deleteFilterEventEmitter = MutableLiveData<HandleOnceEvent<FeedFilter>>()
     val deleteFilterEvent: LiveData<HandleOnceEvent<FeedFilter>> = deleteFilterEventEmitter
     
-    fun addFilter(filter: String) = launch(CommonPool) {
+    fun addFilter(filter: String) = GlobalScope.launch(Dispatchers.Default) {
         addedFilter = filter
         val insert = FeedFilter(0, filter, ZonedDateTime.now())
         val ids = feedFilterDao.insertFilter(insert)
@@ -43,14 +44,14 @@ class FilterService(private val appRoomDatabase: AppRoomDatabase) {
         addFilterEventEmitter.postValue(HandleOnceEvent(insert))
     }
     
-    fun undoAdd() = launch(CommonPool) {
+    fun undoAdd() = GlobalScope.launch(Dispatchers.Default) {
         addedFilter?.let {
             feedFilterDao.deleteFilter(it)
             addedFilter = null
         }
     }
     
-    fun deleteFilter(filter: String) = launch(CommonPool) {
+    fun deleteFilter(filter: String) = GlobalScope.launch(Dispatchers.Default) {
         val target = feedFilterDao.getFilter(filter)
         if (target == null) {
             Timber.e("$filter is not exist")
@@ -62,7 +63,7 @@ class FilterService(private val appRoomDatabase: AppRoomDatabase) {
         deleteFilterEventEmitter.postValue(HandleOnceEvent(target))
     }
     
-    fun undoDelete() = launch(CommonPool) {
+    fun undoDelete() = GlobalScope.launch(Dispatchers.Default) {
         deleteCommand?.let {
             feedFilterDao.insertFilter(it.filter)
             if (it.filteredFeeds.isNotEmpty()) {
