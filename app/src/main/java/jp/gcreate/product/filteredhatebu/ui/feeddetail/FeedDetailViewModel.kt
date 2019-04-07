@@ -10,9 +10,10 @@ import jp.gcreate.product.filteredhatebu.domain.services.BookmarkCommentsService
 import jp.gcreate.product.filteredhatebu.domain.services.FilterService
 import jp.gcreate.product.filteredhatebu.model.HatebuComments
 import jp.gcreate.product.filteredhatebu.ui.common.HandleOnceEvent
-import kotlinx.coroutines.experimental.CommonPool
-import kotlinx.coroutines.experimental.async
-import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 import timber.log.Timber
 
 class FeedDetailViewModel(
@@ -37,7 +38,7 @@ class FeedDetailViewModel(
         if (currentUrl == url) return
         currentUrl = url
         commentsEmitter.value = HatebuComments.Loading
-        launch(CommonPool) {
+        GlobalScope.launch(Dispatchers.Default) {
             val feedData = async { feedDataDao.getFeed(url) }
             val comments = async { commentsService.fetchComments(url) }
             feedDataEmitter.postValue(feedData.await())
@@ -57,7 +58,7 @@ class FeedDetailViewModel(
     fun favoriteFeed() {
         val isFavorite = feedDetail.value?.isFavorite ?: false
         val current = feedDetail.value ?: throw IllegalStateException("current feed is null")
-        launch(CommonPool) {
+        GlobalScope.launch(Dispatchers.Default) {
             val updated = current.copy(isFavorite = !current.isFavorite)
             feedDataDao.updateStatusFavorite(updated.url, updated.isFavorite)
             feedDataEmitter.postValue(updated)

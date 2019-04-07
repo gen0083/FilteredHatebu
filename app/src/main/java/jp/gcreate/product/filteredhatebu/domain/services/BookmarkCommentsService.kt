@@ -2,13 +2,13 @@ package jp.gcreate.product.filteredhatebu.domain.services
 
 import jp.gcreate.product.filteredhatebu.api.HatenaClient
 import jp.gcreate.product.filteredhatebu.model.HatebuComments
-import kotlinx.coroutines.experimental.CommonPool
-import kotlinx.coroutines.experimental.withContext
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import timber.log.Timber
 
 class BookmarkCommentsService(private val client: HatenaClient.JsonService) {
     suspend fun fetchComments(url: String): HatebuComments {
-        return withContext(CommonPool) {
+        return withContext(Dispatchers.IO) {
             try {
                 val response = client.getHatebuEntry(url).execute()
                 if (!response.isSuccessful) {

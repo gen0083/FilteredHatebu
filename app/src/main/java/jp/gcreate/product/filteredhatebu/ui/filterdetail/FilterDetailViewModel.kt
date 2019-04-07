@@ -6,7 +6,8 @@ import androidx.lifecycle.ViewModel
 import jp.gcreate.product.filteredhatebu.data.AppRoomDatabase
 import jp.gcreate.product.filteredhatebu.data.entities.FeedData
 import jp.gcreate.product.filteredhatebu.domain.services.FilterService
-import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class FilterDetailViewModel(
     private val db: AppRoomDatabase,
@@ -18,7 +19,7 @@ class FilterDetailViewModel(
     val filteredFeedList: LiveData<List<FeedData>> = filteredFeedListEmitter
     private var currentFilter: String? = null
     
-    fun fetchFeeds(filter: String) = launch {
+    fun fetchFeeds(filter: String) = GlobalScope.launch {
         currentFilter = filter
         val list = filteredFeedDao.getFilteredFeeds(filter)
         filteredFeedListEmitter.postValue(list)
