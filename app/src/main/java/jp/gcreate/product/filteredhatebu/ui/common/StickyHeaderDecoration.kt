@@ -10,7 +10,6 @@ import android.view.View
 import androidx.core.content.ContextCompat
 import jp.gcreate.product.filteredhatebu.R
 import jp.gcreate.product.filteredhatebu.ui.feedlist.PagingFeedListAdapter
-import timber.log.Timber
 
 /**
  * Note: This class depends on FeedListAdapter and LinearLayoutManager
@@ -78,13 +77,11 @@ class StickyHeaderDecoration(context: Context) :
         val firstPosition = layoutManager.findFirstVisibleItemPosition()
         val lastPosition = layoutManager.findLastVisibleItemPosition()
         val adapter = parent.adapter as PagingFeedListAdapter
-        Timber.v("onDraw firstVisible position: $firstPosition/$lastPosition $state")
         val textX = (parent.width / 2).toFloat()
         
         if (firstPosition < 0 || lastPosition < 0) return
         for (i in firstPosition..lastPosition) {
             val view = parent.findViewHolderForAdapterPosition(i)?.itemView ?: continue
-            Timber.v("i($i) from $firstPosition/$lastPosition view=$view")
             val headerText = adapter.getGroupHeaderText(i)
             if (previousHeader != headerText) {
                 // draw header text
@@ -96,8 +93,8 @@ class StickyHeaderDecoration(context: Context) :
                 }
                 val textLength = textPaint.measureText(headerText) / 2
                 val rectF = RectF(textX - textLength - headerPadding,
-                                  textY - textHeight - headerPadding,
-                                  textX + textLength + headerPadding, textY + headerPadding)
+                    textY - textHeight - headerPadding,
+                    textX + textLength + headerPadding, textY + headerPadding)
                 c.drawRoundRect(rectF, 15f, 15f, backgroundPaint)
                 c.drawText(headerText, textX, textY, textPaint)
     
