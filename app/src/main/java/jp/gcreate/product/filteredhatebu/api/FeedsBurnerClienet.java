@@ -9,7 +9,7 @@ import rx.Observable;
  */
 
 public interface FeedsBurnerClienet {
-    public static final String BASE_URL = "http://feeds.feedburner.com/";
+    public static final String BASE_URL = "https://feeds.feedburner.com/";
 
     @GET("hatena/b/hotentry")
     Observable<HatebuFeed> getHotentryFeed();

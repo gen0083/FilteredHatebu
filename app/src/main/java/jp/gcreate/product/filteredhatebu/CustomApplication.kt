@@ -7,7 +7,7 @@ import androidx.work.ExistingPeriodicWorkPolicy
 import androidx.work.NetworkType
 import androidx.work.PeriodicWorkRequestBuilder
 import androidx.work.WorkManager
-import androidx.work.toWorkData
+import androidx.work.workDataOf
 import com.jakewharton.threetenabp.AndroidThreeTen
 import com.squareup.picasso.Picasso
 import jp.gcreate.product.filteredhatebu.di.koinAppModule
@@ -16,6 +16,7 @@ import jp.gcreate.product.filteredhatebu.di.koinDebugModule
 import jp.gcreate.product.filteredhatebu.di.koinNetworkModule
 import jp.gcreate.product.filteredhatebu.di.koinViewModelModule
 import jp.gcreate.product.filteredhatebu.domain.CrawlFeedsWork
+import jp.gcreate.product.filteredhatebu.domain.DeleteFeedsWork
 import jp.gcreate.product.filteredhatebu.ui.common.NotificationUtil
 import jp.gcreate.product.filteredhatebu.util.CrashlyticsWrapper
 import jp.gcreate.product.filteredhatebu.util.StethoWrapper
@@ -52,6 +53,7 @@ class CustomApplication : Application() {
         AndroidThreeTen.init(this)
         Picasso.setSingletonInstance(picassoBuilder.build())
         scheduleCrawlFeedWork()
+        DeleteFeedsWork.schedule()
         notificationUtil.installChannel()
     }
     
@@ -67,7 +69,7 @@ class CustomApplication : Application() {
         val request = PeriodicWorkRequestBuilder<CrawlFeedsWork>(6, TimeUnit.HOURS)
             .setConstraints(constraints)
             .addTag("repeat_crawling")
-            .setInputData(mapOf(CrawlFeedsWork.KEY_TYPE to "period").toWorkData())
+            .setInputData(workDataOf(CrawlFeedsWork.KEY_TYPE to "period"))
             .build()
         WorkManager.getInstance()
             .enqueueUniquePeriodicWork("repeat_crawling", ExistingPeriodicWorkPolicy.KEEP, request)

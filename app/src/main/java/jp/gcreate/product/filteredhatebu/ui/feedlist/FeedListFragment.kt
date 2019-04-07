@@ -18,7 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequestBuilder
-import androidx.work.State
+import androidx.work.WorkInfo
 import androidx.work.WorkManager
 import com.google.android.material.snackbar.Snackbar
 import jp.gcreate.product.filteredhatebu.R
@@ -41,7 +41,7 @@ class FeedListFragment : Fragment() {
     }
     
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+        savedInstanceState: Bundle?): View? {
         binding = FragmentFeedListBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -127,13 +127,13 @@ class FeedListFragment : Fragment() {
         WorkManager.getInstance().run {
             beginUniqueWork("fetch_new_feeds", ExistingWorkPolicy.REPLACE, work)
                 .enqueue()
-            getStatusById(work.id)
+            WorkManager.getInstance().getWorkInfoByIdLiveData(work.id)
                 .observe(this@FeedListFragment, Observer {
                     Timber.d("status updated $it")
-                    if (it?.state in arrayOf(State.SUCCEEDED, State.FAILED)) {
+                    if (it?.state in arrayOf(WorkInfo.State.SUCCEEDED, WorkInfo.State.FAILED)) {
                         val count = it?.outputData?.getInt(CrawlFeedsWork.KEY_NEW_FEEDS_COUNT, 0)
                         Snackbar.make(binding.root, "$count feeds new comes!",
-                                      Snackbar.LENGTH_SHORT)
+                            Snackbar.LENGTH_SHORT)
                             .show()
                         binding.swipeRefresh.isRefreshing = false
                     }

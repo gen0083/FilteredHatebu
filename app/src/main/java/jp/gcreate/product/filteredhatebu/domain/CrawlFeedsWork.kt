@@ -1,7 +1,9 @@
 package jp.gcreate.product.filteredhatebu.domain
 
+import android.content.Context
 import androidx.work.Worker
-import androidx.work.toWorkData
+import androidx.work.WorkerParameters
+import androidx.work.workDataOf
 import jp.gcreate.product.filteredhatebu.api.FeedsBurnerClienet
 import jp.gcreate.product.filteredhatebu.api.HatenaClient
 import jp.gcreate.product.filteredhatebu.data.AppRoomDatabase
@@ -15,7 +17,9 @@ import org.koin.standalone.inject
 import org.threeten.bp.ZonedDateTime
 import timber.log.Timber
 
-class CrawlFeedsWork : Worker(), KoinComponent {
+class CrawlFeedsWork(context: Context, params: WorkerParameters)
+    : Worker(context, params), KoinComponent {
+    
     private val feedsBurnerClienet: FeedsBurnerClienet by inject()
     private val xmlService: HatenaClient.XmlService by inject()
     private val appRoomDatabase: AppRoomDatabase by inject()
@@ -43,13 +47,13 @@ class CrawlFeedsWork : Worker(), KoinComponent {
             }
         } catch (e: Exception) {
             Timber.e(e)
-            outputData = mapOf(KEY_NEW_FEEDS_COUNT to count).toWorkData()
+            val outputData = workDataOf(KEY_NEW_FEEDS_COUNT to count)
             logWorkResult(count)
-            return Result.FAILURE
+            return Result.failure(outputData)
         }
-        outputData = mapOf(KEY_NEW_FEEDS_COUNT to count).toWorkData()
+        val outputData = workDataOf(KEY_NEW_FEEDS_COUNT to count)
         logWorkResult(count)
-        return Result.SUCCESS
+        return Result.success(outputData)
     }
     
     private fun logWorkResult(count: Int) {
@@ -64,10 +68,10 @@ class CrawlFeedsWork : Worker(), KoinComponent {
     
     fun saveFeed(feed: HatebuFeedItem): Boolean {
         val feedData = FeedData(url = feed.link, title = feed.title,
-                                count = feed.count ?: 0,
-                                summary = feed.description ?: "",
-                                pubDate = ZonedDateTime.parse(feed.date),
-                                fetchedAt = ZonedDateTime.now())
+            count = feed.count ?: 0,
+            summary = feed.description ?: "",
+            pubDate = ZonedDateTime.parse(feed.date),
+            fetchedAt = ZonedDateTime.now())
         val feedDataDao = appRoomDatabase.feedDataDao()
         val result = feedDataDao.insertFeed(feedData)
         // Feedの登録が行われなかった場合ははてブ数の更新を行うだけ
