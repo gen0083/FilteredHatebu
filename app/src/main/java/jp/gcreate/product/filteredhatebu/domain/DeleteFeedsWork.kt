@@ -19,16 +19,17 @@ class DeleteFeedsWork(context: Context, params: WorkerParameters)
     private val appRoomDatabase: AppRoomDatabase by inject()
     
     override suspend fun doWork(): Result {
-        deleteArchivedFeeds()
+        // TODO: ここでは10日過ぎた記事は削除するようにしている
+        val targetTime = ZonedDateTime.now().minusDays(10L)
+        deleteArchivedFeeds(targetTime)
+        deleteFilteredFeeds(targetTime)
         return Result.success()
     }
     
-    private fun deleteArchivedFeeds() {
-        // TODO: ここでは10日過ぎた記事は削除するようにしている
-        val targetTime = ZonedDateTime.now().minusDays(10L)
+    private fun deleteArchivedFeeds(targetTime: ZonedDateTime) {
         val feeds = appRoomDatabase.feedDataDao().getArchivedFeeds()
             .filter { !it.isFavorite && it.fetchedAt.isBefore(targetTime) }
-        if (feeds.size > 0) {
+        if (feeds.isNotEmpty()) {
             feeds.forEach {
                 appRoomDatabase.feedDataDao().deleteFeed(it)
             }
@@ -36,6 +37,19 @@ class DeleteFeedsWork(context: Context, params: WorkerParameters)
                 "${feeds.size} feeds delete (archived and before $targetTime)"))
         } else {
             log(WorkLog(0, ZonedDateTime.now(), "delete work run but no feeds deleted."))
+        }
+    }
+    
+    private fun deleteFilteredFeeds(targetTime: ZonedDateTime) {
+        val feeds = appRoomDatabase.feedDataDao().getFilteredFeedsByState(false, false)
+            .filter { it.fetchedAt.isBefore(targetTime) }
+        if (feeds.isNotEmpty()) {
+            feeds.forEach {
+                appRoomDatabase.feedDataDao().deleteFeed(it)
+            }
+            log(WorkLog(0, ZonedDateTime.now(), "${feeds.size} feeds which filtered are deleted"))
+        } else {
+            log(WorkLog(0, ZonedDateTime.now(), "no filtered feeds are deleted"))
         }
     }
     
