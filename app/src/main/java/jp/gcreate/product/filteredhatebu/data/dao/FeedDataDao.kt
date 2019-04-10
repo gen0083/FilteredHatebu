@@ -11,16 +11,17 @@ import jp.gcreate.product.filteredhatebu.data.entities.FeedData
 
 private const val QUERY_FILTERED_FEEDS_BY_STATE =
     "select * from feed_data left join (select distinct filteredUrl from filtered_feed)" +
-    " on url=filteredUrl where filteredUrl is null and isArchived=:isArchived and" +
-    " isFavorite=:isFavorite order by fetchedAt desc"
+        " on url=filteredUrl where filteredUrl is null and isArchived=:isArchived and" +
+        " isFavorite=:isFavorite order by fetchedAt desc"
 private const val QUERY_FILTERED_NEW_FEEDS =
     "select * from feed_data left join" +
-    " (select distinct filteredUrl from filtered_feed) on url=filteredUrl" +
-    " where filteredUrl is null and isArchived=0 order by fetchedAt desc"
+        " (select distinct filteredUrl from filtered_feed) on url=filteredUrl" +
+        " where filteredUrl is null and isArchived=0 order by fetchedAt desc"
 private const val QUERY_ARCHIVED_FEEDS =
     "select * from feed_data where isArchived=1 order by fetchedAt DESC"
 private const val QUERY_FAVORITE_FEEDS =
     "select * from feed_data where isFavorite=1 order by pubDate desc"
+
 @Dao
 interface FeedDataDao {
     
@@ -71,6 +72,9 @@ interface FeedDataDao {
     
     @Delete
     fun deleteFeed(feed: FeedData)
+    
+    @Query("delete from feed_data where url = :url")
+    fun deleteFeedByUrl(url: String)
     
     @Query("select * from feed_data where url=:url limit 1")
     fun getFeed(url: String): FeedData?

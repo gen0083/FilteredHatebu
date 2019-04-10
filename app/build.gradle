@@ -207,6 +207,8 @@ dependencies {
         exclude module: 'xpp3'
     }
 
+    debugImplementation 'com.amitshekhar.android:debug-db:1.0.6'
+
     def junit4 = 'junit:junit:4.12'
     def mockk_version = "1.8.9"
     androidTestImplementation('androidx.test.espresso:espresso-core:3.1.0-alpha4', {
