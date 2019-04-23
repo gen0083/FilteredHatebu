@@ -76,6 +76,10 @@ android {
             applicationIdSuffix ".debug"
             signingConfig signingConfigs.debug
             ext.enableCrashlytics = false
+            // https://github.com/amitshekhariitbhu/Android-Debug-Database
+            // adb forward tcp:8081 tcp:8081
+            // and access to localhost:8081 with browser
+            resValue("string", "PORT_NUMBER", "8081")
         }
         release {
             minifyEnabled true
