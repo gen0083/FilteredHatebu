@@ -3,6 +3,8 @@ package jp.gcreate.product.filteredhatebu.di
 import androidx.room.Room
 import jp.gcreate.product.filteredhatebu.data.AppRoomDatabase
 import jp.gcreate.product.filteredhatebu.data.entities.FeedData
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module.module
 import org.threeten.bp.ZoneId

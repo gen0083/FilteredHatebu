@@ -31,6 +31,10 @@ class FilteredFeedCombinationTest {
     
     private lateinit var db: AppRoomDatabase
     @get:Rule var executeRule = InstantTaskExecutorRule()
+    private val FILTERED_FEED_IN_TEST =
+        FeedData(url = "https://www.google.com/", title = "test2", summary = "test2 summary",
+            pubDate = ZonedDateTime.now(),
+            fetchedAt = ZonedDateTime.of(2018, 2, 3, 4, 5, 6, 7, ZoneOffset.UTC))
     
     @Before fun setUp() {
         val context = InstrumentationRegistry.getTargetContext()
@@ -41,14 +45,15 @@ class FilteredFeedCombinationTest {
         
         db.feedDataDao().insertFeed(
             FeedData(url = "https://gcreate.jp/", title = "test1", summary = "test1 summary",
-                     pubDate = ZonedDateTime.now(),
-                     fetchedAt = ZonedDateTime.of(2018, 1, 2, 3, 4, 5, 6, ZoneOffset.UTC)),
-            FeedData(url = "https://www.google.com/", title = "test2", summary = "test2 summary",
-                     pubDate = ZonedDateTime.now(),
-                     fetchedAt = ZonedDateTime.of(2018, 2, 3, 4, 5, 6, 7, ZoneOffset.UTC)),
+                pubDate = ZonedDateTime.now(),
+                fetchedAt = ZonedDateTime.of(2018, 1, 2, 3, 4, 5, 6, ZoneOffset.UTC)),
+            FILTERED_FEED_IN_TEST,
+//            FeedData(url = "https://www.google.com/", title = "test2", summary = "test2 summary",
+//                pubDate = ZonedDateTime.now(),
+//                fetchedAt = ZonedDateTime.of(2018, 2, 3, 4, 5, 6, 7, ZoneOffset.UTC)),
             FeedData(url = "https://github.com/gen0083", title = "test3", summary = "test3 summary",
-                     pubDate = ZonedDateTime.now(),
-                     fetchedAt = ZonedDateTime.of(2018, 3, 4, 5, 6, 7, 8, ZoneOffset.UTC))
+                pubDate = ZonedDateTime.now(),
+                fetchedAt = ZonedDateTime.of(2018, 3, 4, 5, 6, 7, 8, ZoneOffset.UTC))
         )
         db.feedFilterDao().insertFilter(FeedFilter(1, "google.com/", ZonedDateTime.now()))
         db.filteredFeedDao().insertFilteredFeed(FilteredFeed(1, "https://www.google.com/"))
@@ -73,8 +78,8 @@ class FilteredFeedCombinationTest {
         
         db.feedDataDao().insertFeed(
             FeedData(url = "https://android.gcreate.jp/", title = "test4", summary = "test4",
-                     pubDate = ZonedDateTime.now(),
-                     fetchedAt = ZonedDateTime.of(2018, 5, 6, 7, 8, 9, 10, ZoneOffset.UTC))
+                pubDate = ZonedDateTime.now(),
+                fetchedAt = ZonedDateTime.of(2018, 5, 6, 7, 8, 9, 10, ZoneOffset.UTC))
         )
         val feedDataCapture = slot<List<FeedData>>()
         verify(exactly = 2) { testObserver.onChanged(capture(feedDataCapture)) }
@@ -119,6 +124,21 @@ class FilteredFeedCombinationTest {
         val after = db.feedDataDao().getFilteredNewFeeds()
         val afterFiltered = db.filteredFeedDao().getFilteredInformation()
         assertThat(after.size).isEqualTo(3)
+        assertThat(afterFiltered.size).isEqualTo(0)
+    }
+    
+    @Test fun delete_feed_which_filtered() {
+        val before = db.feedDataDao().getAllFeeds()
+        val beforeFiltered = db.filteredFeedDao().getFilteredInformation()
+        assertThat(before.size).isEqualTo(3)
+        assertThat(beforeFiltered.size).isEqualTo(1)
+
+//        db.feedDataDao().deleteFeedByUrl("https://www.google.com/")
+        db.feedDataDao().deleteFeed(FILTERED_FEED_IN_TEST)
+        
+        val after = db.feedDataDao().getAllFeeds()
+        val afterFiltered = db.filteredFeedDao().getFilteredInformation()
+        assertThat(after.size).isEqualTo(2)
         assertThat(afterFiltered.size).isEqualTo(0)
     }
 }
