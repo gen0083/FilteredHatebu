@@ -24,7 +24,7 @@ class FilterListFragment : Fragment() {
     private val filterListAdapter: FilterListAdapter by inject()
     
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+        savedInstanceState: Bundle?): View? {
         binding = FragmentFilterListBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -45,10 +45,10 @@ class FilterListFragment : Fragment() {
         }
         filterListAdapter.clickEvent.observe(this, Observer {
             Timber.d("filter list clicked: $it")
-            it?.handleEvent()?.let {
-                val dest = FilterListFragmentDirections
-                    .ActionNavigationFilterToFilterDetailFragment(it.filter, it.feedCount)
-                findNavController().navigate(dest)
+            it?.handleEvent()?.let { info ->
+                val direction = FilterListFragmentDirections
+                    .actionNavigationFilterToFilterDetailFragment(info.filter, info.feedCount)
+                findNavController().navigate(direction)
             }
         })
     }

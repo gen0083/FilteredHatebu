@@ -5,7 +5,7 @@ apply plugin: 'com.github.gfx.ribbonizer'
 apply plugin: 'com.google.gms.oss.licenses.plugin'
 apply plugin: 'com.github.triplet.play'
 apply plugin: 'io.fabric'
-apply plugin: "androidx.navigation.safeargs"
+apply plugin: "androidx.navigation.safeargs.kotlin"
 
 ext {
     ciBuild = System.getenv("CI") == "true"
@@ -154,9 +154,9 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
     implementation "androidx.lifecycle:lifecycle-reactivestreams:$lifecycle_version"
     kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
-    def nav_version = "1.0.0-alpha06"
-    implementation "android.arch.navigation:navigation-fragment-ktx:$nav_version"
-    implementation "android.arch.navigation:navigation-ui-ktx:$nav_version"
+    def nav_version = "2.1.0-alpha04"
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
     def room_version = "2.0.0-rc01"
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
@@ -228,7 +228,6 @@ dependencies {
     androidTestImplementation "org.assertj:assertj-core:2.9.1"
     androidTestImplementation junit4
     androidTestImplementation "androidx.arch.core:core-testing:$lifecycle_version"
-    androidTestImplementation "android.arch.navigation:navigation-testing-ktx:$nav_version"
     androidTestImplementation "androidx.work:work-testing:$work_version"
 
     testImplementation junit4

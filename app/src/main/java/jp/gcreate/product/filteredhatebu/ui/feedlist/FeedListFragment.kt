@@ -58,12 +58,12 @@ class FeedListFragment : Fragment() {
         inflater.inflate(R.menu.feed_list_menu, menu)
     }
     
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        if (item?.itemId == R.id.action_list_filter) {
-            ListFilterStateDialog().show(fragmentManager, "filter_dialog")
-            return true
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return if (item.itemId == R.id.action_list_filter) {
+            ListFilterStateDialog().show(requireFragmentManager(), "filter_dialog")
+            true
         } else {
-            return super.onOptionsItemSelected(item)
+            super.onOptionsItemSelected(item)
         }
     }
     
@@ -79,9 +79,9 @@ class FeedListFragment : Fragment() {
             vm.archiveFeedAtPosition(adapterPosition)
         }).attachToRecyclerView(binding.recyclerView)
         feedListAdapter.clickEvent.observe(this, Observer {
-            it?.handleEvent()?.let {
+            it?.handleEvent()?.let { data ->
                 val direction = FeedListFragmentDirections
-                    .ActionNavigationFeedListToFeedDetailFragment(it.url)
+                    .actionNavigationFeedListToFeedDetailFragment(data.url)
                 findNavController().navigate(direction)
             }
         })

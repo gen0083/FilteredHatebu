@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import jp.gcreate.product.filteredhatebu.R
 import jp.gcreate.product.filteredhatebu.databinding.FragmentFeedDetailBinding
 import jp.gcreate.product.filteredhatebu.ui.common.CustomTabHelper
@@ -22,6 +23,7 @@ class FeedDetailFragment : Fragment() {
     private lateinit var binding: FragmentFeedDetailBinding
     private val vm: FeedDetailViewModel by sharedViewModel()
     private val customTabHelper: CustomTabHelper by inject()
+    private val args: FeedDetailFragmentArgs by navArgs()
     
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,14 +31,14 @@ class FeedDetailFragment : Fragment() {
     }
     
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+        savedInstanceState: Bundle?): View? {
         binding = FragmentFeedDetailBinding.inflate(inflater, container, false)
         return binding.root
     }
     
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        val url = FeedDetailFragmentArgs.fromBundle(arguments).feedUrl
+        val url = args.feedUrl
         setupActionsFromView()
         subscribeViewModel()
         
@@ -100,11 +102,11 @@ class FeedDetailFragment : Fragment() {
             findNavController().popBackStack()
         }
         binding.commentButton.setOnClickListener {
-            CommentBottomSheetDialog().show(fragmentManager, "comments")
+            CommentBottomSheetDialog().show(requireFragmentManager(), "comments")
         }
     }
     
     private fun showFilterCandidate() {
-        PickFilterDialogFragment().show(fragmentManager, vm.currentUrl)
+        PickFilterDialogFragment().show(requireFragmentManager(), vm.currentUrl)
     }
 }
