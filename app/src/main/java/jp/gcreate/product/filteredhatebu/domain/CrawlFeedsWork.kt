@@ -11,8 +11,8 @@ import jp.gcreate.product.filteredhatebu.data.entities.FeedData
 import jp.gcreate.product.filteredhatebu.data.entities.FilteredFeed
 import jp.gcreate.product.filteredhatebu.model.HatebuFeedItem
 import jp.gcreate.product.filteredhatebu.ui.common.NotificationUtil
-import org.koin.standalone.KoinComponent
-import org.koin.standalone.inject
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 import org.threeten.bp.ZonedDateTime
 import timber.log.Timber
 
@@ -58,8 +58,8 @@ class CrawlFeedsWork(context: Context, params: WorkerParameters)
     private fun logWorkResult(count: Int) {
         val type = inputData.getString(KEY_TYPE) ?: "one_time"
         val tag = tags.joinToString()
-//        appRoomDatabase.workLogDao()
-//            .insert(WorkLog(0, ZonedDateTime.now(), "tag<$tag> type:$type, new feeds=$count"))
+        //        appRoomDatabase.workLogDao()
+        //            .insert(WorkLog(0, ZonedDateTime.now(), "tag<$tag> type:$type, new feeds=$count"))
         if (type == "period") {
             notificationUtil.notifyNewFeedsCount(count)
         }

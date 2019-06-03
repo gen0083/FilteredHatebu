@@ -5,14 +5,14 @@ import jp.gcreate.product.filteredhatebu.data.AppRoomDatabase
 import jp.gcreate.product.filteredhatebu.data.entities.FeedData
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import org.koin.android.ext.koin.androidApplication
-import org.koin.dsl.module.module
+import org.koin.android.ext.koin.androidContext
+import org.koin.dsl.module
 import org.threeten.bp.ZoneId
 import org.threeten.bp.ZonedDateTime
 
 val koinDataModule = module {
     single {
-        val db = Room.inMemoryDatabaseBuilder(androidApplication(),
+        val db = Room.inMemoryDatabaseBuilder(androidContext(),
             AppRoomDatabase::class.java)
             .fallbackToDestructiveMigration()
             .allowMainThreadQueries()

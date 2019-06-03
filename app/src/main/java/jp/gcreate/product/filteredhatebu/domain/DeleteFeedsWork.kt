@@ -8,8 +8,8 @@ import androidx.work.WorkManager
 import androidx.work.WorkerParameters
 import jp.gcreate.product.filteredhatebu.data.AppRoomDatabase
 import jp.gcreate.product.filteredhatebu.data.entities.debug.WorkLog
-import org.koin.standalone.KoinComponent
-import org.koin.standalone.inject
+import org.koin.core.KoinComponent
+import org.koin.core.inject
 import org.threeten.bp.ZonedDateTime
 import java.util.concurrent.TimeUnit
 
