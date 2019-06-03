@@ -79,9 +79,9 @@ class FeedListFragment : Fragment() {
             vm.archiveFeedAtPosition(adapterPosition)
         }).attachToRecyclerView(binding.recyclerView)
         feedListAdapter.clickEvent.observe(this, Observer {
-            it?.handleEvent()?.let {
+            it?.handleEvent()?.let { data ->
                 val direction = FeedListFragmentDirections
-                    .ActionNavigationFeedListToFeedDetailFragment(it.url)
+                    .actionNavigationFeedListToFeedDetailFragment(data.url)
                 findNavController().navigate(direction)
             }
         })
