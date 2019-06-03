@@ -3,7 +3,6 @@ Filtered Hatebu
 
 - TravisCI [![Build Status](https://travis-ci.org/gen0083/FilteredHatebu.svg?branch=develop)](https://travis-ci.org/gen0083/FilteredHatebu)
 - CircleCI [![CircleCI](https://circleci.com/gh/gen0083/FilteredHatebu/tree/develop.svg?style=svg)](https://circleci.com/gh/gen0083/FilteredHatebu/tree/develop)
-- Wercker [![wercker status](https://app.wercker.com/status/0f3eacbd625cd767b1f12e4e460eec03/s/develop "wercker status")](https://app.wercker.com/project/byKey/0f3eacbd625cd767b1f12e4e460eec03)
 
 ---
 
