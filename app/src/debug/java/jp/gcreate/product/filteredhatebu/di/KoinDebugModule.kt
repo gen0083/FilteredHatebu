@@ -7,19 +7,19 @@ import jp.gcreate.product.filteredhatebu.util.StethoWrapper
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
-import org.koin.android.ext.koin.androidApplication
-import org.koin.dsl.module.module
+import org.koin.android.ext.koin.androidContext
+import org.koin.dsl.module
 import timber.log.Timber
 
 val koinDebugModule = module {
-    single { StethoWrapper(androidApplication()) }
+    single { StethoWrapper(androidContext()) }
     single { Timber.DebugTree() as Timber.Tree }
     single {
         HttpLoggingInterceptor(HttpLoggingInterceptor.Logger { Timber.tag("OkHttp").v(it) })
             .setLevel(HttpLoggingInterceptor.Level.HEADERS) as Interceptor
     }
     single {
-        Picasso.Builder(androidApplication())
+        Picasso.Builder(androidContext())
             .downloader(OkHttp3Downloader(get<OkHttpClient>()))
             .loggingEnabled(true)
             .indicatorsEnabled(true)

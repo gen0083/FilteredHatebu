@@ -21,7 +21,8 @@ import jp.gcreate.product.filteredhatebu.ui.common.NotificationUtil
 import jp.gcreate.product.filteredhatebu.util.CrashlyticsWrapper
 import jp.gcreate.product.filteredhatebu.util.StethoWrapper
 import org.koin.android.ext.android.inject
-import org.koin.android.ext.android.startKoin
+import org.koin.android.ext.koin.androidContext
+import org.koin.core.context.startKoin
 import timber.log.Timber
 import java.util.concurrent.TimeUnit
 
@@ -39,13 +40,18 @@ class CustomApplication : Application() {
     override fun onCreate() {
         super.onCreate()
     
-        startKoin(this, listOf(
-            koinAppModule,
-            koinDataModule,
-            koinDebugModule,
-            koinNetworkModule,
-            koinViewModelModule
-        ))
+        startKoin {
+            androidContext(this@CustomApplication)
+            modules(
+                listOf(
+                    koinAppModule,
+                    koinDataModule,
+                    koinDebugModule,
+                    koinNetworkModule,
+                    koinViewModelModule
+                )
+            )
+        }
         
         Timber.plant(tree)
         stetho.install()

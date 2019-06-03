@@ -4,8 +4,8 @@ import jp.gcreate.product.filteredhatebu.api.FeedsBurnerClienet
 import jp.gcreate.product.filteredhatebu.api.HatenaClient
 import okhttp3.Cache
 import okhttp3.OkHttpClient
-import org.koin.android.ext.koin.androidApplication
-import org.koin.dsl.module.module
+import org.koin.android.ext.koin.androidContext
+import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -16,7 +16,7 @@ private const val OKHTTP_CACHE_DIR = "okhttp"
 private const val OKHTTP_CACHE_SIZE = 4 * 1024 * 1024
 val koinNetworkModule = module {
     single {
-        val appContext = androidApplication()
+        val appContext = androidContext()
         val cacheDir = File(appContext.cacheDir, OKHTTP_CACHE_DIR)
         val cache = Cache(cacheDir, OKHTTP_CACHE_SIZE.toLong())
         OkHttpClient.Builder()
