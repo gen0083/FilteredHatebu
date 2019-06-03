@@ -102,11 +102,11 @@ class FeedDetailFragment : Fragment() {
             findNavController().popBackStack()
         }
         binding.commentButton.setOnClickListener {
-            CommentBottomSheetDialog().show(fragmentManager, "comments")
+            CommentBottomSheetDialog().show(requireFragmentManager(), "comments")
         }
     }
     
     private fun showFilterCandidate() {
-        PickFilterDialogFragment().show(fragmentManager, vm.currentUrl)
+        PickFilterDialogFragment().show(requireFragmentManager(), vm.currentUrl)
     }
 }
