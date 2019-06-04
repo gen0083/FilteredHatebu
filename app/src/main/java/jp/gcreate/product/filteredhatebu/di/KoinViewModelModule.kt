@@ -5,8 +5,8 @@ import jp.gcreate.product.filteredhatebu.ui.feeddetail.FeedDetailViewModel
 import jp.gcreate.product.filteredhatebu.ui.feedlist.FeedListViewModel
 import jp.gcreate.product.filteredhatebu.ui.filterdetail.FilterDetailViewModel
 import jp.gcreate.product.filteredhatebu.ui.filterlist.FilterListViewModel
-import org.koin.androidx.viewmodel.ext.koin.viewModel
-import org.koin.dsl.module.module
+import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.dsl.module
 
 val koinViewModelModule = module {
     viewModel { FavoriteViewModel(get()) }

@@ -12,14 +12,15 @@ import jp.gcreate.product.filteredhatebu.ui.feedlist.FeedListAdapter
 import jp.gcreate.product.filteredhatebu.ui.feedlist.PagingFeedListAdapter
 import jp.gcreate.product.filteredhatebu.ui.filterlist.FilterListAdapter
 import org.koin.android.ext.koin.androidApplication
-import org.koin.dsl.module.module
+import org.koin.core.qualifier.named
+import org.koin.dsl.module
 import rx.Scheduler
 import rx.android.schedulers.AndroidSchedulers
 import rx.schedulers.Schedulers
 
 val koinAppModule = module {
-    factory("subscribeOn") { Schedulers.io() as Scheduler }
-    factory("observeOn") { AndroidSchedulers.mainThread() as Scheduler }
+    factory(named("subscribeOn")) { Schedulers.io() as Scheduler }
+    factory(named("observeOn")) { AndroidSchedulers.mainThread() as Scheduler }
     // domain
     single { BookmarkCommentsService(get()) }
     single { FilterService(get()) }

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,18 +22,17 @@ class FilterDetailFragment : Fragment() {
     private lateinit var binding: FragmentFilterDetailBinding
     private val vm: FilterDetailViewModel by sharedViewModel()
     private val feedListAdapter: FeedListAdapter by inject()
+    val args: FilterDetailFragmentArgs by navArgs()
     
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+        savedInstanceState: Bundle?): View? {
         binding = FragmentFilterDetailBinding.inflate(inflater, container, false)
         return binding.root
     }
     
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        val info = FilterDetailFragmentArgs.fromBundle(arguments).run {
-            FilteredFeedInfo(filter, feedCount)
-        }
+        val info = FilteredFeedInfo(args.filter, args.feedCount)
         binding.info = info
         
         setupRecyclerView()
