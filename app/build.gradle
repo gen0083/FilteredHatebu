@@ -65,7 +65,7 @@ android {
             }
             // ローカルビルド
             if (!ciBuild) {
-                storeFile rootProject.file('release.keystore')
+                storeFile rootProject.file('upload_cert.der')
                 storePassword getProperty('filtered_hatebu_pass')
                 keyAlias getProperty('filtered_hatebu_alias')
                 keyPassword getProperty('filtered_hatebu_key_pass')
