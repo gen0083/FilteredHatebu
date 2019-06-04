@@ -1,9 +1,11 @@
+plugins {
+    id("com.github.triplet.play") version "2.2.1"
+}
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'com.github.gfx.ribbonizer'
 apply plugin: 'com.google.gms.oss.licenses.plugin'
-apply plugin: 'com.github.triplet.play'
 apply plugin: 'io.fabric'
 apply plugin: "androidx.navigation.safeargs.kotlin"
 
@@ -127,8 +129,9 @@ ribbonizer {
 
 play {
     track = 'production'
+    defaultToAppBundles = true
     if (!ciBuild) {
-        jsonFile = rootProject.file("filteredhatebu_play_api.json")
+        serviceAccountCredentials = rootProject.file("filteredhatebu_play_api.json")
     }
 }
 
