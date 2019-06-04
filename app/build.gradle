@@ -130,7 +130,7 @@ ribbonizer {
 play {
     track = 'production'
     defaultToAppBundles = true
-    if (!ciBuild) {
+    if (!ciBuild || travisBuild) {
         serviceAccountCredentials = rootProject.file("filteredhatebu_play_api.json")
     }
 }
