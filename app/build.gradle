@@ -164,7 +164,7 @@ dependencies {
     implementation "androidx.room:room-rxjava2:$room_version"
     def work_version = "2.0.1"
     implementation "androidx.work:work-runtime-ktx:$work_version"
-    def paging_version = "2.0.0-rc01"
+    def paging_version = "2.1.0"
     implementation "androidx.paging:paging-runtime:$paging_version"
 
     implementation 'com.google.firebase:firebase-core:16.0.9'
@@ -237,7 +237,7 @@ dependencies {
     testImplementation "io.mockk:mockk:$mockk_version"
     testImplementation "org.assertj:assertj-core:2.9.1"
     testImplementation "androidx.room:room-testing:$room_version"
-    testImplementation "androidx.paging:paging-common:$paging_version"
+    testImplementation "androidx.paging:paging-common-ktx:$paging_version"
     testImplementation "org.koin:koin-test:$koin_version"
 }
 
