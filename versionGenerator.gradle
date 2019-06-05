@@ -54,9 +54,7 @@ task bumpVersion {
         assert before_release_note_time != now_release_note_time, "release_note.txt[${release_note_path}] is note updated"
 
         buildTimes++
-        println("bumpVersion: version_code=${props.version_code} (before)")
         versionCode++
-        println("bumpVersion: version_code=${props.version_code} (after)")
         props.build_times = String.valueOf(buildTimes)
         props.version_code = String.valueOf(versionCode)
         props.release_note = String.valueOf(now_release_note_time)
