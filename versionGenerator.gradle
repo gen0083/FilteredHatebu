@@ -2,10 +2,20 @@ import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 
+
 rootProject.ext {
     versionFile = rootProject.file("scripts/VERSION")
     versionCode = getVersionCode()
     versionName = getVersionName()
+    release_note_path = "app/src/prod/play/release-notes/ja-JP/production.txt"
+}
+
+task testCheck {
+    doLast {
+        println("test")
+        def now_release_note_time = rootProject.file(release_note_path).lastModified()
+        println(now_release_note_time)
+    }
 }
 
 task testVersion {
@@ -15,6 +25,12 @@ task testVersion {
         writeVersionProperties(props)
         getVersionName()
         getVersionCode()
+    }
+}
+
+task dumpVersionName {
+    doLast {
+        println(getVersionName())
     }
 }
 
@@ -32,12 +48,16 @@ task bumpVersion {
         }
         def buildTimes = props.build_times.toInteger()
         def versionCode = props.version_code.toInteger()
+        def before_release_note_time = props.release_note.toLong()
+        def now_release_note_time = rootProject.file(release_note_path).lastModified()
+
+        assert before_release_note_time != now_release_note_time, "release_note.txt[${release_note_path}] is note updated"
+
         buildTimes++
-        println("bumpVersion: version_code=${props.version_code} (before)")
         versionCode++
-        println("bumpVersion: version_code=${props.version_code} (after)")
         props.build_times = String.valueOf(buildTimes)
         props.version_code = String.valueOf(versionCode)
+        props.release_note = String.valueOf(now_release_note_time)
         writeVersionProperties(props)
         println(getVersionName())
     }
@@ -56,24 +76,23 @@ Properties loadVersionProperties() {
 }
 
 void writeVersionProperties(Properties props) {
-    println "props size=${props.size()}"
-    props.forEach { key, value -> println "$key=$value" }
-    file(versionFile).withOutputStream {
-        println "props $props"
-        props.store(it, "versions")
+    def date = ZonedDateTime.now(ZoneId.of("Asia/Tokyo"))
+    file(versionFile).withWriter("UTF-8") { writer ->
+        writer << "# versions\n"
+        writer << "# ${date}\n"
+        props.sort { key1, key2 -> key1.key <=> key2.key }
+                .forEach { key, value -> writer << "$key=$value\n" }
     }
 }
 
 String getVersionName() {
     def props = loadVersionProperties()
     def versionName = "v${props.build_year}.${props.build_month}.${props.build_times}"
-    println "getVersionName(): versionName=$versionName"
     return versionName
 }
 
 int getVersionCode() {
     def props = loadVersionProperties()
     def versionCode = props.version_code.toInteger()
-    println "getVersionCode(): versionCode=$versionCode"
     return versionCode
 }
