@@ -1,7 +1,7 @@
 # versions
-# 2019-06-05T21:09:18.857+09:00[Asia/Tokyo]
+# 2019-06-05T21:47:19.604+09:00[Asia/Tokyo]
 build_month=6
 build_times=1
-build_year=18
-release_note=1559734933000
-version_code=10
+build_year=19
+release_note=1559738829000
+version_code=11
