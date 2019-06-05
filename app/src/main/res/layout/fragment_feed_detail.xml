@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+
+    <data>
+
+        <variable
+            name="item"
+            type="jp.gcreate.product.filteredhatebu.data.entities.FeedData"
+            />
+
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/main_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="16dp"
+                android:text="@{item.title}"
+                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                app:layout_constraintBottom_toTopOf="@+id/url"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"
+                app:layout_constraintVertical_chainStyle="packed"
+                tools:text="Here is the title sometimes very very long characters in this line."
+                />
+
+            <TextView
+                android:id="@+id/url"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="marquee"
+                android:paddingBottom="0dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp"
+                android:paddingTop="0dp"
+                android:text="@{item.url}"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                android:singleLine="true"
+                app:layout_constraintBottom_toTopOf="@+id/summary"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/title"
+                tools:text="http://hoge.test.com/hoge/very_long_long_url_the_difficult_fuga_fuga.html"
+                />
+
+            <TextView
+                android:id="@+id/summary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constrainedHeight="true"
+                android:padding="16dp"
+                android:text="@{item.summary}"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/url"
+                app:layout_constraintBottom_toTopOf="@+id/read_more_button"
+                tools:text="@tools:sample/lorem/random"
+                />
+
+            <Button
+                android:id="@+id/read_more_button"
+                style="@style/Base.Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/move_to_the_site"
+                android:padding="@dimen/item_padding"
+                app:layout_constraintBottom_toTopOf="@+id/favorite_button"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/summary"
+                android:layout_marginBottom="16dp"
+                />
+
+            <ImageButton
+                android:id="@+id/favorite_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:srcCompat="@{item.isFavorite ? @drawable/ic_favorite : @drawable/ic_favorite_border}"
+                android:tint="@color/colorAccent"
+                style="@style/Base.Widget.AppCompat.ActionButton"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/archive_button"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintVertical_bias="1.0"
+                tools:srcCompat="@drawable/ic_favorite"
+                android:layout_marginBottom="16dp"
+                android:layout_marginTop="16dp"
+                />
+
+            <ImageButton
+                android:id="@+id/archive_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_archive"
+                style="@style/Base.Widget.AppCompat.ActionButton"
+                android:contentDescription="@string/archive"
+                android:tint="@color/colorAccent"
+                app:layout_constraintLeft_toRightOf="@+id/favorite_button"
+                app:layout_constraintRight_toLeftOf="@+id/add_filter_button"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="16dp"
+                android:layout_marginTop="16dp"
+                />
+
+            <ImageButton
+                android:id="@+id/add_filter_button"
+                style="@style/Base.Widget.AppCompat.ActionButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/ic_filter"
+                android:tint="@color/colorAccent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/archive_button"
+                app:layout_constraintRight_toLeftOf="@+id/comment_button"
+                android:layout_marginBottom="16dp"
+                android:layout_marginTop="16dp"
+                />
+
+            <jp.gcreate.product.filteredhatebu.ui.feeddetail.CommentStatusView
+                android:id="@+id/comment_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toRightOf="@+id/add_filter_button"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:layout="@layout/view_comment_status"
+                android:layout_marginBottom="16dp"
+                android:layout_marginTop="16dp"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

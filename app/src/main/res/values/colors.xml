@@ -2,5 +2,8 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimaryLight">@color/indigo_100</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="item_background_archive">@color/grey_400</color>
+    <color name="item_background_new">@android:color/transparent</color>
 </resources>

@@ -1,7 +1,13 @@
+plugins {
+    id("com.github.triplet.play") version "2.2.1"
+}
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 apply plugin: 'com.github.gfx.ribbonizer'
-apply plugin: 'com.cookpad.android.licensetools'
-apply plugin: 'com.github.triplet.play'
+apply plugin: 'com.google.gms.oss.licenses.plugin'
+apply plugin: 'io.fabric'
+apply plugin: "androidx.navigation.safeargs.kotlin"
 
 ext {
     ciBuild = System.getenv("CI") == "true"
@@ -9,21 +15,37 @@ ext {
 }
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion 28
     defaultConfig {
         applicationId "jp.gcreate.product.filteredhatebu"
-        minSdkVersion 15
-        targetSdkVersion 25
-        versionCode 9
-        versionName "v17.1.1"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
+        multiDexEnabled true
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
     }
+
+    // flavorDimensionsはproductFlavorsをどの次元で切り分けているかを定義するもの
+    // 同じdimensionなら並列に並ぶ（ここでは使うnetworkでflavorを分けているので名前をnetworkとしている）
+    // productFlavorsを定義する場合、少なくとも1つflavorDimensionsを定義する必要がある
+    flavorDimensions "network"
     productFlavors {
         mock {
             applicationIdSuffix ".mock"
+            // flavorDimensionsが1つしかないなら省略しても結果は同じ
+            dimension "network"
         }
         prod {
+            // mockとprodが同じdimensionならmockDebug/prodDebugとなるが
+            // これを仮に別のdimensionにしたらmockProdDebugとかになる
+            dimension "network"
         }
     }
     signingConfigs {
@@ -55,12 +77,18 @@ android {
             minifyEnabled false
             applicationIdSuffix ".debug"
             signingConfig signingConfigs.debug
+            ext.enableCrashlytics = false
+            // https://github.com/amitshekhariitbhu/Android-Debug-Database
+            // adb forward tcp:8081 tcp:8081
+            // and access to localhost:8081 with browser
+            resValue("string", "PORT_NUMBER", "8081")
         }
         release {
             minifyEnabled true
             useProguard true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
+            ext.enableCrashlytics = true
         }
     }
     dataBinding {
@@ -75,6 +103,15 @@ android {
             // getClass().getClassLoader().getResources()でアクセスできるようにする
             test.resources.srcDirs += "src/mock/assets"
         }
+    }
+    testOptions {
+        unitTests {
+            returnDefaultValues = true
+            animationsDisabled = true
+        }
+    }
+    packagingOptions {
+        pickFirst("META-INF/atomicfu.kotlin_module")
     }
 }
 
@@ -92,82 +129,119 @@ ribbonizer {
 
 play {
     track = 'production'
-    if (!ciBuild) {
-        jsonFile = rootProject.file("filteredhatebu_play_api.json")
+    defaultToAppBundles = true
+    if (!ciBuild || travisBuild) {
+        serviceAccountCredentials = rootProject.file("filteredhatebu_play_api.json")
     }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    def support_ver = "25.1.0"
-    compile "com.android.support:appcompat-v7:$support_ver"
-    compile "com.android.support:design:$support_ver"
-    compile "com.android.support:recyclerview-v7:$support_ver"
-    compile "com.android.support:cardview-v7:$support_ver"
-    compile "com.android.support:customtabs:$support_ver"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    def coroutine_version = "1.2.0-alpha-2"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine_version"
 
-    def play_services_version = "10.0.1"
-    compile "com.google.firebase:firebase-core:$play_services_version"
-    compile "com.google.firebase:firebase-crash:$play_services_version"
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'com.google.android.material:material:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'androidx.browser:browser:1.0.0'
 
-    compile 'com.google.dagger:dagger:2.7'
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.7'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta1'
 
-    compile 'com.jakewharton.timber:timber:4.3.1'
-    compile 'io.reactivex:rxjava:1.2.2'
-    compile 'io.reactivex:rxandroid:1.2.1'
-    compile 'com.squareup.picasso:picasso:2.5.2'
-    compile 'com.jakewharton.picasso:picasso2-okhttp3-downloader:1.1.0'
-    compile 'com.jakewharton.threetenabp:threetenabp:1.0.4'
+    implementation 'androidx.core:core-ktx:1.0.2'
 
-    def orma_version = '3.0.0'
-    annotationProcessor "com.github.gfx.android.orma:orma-processor:$orma_version"
-    compile "com.github.gfx.android.orma:orma:$orma_version"
+    def lifecycle_version = "2.0.0"
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
+    implementation "androidx.lifecycle:lifecycle-reactivestreams:$lifecycle_version"
+    kapt "androidx.lifecycle:lifecycle-compiler:$lifecycle_version"
+    def nav_version = "2.1.0-alpha04"
+    implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+    def room_version = "2.1.0-rc01"
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
+    implementation "androidx.room:room-ktx:$room_version"
+    implementation "androidx.room:room-rxjava2:$room_version"
+    def work_version = "2.0.1"
+    implementation "androidx.work:work-runtime-ktx:$work_version"
+    def paging_version = "2.1.0"
+    implementation "androidx.paging:paging-runtime:$paging_version"
+
+    implementation 'com.google.firebase:firebase-core:16.0.9'
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
+    implementation 'com.google.android.gms:play-services-oss-licenses:16.0.2'
+
+    def koin_version = "2.0.1"
+    implementation "org.koin:koin-android:$koin_version"
+    implementation "org.koin:koin-androidx-viewmodel:$koin_version"
+
+    implementation 'com.jakewharton.timber:timber:4.7.1'
+    implementation 'io.reactivex:rxjava:1.2.2'
+    implementation 'io.reactivex:rxandroid:1.2.1'
+    implementation "io.reactivex.rxjava2:rxjava:2.1.16"
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
+    implementation 'com.squareup.picasso:picasso:2.5.2'
+    implementation 'com.jakewharton.picasso:picasso2-okhttp3-downloader:1.1.0'
+    implementation 'com.jakewharton.threetenabp:threetenabp:1.2.0'
 
     // json
-    compile 'com.squareup.moshi:moshi:1.2.0'
-    compile 'com.google.code.gson:gson:2.7:'
+    def moshi_version = "1.6.0"
+    implementation "com.squareup.moshi:moshi:$moshi_version"
+    kapt "com.squareup.moshi:moshi-kotlin-codegen:$moshi_version"
 
     // network
     def okhttp_ver = "3.4.1"
-    compile "com.squareup.okhttp3:okhttp:$okhttp_ver"
-    compile "com.squareup.okhttp3:logging-interceptor:$okhttp_ver"
+    implementation "com.squareup.okhttp3:okhttp:$okhttp_ver"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_ver"
 
-    debugCompile 'com.facebook.stetho:stetho:1.4.1'
+    debugImplementation 'com.facebook.stetho:stetho:1.5.1'
 
     def leak_ver = '1.5'
-    debugCompile "com.squareup.leakcanary:leakcanary-android:$leak_ver"
-    releaseCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leak_ver"
-    testCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leak_ver"
-    androidTestCompile "com.squareup.leakcanary:leakcanary-android-no-op:$leak_ver"
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:$leak_ver"
+    releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leak_ver"
+    testImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leak_ver"
+    androidTestImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leak_ver"
 
     def retrofit_ver = "2.1.0"
-    compile "com.squareup.retrofit2:retrofit:$retrofit_ver"
-    compile "com.squareup.retrofit2:converter-moshi:$retrofit_ver"
-    compile "com.squareup.retrofit2:converter-gson:$retrofit_ver"
-    compile "com.squareup.retrofit2:adapter-rxjava:$retrofit_ver"
-    compile("com.squareup.retrofit2:converter-simplexml:$retrofit_ver") {
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_ver"
+    implementation "com.squareup.retrofit2:converter-moshi:$retrofit_ver"
+    implementation "com.squareup.retrofit2:adapter-rxjava:$retrofit_ver"
+    implementation("com.squareup.retrofit2:converter-simplexml:$retrofit_ver") {
         exclude module: 'stax'
         exclude module: 'stax-api'
         exclude module: 'xpp3'
     }
 
+    debugImplementation 'com.amitshekhar.android:debug-db:1.0.6'
+
     def junit4 = 'junit:junit:4.12'
-    def espresso_ver = '2.2.2'
-    androidTestCompile("com.android.support.test.espresso:espresso-core:$espresso_ver", {
+    def mockk_version = "1.8.9"
+    androidTestImplementation('androidx.test.espresso:espresso-core:3.1.0-alpha4', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    androidTestCompile "com.android.support.test.espresso:espresso-contrib:$espresso_ver", {
+    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.1.0-alpha4', {
         exclude group: 'com.android.support', module: 'support-annotations'
         exclude group: 'com.android.support', module: 'support-v4'
         exclude group: 'com.android.support', module: 'design'
         exclude group: 'com.android.support', module: 'recyclerview-v7'
     }
-    androidTestCompile junit4
-    testCompile junit4
-    testCompile "org.robolectric:robolectric:3.1.2"
-    testCompile 'org.mockito:mockito-core:1.10.19'
+    androidTestImplementation "io.mockk:mockk-android:$mockk_version"
+    androidTestImplementation "org.assertj:assertj-core:2.9.1"
+    androidTestImplementation junit4
+    androidTestImplementation "androidx.arch.core:core-testing:$lifecycle_version"
+    androidTestImplementation "androidx.work:work-testing:$work_version"
+
+    testImplementation junit4
+    testImplementation "org.robolectric:robolectric:3.2.2"
+    testImplementation 'org.threeten:threetenbp:1.3.8'
+    testImplementation "io.mockk:mockk:$mockk_version"
+    testImplementation "org.assertj:assertj-core:2.9.1"
+    testImplementation "androidx.room:room-testing:$room_version"
+    testImplementation "androidx.paging:paging-common-ktx:$paging_version"
+    testImplementation "org.koin:koin-test:$koin_version"
 }
 
 /*
@@ -192,6 +266,32 @@ tasks.withType(com.android.build.gradle.internal.tasks.databinding.DataBindingEx
         task.finalizedBy(tasks.create("${task.name}Workaround") << {
             task.output.deleteDir()
         })
+    }
+}
+
+task openReportJvmTest(type: Exec) {
+    workingDir "build/reports/tests/testProdDebugUnitTest"
+    commandLine 'open'
+    args "index.html"
+}
+
+task openReportInstrumentedTest(type: Exec) {
+    workingDir "build/reports/androidTests/connected/flavors/MOCK"
+    commandLine 'open'
+    args "index.html"
+}
+openReportJvmTest.onlyIf { !ciBuild && !travisBuild }
+openReportInstrumentedTest.onlyIf { !ciBuild && !travisBuild }
+
+tasks.withType(AbstractTestTask) { task ->
+    if (task.name == "testProdDebugUnitTest") {
+        task.finalizedBy openReportJvmTest
+    }
+}
+
+tasks.withType(com.android.build.gradle.internal.tasks.AndroidTestTask) { task ->
+    if (task.name == "connectedMockDebugAndroidTest") {
+        task.finalizedBy openReportInstrumentedTest
     }
 }
 

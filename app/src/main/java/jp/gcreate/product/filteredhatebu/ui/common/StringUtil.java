@@ -1,10 +1,11 @@
 package jp.gcreate.product.filteredhatebu.ui.common;
 
 import android.content.Context;
-import android.support.annotation.VisibleForTesting;
 
 import org.threeten.bp.Clock;
 import org.threeten.bp.LocalDateTime;
+import org.threeten.bp.ZoneOffset;
+import org.threeten.bp.ZonedDateTime;
 import org.threeten.bp.format.DateTimeFormatter;
 import org.threeten.bp.format.DateTimeParseException;
 import org.threeten.bp.temporal.ChronoUnit;
@@ -12,6 +13,7 @@ import org.threeten.bp.temporal.ChronoUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import androidx.annotation.VisibleForTesting;
 import jp.gcreate.product.filteredhatebu.R;
 
 /**
@@ -56,6 +58,20 @@ public class StringUtil {
 
     public static String whenPublished(String time, Context context) {
         return whenPublished(time, context, Clock.systemDefaultZone());
+    }
+
+    public static String whenPublished(ZonedDateTime time, Context context) {
+        ZonedDateTime now = ZonedDateTime.now();
+        long diff = ChronoUnit.HOURS.between(time, now); // timeからnowまで何時間の差があるかを調べる、逆にするとマイナスになる
+        if (diff > 24) {
+            return time.format(DateTimeFormatter.ISO_LOCAL_DATE
+                                       .withZone(ZoneOffset.systemDefault()));
+        } else if (diff == 0) {
+            long minute = ChronoUnit.MINUTES.between(time, now);
+            return context.getString(R.string.before_minutes, minute);
+        } else {
+            return context.getString(R.string.before_hours, diff);
+        }
     }
 
     @VisibleForTesting

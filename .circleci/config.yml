@@ -1,0 +1,38 @@
+version: 2.0
+jobs:
+  build:
+    docker:
+      - image: circleci/android:api-28-alpha
+    environment:
+      GRADLE_OPTS: '-Dorg.gradle.jvmargs="-Xmx2048m -XX:+HeapDumpOnOutOfMemoryError"'
+      JVM_OPTS: -Xmx3200m
+    steps:
+      - checkout
+      - restore_cache:
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+      - run:
+          name: Download Dependencies
+          command: ./gradlew androidDependencies
+      - save_cache:
+          paths:
+            - ~/.gradle
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+      - run:
+          name: Unit Test
+          command: ./gradlew testMockDebugUnitTest
+      - store_test_results:
+          path: app/build/reports/tests
+      - store_artifacts:
+          path: app/build/reports
+          destination: reports
+      - run:
+          name: Post to slack
+          command: |
+            curl -s -S -X POST --data-urlencode "payload={'channel': '#ci', 'username': 'circleci', \
+            'text': 'test report :\n JUnit : \
+            <https://$CIRCLE_BUILD_NUM-72186590-gh.circle-artifacts.com/0$CIRCLE_TEST_REPORTS/tests/mockDebug/index.html| \
+            junit test report > \
+            \nUI test : \
+            <https://$CIRCLE_BUILD_NUM-72186590-gh.circle-artifacts.com/0$CIRCLE_TEST_REPORTS/androidTests/connected/flavors/MOCK/index.html| \
+            Espresso test report > \
+            (build $CIRCLE_BUILD_NUM)' }" $SLACK_TEST_HOOK >/dev/null
