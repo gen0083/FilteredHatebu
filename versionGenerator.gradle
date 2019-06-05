@@ -28,6 +28,12 @@ task testVersion {
     }
 }
 
+task dumpVersionName {
+    doLast {
+        println(getVersionName())
+    }
+}
+
 task bumpVersion {
     doLast {
         def props = loadVersionProperties()
@@ -72,13 +78,7 @@ Properties loadVersionProperties() {
 }
 
 void writeVersionProperties(Properties props) {
-    println "props size=${props.size()}"
     def date = ZonedDateTime.now(ZoneId.of("Asia/Tokyo"))
-    props.sort { key1, key2 ->
-        println("key1:${key1} key2:${key2}")
-        key1.key <=> key2.key
-    }
-            .forEach { key, value -> println "$key=$value" }
     file(versionFile).withWriter("UTF-8") { writer ->
         writer << "# versions\n"
         writer << "# ${date}\n"
@@ -90,13 +90,11 @@ void writeVersionProperties(Properties props) {
 String getVersionName() {
     def props = loadVersionProperties()
     def versionName = "v${props.build_year}.${props.build_month}.${props.build_times}"
-    println "getVersionName(): versionName=$versionName"
     return versionName
 }
 
 int getVersionCode() {
     def props = loadVersionProperties()
     def versionCode = props.version_code.toInteger()
-    println "getVersionCode(): versionCode=$versionCode"
     return versionCode
 }

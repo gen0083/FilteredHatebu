@@ -37,3 +37,8 @@ MVPっぽい設計、Daggerを使ったモジュールの差し替え、テス�
 - [Android License Tools Plugin](https://github.com/cookpad/license-tools-plugin)　OSSライセンス表記に便利
 - [Ribbonizer plugin for Android](https://github.com/gfx/gradle-android-ribbonizer-plugin)　アプリアイコンの識別に重宝
 - [gradle-play-publisher](https://github.com/Triple-T/gradle-play-publisher)　APKのリリースをGradleで実行
+
+## デプロイ
+
+`./script/deploy_local.sh`を実行する
+

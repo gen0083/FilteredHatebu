@@ -1,6 +1,7 @@
 #!/bin/bash
 
-VERSION=`./gradlew bumpVersion | grep -E "^v\d+\.\d+\.\d+"`
+./gradlew bumpVersion
+VERSION=`./gradlew dumpVersionName`
 echo "$VERSION"
 ./gradlew :app:publishProdReleaseBundle
 git add --all
