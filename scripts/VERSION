@@ -1,8 +1,8 @@
-#versions
-#Sat Jun 30 09:54:45 JST 2018
+# versions
+# 2019-06-05T10:59:06.281+09:00[Asia/Tokyo]
 build_month=6
 build_times=1
 build_year=18
+release_note=1559664055000
 version_code=10
 whatsnew=1530325792000
-release_note=1559664055000
