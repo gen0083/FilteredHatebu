@@ -8,15 +8,12 @@ rootProject.ext {
     versionCode = getVersionCode()
     versionName = getVersionName()
     release_note_path = "app/src/prod/play/release-notes/ja-JP/production.txt"
-    whatsnew_path = "app/src/prod/play/ja-JP/whatsnew"
 }
 
 task testCheck {
     doLast {
         println("test")
-        def now_whatsnew_time = rootProject.file(whatsnew_path).lastModified()
         def now_release_note_time = rootProject.file(release_note_path).lastModified()
-        println(now_whatsnew_time)
         println(now_release_note_time)
     }
 }
@@ -45,12 +42,9 @@ task bumpVersion {
         }
         def buildTimes = props.build_times.toInteger()
         def versionCode = props.version_code.toInteger()
-        def before_whatsnew_time = props.whatsnew.toLong()
         def before_release_note_time = props.release_note.toLong()
-        def now_whatsnew_time = rootProject.file(whatsnew_path).lastModified()
         def now_release_note_time = rootProject.file(release_note_path).lastModified()
 
-        assert before_whatsnew_time != now_whatsnew_time, "whatsnew file[${whatsnew_path}] is not updated"
         assert before_release_note_time != now_release_note_time, "release_note.txt[${release_note_path}] is note updated"
 
         buildTimes++
@@ -59,7 +53,6 @@ task bumpVersion {
         println("bumpVersion: version_code=${props.version_code} (after)")
         props.build_times = String.valueOf(buildTimes)
         props.version_code = String.valueOf(versionCode)
-        props.whatsnew = String.valueOf(now_whatsnew_time)
         props.release_note = String.valueOf(now_release_note_time)
         writeVersionProperties(props)
         println(getVersionName())
