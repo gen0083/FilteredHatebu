@@ -1,25 +1,28 @@
 plugins {
-    id("com.github.triplet.play") version "2.2.1"
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+    id 'com.google.android.gms.oss-licenses-plugin'
+    id 'androidx.navigation.safeargs.kotlin'
+    id 'com.google.firebase.crashlytics'
+    id 'com.google.gms.google-services'
 }
-apply plugin: 'com.android.application'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-kapt'
-apply plugin: 'com.github.gfx.ribbonizer'
-apply plugin: 'com.google.gms.oss.licenses.plugin'
-apply plugin: 'io.fabric'
-apply plugin: "androidx.navigation.safeargs.kotlin"
 
 ext {
     ciBuild = System.getenv("CI") == "true"
     travisBuild = System.getenv("TRAVIS") == "true"
 }
 
+//if (!ciBuild || travisBuild) {
+//    apply plugin: 'com.google.gms.google-services'
+//}
+
 android {
-    compileSdkVersion 28
+    compileSdkVersion 33
     defaultConfig {
         applicationId "jp.gcreate.product.filteredhatebu"
         minSdkVersion 21
-        targetSdkVersion 28
+        targetSdkVersion 33
         versionCode rootProject.ext.versionCode
         versionName rootProject.ext.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -77,7 +80,6 @@ android {
             minifyEnabled false
             applicationIdSuffix ".debug"
             signingConfig signingConfigs.debug
-            ext.enableCrashlytics = false
             // https://github.com/amitshekhariitbhu/Android-Debug-Database
             // adb forward tcp:8081 tcp:8081
             // and access to localhost:8081 with browser
@@ -85,17 +87,12 @@ android {
         }
         release {
             minifyEnabled true
-            useProguard true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
-            ext.enableCrashlytics = true
         }
     }
     dataBinding {
         enabled = true
-    }
-    dexOptions {
-        preDexLibraries = !ciBuild
     }
     sourceSets {
         mock {
@@ -111,37 +108,18 @@ android {
         }
     }
     packagingOptions {
-        pickFirst("META-INF/atomicfu.kotlin_module")
-    }
-}
-
-ribbonizer {
-    builder { variant, iconFile ->
-        if (variant.flavorName == "mock") {
-            return yellowRibbonFilter(variant, iconFile)
-        } else {
-            return greenRibbonFilter(variant, iconFile)
+        resources {
+            pickFirsts += ['META-INF/atomicfu.kotlin_module']
         }
     }
-
-    forcedVariantsNames "mockRelease"
-}
-
-play {
-    track = 'production'
-    defaultToAppBundles = true
-    if (!ciBuild || travisBuild) {
-        serviceAccountCredentials = rootProject.file("filteredhatebu_play_api.json")
-    }
+    namespace 'jp.gcreate.product.filteredhatebu'
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    def coroutine_version = "1.2.0-alpha-2"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine_version"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
 
     implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation 'com.google.android.material:material:1.0.0'
@@ -151,7 +129,9 @@ dependencies {
 
     implementation 'androidx.constraintlayout:constraintlayout:2.0.0-beta1'
 
-    implementation 'androidx.core:core-ktx:1.0.2'
+    implementation 'androidx.core:core-ktx:1.9.0'
+    implementation "androidx.activity:activity-ktx:1.6.1"
+    implementation "androidx.fragment:fragment-ktx:1.5.4"
 
     def lifecycle_version = "2.0.0"
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
@@ -170,13 +150,17 @@ dependencies {
     def paging_version = "2.1.0"
     implementation "androidx.paging:paging-runtime:$paging_version"
 
-    implementation 'com.google.firebase:firebase-core:16.0.9'
-    implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
-    implementation 'com.google.android.gms:play-services-oss-licenses:16.0.2'
+    implementation platform('com.google.firebase:firebase-bom:31.0.1')
+    implementation 'com.google.firebase:firebase-crashlytics-ktx'
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+    implementation 'com.google.android.gms:play-services-oss-licenses:17.0.0'
 
-    def koin_version = "2.0.1"
-    implementation "org.koin:koin-android:$koin_version"
-    implementation "org.koin:koin-androidx-viewmodel:$koin_version"
+    def koin_version = "3.3.0"
+    implementation "io.insert-koin:koin-android:$koin_version"
+    implementation "io.insert-koin:koin-androidx-workmanager:$koin_version"
+    implementation "io.insert-koin:koin-androidx-navigation:$koin_version"
+    def koin_compose_version = "3.3.0"
+    implementation "io.insert-koin:koin-androidx-compose:$koin_compose_version"
 
     implementation 'com.jakewharton.timber:timber:4.7.1'
     implementation 'io.reactivex:rxjava:1.2.2'
@@ -197,14 +181,6 @@ dependencies {
     implementation "com.squareup.okhttp3:okhttp:$okhttp_ver"
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_ver"
 
-    debugImplementation 'com.facebook.stetho:stetho:1.5.1'
-
-    def leak_ver = '1.5'
-    debugImplementation "com.squareup.leakcanary:leakcanary-android:$leak_ver"
-    releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leak_ver"
-    testImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leak_ver"
-    androidTestImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$leak_ver"
-
     def retrofit_ver = "2.1.0"
     implementation "com.squareup.retrofit2:retrofit:$retrofit_ver"
     implementation "com.squareup.retrofit2:converter-moshi:$retrofit_ver"
@@ -214,8 +190,6 @@ dependencies {
         exclude module: 'stax-api'
         exclude module: 'xpp3'
     }
-
-    debugImplementation 'com.amitshekhar.android:debug-db:1.0.6'
 
     def junit4 = 'junit:junit:4.12'
     def mockk_version = "1.8.9"
@@ -244,31 +218,6 @@ dependencies {
     testImplementation "org.koin:koin-test:$koin_version"
 }
 
-/*
- * On Travis-CI androidTest failed as java.lang.IllegalAccessError: Class ref in pre-verified class resolved to unexpected implementation
- * at android.databinding.DataBindingUtil.<clinit>(DataBindingUtil.java:31)
- *
- * This is workaround for it.
- *
- * Workaround for https://code.google.com/p/android/issues/detail?id=182715
- *
- * The Android Gradle plugin is creating DataBindingExportBuildInfoTasks for the instrumentation
- * APK that generates from the app APKs layouts. This creates duplicate classes in the app and
- * instrumentation APK which leads to
- *      java.lang.IllegalAccessError: Class ref in pre-verified class resolved to unexpected implementation
- * on older devices.
- *
- * The workaround is to get the DataBindingExportBuildInfoTasks tasks for the instrumentation APK
- * and delete the files right after it creates them.
- */
-tasks.withType(com.android.build.gradle.internal.tasks.databinding.DataBindingExportBuildInfoTask) { task ->
-    if (task.name.endsWith("AndroidTest")) {
-        task.finalizedBy(tasks.create("${task.name}Workaround") << {
-            task.output.deleteDir()
-        })
-    }
-}
-
 task openReportJvmTest(type: Exec) {
     workingDir "build/reports/tests/testProdDebugUnitTest"
     commandLine 'open'
@@ -293,8 +242,4 @@ tasks.withType(com.android.build.gradle.internal.tasks.AndroidTestTask) { task -
     if (task.name == "connectedMockDebugAndroidTest") {
         task.finalizedBy openReportInstrumentedTest
     }
-}
-
-if (!ciBuild || travisBuild) {
-    apply plugin: 'com.google.gms.google-services'
 }
