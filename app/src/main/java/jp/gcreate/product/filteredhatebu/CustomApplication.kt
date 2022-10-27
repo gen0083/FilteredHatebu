@@ -2,24 +2,13 @@ package jp.gcreate.product.filteredhatebu
 
 import android.app.Application
 import android.os.Build
-import androidx.work.Constraints
-import androidx.work.ExistingPeriodicWorkPolicy
-import androidx.work.NetworkType
-import androidx.work.PeriodicWorkRequestBuilder
-import androidx.work.WorkManager
-import androidx.work.workDataOf
+import androidx.work.*
 import com.jakewharton.threetenabp.AndroidThreeTen
 import com.squareup.picasso.Picasso
-import jp.gcreate.product.filteredhatebu.di.koinAppModule
-import jp.gcreate.product.filteredhatebu.di.koinDataModule
-import jp.gcreate.product.filteredhatebu.di.koinDebugModule
-import jp.gcreate.product.filteredhatebu.di.koinNetworkModule
-import jp.gcreate.product.filteredhatebu.di.koinViewModelModule
+import jp.gcreate.product.filteredhatebu.di.*
 import jp.gcreate.product.filteredhatebu.domain.CrawlFeedsWork
 import jp.gcreate.product.filteredhatebu.domain.DeleteFeedsWork
 import jp.gcreate.product.filteredhatebu.ui.common.NotificationUtil
-import jp.gcreate.product.filteredhatebu.util.CrashlyticsWrapper
-import jp.gcreate.product.filteredhatebu.util.StethoWrapper
 import org.koin.android.ext.android.inject
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
@@ -31,10 +20,8 @@ import java.util.concurrent.TimeUnit
  */
 class CustomApplication : Application() {
     
-    val stetho: StethoWrapper by inject()
     val tree: Timber.Tree by inject()
     val picassoBuilder: Picasso.Builder by inject()
-    val crashlyticsWrapper: CrashlyticsWrapper by inject()
     val notificationUtil: NotificationUtil by inject()
     
     override fun onCreate() {
@@ -54,8 +41,6 @@ class CustomApplication : Application() {
         }
         
         Timber.plant(tree)
-        stetho.install()
-        crashlyticsWrapper.init(this)
         AndroidThreeTen.init(this)
         Picasso.setSingletonInstance(picassoBuilder.build())
         scheduleCrawlFeedWork()

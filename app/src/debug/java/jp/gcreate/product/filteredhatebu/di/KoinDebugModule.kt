@@ -2,8 +2,6 @@ package jp.gcreate.product.filteredhatebu.di
 
 import com.jakewharton.picasso.OkHttp3Downloader
 import com.squareup.picasso.Picasso
-import jp.gcreate.product.filteredhatebu.util.CrashlyticsWrapper
-import jp.gcreate.product.filteredhatebu.util.StethoWrapper
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
@@ -12,8 +10,7 @@ import org.koin.dsl.module
 import timber.log.Timber
 
 val koinDebugModule = module {
-    single { StethoWrapper(androidContext()) }
-    single { Timber.DebugTree() as Timber.Tree }
+    single { Timber.DebugTree() }
     single {
         HttpLoggingInterceptor(HttpLoggingInterceptor.Logger { Timber.tag("OkHttp").v(it) })
             .setLevel(HttpLoggingInterceptor.Level.HEADERS) as Interceptor
@@ -24,5 +21,4 @@ val koinDebugModule = module {
             .loggingEnabled(true)
             .indicatorsEnabled(true)
     }
-    single { CrashlyticsWrapper() }
 }
