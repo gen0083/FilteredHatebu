@@ -6,11 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import androidx.browser.customtabs.CustomTabsCallback
-import androidx.browser.customtabs.CustomTabsClient
-import androidx.browser.customtabs.CustomTabsIntent
-import androidx.browser.customtabs.CustomTabsServiceConnection
-import androidx.browser.customtabs.CustomTabsSession
+import androidx.browser.customtabs.*
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import jp.gcreate.product.filteredhatebu.R
@@ -79,8 +75,10 @@ class CustomTabHelper(private val context: Context) :
             type = "text/plain"
             putExtra(Intent.EXTRA_TEXT, url)
         }
-        val pendingIntent = PendingIntent.getActivity(context, requestCode, shareIntent,
-            PendingIntent.FLAG_UPDATE_CURRENT)
+        val pendingIntent = PendingIntent.getActivity(
+            context, requestCode, shareIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+        )
         val customTabIntent = CustomTabsIntent.Builder(session)
             .setToolbarColor(ContextCompat.getColor(context, R.color.colorPrimary))
             .setShowTitle(true)

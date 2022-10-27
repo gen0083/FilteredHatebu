@@ -9,9 +9,10 @@ import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 import timber.log.Timber
+import timber.log.Timber.Tree
 
 val koinDebugModule = module {
-    single { ReleaseLogTree() as Timber.Tree }
+    single<Tree> { ReleaseLogTree() }
     single {
         HttpLoggingInterceptor(
             HttpLoggingInterceptor.Logger { Timber.tag("OkHttp").v(it) }
