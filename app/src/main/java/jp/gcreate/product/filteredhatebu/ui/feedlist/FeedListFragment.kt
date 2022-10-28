@@ -98,7 +98,7 @@ class FeedListFragment : Fragment() {
         vm.archiveMessage.observe(this, Observer {
             it?.handleEvent()?.let {
                 Snackbar.make(binding.root, R.string.archive_done, Snackbar.LENGTH_SHORT)
-                    .setAction(R.string.cancel, { vm.undoArchive() })
+                    .setAction(R.string.cancel) { vm.undoArchive() }
                     .show()
             }
         })
@@ -124,11 +124,11 @@ class FeedListFragment : Fragment() {
     
     private fun fetchFeeds() {
         val work = OneTimeWorkRequestBuilder<CrawlFeedsWork>().build()
-        WorkManager.getInstance().run {
+        WorkManager.getInstance(requireContext()).run {
             beginUniqueWork("fetch_new_feeds", ExistingWorkPolicy.REPLACE, work)
                 .enqueue()
-            WorkManager.getInstance().getWorkInfoByIdLiveData(work.id)
-                .observe(this@FeedListFragment, Observer {
+            WorkManager.getInstance(requireContext()).getWorkInfoByIdLiveData(work.id)
+                .observe(viewLifecycleOwner, Observer {
                     Timber.d("status updated $it")
                     if (it?.state in arrayOf(WorkInfo.State.SUCCEEDED, WorkInfo.State.FAILED)) {
                         val count = it?.outputData?.getInt(CrawlFeedsWork.KEY_NEW_FEEDS_COUNT, 0)
