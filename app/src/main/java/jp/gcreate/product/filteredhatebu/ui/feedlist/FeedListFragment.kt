@@ -1,12 +1,7 @@
 package jp.gcreate.product.filteredhatebu.ui.feedlist
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -70,15 +65,15 @@ class FeedListFragment : Fragment() {
     private fun setUpRecyclerView() {
         binding.recyclerView.apply {
             addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
-            addItemDecoration(StickyHeaderDecoration(activity!!))
+            addItemDecoration(StickyHeaderDecoration(requireActivity()))
             adapter = feedListAdapter
             layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
         }
-        ItemTouchHelper(SwipeDismissCallback(activity!!) { adapterPosition ->
+        ItemTouchHelper(SwipeDismissCallback(requireActivity()) { adapterPosition ->
             Timber.d("swiped $adapterPosition")
             vm.archiveFeedAtPosition(adapterPosition)
         }).attachToRecyclerView(binding.recyclerView)
-        feedListAdapter.clickEvent.observe(this, Observer {
+        feedListAdapter.clickEvent.observe(viewLifecycleOwner, Observer {
             it?.handleEvent()?.let { data ->
                 val direction = FeedListFragmentDirections
                     .actionNavigationFeedListToFeedDetailFragment(data.url)
@@ -88,24 +83,24 @@ class FeedListFragment : Fragment() {
     }
     
     private fun subscribeViewModel() {
-        vm.newFeeds.observe(this, Observer { list ->
+        vm.newFeeds.observe(viewLifecycleOwner, Observer { list ->
             Timber.d("update list size=${list?.size}")
             list?.let {
                 feedListAdapter.submitList(it)
                 binding.noContentGroup.isVisible = it.isEmpty()
             }
         })
-        vm.archiveMessage.observe(this, Observer {
+        vm.archiveMessage.observe(viewLifecycleOwner, Observer {
             it?.handleEvent()?.let {
                 Snackbar.make(binding.root, R.string.archive_done, Snackbar.LENGTH_SHORT)
                     .setAction(R.string.cancel) { vm.undoArchive() }
                     .show()
             }
         })
-        vm.addFilterEvent.observe(this, Observer {
+        vm.addFilterEvent.observe(viewLifecycleOwner, Observer {
             it?.handleEvent()?.let {
                 Snackbar.make(binding.root, R.string.add_filter_done, Snackbar.LENGTH_SHORT)
-                    .setAction(R.string.cancel, { vm.cancelAddFilter() })
+                    .setAction(R.string.cancel) { vm.cancelAddFilter() }
                     .show()
             }
         })
@@ -132,8 +127,10 @@ class FeedListFragment : Fragment() {
                     Timber.d("status updated $it")
                     if (it?.state in arrayOf(WorkInfo.State.SUCCEEDED, WorkInfo.State.FAILED)) {
                         val count = it?.outputData?.getInt(CrawlFeedsWork.KEY_NEW_FEEDS_COUNT, 0)
-                        Snackbar.make(binding.root, "$count feeds new comes!",
-                            Snackbar.LENGTH_SHORT)
+                        Snackbar.make(
+                            binding.root, "$count feeds new comes!",
+                            Snackbar.LENGTH_SHORT
+                        )
                             .show()
                         binding.swipeRefresh.isRefreshing = false
                     }

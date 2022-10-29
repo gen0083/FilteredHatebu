@@ -14,12 +14,12 @@ import androidx.recyclerview.widget.RecyclerView
 import jp.gcreate.product.filteredhatebu.databinding.FragmentFavoriteBinding
 import jp.gcreate.product.filteredhatebu.ui.feedlist.FeedListAdapter
 import org.koin.android.ext.android.inject
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.activityViewModel
 
 class FavoriteFragment : Fragment() {
-    
+
     private lateinit var binding: FragmentFavoriteBinding
-    private val vm: FavoriteViewModel by sharedViewModel()
+    private val vm: FavoriteViewModel by activityViewModel()
     private val feedAdapter: FeedListAdapter by inject()
     
     override fun onCreateView(
@@ -42,7 +42,7 @@ class FavoriteFragment : Fragment() {
             adapter = feedAdapter
             layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
         }
-        feedAdapter.clickEvent.observe(this, Observer {
+        feedAdapter.clickEvent.observe(viewLifecycleOwner, Observer {
             it?.handleEvent()?.let {
                 val dest = FavoriteFragmentDirections.actionNavigationFavoriteToFeedDetail(it.url)
                 findNavController().navigate(dest)
@@ -51,11 +51,11 @@ class FavoriteFragment : Fragment() {
     }
     
     private fun subscribeViewModel() {
-        vm.favoriteFeed.observe(this, Observer {
+        vm.favoriteFeed.observe(viewLifecycleOwner, Observer {
             val isEmpty = it?.isEmpty() ?: true
             binding.noContentGroup.isVisible = isEmpty
             binding.recyclerView.isGone = isEmpty
-            
+
             it?.let { feedAdapter.submitList(it) }
         })
     }

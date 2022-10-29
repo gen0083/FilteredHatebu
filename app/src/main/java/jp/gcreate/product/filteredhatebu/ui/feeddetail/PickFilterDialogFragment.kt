@@ -7,11 +7,11 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.DialogFragment
 import jp.gcreate.product.filteredhatebu.R
 import jp.gcreate.product.filteredhatebu.ui.common.FilterGenerator
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.activityViewModel
 import timber.log.Timber
 
 class PickFilterDialogFragment : DialogFragment() {
-    private val vm: FeedDetailViewModel by sharedViewModel()
+    private val vm: FeedDetailViewModel by activityViewModel()
     
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         Timber.d("vm current url: ${vm.currentUrl}")
