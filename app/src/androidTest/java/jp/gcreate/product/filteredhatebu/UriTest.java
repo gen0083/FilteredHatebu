@@ -1,22 +1,17 @@
 package jp.gcreate.product.filteredhatebu;
 
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
+
 import android.net.Uri;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
-
-import static org.hamcrest.CoreMatchers.is;
-import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
  * Copyright 2016 G-CREATE
  */
 
-@RunWith(RobolectricTestRunner.class)
-@Config(sdk = 19, manifest = Config.NONE)
 public class UriTest {
     private Uri sut;
 
@@ -33,7 +28,7 @@ public class UriTest {
     }
 
     @Test
-    public void getFragmetn() {
+    public void getFragment() {
         String actual = sut.getFragment();
         assertThat(actual, is("fragment"));
     }
