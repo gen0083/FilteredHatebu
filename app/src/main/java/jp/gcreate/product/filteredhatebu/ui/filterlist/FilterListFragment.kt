@@ -15,12 +15,12 @@ import com.google.android.material.snackbar.Snackbar
 import jp.gcreate.product.filteredhatebu.R
 import jp.gcreate.product.filteredhatebu.databinding.FragmentFilterListBinding
 import org.koin.android.ext.android.inject
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.activityViewModel
 import timber.log.Timber
 
 class FilterListFragment : Fragment() {
     private lateinit var binding: FragmentFilterListBinding
-    private val vm: FilterListViewModel by sharedViewModel()
+    private val vm: FilterListViewModel by activityViewModel()
     private val filterListAdapter: FilterListAdapter by inject()
     
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -43,7 +43,7 @@ class FilterListFragment : Fragment() {
             layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
             addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
         }
-        filterListAdapter.clickEvent.observe(this, Observer {
+        filterListAdapter.clickEvent.observe(viewLifecycleOwner, Observer {
             Timber.d("filter list clicked: $it")
             it?.handleEvent()?.let { info ->
                 val direction = FilterListFragmentDirections
@@ -57,20 +57,20 @@ class FilterListFragment : Fragment() {
     }
     
     private fun subscribeViewModel() {
-        vm.filterInfo.observe(this, Observer { list ->
+        vm.filterInfo.observe(viewLifecycleOwner, Observer { list ->
             list?.let {
                 filterListAdapter.submitList(it)
                 binding.noContentGroup.isVisible = it.isEmpty()
             }
         })
-        vm.deleteFilterEvent.observe(this, Observer {
+        vm.deleteFilterEvent.observe(viewLifecycleOwner, Observer {
             it?.handleEvent()?.let {
                 Snackbar.make(binding.root, R.string.delete_filter, Snackbar.LENGTH_SHORT)
                     .setAction(R.string.cancel, { vm.undoDeleteFilter() })
                     .show()
             }
         })
-        vm.archiveEvent.observe(this, Observer {
+        vm.archiveEvent.observe(viewLifecycleOwner, Observer {
             // フィルタにひっかかった記事でも、記事詳細からアーカイブすることができる
             // しかし、記事一覧に移動したときにアーカイブしたメッセージが表示されてしまうので、ここで処理する
             Timber.d("archive feed from filtered detail: ${it?.handleEvent()}")

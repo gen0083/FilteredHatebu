@@ -1,7 +1,8 @@
 package jp.gcreate.product.filteredhatebu.model
 
 import com.squareup.moshi.Moshi
-import okio.Okio
+import okio.buffer
+import okio.source
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Assert.fail
@@ -24,8 +25,8 @@ class HatebuBookmarkTest {
     @Test
     @Throws(Exception::class)
     fun decode() {
-        val file = File(javaClass.classLoader.getResource("mock_hatebu_entry.json").file)
-        val source = Okio.buffer(Okio.source(file))
+        val file = File(javaClass.classLoader!!.getResource("mock_hatebu_entry.json").file)
+        val source = file.source().buffer()
         val adapter = moshi.adapter(HatebuEntry::class.java)
         val entry = adapter.fromJson(source)
         val (user, _, _, comment) = entry!!.bookmarks[0]
@@ -33,10 +34,10 @@ class HatebuBookmarkTest {
         assertThat(user, `is`("test"))
         source.close()
     }
-    
+
     @Test fun `get comments`() {
-        val file = File(javaClass.classLoader.getResource("hatebu_comments.json").file)
-        val source = Okio.buffer(Okio.source(file))
+        val file = File(javaClass.classLoader!!.getResource("hatebu_comments.json").file)
+        val source = file.source().buffer()
         val adapter = moshi.adapter(HatebuEntry::class.java)
         val entry = adapter.fromJson(source)
         entry?.bookmarks?.let { bookmarks ->
@@ -44,10 +45,11 @@ class HatebuBookmarkTest {
         } ?: fail("bookmarks null")
         source.close()
     }
-    
+
     @Test fun `get comments cannot parse case?`() {
-        val file = File(javaClass.classLoader.getResource("hatebu_comments_cannot_parse.json").file)
-        val source = Okio.buffer(Okio.source(file))
+        val file =
+            File(javaClass.classLoader!!.getResource("hatebu_comments_cannot_parse.json").file)
+        val source = file.source().buffer()
         val adapter = moshi.adapter(HatebuEntry::class.java)
         val entry = adapter.fromJson(source)
         entry?.bookmarks?.let { bookmarks ->

@@ -42,7 +42,7 @@ class HatebuFeedItemTest {
         a.count = 1
         b.count = 1
 
-        assertThat(a == b).isTrue()
+        assertThat(a == b).isTrue
     }
 
     @Test
@@ -75,7 +75,7 @@ class HatebuFeedItemTest {
         a.count = 1
         b.count = 1
 
-        assertThat(a == b).isTrue()
+        assertThat(a == b).isTrue
     }
 
     @Test
@@ -108,7 +108,7 @@ class HatebuFeedItemTest {
         a.count = 1
         b.count = 1
 
-        assertThat(a == b).isFalse()
+        assertThat(a == b).isFalse
     }
 
     @Test
@@ -141,14 +141,14 @@ class HatebuFeedItemTest {
         a.count = 1
         b.count = 1
 
-        assertThat(a == b).isFalse()
+        assertThat(a == b).isFalse
     }
 
     @Test
     @Throws(Exception::class)
     fun decode() {
         val serializer = Persister()
-        val file = File(javaClass.classLoader.getResource("mock_hatebu_hotentry.rss").file)
+        val file = File(javaClass.classLoader!!.getResource("mock_hatebu_hotentry.rss").file)
         val feed = serializer.read(HatebuFeed::class.java, file)
         val actual = feed.itemList[0]
         assertThat(actual.title).isEqualTo("test0-1")
@@ -158,7 +158,7 @@ class HatebuFeedItemTest {
     @Test fun `new condition decode xml`() {
         // あるタイミングからおそらくdc:subject（タグ）が複数出力されるようになった
         val serializer = Persister()
-        val file = File(javaClass.classLoader.getResource("feedburner_hotentry.xml").file)
+        val file = File(javaClass.classLoader!!.getResource("feedburner_hotentry.xml").file)
         val feed = serializer.read(HatebuFeed::class.java, file)
         val actual = feed.itemList[2]
         print(actual)
@@ -166,7 +166,7 @@ class HatebuFeedItemTest {
     
     @Test fun `dateをZonedDateTimeにパースする`() {
         val serializer = Persister()
-        val file = File(javaClass.classLoader.getResource("feedburner_hotentry.xml").file)
+        val file = File(javaClass.classLoader!!.getResource("feedburner_hotentry.xml").file)
         val feed = serializer.read(HatebuFeed::class.java, file)
         val item = feed.itemList[2]
         val date = ZonedDateTime.parse(item.date)
@@ -175,7 +175,7 @@ class HatebuFeedItemTest {
         
         val fromRss = serializer.read(
             HatebuFeed::class.java,
-            File(javaClass.classLoader.getResource("mock_hatebu_hotentry.rss").file)
+            File(javaClass.classLoader!!.getResource("mock_hatebu_hotentry.rss").file)
         )
         val itemFromRss = fromRss.itemList[2]
         val dateFromRss = ZonedDateTime.parse(itemFromRss.date)

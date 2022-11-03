@@ -2,12 +2,7 @@ package jp.gcreate.product.filteredhatebu.ui.feeddetail
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
@@ -68,18 +63,18 @@ class FeedDetailFragment : Fragment() {
     }
     
     private fun subscribeViewModel() {
-        vm.feedDetail.observe(this, Observer {
+        vm.feedDetail.observe(viewLifecycleOwner, Observer {
             it?.let {
                 Timber.d("detail feed: $it")
                 binding.item = it
             }
         })
-        vm.hatebuComments.observe(this, Observer {
+        vm.hatebuComments.observe(viewLifecycleOwner, Observer {
             it?.let {
                 binding.commentButton.setCommentStatus(it)
             }
         })
-        vm.addFilterAction.observe(this, Observer {
+        vm.addFilterAction.observe(viewLifecycleOwner, Observer {
             it?.handleEvent()?.let {
                 Timber.d("add filter $it")
                 findNavController().popBackStack()
@@ -102,11 +97,11 @@ class FeedDetailFragment : Fragment() {
             findNavController().popBackStack()
         }
         binding.commentButton.setOnClickListener {
-            CommentBottomSheetDialog().show(requireFragmentManager(), "comments")
+            CommentBottomSheetDialog().show(parentFragmentManager, "comments")
         }
     }
     
     private fun showFilterCandidate() {
-        PickFilterDialogFragment().show(requireFragmentManager(), vm.currentUrl)
+        PickFilterDialogFragment().show(parentFragmentManager, vm.currentUrl)
     }
 }
