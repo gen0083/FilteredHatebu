@@ -165,7 +165,6 @@ dependencies {
     implementation "androidx.room:room-rxjava2:$room_version"
     def work_version = "2.7.1"
     implementation "androidx.work:work-runtime-ktx:$work_version"
-    implementation("androidx.work:work-runtime-ktx:$work_version")
     def paging_version = "2.1.0"
     implementation "androidx.paging:paging-runtime:$paging_version"
 
