@@ -15,12 +15,12 @@ import jp.gcreate.product.filteredhatebu.data.entities.FilteredFeedInfo
 import jp.gcreate.product.filteredhatebu.databinding.FragmentFilterDetailBinding
 import jp.gcreate.product.filteredhatebu.ui.feedlist.FeedListAdapter
 import org.koin.android.ext.android.inject
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
+import org.koin.androidx.viewmodel.ext.android.activityViewModel
 import timber.log.Timber
 
 class FilterDetailFragment : Fragment() {
     private lateinit var binding: FragmentFilterDetailBinding
-    private val vm: FilterDetailViewModel by sharedViewModel()
+    private val vm: FilterDetailViewModel by activityViewModel()
     private val feedListAdapter: FeedListAdapter by inject()
     val args: FilterDetailFragmentArgs by navArgs()
     
@@ -48,7 +48,7 @@ class FilterDetailFragment : Fragment() {
             layoutManager = LinearLayoutManager(activity, RecyclerView.VERTICAL, false)
             addItemDecoration(DividerItemDecoration(activity, DividerItemDecoration.VERTICAL))
         }
-        feedListAdapter.clickEvent.observe(this, Observer {
+        feedListAdapter.clickEvent.observe(viewLifecycleOwner, Observer {
             Timber.d("$it")
             it?.handleEvent()?.let {
                 Timber.d("click event $it")
@@ -67,7 +67,7 @@ class FilterDetailFragment : Fragment() {
     }
     
     private fun subscribeViewModel() {
-        vm.filteredFeedList.observe(this, Observer {
+        vm.filteredFeedList.observe(viewLifecycleOwner, Observer {
             it?.let {
                 feedListAdapter.submitList(it)
             }

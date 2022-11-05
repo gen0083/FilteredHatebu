@@ -11,8 +11,8 @@ import jp.gcreate.product.filteredhatebu.data.entities.FeedData
 import jp.gcreate.product.filteredhatebu.data.entities.FilteredFeed
 import jp.gcreate.product.filteredhatebu.model.HatebuFeedItem
 import jp.gcreate.product.filteredhatebu.ui.common.NotificationUtil
-import org.koin.core.KoinComponent
-import org.koin.core.inject
+import org.koin.core.component.KoinComponent
+import org.koin.core.component.inject
 import org.threeten.bp.ZonedDateTime
 import timber.log.Timber
 
@@ -66,11 +66,13 @@ class CrawlFeedsWork(context: Context, params: WorkerParameters)
     }
     
     fun saveFeed(feed: HatebuFeedItem): Boolean {
-        val feedData = FeedData(url = feed.link, title = feed.title,
-            count = feed.count ?: 0,
+        val feedData = FeedData(
+            url = feed.link, title = feed.title,
+            count = feed.count,
             summary = feed.description ?: "",
             pubDate = ZonedDateTime.parse(feed.date),
-            fetchedAt = ZonedDateTime.now())
+            fetchedAt = ZonedDateTime.now()
+        )
         val feedDataDao = appRoomDatabase.feedDataDao()
         val result = feedDataDao.insertFeed(feedData)
         // Feedの登録が行われなかった場合ははてブ数の更新を行うだけ

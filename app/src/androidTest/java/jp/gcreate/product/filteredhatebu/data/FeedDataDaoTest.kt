@@ -1,15 +1,12 @@
 package jp.gcreate.product.filteredhatebu.data
 
+import android.content.Context
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import androidx.room.Room
-import androidx.test.InstrumentationRegistry
+import androidx.test.core.app.ApplicationProvider
 import com.jakewharton.threetenabp.AndroidThreeTen
-import io.mockk.Runs
-import io.mockk.every
-import io.mockk.just
-import io.mockk.mockk
-import io.mockk.verify
+import io.mockk.*
 import jp.gcreate.product.filteredhatebu.data.dao.FeedDataDao
 import jp.gcreate.product.filteredhatebu.data.entities.FeedData
 import org.assertj.core.api.Assertions.assertThat
@@ -26,7 +23,7 @@ class FeedDataDaoTest {
     @get:Rule var executeRule = InstantTaskExecutorRule()
     
     @Before fun setUp() {
-        val context = InstrumentationRegistry.getTargetContext()
+        val context = ApplicationProvider.getApplicationContext<Context>()
         AndroidThreeTen.init(context)
         db = Room.inMemoryDatabaseBuilder(context, AppRoomDatabase::class.java)
             .allowMainThreadQueries()
@@ -133,7 +130,7 @@ class FeedDataDaoTest {
         assertThat(afterNew.size).isEqualTo(0)
         val afterAll = sut.getAllFeeds()
         assertThat(afterAll.size).isEqualTo(1)
-        assertThat(afterAll[0].isArchived).isTrue()
+        assertThat(afterAll[0].isArchived).isTrue
     }
     
     @Test fun subscribe_called_every_insert() {

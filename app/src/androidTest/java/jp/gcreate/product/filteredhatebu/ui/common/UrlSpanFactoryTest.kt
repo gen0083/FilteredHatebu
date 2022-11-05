@@ -9,7 +9,7 @@ import org.junit.Test
  * Copyright 2018 G-CREATE
  */
 class UrlSpanFactoryTest {
-    private val sut = UrlSpanFactory(mockk())
+    private val sut = UrlSpanFactory(mockk(relaxed = true, relaxUnitFun = true))
     
     @Test fun `URLが含まれない場合は何もしない`() {
         val comment = "サンプルコメント"

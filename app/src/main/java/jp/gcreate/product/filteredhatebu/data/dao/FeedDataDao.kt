@@ -2,11 +2,7 @@ package jp.gcreate.product.filteredhatebu.data.dao
 
 import androidx.lifecycle.LiveData
 import androidx.paging.DataSource
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import jp.gcreate.product.filteredhatebu.data.entities.FeedData
 
 private const val QUERY_FILTERED_FEEDS_BY_STATE =
@@ -27,20 +23,25 @@ interface FeedDataDao {
     
     @Query("select * from feed_data order by pubDate desc")
     fun getAllFeeds(): List<FeedData>
-    
+
     @Query(QUERY_FILTERED_FEEDS_BY_STATE)
+    @RewriteQueriesToDropUnusedColumns
     fun getFilteredFeedsByState(isArchived: Boolean, isFavorite: Boolean): List<FeedData>
-    
+
     @Query(QUERY_FILTERED_FEEDS_BY_STATE)
+    @RewriteQueriesToDropUnusedColumns
     fun subscribeFilteredFeedsByState(isArchived: Boolean, isFavorite: Boolean): List<FeedData>
-    
+
     @Query(QUERY_FILTERED_NEW_FEEDS)
+    @RewriteQueriesToDropUnusedColumns
     fun getFilteredNewFeeds(): List<FeedData>
-    
+
     @Query(QUERY_FILTERED_NEW_FEEDS)
+    @RewriteQueriesToDropUnusedColumns
     fun subscribeFilteredNewFeeds(): LiveData<List<FeedData>>
-    
+
     @Query(QUERY_FILTERED_NEW_FEEDS)
+    @RewriteQueriesToDropUnusedColumns
     fun subscribePagedFilteredNewFeeds(): DataSource.Factory<Int, FeedData>
     
     @Query(QUERY_ARCHIVED_FEEDS)
