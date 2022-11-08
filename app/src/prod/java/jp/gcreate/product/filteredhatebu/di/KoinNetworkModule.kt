@@ -1,6 +1,6 @@
 package jp.gcreate.product.filteredhatebu.di
 
-import jp.gcreate.product.filteredhatebu.api.FeedsBurnerClienet
+import jp.gcreate.product.filteredhatebu.api.FeedsBurnerClient
 import jp.gcreate.product.filteredhatebu.api.HatenaClient
 import okhttp3.Cache
 import okhttp3.OkHttpClient
@@ -25,12 +25,12 @@ val koinNetworkModule = module {
     }
     single {
         val retrofit = Retrofit.Builder()
-            .baseUrl(FeedsBurnerClienet.BASE_URL)
+            .baseUrl(FeedsBurnerClient.BASE_URL)
             .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
             .addConverterFactory(SimpleXmlConverterFactory.create())
             .client(get())
             .build()
-        retrofit.create(FeedsBurnerClienet::class.java) as FeedsBurnerClienet
+        retrofit.create(FeedsBurnerClient::class.java) as FeedsBurnerClient
     }
     single {
         val retrofit = Retrofit.Builder()

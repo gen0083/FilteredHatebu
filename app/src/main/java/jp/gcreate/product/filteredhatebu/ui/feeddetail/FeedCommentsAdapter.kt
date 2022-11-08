@@ -7,8 +7,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import jp.gcreate.product.filteredhatebu.R
+import jp.gcreate.product.filteredhatebu.api.response.HatebuBookmark
 import jp.gcreate.product.filteredhatebu.databinding.ItemEntryBookmarksBinding
-import jp.gcreate.product.filteredhatebu.model.HatebuBookmark
 import jp.gcreate.product.filteredhatebu.ui.common.DataBindingViewHolder
 import jp.gcreate.product.filteredhatebu.ui.common.UrlSpanFactory
 
@@ -19,9 +19,11 @@ class FeedCommentsAdapter(
         override fun areItemsTheSame(oldItem: HatebuBookmark, newItem: HatebuBookmark): Boolean {
             return oldItem.user == newItem.user
         }
-    
-        override fun areContentsTheSame(oldItem: HatebuBookmark,
-                                        newItem: HatebuBookmark): Boolean {
+
+        override fun areContentsTheSame(
+            oldItem: HatebuBookmark,
+            newItem: HatebuBookmark
+        ): Boolean {
             return oldItem == newItem
         }
     }

@@ -1,7 +1,7 @@
 package jp.gcreate.product.filteredhatebu.domain.services
 
 import jp.gcreate.product.filteredhatebu.api.HatenaClient
-import jp.gcreate.product.filteredhatebu.model.HatebuComments
+import jp.gcreate.product.filteredhatebu.api.response.HatebuComments
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import timber.log.Timber
@@ -10,12 +10,7 @@ class BookmarkCommentsService(private val client: HatenaClient.JsonService) {
     suspend fun fetchComments(url: String): HatebuComments {
         return withContext(Dispatchers.IO) {
             try {
-                val response = client.getHatebuEntry(url).execute()
-                if (!response.isSuccessful) {
-                    Timber.e(response.errorBody().string())
-                    return@withContext HatebuComments.Empty
-                }
-                val hatebuEntry = response.body()
+                val hatebuEntry = client.getHatebuEntry(url)
                 val count = hatebuEntry.count
                 val bookmarks = hatebuEntry.bookmarks
                 if (count > 0 && bookmarks.isEmpty()) {

@@ -11,8 +11,8 @@ import androidx.core.view.isGone
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import jp.gcreate.product.filteredhatebu.R
+import jp.gcreate.product.filteredhatebu.api.response.HatebuComments
 import jp.gcreate.product.filteredhatebu.databinding.ViewCommentStatusBinding
-import jp.gcreate.product.filteredhatebu.model.HatebuComments
 
 class CommentStatusView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0

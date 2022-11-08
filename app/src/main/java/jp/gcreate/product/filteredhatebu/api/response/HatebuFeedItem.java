@@ -1,4 +1,4 @@
-package jp.gcreate.product.filteredhatebu.model;
+package jp.gcreate.product.filteredhatebu.api.response;
 
 import android.os.Parcel;
 import android.os.Parcelable;

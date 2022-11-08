@@ -27,9 +27,9 @@ import timber.log.Timber;
  */
 
 public class MockInterceptor implements Interceptor {
-    private Context context;
-    private Pattern categoryUrl;
-    private int     count;
+    private final Context context;
+    private final Pattern categoryUrl;
+    private int count;
 
     public MockInterceptor(Context context) {
         this.context = context;
@@ -50,14 +50,14 @@ public class MockInterceptor implements Interceptor {
             }
         }
 
-        if (FeedsBurnerClienet.BASE_URL.contains(url.host())) {
+        if (FeedsBurnerClient.BASE_URL.contains(url.host())) {
             // 総合ページのモックフィードを返す
             return mockedFeedsBurnerResponse(chain.request());
         }
         if (HatenaClient.BASE_URL.contains(url.host())) {
             // HatebuFeedDetailActivity
             if (url.encodedPath().equals("/entry/json/") ||
-                url.encodedPath().equals("/entry/jsonlite/")) {
+                    url.encodedPath().equals("/entry/jsonlite/")) {
                 if (url.query().contains("test.com/")) {
                     // コメントありのページを返す（test.comはモックに2件だけ用意されている）
                     return mockedHatebuEntry(chain.request(), "mock_hatebu_entry.json");

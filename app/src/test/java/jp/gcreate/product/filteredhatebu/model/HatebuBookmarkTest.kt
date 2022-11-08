@@ -1,6 +1,7 @@
 package jp.gcreate.product.filteredhatebu.model
 
 import com.squareup.moshi.Moshi
+import jp.gcreate.product.filteredhatebu.api.response.HatebuEntry
 import okio.buffer
 import okio.source
 import org.hamcrest.CoreMatchers.`is`
@@ -40,9 +41,7 @@ class HatebuBookmarkTest {
         val source = file.source().buffer()
         val adapter = moshi.adapter(HatebuEntry::class.java)
         val entry = adapter.fromJson(source)
-        entry?.bookmarks?.let { bookmarks ->
-            bookmarks.forEach(::println)
-        } ?: fail("bookmarks null")
+        entry?.bookmarks?.forEach(::println) ?: fail("bookmarks null")
         source.close()
     }
 
@@ -52,9 +51,7 @@ class HatebuBookmarkTest {
         val source = file.source().buffer()
         val adapter = moshi.adapter(HatebuEntry::class.java)
         val entry = adapter.fromJson(source)
-        entry?.bookmarks?.let { bookmarks ->
-            bookmarks.forEach(::println)
-        }
+        entry?.bookmarks?.forEach(::println) ?: fail("bookmarks null")
         source.close()
     }
 }

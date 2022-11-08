@@ -1,4 +1,4 @@
-package jp.gcreate.product.filteredhatebu.model
+package jp.gcreate.product.filteredhatebu.api.response
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass

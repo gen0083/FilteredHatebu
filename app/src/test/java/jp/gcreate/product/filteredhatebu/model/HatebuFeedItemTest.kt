@@ -1,5 +1,7 @@
 package jp.gcreate.product.filteredhatebu.model
 
+import jp.gcreate.product.filteredhatebu.api.response.HatebuFeed
+import jp.gcreate.product.filteredhatebu.api.response.HatebuFeedItem
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.simpleframework.xml.core.Persister

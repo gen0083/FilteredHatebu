@@ -11,7 +11,7 @@
 
         <variable
             name="bookmark"
-            type="jp.gcreate.product.filteredhatebu.model.HatebuBookmark"
+            type="jp.gcreate.product.filteredhatebu.api.response.HatebuBookmark"
             />
     </data>
 

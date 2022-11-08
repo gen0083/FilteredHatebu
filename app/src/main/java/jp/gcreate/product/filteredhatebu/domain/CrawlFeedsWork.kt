@@ -1,44 +1,44 @@
 package jp.gcreate.product.filteredhatebu.domain
 
 import android.content.Context
-import androidx.work.Worker
+import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
 import androidx.work.workDataOf
-import jp.gcreate.product.filteredhatebu.api.FeedsBurnerClienet
+import jp.gcreate.product.filteredhatebu.api.FeedsBurnerClient
 import jp.gcreate.product.filteredhatebu.api.HatenaClient
+import jp.gcreate.product.filteredhatebu.api.response.HatebuFeedItem
 import jp.gcreate.product.filteredhatebu.data.AppRoomDatabase
 import jp.gcreate.product.filteredhatebu.data.entities.FeedData
 import jp.gcreate.product.filteredhatebu.data.entities.FilteredFeed
-import jp.gcreate.product.filteredhatebu.model.HatebuFeedItem
 import jp.gcreate.product.filteredhatebu.ui.common.NotificationUtil
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.threeten.bp.ZonedDateTime
 import timber.log.Timber
 
-class CrawlFeedsWork(context: Context, params: WorkerParameters)
-    : Worker(context, params), KoinComponent {
-    
-    private val feedsBurnerClienet: FeedsBurnerClienet by inject()
+class CrawlFeedsWork(context: Context, params: WorkerParameters) : CoroutineWorker(context, params),
+    KoinComponent {
+
+    private val feedsBurnerClienet: FeedsBurnerClient by inject()
     private val xmlService: HatenaClient.XmlService by inject()
     private val appRoomDatabase: AppRoomDatabase by inject()
     private val notificationUtil: NotificationUtil by inject()
-    
-    override fun doWork(): Result {
+
+    override suspend fun doWork(): Result {
         // do-crawling
         Timber.d("do-work on thread: ${Thread.currentThread()}")
-        
+
         var count = 0
         try {
             // はてなブックマーク総合ホットエントリを取得
-            val hatebuSougou = feedsBurnerClienet.hotentryFeed.toBlocking().first()
+            val hatebuSougou = feedsBurnerClienet.getHotentryFeed()
             hatebuSougou.itemList.forEach {
                 Timber.v("save $it")
                 if (saveFeed(it)) count++
             }
             // 各カテゴリごとのはてなブックマークホットエントリを取得
             arrayOf("general", "it", "life", "game").forEach { category ->
-                val hatebuCategory = xmlService.getCategoryFeed(category).toBlocking().first()
+                val hatebuCategory = xmlService.getCategoryFeed(category)
                 hatebuCategory.itemList.forEach {
                     Timber.v("save $it")
                     if (saveFeed(it)) count++

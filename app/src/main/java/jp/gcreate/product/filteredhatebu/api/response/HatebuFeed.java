@@ -1,4 +1,4 @@
-package jp.gcreate.product.filteredhatebu.model;
+package jp.gcreate.product.filteredhatebu.api.response;
 
 import org.simpleframework.xml.ElementList;
 import org.simpleframework.xml.Namespace;

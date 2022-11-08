@@ -65,8 +65,8 @@
     @org.simpleframework.xml.* <fields>;
     @org.simpleframework.xml.* <init>(...);
 }
--keep class jp.gcreate.product.filteredhatebu.model.HatebuFeedItem { *; }
--keep class jp.gcreate.product.filteredhatebu.model.HatebuFeed { *; }
+-keep class jp.gcreate.product.filteredhatebu.api.response.HatebuFeedItem { *; }
+-keep class jp.gcreate.product.filteredhatebu.api.response.HatebuFeed { *; }
 
 # Crashlytics
 -keepattributes *Annotation*

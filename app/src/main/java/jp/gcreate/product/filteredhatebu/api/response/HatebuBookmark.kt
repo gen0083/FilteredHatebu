@@ -1,4 +1,4 @@
-package jp.gcreate.product.filteredhatebu.model
+package jp.gcreate.product.filteredhatebu.api.response
 
 import com.squareup.moshi.JsonClass
 
@@ -12,10 +12,6 @@ data class HatebuBookmark(
     var timestamp: String,
     var comment: String
 ) {
-    companion object {
-        val EMPTY = HatebuBookmark("", arrayOf(""), "", "")
-    }
-    
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
