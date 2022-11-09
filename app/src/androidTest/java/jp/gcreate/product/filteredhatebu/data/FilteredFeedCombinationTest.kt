@@ -2,16 +2,15 @@ package jp.gcreate.product.filteredhatebu.data
 
 import android.app.Application
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.lifecycle.Observer
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
+import app.cash.turbine.test
 import com.jakewharton.threetenabp.AndroidThreeTen
-import io.mockk.every
-import io.mockk.mockk
-import io.mockk.verify
 import jp.gcreate.product.filteredhatebu.data.entities.FeedData
 import jp.gcreate.product.filteredhatebu.data.entities.FeedFilter
 import jp.gcreate.product.filteredhatebu.data.entities.FilteredFeed
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runTest
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.After
 import org.junit.Before
@@ -35,18 +34,21 @@ class FilteredFeedCombinationTest {
         FeedData(url = "https://www.google.com/", title = "test2", summary = "test2 summary",
             pubDate = ZonedDateTime.now(),
             fetchedAt = ZonedDateTime.of(2018, 2, 3, 4, 5, 6, 7, ZoneOffset.UTC))
-    
-    @Before fun setUp() {
+
+    @Before
+    fun setUp() = runBlocking {
         val context = ApplicationProvider.getApplicationContext<Application>()
         AndroidThreeTen.init(context)
         db = Room.inMemoryDatabaseBuilder(context, AppRoomDatabase::class.java)
             .allowMainThreadQueries()
             .build()
-        
+
         db.feedDataDao().insertFeed(
-            FeedData(url = "https://gcreate.jp/", title = "test1", summary = "test1 summary",
+            FeedData(
+                url = "https://gcreate.jp/", title = "test1", summary = "test1 summary",
                 pubDate = ZonedDateTime.now(),
-                fetchedAt = ZonedDateTime.of(2018, 1, 2, 3, 4, 5, 6, ZoneOffset.UTC)),
+                fetchedAt = ZonedDateTime.of(2018, 1, 2, 3, 4, 5, 6, ZoneOffset.UTC)
+            ),
             FILTERED_FEED_IN_TEST,
 //            FeedData(url = "https://www.google.com/", title = "test2", summary = "test2 summary",
 //                pubDate = ZonedDateTime.now(),
@@ -62,72 +64,68 @@ class FilteredFeedCombinationTest {
     @After fun tearDown() {
         db.close()
     }
-    
-    @Test fun get_new_feeds_which_is_not_filtered() {
+
+    @Test
+    fun get_new_feeds_which_is_not_filtered() = runTest {
         val notFiltered = db.feedDataDao().getFilteredNewFeeds()
         assertThat(notFiltered.size).isEqualTo(2)
         assertThat(notFiltered[0].title).isEqualToIgnoringCase("test3")
         assertThat(notFiltered[1].title).isEqualToIgnoringCase("test1")
     }
-    
-    @Test fun subscribe_live_data_is_updated_when_new_feed_added() {
-        val testObserver = mockk<Observer<List<FeedData>>>()
-        every { testObserver.onChanged(any()) }.answers { Unit }
-        db.feedDataDao().subscribeFilteredNewFeeds().observeForever(testObserver)
-        verify(exactly = 1) { testObserver.onChanged(any()) }
-        
-        db.feedDataDao().insertFeed(
-            FeedData(url = "https://android.gcreate.jp/", title = "test4", summary = "test4",
-                pubDate = ZonedDateTime.now(),
-                fetchedAt = ZonedDateTime.of(2018, 5, 6, 7, 8, 9, 10, ZoneOffset.UTC))
-        )
-        val feedDataCapture = mutableListOf<List<FeedData>>()
-        verify(exactly = 2) { testObserver.onChanged(capture(feedDataCapture)) }
-        val captured = feedDataCapture[1]
-        assertThat(captured.size).isEqualTo(3)
-        assertThat(captured[0].title).isEqualToIgnoringCase("test4")
-        
-        db.feedDataDao().subscribeFilteredNewFeeds().removeObserver(testObserver)
+
+    @Test
+    fun subscribe_live_data_is_updated_when_new_feed_added() = runTest {
+        db.feedDataDao().subscribeFilteredNewFeeds().test {
+            val test = awaitItem()
+            assertThat(test.size).isEqualTo(2)
+            db.feedDataDao().insertFeed(
+                FeedData(
+                    url = "https://android.gcreate.jp/", title = "test4", summary = "test4",
+                    pubDate = ZonedDateTime.now(),
+                    fetchedAt = ZonedDateTime.of(2018, 5, 6, 7, 8, 9, 10, ZoneOffset.UTC)
+                )
+            )
+            val test2 = awaitItem()
+            assertThat(test2.size).isEqualTo(3)
+            assertThat(test2[0].title).isEqualToIgnoringCase("test4")
+        }
     }
-    
-    @Test fun subscribe_live_data_is_updated_when_new_filtered_added() {
-        val testObserver = mockk<Observer<List<FeedData>>>()
-        every { testObserver.onChanged(any()) }.answers { Unit }
-        val feedCapture = mutableListOf<List<FeedData>>()
 
-        val observer = db.feedDataDao().subscribeFilteredNewFeeds()
-        observer.observeForever(testObserver)
-        verify(exactly = 1) { testObserver.onChanged(capture(feedCapture)) }
-        assertThat(feedCapture[0].size).isEqualTo(2)
-        assertThat(feedCapture[0][0].title).isEqualToIgnoringCase("test3")
-        // フィルタを追加して既存の記事がフィルタされた記事になる
-        db.feedFilterDao().insertFilter(FeedFilter(2, "gcreate.jp", ZonedDateTime.now()))
-        db.filteredFeedDao().insertFilteredFeed(
-            FilteredFeed(2, "https://gcreate.jp/")
-        )
+    @Test
+    fun subscribe_live_data_is_updated_when_new_filtered_added() = runTest {
+        db.feedDataDao().subscribeFilteredNewFeeds().test {
+            val test = awaitItem()
+            assertThat(test.size).isEqualTo(2)
+            assertThat(test[0].title).isEqualToIgnoringCase("test3")
+            // フィルタを追加して既存の記事がフィルタされた記事になる
+            db.feedFilterDao().insertFilter(FeedFilter(2, "gcreate.jp", ZonedDateTime.now()))
+            db.filteredFeedDao().insertFilteredFeed(
+                FilteredFeed(2, "https://gcreate.jp/")
+            )
 
-        verify(exactly = 2) { testObserver.onChanged(capture(feedCapture)) }
-        assertThat(feedCapture[2].size).isEqualTo(1)
-        assertThat(feedCapture[2][0].title).isEqualToIgnoringCase("test3")
-
-        observer.removeObserver(testObserver)
+            val test2 = awaitItem()
+            assertThat(test2.size).isEqualTo(1)
+            assertThat(test2[0].title).isEqualToIgnoringCase("test3")
+        }
     }
-    
-    @Test fun delete_filter_and_filtered_feed_delete_too() {
+
+    @Test
+    fun delete_filter_and_filtered_feed_delete_too() = runTest {
         val before = db.feedDataDao().getFilteredNewFeeds()
         val beforeFiltered = db.filteredFeedDao().getFilteredInformation()
         assertThat(before.size).isEqualTo(2)
         assertThat(beforeFiltered.size).isEqualTo(1)
-        
+
         db.feedFilterDao().deleteFilter("google.com/")
-        
+
         val after = db.feedDataDao().getFilteredNewFeeds()
         val afterFiltered = db.filteredFeedDao().getFilteredInformation()
         assertThat(after.size).isEqualTo(3)
         assertThat(afterFiltered.size).isEqualTo(0)
     }
-    
-    @Test fun delete_feed_which_filtered() {
+
+    @Test
+    fun delete_feed_which_filtered() = runTest {
         val before = db.feedDataDao().getAllFeeds()
         val beforeFiltered = db.filteredFeedDao().getFilteredInformation()
         assertThat(before.size).isEqualTo(3)
@@ -135,7 +133,7 @@ class FilteredFeedCombinationTest {
 
 //        db.feedDataDao().deleteFeedByUrl("https://www.google.com/")
         db.feedDataDao().deleteFeed(FILTERED_FEED_IN_TEST)
-        
+
         val after = db.feedDataDao().getAllFeeds()
         val afterFiltered = db.filteredFeedDao().getFilteredInformation()
         assertThat(after.size).isEqualTo(2)

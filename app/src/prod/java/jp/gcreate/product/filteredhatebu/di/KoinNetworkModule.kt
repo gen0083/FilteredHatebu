@@ -8,6 +8,7 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory
+import retrofit2.converter.jaxb.JaxbConverterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.converter.simplexml.SimpleXmlConverterFactory
 import java.io.File
@@ -28,6 +29,7 @@ val koinNetworkModule = module {
             .baseUrl(FeedsBurnerClient.BASE_URL)
             .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
             .addConverterFactory(SimpleXmlConverterFactory.create())
+            .addConverterFactory(JaxbConverterFactory.create())
             .client(get())
             .build()
         retrofit.create(FeedsBurnerClient::class.java) as FeedsBurnerClient
@@ -46,6 +48,7 @@ val koinNetworkModule = module {
             .baseUrl(HatenaClient.BASE_URL)
             .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
             .addConverterFactory(SimpleXmlConverterFactory.create())
+            .addConverterFactory(JaxbConverterFactory.create())
             .client(get())
             .build()
         retrofit.create(HatenaClient.XmlService::class.java) as HatenaClient.XmlService

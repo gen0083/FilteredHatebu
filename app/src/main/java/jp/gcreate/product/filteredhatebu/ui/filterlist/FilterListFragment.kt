@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
+import androidx.lifecycle.*
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,6 +14,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import jp.gcreate.product.filteredhatebu.R
 import jp.gcreate.product.filteredhatebu.databinding.FragmentFilterListBinding
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
 import timber.log.Timber
@@ -57,12 +60,16 @@ class FilterListFragment : Fragment() {
     }
     
     private fun subscribeViewModel() {
-        vm.filterInfo.observe(viewLifecycleOwner, Observer { list ->
-            list?.let {
-                filterListAdapter.submitList(it)
-                binding.noContentGroup.isVisible = it.isEmpty()
+        lifecycleScope.launch {
+            launch {
+                repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                    vm.filterInfo.stateIn(vm.viewModelScope).collectLatest {
+                        filterListAdapter.submitList(it)
+                        binding.noContentGroup.isVisible = it.isEmpty()
+                    }
+                }
             }
-        })
+        }
         vm.deleteFilterEvent.observe(viewLifecycleOwner, Observer {
             it?.handleEvent()?.let {
                 Snackbar.make(binding.root, R.string.delete_filter, Snackbar.LENGTH_SHORT)

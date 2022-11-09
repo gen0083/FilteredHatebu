@@ -1,9 +1,9 @@
 package jp.gcreate.product.filteredhatebu.data.dao
 
-import androidx.lifecycle.LiveData
 import androidx.paging.DataSource
 import androidx.room.*
 import jp.gcreate.product.filteredhatebu.data.entities.FeedData
+import kotlinx.coroutines.flow.Flow
 
 private const val QUERY_FILTERED_FEEDS_BY_STATE =
     "select * from feed_data left join (select distinct filteredUrl from filtered_feed)" +
@@ -20,63 +20,66 @@ private const val QUERY_FAVORITE_FEEDS =
 
 @Dao
 interface FeedDataDao {
-    
+
     @Query("select * from feed_data order by pubDate desc")
-    fun getAllFeeds(): List<FeedData>
+    suspend fun getAllFeeds(): List<FeedData>
 
     @Query(QUERY_FILTERED_FEEDS_BY_STATE)
     @RewriteQueriesToDropUnusedColumns
-    fun getFilteredFeedsByState(isArchived: Boolean, isFavorite: Boolean): List<FeedData>
+    suspend fun getFilteredFeedsByState(isArchived: Boolean, isFavorite: Boolean): List<FeedData>
 
     @Query(QUERY_FILTERED_FEEDS_BY_STATE)
     @RewriteQueriesToDropUnusedColumns
-    fun subscribeFilteredFeedsByState(isArchived: Boolean, isFavorite: Boolean): List<FeedData>
+    fun subscribeFilteredFeedsByState(
+        isArchived: Boolean,
+        isFavorite: Boolean
+    ): Flow<List<FeedData>>
 
     @Query(QUERY_FILTERED_NEW_FEEDS)
     @RewriteQueriesToDropUnusedColumns
-    fun getFilteredNewFeeds(): List<FeedData>
+    suspend fun getFilteredNewFeeds(): List<FeedData>
 
     @Query(QUERY_FILTERED_NEW_FEEDS)
     @RewriteQueriesToDropUnusedColumns
-    fun subscribeFilteredNewFeeds(): LiveData<List<FeedData>>
+    fun subscribeFilteredNewFeeds(): Flow<List<FeedData>>
 
     @Query(QUERY_FILTERED_NEW_FEEDS)
     @RewriteQueriesToDropUnusedColumns
     fun subscribePagedFilteredNewFeeds(): DataSource.Factory<Int, FeedData>
-    
+
     @Query(QUERY_ARCHIVED_FEEDS)
-    fun getArchivedFeeds(): List<FeedData>
-    
+    suspend fun getArchivedFeeds(): List<FeedData>
+
     @Query(QUERY_ARCHIVED_FEEDS)
-    fun subscribeArchivedFeeds(): LiveData<List<FeedData>>
+    fun subscribeArchivedFeeds(): Flow<List<FeedData>>
     
     @Query(QUERY_ARCHIVED_FEEDS)
     fun subscribePagedArchiveFeeds(): DataSource.Factory<Int, FeedData>
-    
+
     @Query(QUERY_FAVORITE_FEEDS)
-    fun getFavoriteFeeds(): List<FeedData>
-    
+    suspend fun getFavoriteFeeds(): List<FeedData>
+
     @Query(QUERY_FAVORITE_FEEDS)
-    fun subscribeFavoriteFeeds(): LiveData<List<FeedData>>
-    
+    fun subscribeFavoriteFeeds(): Flow<List<FeedData>>
+
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    fun insertFeed(vararg feed: FeedData): Array<Long>
-    
+    suspend fun insertFeed(vararg feed: FeedData): Array<Long>
+
     @Query("update feed_data set count=:count where url=:url")
-    fun updateHatebuCount(url: String, count: Int)
-    
+    suspend fun updateHatebuCount(url: String, count: Int)
+
     @Query("update feed_data set isArchived=:isArchived where url = :url")
-    fun updateStatusArchived(url: String, isArchived: Boolean)
-    
+    suspend fun updateStatusArchived(url: String, isArchived: Boolean)
+
     @Query("update feed_data set isFavorite=:isFavorite where url=:url")
-    fun updateStatusFavorite(url: String, isFavorite: Boolean)
-    
+    suspend fun updateStatusFavorite(url: String, isFavorite: Boolean)
+
     @Delete
-    fun deleteFeed(feed: FeedData)
-    
+    suspend fun deleteFeed(feed: FeedData)
+
     @Query("delete from feed_data where url = :url")
-    fun deleteFeedByUrl(url: String)
-    
+    suspend fun deleteFeedByUrl(url: String)
+
     @Query("select * from feed_data where url=:url limit 1")
-    fun getFeed(url: String): FeedData?
+    suspend fun getFeed(url: String): FeedData?
 }

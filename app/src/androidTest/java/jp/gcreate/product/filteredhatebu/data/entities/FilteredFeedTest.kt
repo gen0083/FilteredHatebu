@@ -1,11 +1,14 @@
 package jp.gcreate.product.filteredhatebu.data.entities
 
+import android.content.Context
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
-import androidx.test.InstrumentationRegistry
+import androidx.test.core.app.ApplicationProvider
 import com.jakewharton.threetenabp.AndroidThreeTen
 import jp.gcreate.product.filteredhatebu.data.AppRoomDatabase
 import jp.gcreate.product.filteredhatebu.data.dao.FilteredFeedDao
+import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runTest
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.After
 import org.junit.Before
@@ -16,20 +19,23 @@ import org.threeten.bp.ZonedDateTime
 class FilteredFeedTest {
     private lateinit var sut: FilteredFeedDao
     private lateinit var db: AppRoomDatabase
-    @get:Rule var executeRule = InstantTaskExecutorRule()
-    
-    @Before fun setUp() {
-        val context = InstrumentationRegistry.getTargetContext()
+    @get:Rule
+    var executeRule = InstantTaskExecutorRule()
+
+    @Before
+    fun setUp() = runBlocking {
+        val context = ApplicationProvider.getApplicationContext<Context>()
         AndroidThreeTen.init(context)
         db = Room.inMemoryDatabaseBuilder(context, AppRoomDatabase::class.java)
             .allowMainThreadQueries()
             .build()
         sut = db.filteredFeedDao()
-        
+
         db.feedDataDao().insertFeed(
-            FeedData(url = "https://gcreate.jp/",
-                                                                     title = "test1",
-                                                                     summary = "hoge",
+            FeedData(
+                url = "https://gcreate.jp/",
+                title = "test1",
+                summary = "hoge",
                                                                      pubDate = ZonedDateTime.now()),
             FeedData(
                 url = "https://wantit.gcreate.jp/", title = "test2", summary = "fuga",
@@ -49,15 +55,17 @@ class FilteredFeedTest {
     @After fun tearDown() {
         db.close()
     }
-    
-    @Test fun getFilteredInfo() {
+
+    @Test
+    fun getFilteredInfo() = runTest {
         val info = sut.getFilteredInformation()
         assertThat(info.size).isEqualTo(1)
         assertThat(info[0].feedCount).isEqualTo(1)
         assertThat(info[0].filter).isEqualTo("wantit.gcreate.jp")
     }
-    
-    @Test fun getFilteredInfo_as_2() {
+
+    @Test
+    fun getFilteredInfo_as_2() = runTest {
         sut.insertFilteredFeed(FilteredFeed(1, "https://gcreate.jp/"))
         val info = sut.getFilteredInformation()
         assertThat(info.size).isEqualTo(1)

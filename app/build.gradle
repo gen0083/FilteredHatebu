@@ -126,7 +126,12 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
+    def coroutine_version = "1.6.4"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine_version"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutine_version"
+    testImplementation 'app.cash.turbine:turbine:0.12.1'
+    androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$coroutine_version"
+    androidTestImplementation 'app.cash.turbine:turbine:0.12.1'
 
     def composeBom = platform('androidx.compose:compose-bom:2022.10.00')
     implementation composeBom
@@ -200,10 +205,11 @@ dependencies {
     implementation "com.squareup.okhttp3:okhttp:$okhttp_ver"
     implementation "com.squareup.okhttp3:logging-interceptor:$okhttp_ver"
 
-    def retrofit_ver = "2.1.0"
+    def retrofit_ver = "2.9.0"
     implementation "com.squareup.retrofit2:retrofit:$retrofit_ver"
     implementation "com.squareup.retrofit2:converter-moshi:$retrofit_ver"
     implementation "com.squareup.retrofit2:adapter-rxjava:$retrofit_ver"
+    implementation("com.squareup.retrofit2:converter-jaxb:$retrofit_ver")
     implementation("com.squareup.retrofit2:converter-simplexml:$retrofit_ver") {
         exclude module: 'stax'
         exclude module: 'stax-api'

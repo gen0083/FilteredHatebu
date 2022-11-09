@@ -7,9 +7,10 @@ import jp.gcreate.product.filteredhatebu.data.entities.debug.WorkLog
 
 @Dao
 interface WorkLogDao {
-    
-    @Insert fun insert(log: WorkLog)
-    
+
+    @Insert
+    suspend fun insert(log: WorkLog)
+
     @Query("select * from debug_work_log")
-    fun getAllLog(): List<WorkLog>
+    suspend fun getAllLog(): List<WorkLog>
 }

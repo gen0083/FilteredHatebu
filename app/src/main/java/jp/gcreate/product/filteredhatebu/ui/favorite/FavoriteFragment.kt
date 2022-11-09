@@ -7,12 +7,17 @@ import android.view.ViewGroup
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import jp.gcreate.product.filteredhatebu.databinding.FragmentFavoriteBinding
 import jp.gcreate.product.filteredhatebu.ui.feedlist.FeedListAdapter
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
 
@@ -51,12 +56,18 @@ class FavoriteFragment : Fragment() {
     }
     
     private fun subscribeViewModel() {
-        vm.favoriteFeed.observe(viewLifecycleOwner, Observer {
-            val isEmpty = it?.isEmpty() ?: true
-            binding.noContentGroup.isVisible = isEmpty
-            binding.recyclerView.isGone = isEmpty
+        lifecycleScope.launch {
+            launch {
+                repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                    vm.favoriteFeed.collectLatest { list ->
+                        val isEmpty = list.isEmpty()
+                        binding.noContentGroup.isVisible = isEmpty
+                        binding.recyclerView.isGone = isEmpty
 
-            it?.let { feedAdapter.submitList(it) }
-        })
+                        feedAdapter.submitList(list)
+                    }
+                }
+            }
+        }
     }
 }

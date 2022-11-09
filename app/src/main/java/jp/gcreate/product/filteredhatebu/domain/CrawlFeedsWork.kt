@@ -11,6 +11,8 @@ import jp.gcreate.product.filteredhatebu.data.AppRoomDatabase
 import jp.gcreate.product.filteredhatebu.data.entities.FeedData
 import jp.gcreate.product.filteredhatebu.data.entities.FilteredFeed
 import jp.gcreate.product.filteredhatebu.ui.common.NotificationUtil
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import org.koin.core.component.KoinComponent
 import org.koin.core.component.inject
 import org.threeten.bp.ZonedDateTime
@@ -54,7 +56,7 @@ class CrawlFeedsWork(context: Context, params: WorkerParameters) : CoroutineWork
         logWorkResult(count)
         return Result.success(outputData)
     }
-    
+
     private fun logWorkResult(count: Int) {
         val type = inputData.getString(KEY_TYPE) ?: "one_time"
         val tag = tags.joinToString()
@@ -64,8 +66,8 @@ class CrawlFeedsWork(context: Context, params: WorkerParameters) : CoroutineWork
             notificationUtil.notifyNewFeedsCount(count)
         }
     }
-    
-    fun saveFeed(feed: HatebuFeedItem): Boolean {
+
+    suspend fun saveFeed(feed: HatebuFeedItem): Boolean = withContext(Dispatchers.IO) {
         val feedData = FeedData(
             url = feed.link, title = feed.title,
             count = feed.count,
@@ -78,25 +80,26 @@ class CrawlFeedsWork(context: Context, params: WorkerParameters) : CoroutineWork
         // Feedの登録が行われなかった場合ははてブ数の更新を行うだけ
         if (result[0] == -1L) {
             feedDataDao.updateHatebuCount(feed.link, feed.count)
-            return false
+            return@withContext false
         }
         // filterのマッチング処理
         saveAsFilteredFeedIfUrlMatchesAnyFilter(feedData.url)
-        return true
+        return@withContext true
     }
-    
-    private fun saveAsFilteredFeedIfUrlMatchesAnyFilter(url: String) {
-        val filters = appRoomDatabase.feedFilterDao().getAllFilters()
-        filters.forEach { (id, filter, _) ->
-            if (url.contains(filterToRegex(filter))) {
-                appRoomDatabase.filteredFeedDao().insertFilteredFeed(FilteredFeed(id, url))
-                return
+
+    private suspend fun saveAsFilteredFeedIfUrlMatchesAnyFilter(url: String) {
+        withContext(Dispatchers.IO) {
+            val filters = appRoomDatabase.feedFilterDao().getAllFilters()
+            filters.forEach { (id, filter, _) ->
+                if (url.contains(filterToRegex(filter))) {
+                    appRoomDatabase.filteredFeedDao().insertFilteredFeed(FilteredFeed(id, url))
+                }
             }
         }
     }
-    
+
     private fun filterToRegex(filter: String): Regex = "https?://[^/]*$filter".toRegex()
-    
+
     companion object {
         const val KEY_NEW_FEEDS_COUNT = "new_feeds_count"
         const val KEY_TYPE = "key_type"

@@ -4,6 +4,7 @@ import androidx.room.Room
 import androidx.test.InstrumentationRegistry
 import jp.gcreate.product.filteredhatebu.data.AppRoomDatabase
 import jp.gcreate.product.filteredhatebu.data.dao.DeletedFeedDao
+import kotlinx.coroutines.test.runTest
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.After
 import org.junit.Before
@@ -24,25 +25,28 @@ class DeletedFeedTest {
     @After fun tearDown() {
         db.close()
     }
-    
-    @Test fun `指定したURLが削除テーブルに存在する場合はtrueを返す`() {
+
+    @Test
+    fun `指定したURLが削除テーブルに存在する場合はtrueを返す`() = runTest {
         sut.addDeletedUrl(DeletedFeed("https://gcreate.jp/"))
-        
+
         assertThat(sut.isDeletedUrl("https://gcreate.jp/")).isTrue()
     }
-    
-    @Test fun `指定したURLが削除テーブルにない場合はfalseを返す`() {
+
+    @Test
+    fun `指定したURLが削除テーブルにない場合はfalseを返す`() = runTest {
         assertThat(sut.isDeletedUrl("https://google.com/")).isFalse()
     }
-    
-    @Test fun `複数テスト`() {
+
+    @Test
+    fun `複数テスト`() = runTest {
         sut.addDeletedUrl(DeletedFeed("https://hoge.jp"))
         sut.addDeletedUrl(DeletedFeed("http://gcreate.jp"))
-        
-        assertThat(sut.isDeletedUrl("https://gcreate.jp/")).isFalse()
-        assertThat(sut.isDeletedUrl("http://gcreate.jp")).isTrue()
-        assertThat(sut.isDeletedUrl("http://gcreate.jp/")).isFalse()
-        assertThat(sut.isDeletedUrl("https://hoge.jp")).isTrue()
+
+        assertThat(sut.isDeletedUrl("https://gcreate.jp/")).isFalse
+        assertThat(sut.isDeletedUrl("http://gcreate.jp")).isTrue
+        assertThat(sut.isDeletedUrl("http://gcreate.jp/")).isFalse
+        assertThat(sut.isDeletedUrl("https://hoge.jp")).isTrue
         assertThat(sut.isDeletedUrl("hoge")).isFalse()
     }
 }
