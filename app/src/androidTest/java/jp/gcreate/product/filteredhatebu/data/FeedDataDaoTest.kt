@@ -8,6 +8,7 @@ import app.cash.turbine.test
 import com.jakewharton.threetenabp.AndroidThreeTen
 import jp.gcreate.product.filteredhatebu.data.dao.FeedDataDao
 import jp.gcreate.product.filteredhatebu.data.entities.FeedData
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.After
@@ -17,11 +18,12 @@ import org.junit.Test
 import org.threeten.bp.ZonedDateTime
 import org.threeten.bp.temporal.ChronoUnit
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class FeedDataDaoTest {
     private lateinit var sut: FeedDataDao
     private lateinit var db: AppRoomDatabase
     @get:Rule var executeRule = InstantTaskExecutorRule()
-    
+
     @Before fun setUp() {
         val context = ApplicationProvider.getApplicationContext<Context>()
         AndroidThreeTen.init(context)
@@ -30,13 +32,13 @@ class FeedDataDaoTest {
             .build()
         sut = db.feedDataDao()
     }
-    
+
     @After fun tearDown() {
         db.close()
     }
 
     @Test
-    fun insert_then_return_row_id_inserted_rowId() = runTest {
+    fun `insertしたらrowIdが返ってくる`() = runTest {
         val before = sut.getAllFeeds()
         assertThat(before.size).isEqualTo(0)
         val data = FeedData(
@@ -49,15 +51,15 @@ class FeedDataDaoTest {
         val first = sut.insertFeed(data)
         assertThat(first.size).isEqualTo(1)
         assertThat(first[0]).isEqualTo(1)
-        
+
         val second = sut.insertFeed(FeedData(url = "https://test.com/", title = "next",
-                                             summary = "hoge", pubDate = ZonedDateTime.now()))
+            summary = "hoge", pubDate = ZonedDateTime.now()))
         assertThat(second.size).isEqualTo(1)
         assertThat(second[0]).isEqualTo(2)
     }
 
     @Test
-    fun insert_same_url_feed_then_return_row_id_minus1() = runTest {
+    fun `insertで同じUrlを追加したらrowIdにマイナス1が返る`() = runTest {
         val before = sut.getAllFeeds()
         assertThat(before.size).isEqualTo(0)
         val data = FeedData(
@@ -83,7 +85,7 @@ class FeedDataDaoTest {
     }
 
     @Test
-    fun delete_test() = runTest {
+    fun `deleteできる`() = runTest {
         val data = FeedData(
             url = "https://gcreate.jp/", title = "test", count = 0, summary = "hoge",
             pubDate = ZonedDateTime.now()
@@ -98,7 +100,7 @@ class FeedDataDaoTest {
     }
 
     @Test
-    fun delete_when_id_not_exist() = runTest {
+    fun `deleteで存在しないものを指定したら何も起きない`() = runTest {
         val data = FeedData(
             url = "https://gcreate.jp/", title = "test", count = 0, summary = "hoge",
             pubDate = ZonedDateTime.now()
@@ -118,20 +120,20 @@ class FeedDataDaoTest {
     }
 
     @Test
-    fun get_new_feeds_list() = runTest {
+    fun `getAllFeedsでinsertされた新しいデータが取得できる`() = runTest {
+        val before = sut.getAllFeeds()
+        assertThat(before.size).isEqualTo(0)
         val data = FeedData(
             url = "https://gcreate.jp/", title = "test", summary = "hoge", count = 0,
             pubDate = ZonedDateTime.now()
         )
         sut.insertFeed(data)
-        val before = sut.getAllFeeds()
-        assertThat(before.size).isEqualTo(1)
-        val beforeNew = sut.getFilteredNewFeeds()
+        val beforeNew = sut.getAllFeeds()
         assertThat(beforeNew.size).isEqualTo(1)
     }
 
     @Test
-    fun update_archive_flag() = runTest {
+    fun `updateStatusArchivedで指定したurlがアーカイブできる`() = runTest {
         val data = FeedData(
             url = "https://gcreate.jp/", title = "test", summary = "hoge", count = 0,
             pubDate = ZonedDateTime.now()
@@ -149,7 +151,7 @@ class FeedDataDaoTest {
     }
 
     @Test
-    fun subscribe_called_every_insert() = runTest {
+    fun `subscribeでinsertごとに新規記事の監視ができる`() = runTest {
         sut.subscribeFilteredNewFeeds().test {
             assertThat(awaitItem().size).isEqualTo(0)
 

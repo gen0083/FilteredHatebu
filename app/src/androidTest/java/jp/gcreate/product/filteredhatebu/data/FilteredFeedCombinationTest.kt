@@ -9,6 +9,7 @@ import com.jakewharton.threetenabp.AndroidThreeTen
 import jp.gcreate.product.filteredhatebu.data.entities.FeedData
 import jp.gcreate.product.filteredhatebu.data.entities.FeedFilter
 import jp.gcreate.product.filteredhatebu.data.entities.FilteredFeed
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runTest
 import org.assertj.core.api.Assertions.assertThat
@@ -26,6 +27,7 @@ import org.threeten.bp.ZonedDateTime
  *
  * 上記3つのDAOの結合テスト
  */
+@OptIn(ExperimentalCoroutinesApi::class)
 class FilteredFeedCombinationTest {
     
     private lateinit var db: AppRoomDatabase
@@ -66,7 +68,7 @@ class FilteredFeedCombinationTest {
     }
 
     @Test
-    fun get_new_feeds_which_is_not_filtered() = runTest {
+    fun `getFilteredNewFeedsでフィルタされたフィードの一覧が取得できる`() = runTest {
         val notFiltered = db.feedDataDao().getFilteredNewFeeds()
         assertThat(notFiltered.size).isEqualTo(2)
         assertThat(notFiltered[0].title).isEqualToIgnoringCase("test3")
@@ -74,10 +76,10 @@ class FilteredFeedCombinationTest {
     }
 
     @Test
-    fun subscribe_live_data_is_updated_when_new_feed_added() = runTest {
+    fun `subscribeで新たに追加したフィードを含む新しいListが取得できる`() = runTest {
         db.feedDataDao().subscribeFilteredNewFeeds().test {
-            val test = awaitItem()
-            assertThat(test.size).isEqualTo(2)
+            val before = awaitItem()
+            assertThat(before.size).isEqualTo(2)
             db.feedDataDao().insertFeed(
                 FeedData(
                     url = "https://android.gcreate.jp/", title = "test4", summary = "test4",
@@ -85,14 +87,14 @@ class FilteredFeedCombinationTest {
                     fetchedAt = ZonedDateTime.of(2018, 5, 6, 7, 8, 9, 10, ZoneOffset.UTC)
                 )
             )
-            val test2 = awaitItem()
-            assertThat(test2.size).isEqualTo(3)
-            assertThat(test2[0].title).isEqualToIgnoringCase("test4")
+            val after = awaitItem()
+            assertThat(after.size).isEqualTo(3)
+            assertThat(after[0].title).isEqualToIgnoringCase("test4")
         }
     }
 
     @Test
-    fun subscribe_live_data_is_updated_when_new_filtered_added() = runTest {
+    fun `subscribeで新たにフィルタを追加した結果のリストが取得できる`() = runTest {
         db.feedDataDao().subscribeFilteredNewFeeds().test {
             val test = awaitItem()
             assertThat(test.size).isEqualTo(2)
@@ -110,7 +112,7 @@ class FilteredFeedCombinationTest {
     }
 
     @Test
-    fun delete_filter_and_filtered_feed_delete_too() = runTest {
+    fun `フィルタを削除した場合にフィルタされていた記事が表示されるようになる`() = runTest {
         val before = db.feedDataDao().getFilteredNewFeeds()
         val beforeFiltered = db.filteredFeedDao().getFilteredInformation()
         assertThat(before.size).isEqualTo(2)
@@ -125,7 +127,7 @@ class FilteredFeedCombinationTest {
     }
 
     @Test
-    fun delete_feed_which_filtered() = runTest {
+    fun `フィルタしたフィードを削除したらフィルタ情報も削除される`() = runTest {
         val before = db.feedDataDao().getAllFeeds()
         val beforeFiltered = db.filteredFeedDao().getFilteredInformation()
         assertThat(before.size).isEqualTo(3)

@@ -1,11 +1,13 @@
 package jp.gcreate.product.filteredhatebu.data.entities
 
+import android.content.Context
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
-import androidx.test.InstrumentationRegistry
+import androidx.test.core.app.ApplicationProvider
 import com.jakewharton.threetenabp.AndroidThreeTen
 import jp.gcreate.product.filteredhatebu.data.AppRoomDatabase
 import jp.gcreate.product.filteredhatebu.data.dao.FeedFilterDao
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.After
@@ -14,20 +16,21 @@ import org.junit.Rule
 import org.junit.Test
 import org.threeten.bp.ZonedDateTime
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class FeedFilterTest {
     private lateinit var sut: FeedFilterDao
     private lateinit var db: AppRoomDatabase
     @get:Rule var executeRule = InstantTaskExecutorRule()
-    
+
     @Before fun setUp() {
-        val context = InstrumentationRegistry.getTargetContext()
+        val context = ApplicationProvider.getApplicationContext<Context>()
         AndroidThreeTen.init(context)
         db = Room.inMemoryDatabaseBuilder(context, AppRoomDatabase::class.java)
             .allowMainThreadQueries()
             .build()
         sut = db.feedFilterDao()
     }
-    
+
     @After fun tearDown() {
         db.close()
     }
@@ -121,7 +124,7 @@ class FeedFilterTest {
     }
 
     @Test
-    fun `deleteでFeedFilterを渡す場合IDが一致していれば削除される`() = runTest {
+    fun `deleteでFeedFilterを渡す場合、IDが一致していれば削除される`() = runTest {
         sut.insertFilter(FeedFilter(1, "test", ZonedDateTime.now()))
         val before = sut.getAllFilters()
         assertThat(before.size).isEqualTo(1)
@@ -143,7 +146,7 @@ class FeedFilterTest {
     }
 
     @Test
-    fun `deleteで存在しないfilterを指定して削除しても何も起きない`() = runTest {
+    fun `deleteで存在しないfilterを削除しても何も起きない`() = runTest {
         sut.insertFilter(FeedFilter(1, "exist", ZonedDateTime.now()))
         val before = sut.getAllFilters()
         assertThat(before.size).isEqualTo(1)
