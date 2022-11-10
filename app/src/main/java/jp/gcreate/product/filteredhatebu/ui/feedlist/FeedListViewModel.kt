@@ -5,8 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-import androidx.paging.LivePagedListBuilder
-import androidx.paging.PagedList
+import androidx.paging.*
 import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
@@ -14,13 +13,15 @@ import jp.gcreate.product.filteredhatebu.data.AppRoomDatabase
 import jp.gcreate.product.filteredhatebu.data.entities.FeedData
 import jp.gcreate.product.filteredhatebu.domain.CrawlFeedsWork
 import jp.gcreate.product.filteredhatebu.domain.services.ArchiveFeedService
-import jp.gcreate.product.filteredhatebu.domain.services.FilterService
+import jp.gcreate.product.filteredhatebu.domain.services.FilterFeedService
 import jp.gcreate.product.filteredhatebu.ui.common.HandleOnceEvent
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.StateFlow
 import timber.log.Timber
 
 class FeedListViewModel(
     private val appRoomDatabase: AppRoomDatabase,
-    private val filterService: FilterService,
+    private val filterFeedService: FilterFeedService,
     private val archiveService: ArchiveFeedService
 ) : ViewModel() {
     
@@ -36,24 +37,44 @@ class FeedListViewModel(
                 .setEnablePlaceholders(true)
                 .build()
             return@Function if (it == FilterState.ARCHIVE_FEEDS) {
-                LivePagedListBuilder(archiveFeedLiveData, config).build()
+                Pager(
+                    PagingConfig(
+                        config.pageSize,
+                        config.prefetchDistance,
+                        config.enablePlaceholders,
+                        config.initialLoadSizeHint,
+                        config.maxSize
+                    ),
+                    this.initialLoadKey,
+                    archiveFeedLiveData.asPagingSourceFactory(Dispatchers.IO)
+                ).liveData.build()
             } else {
-                LivePagedListBuilder(newFeedLiveData, config).build()
+                Pager(
+                    PagingConfig(
+                        config.pageSize,
+                        config.prefetchDistance,
+                        config.enablePlaceholders,
+                        config.initialLoadSizeHint,
+                        config.maxSize
+                    ),
+                    this.initialLoadKey,
+                    newFeedLiveData.asPagingSourceFactory(Dispatchers.IO)
+                ).liveData.build()
             }
         })
     val test get() = "from ViewModel@${this.hashCode()} feeds:${newFeeds.value?.size}"
-    val archiveMessage: LiveData<HandleOnceEvent<String>> = archiveService.archiveEvent
-    val addFilterEvent = filterService.addFilterEvent
+    val archiveMessage: StateFlow<HandleOnceEvent<String>?> = archiveService.archiveEvent
+    val addFilterEvent = filterFeedService.addFilterEvent
     var filterState = FilterState.NEW_FEEDS
         private set
-    
+
     init {
         (filterStateLiveData as MutableLiveData).postValue(filterState)
     }
-    
+
     fun fetchFeeds() {
         val work = OneTimeWorkRequestBuilder<CrawlFeedsWork>().build()
-        WorkManager.getInstance()?.let {
+        WorkManager.getInstance().let {
             it.beginUniqueWork("fetch_new_feeds", ExistingWorkPolicy.REPLACE, work)
                 .enqueue()
         }
@@ -69,7 +90,7 @@ class FeedListViewModel(
     }
     
     fun cancelAddFilter() {
-        filterService.undoAdd()
+        filterFeedService.undoAdd()
     }
     
     fun showNewFeeds() {

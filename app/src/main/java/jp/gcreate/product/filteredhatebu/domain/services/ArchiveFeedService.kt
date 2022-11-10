@@ -14,9 +14,8 @@ private typealias ArchiveEvent = HandleOnceEvent<String>
 class ArchiveFeedService(db: AppRoomDatabase) {
 
     private val feedDataDao = db.feedDataDao()
-    private val archiveEventEmitter: MutableStateFlow<ArchiveEvent> =
-        MutableStateFlow(ArchiveEvent(""))
-    val archiveEvent: StateFlow<ArchiveEvent> = archiveEventEmitter
+    private val archiveEventEmitter: MutableStateFlow<ArchiveEvent?> = MutableStateFlow(null)
+    val archiveEvent: StateFlow<ArchiveEvent?> = archiveEventEmitter
     private var archivedUrl: String? = null
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
 

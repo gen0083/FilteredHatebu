@@ -5,13 +5,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import jp.gcreate.product.filteredhatebu.data.AppRoomDatabase
 import jp.gcreate.product.filteredhatebu.data.entities.FeedData
-import jp.gcreate.product.filteredhatebu.domain.services.FilterService
+import jp.gcreate.product.filteredhatebu.domain.services.FilterFeedService
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class FilterDetailViewModel(
     private val db: AppRoomDatabase,
-    private val filterService: FilterService
+    private val filterFeedService: FilterFeedService
 ) : ViewModel() {
     
     private val filteredFeedDao = db.filteredFeedDao()
@@ -26,6 +26,6 @@ class FilterDetailViewModel(
     }
     
     fun deleteFilter() {
-        currentFilter?.let { filterService.deleteFilter(it) }
+        currentFilter?.let { filterFeedService.deleteFilter(it) }
     }
 }

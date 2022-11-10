@@ -69,18 +69,30 @@ class FilterListFragment : Fragment() {
                     }
                 }
             }
-        }
-        vm.deleteFilterEvent.observe(viewLifecycleOwner, Observer {
-            it?.handleEvent()?.let {
-                Snackbar.make(binding.root, R.string.delete_filter, Snackbar.LENGTH_SHORT)
-                    .setAction(R.string.cancel, { vm.undoDeleteFilter() })
-                    .show()
+            launch {
+                repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                    vm.deleteFilterEvent.collectLatest {
+                        it?.handleEvent()?.let {
+                            Snackbar.make(
+                                binding.root,
+                                R.string.delete_filter,
+                                Snackbar.LENGTH_SHORT
+                            )
+                                .setAction(R.string.cancel) { vm.undoDeleteFilter() }
+                                .show()
+                        }
+                    }
+                }
             }
-        })
-        vm.archiveEvent.observe(viewLifecycleOwner, Observer {
-            // フィルタにひっかかった記事でも、記事詳細からアーカイブすることができる
-            // しかし、記事一覧に移動したときにアーカイブしたメッセージが表示されてしまうので、ここで処理する
-            Timber.d("archive feed from filtered detail: ${it?.handleEvent()}")
-        })
+            launch {
+                repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                    vm.archiveEvent.collectLatest {
+                        // フィルタにひっかかった記事でも、記事詳細からアーカイブすることができる
+                        // しかし、記事一覧に移動したときにアーカイブしたメッセージが表示されてしまうので、ここで処理する
+                        Timber.d("archive feed from filtered detail: ${it?.handleEvent()}")
+                    }
+                }
+            }
+        }
     }
 }

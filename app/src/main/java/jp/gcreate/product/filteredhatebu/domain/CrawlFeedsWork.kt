@@ -7,9 +7,8 @@ import androidx.work.workDataOf
 import jp.gcreate.product.filteredhatebu.api.FeedsBurnerClient
 import jp.gcreate.product.filteredhatebu.api.HatenaClient
 import jp.gcreate.product.filteredhatebu.api.response.HatebuFeedItem
-import jp.gcreate.product.filteredhatebu.data.AppRoomDatabase
 import jp.gcreate.product.filteredhatebu.data.entities.FeedData
-import jp.gcreate.product.filteredhatebu.data.entities.FilteredFeed
+import jp.gcreate.product.filteredhatebu.domain.services.FilterFeedService
 import jp.gcreate.product.filteredhatebu.ui.common.NotificationUtil
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
@@ -21,10 +20,10 @@ import timber.log.Timber
 class CrawlFeedsWork(context: Context, params: WorkerParameters) : CoroutineWorker(context, params),
     KoinComponent {
 
-    private val feedsBurnerClienet: FeedsBurnerClient by inject()
+    private val feedsBurnerClient: FeedsBurnerClient by inject()
     private val xmlService: HatenaClient.XmlService by inject()
-    private val appRoomDatabase: AppRoomDatabase by inject()
     private val notificationUtil: NotificationUtil by inject()
+    private val filterFeedService: FilterFeedService by inject()
 
     override suspend fun doWork(): Result {
         // do-crawling
@@ -33,7 +32,7 @@ class CrawlFeedsWork(context: Context, params: WorkerParameters) : CoroutineWork
         var count = 0
         try {
             // はてなブックマーク総合ホットエントリを取得
-            val hatebuSougou = feedsBurnerClienet.getHotentryFeed()
+            val hatebuSougou = feedsBurnerClient.getHotentryFeed()
             hatebuSougou.itemList.forEach {
                 Timber.v("save $it")
                 if (saveFeed(it)) count++
@@ -75,30 +74,8 @@ class CrawlFeedsWork(context: Context, params: WorkerParameters) : CoroutineWork
             pubDate = ZonedDateTime.parse(feed.date),
             fetchedAt = ZonedDateTime.now()
         )
-        val feedDataDao = appRoomDatabase.feedDataDao()
-        val result = feedDataDao.insertFeed(feedData)
-        // Feedの登録が行われなかった場合ははてブ数の更新を行うだけ
-        if (result[0] == -1L) {
-            feedDataDao.updateHatebuCount(feed.link, feed.count)
-            return@withContext false
-        }
-        // filterのマッチング処理
-        saveAsFilteredFeedIfUrlMatchesAnyFilter(feedData.url)
-        return@withContext true
+        return@withContext filterFeedService.saveFeed(feedData)
     }
-
-    private suspend fun saveAsFilteredFeedIfUrlMatchesAnyFilter(url: String) {
-        withContext(Dispatchers.IO) {
-            val filters = appRoomDatabase.feedFilterDao().getAllFilters()
-            filters.forEach { (id, filter, _) ->
-                if (url.contains(filterToRegex(filter))) {
-                    appRoomDatabase.filteredFeedDao().insertFilteredFeed(FilteredFeed(id, url))
-                }
-            }
-        }
-    }
-
-    private fun filterToRegex(filter: String): Regex = "https?://[^/]*$filter".toRegex()
 
     companion object {
         const val KEY_NEW_FEEDS_COUNT = "new_feeds_count"

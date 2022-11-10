@@ -5,7 +5,10 @@ import android.view.*
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -21,6 +24,8 @@ import jp.gcreate.product.filteredhatebu.databinding.FragmentFeedListBinding
 import jp.gcreate.product.filteredhatebu.domain.CrawlFeedsWork
 import jp.gcreate.product.filteredhatebu.ui.common.StickyHeaderDecoration
 import jp.gcreate.product.filteredhatebu.ui.common.SwipeDismissCallback
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import timber.log.Timber
@@ -83,25 +88,43 @@ class FeedListFragment : Fragment() {
     }
     
     private fun subscribeViewModel() {
+        lifecycleScope.launch {
+            launch {
+                repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                    vm.archiveMessage.collectLatest {
+                        it?.handleEvent()?.let {
+                            Snackbar.make(
+                                binding.root,
+                                R.string.archive_done,
+                                Snackbar.LENGTH_SHORT
+                            )
+                                .setAction(R.string.cancel) { vm.undoArchive() }
+                                .show()
+                        }
+                    }
+                }
+            }
+            launch {
+                repeatOnLifecycle(Lifecycle.State.RESUMED) {
+                    vm.addFilterEvent.collectLatest {
+                        it?.handleEvent()?.let {
+                            Snackbar.make(
+                                binding.root,
+                                R.string.add_filter_done,
+                                Snackbar.LENGTH_SHORT
+                            )
+                                .setAction(R.string.cancel) { vm.cancelAddFilter() }
+                                .show()
+                        }
+                    }
+                }
+            }
+        }
         vm.newFeeds.observe(viewLifecycleOwner, Observer { list ->
             Timber.d("update list size=${list?.size}")
             list?.let {
                 feedListAdapter.submitList(it)
                 binding.noContentGroup.isVisible = it.isEmpty()
-            }
-        })
-        vm.archiveMessage.observe(viewLifecycleOwner, Observer {
-            it?.handleEvent()?.let {
-                Snackbar.make(binding.root, R.string.archive_done, Snackbar.LENGTH_SHORT)
-                    .setAction(R.string.cancel) { vm.undoArchive() }
-                    .show()
-            }
-        })
-        vm.addFilterEvent.observe(viewLifecycleOwner, Observer {
-            it?.handleEvent()?.let {
-                Snackbar.make(binding.root, R.string.add_filter_done, Snackbar.LENGTH_SHORT)
-                    .setAction(R.string.cancel) { vm.cancelAddFilter() }
-                    .show()
             }
         })
     }

@@ -2,7 +2,7 @@ package jp.gcreate.product.filteredhatebu.di
 
 import jp.gcreate.product.filteredhatebu.domain.services.ArchiveFeedService
 import jp.gcreate.product.filteredhatebu.domain.services.BookmarkCommentsService
-import jp.gcreate.product.filteredhatebu.domain.services.FilterService
+import jp.gcreate.product.filteredhatebu.domain.services.FilterFeedService
 import jp.gcreate.product.filteredhatebu.ui.common.CustomTabHelper
 import jp.gcreate.product.filteredhatebu.ui.common.FaviconUtil
 import jp.gcreate.product.filteredhatebu.ui.common.NotificationUtil
@@ -23,7 +23,7 @@ val koinAppModule = module {
     factory(named("observeOn")) { AndroidSchedulers.mainThread() as Scheduler }
     // domain
     single { BookmarkCommentsService(get()) }
-    single { FilterService(get()) }
+    single { FilterFeedService(get()) }
     single { ArchiveFeedService(get()) }
     // ui.common
     single { UrlSpanFactory(get()) }

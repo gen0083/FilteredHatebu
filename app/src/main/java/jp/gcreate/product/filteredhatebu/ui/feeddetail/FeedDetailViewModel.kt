@@ -9,7 +9,7 @@ import jp.gcreate.product.filteredhatebu.data.AppRoomDatabase
 import jp.gcreate.product.filteredhatebu.data.entities.FeedData
 import jp.gcreate.product.filteredhatebu.domain.services.ArchiveFeedService
 import jp.gcreate.product.filteredhatebu.domain.services.BookmarkCommentsService
-import jp.gcreate.product.filteredhatebu.domain.services.FilterService
+import jp.gcreate.product.filteredhatebu.domain.services.FilterFeedService
 import jp.gcreate.product.filteredhatebu.ui.common.HandleOnceEvent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -19,7 +19,7 @@ import timber.log.Timber
 class FeedDetailViewModel(
     appRoomDatabase: AppRoomDatabase,
     private val commentsService: BookmarkCommentsService,
-    private val filterService: FilterService,
+    private val filterFeedService: FilterFeedService,
     private val archiveService: ArchiveFeedService
 ) : ViewModel() {
     
@@ -47,7 +47,7 @@ class FeedDetailViewModel(
     }
     
     fun addFilter(filter: String) {
-        filterService.addFilter(filter)
+        filterFeedService.addFilter(filter)
         addFilterActionEmitter.value = HandleOnceEvent(filter)
     }
     
