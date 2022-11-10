@@ -5,7 +5,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-import androidx.paging.*
+import androidx.paging.LivePagedListBuilder
+import androidx.paging.PagedList
 import androidx.work.ExistingWorkPolicy
 import androidx.work.OneTimeWorkRequestBuilder
 import androidx.work.WorkManager
@@ -15,7 +16,6 @@ import jp.gcreate.product.filteredhatebu.domain.CrawlFeedsWork
 import jp.gcreate.product.filteredhatebu.domain.services.ArchiveFeedService
 import jp.gcreate.product.filteredhatebu.domain.services.FilterFeedService
 import jp.gcreate.product.filteredhatebu.ui.common.HandleOnceEvent
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.StateFlow
 import timber.log.Timber
 
@@ -37,29 +37,9 @@ class FeedListViewModel(
                 .setEnablePlaceholders(true)
                 .build()
             return@Function if (it == FilterState.ARCHIVE_FEEDS) {
-                Pager(
-                    PagingConfig(
-                        config.pageSize,
-                        config.prefetchDistance,
-                        config.enablePlaceholders,
-                        config.initialLoadSizeHint,
-                        config.maxSize
-                    ),
-                    this.initialLoadKey,
-                    archiveFeedLiveData.asPagingSourceFactory(Dispatchers.IO)
-                ).liveData.build()
+                LivePagedListBuilder(archiveFeedLiveData, config).build()
             } else {
-                Pager(
-                    PagingConfig(
-                        config.pageSize,
-                        config.prefetchDistance,
-                        config.enablePlaceholders,
-                        config.initialLoadSizeHint,
-                        config.maxSize
-                    ),
-                    this.initialLoadKey,
-                    newFeedLiveData.asPagingSourceFactory(Dispatchers.IO)
-                ).liveData.build()
+                LivePagedListBuilder(newFeedLiveData, config).build()
             }
         })
     val test get() = "from ViewModel@${this.hashCode()} feeds:${newFeeds.value?.size}"
