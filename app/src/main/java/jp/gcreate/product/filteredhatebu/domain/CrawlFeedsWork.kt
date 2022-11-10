@@ -74,7 +74,7 @@ class CrawlFeedsWork(context: Context, params: WorkerParameters) : CoroutineWork
             pubDate = ZonedDateTime.parse(feed.date),
             fetchedAt = ZonedDateTime.now()
         )
-        return@withContext filterFeedService.saveFeed(feedData)
+        return@withContext filterFeedService.addNewFeed(feedData)
     }
 
     companion object {

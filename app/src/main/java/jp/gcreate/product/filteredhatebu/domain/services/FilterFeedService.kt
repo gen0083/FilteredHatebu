@@ -26,7 +26,7 @@ class FilterFeedService(private val appRoomDatabase: AppRoomDatabase) {
     val deleteFilterEvent: StateFlow<HandleOnceEvent<FeedFilter>?> = deleteFilterEventEmitter
     private val scope = CoroutineScope(SupervisorJob() + Dispatchers.IO)
 
-    suspend fun saveFeed(feedData: FeedData) = scope.async {
+    suspend fun addNewFeed(feedData: FeedData) = scope.async {
         val result = feedDataDao.insertFeed(feedData)
         if (result[0] == -1L) {
             feedDataDao.updateHatebuCount(feedData.url, feedData.count)
